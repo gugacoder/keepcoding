@@ -34,7 +34,7 @@
     },
     methods: {
       save: function () {
-        this.$http.post('http://localhost:3000/', { filename: this.routerName, file: this.jsonData }).then(response => {
+        this.$http.post(this.routerName, this.jsonData).then(response => {
           var json = this.jsonData
           if (json) {
             paper.methods.load(json)
