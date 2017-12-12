@@ -20,6 +20,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Paper.Modules.Static\Paper.Modules.Static.csproj" />
     <ProjectReference Include="..\Toolset\Toolset.csproj" />
+    <ProjectReference Include="..\Paper.Modules\Paper.Modules.csproj" />
+    <ProjectReference Include="..\Drive\Drive.csproj" />
   </ItemGroup>
 
 </Project>

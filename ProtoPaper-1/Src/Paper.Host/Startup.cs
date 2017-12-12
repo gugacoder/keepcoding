@@ -18,6 +18,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Paper.Modules.Static.Extensions;
+using Drive;
 
 namespace Paper.Host
 {
@@ -26,6 +27,9 @@ namespace Paper.Host
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
+
+      var space = DriveHub.GetHub(configuration).GetSpace("Blueprints");
+      space.SaveTextFile("teste.txt", "Olá, mundo!");
     }
 
     public IConfiguration Configuration { get; }

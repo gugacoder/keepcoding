@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Toolset\Toolset.csproj" />
-    <ProjectReference Include="..\Paper.Modules\Paper.Modules.csproj" />
+    <ProjectReference Include="..\Drive\Drive.csproj" />
   </ItemGroup>
 
 </Project>
