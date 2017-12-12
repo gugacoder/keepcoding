@@ -20,7 +20,7 @@ namespace Paper.Host
     public static IWebHost BuildWebHost(string[] args) =>
       WebHost.CreateDefaultBuilder(args)
         .UseKestrel()
-        .UseWebRoot("dist")
+        .UseWebRoot("App/dist")
         .UseContentRoot(Directory.GetCurrentDirectory())
         .UseStartup<Startup>()
         .Build();

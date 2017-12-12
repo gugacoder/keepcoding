@@ -45,7 +45,7 @@
     },
     methods: {
       search: function () {
-        this.$http.get('http://localhost:3000/' + this.searchParams).then(response => {
+        this.$http.get(this.searchParams).then(response => {
           var json = response.body
           if (json) {
             paper.methods.load(json)
