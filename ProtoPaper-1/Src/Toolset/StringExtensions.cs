@@ -5,8 +5,98 @@ using System.Text;
 
 namespace Toolset
 {
+  /// <summary>
+  /// Coleção de extensões para o tipo string.
+  /// </summary>
   public static class StringExtensions
   {
+    /// <summary>
+    /// Determina se o texto é formado apenas por números.
+    /// </summary>
+    /// <param name="text">O texto a ser validado.</param>
+    /// <returns>
+    /// Verdadeiro caso o texto seja composto apenas de números.
+    /// </returns>
+    public static bool IsNumeric(this string text)
+    {
+      return text.All(char.IsNumber);
+    }
+
+    /// <summary>
+    /// Determina se o texto corresponde a um número.
+    /// </summary>
+    /// <param name="text">O texto a ser validado.</param>
+    /// <returns>
+    /// Verdadeiro caso o texto seja composto apenas de números e
+    /// separador de decimal.
+    /// </returns>
+    public static bool IsNumber(this string text)
+    {
+      return text.All(c => char.IsNumber(c) || char.IsDigit(c));
+    }
+
+    /// <summary>
+    /// Coloca o texto entre aspas a menos que o texto representa
+    /// um número de até 9 dígitos.
+    /// </summary>
+    /// <param name="text">O texto a ser colocado entre aspas.</param>
+    /// <returns>O texto encapsulado entre aspas.</returns>
+    public static string Quote(this string text)
+    {
+      return Quote(text, '"', false);
+    }
+
+    /// <summary>
+    /// Coloca o texto entre aspas a menos que o texto representa
+    /// um número de até 9 dígitos.
+    /// </summary>
+    /// <param name="text">O texto a ser colocado entre aspas.</param>
+    /// <param name="character">O caracter para encapsulamento do texto.</param>
+    /// <returns>O texto encapsulado entre aspas.</returns>
+    public static string Quote(this string text, char character)
+    {
+      return Quote(text, '"');
+    }
+
+    /// <summary>
+    /// Coloca o texto entre aspas a menos que o texto representa
+    /// um número de até 9 dígitos.
+    /// </summary>
+    /// <param name="text">O texto a ser colocado entre aspas.</param>
+    /// <param name="force">
+    /// Ativa ou desativa o encapsulamento entre aspas para qualquer
+    /// texto, mesmo quando o texto representar um número com até
+    /// 9 digitos.
+    /// </param>
+    /// <returns>O texto encapsulado entre aspas.</returns>
+    public static string Quote(this string text, bool force)
+    {
+      return Quote(text, '"', force);
+    }
+
+    /// <summary>
+    /// Coloca o texto entre aspas a menos que o texto representa
+    /// um número de até 9 dígitos.
+    /// </summary>
+    /// <param name="text">O texto a ser colocado entre aspas.</param>
+    /// <param name="character">O caracter para encapsulamento do texto.</param>
+    /// <param name="force">
+    /// Ativa ou desativa o encapsulamento entre aspas para qualquer
+    /// texto, mesmo quando o texto representar um número com até
+    /// 9 digitos.
+    /// </param>
+    /// <returns>O texto encapsulado entre aspas.</returns>
+    public static string Quote(this string text, char character, bool force)
+    {
+      if (force
+      || (text.IsNumeric() && text.Length > 9)
+      || (!text.IsNumber()))
+      {
+        return $"{character}{text}{character}";
+      }
+      return text;
+    }
+
     public static string ChangeCase(this string sentence, TextCase textCase)
     {
       if (textCase == TextCase.Default || textCase == TextCase.KeepOriginal)

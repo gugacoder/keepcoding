@@ -10,15 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
 using Paper.Modules.Static.Controllers;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Paper.Modules.Static.Extensions;
 using Drive;
+using Paper.Modules.Static;
 
 namespace Paper.Host
 {
@@ -27,9 +26,6 @@ namespace Paper.Host
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
-
-      var space = DriveHub.GetHub(configuration).GetSpace("Blueprints");
-      space.SaveTextFile("teste.txt", "Olá, mundo!");
     }
 
     public IConfiguration Configuration { get; }
@@ -37,8 +33,10 @@ namespace Paper.Host
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddApplicationInsightsTelemetry(Configuration);
+      services.AddSingleton<IDrive, DriveHub>();
       services.AddMvc()
-        .AddPaperStaticModule();
+        .AddApplicationPart(typeof(Paper.Modules.Static.Controllers.ResourceController).GetTypeInfo().Assembly)
+        .AddApplicationPart(typeof(Drive.Controllers.DriveController).GetTypeInfo().Assembly);
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

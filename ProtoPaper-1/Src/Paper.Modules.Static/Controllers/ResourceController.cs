@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using static Paper.Modules.Static.ResourceStorage;
 using Paper.Modules.Static.Helpers;
+using Drive;
 
 namespace Paper.Modules.Static.Controllers
 {
@@ -18,15 +19,15 @@ namespace Paper.Modules.Static.Controllers
   {
     private readonly ResourceStorage storage;
 
-    public ResourceController(IConfiguration configuration)
+    public ResourceController(IConfiguration configuration, IDrive drive)
     {
       Configuration = configuration.GetSection("Paper:Modules:Static");
-
       var folder = Configuration?["Folder"] ?? "./paper/static";
       this.storage = new ResourceStorage(folder);
     }
 
     public IConfiguration Configuration { get; }
+    public IDrive Drive { get; }
 
     [HttpGet("{*resource}")]
     public IActionResult Get(string resource)

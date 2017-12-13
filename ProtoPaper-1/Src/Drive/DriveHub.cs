@@ -6,39 +6,48 @@ using Toolset;
 
 namespace Drive
 {
-  public class DriveHub
+  public class DriveHub : IDrive
   {
     private List<ISpace> spaces;
 
-    private DriveHub(IEnumerable<ISpace> spaces, IConfiguration configuration)
+    public DriveHub(IConfiguration configuration)
     {
-      this.Configuration = configuration;
-      this.spaces = spaces.ToList();
+      this.Configuration = configuration?.GetSection("Drive") ?? configuration;
+      this.spaces = RestoreSpaces(this.Configuration);
     }
 
     public IConfiguration Configuration { get; }
 
-    public ISpace GetSpaceIfExists(string spaceName)
+    public string[] GetSpaceNames()
     {
-      return spaces.FirstOrDefault(x => x.Name == spaceName);
+      return spaces.Select(x => x.Name).ToArray();
     }
 
     public ISpace GetSpace(string spaceName)
     {
-      var space = GetSpaceIfExists(spaceName);
-      if (space == null)
-      {
-        space = new PhysicalSpace(spaceName);
-        this.spaces.Add(space);
-      }
-      return space;
+      return spaces.FirstOrDefault(x => x.Name == spaceName);
     }
 
-    public static DriveHub GetHub(IConfiguration configuration)
+    public ISpace GetOrCreateSpace(string spaceName)
     {
-      configuration = configuration?.GetSection("Drive") ?? configuration;
+      CreateSpace(spaceName);
+      return GetSpace(spaceName);
+    }
 
-      var spaces = new List<PhysicalSpace>();
+    public void CreateSpace(string spaceName)
+    {
+      var exists = spaces.Any(x => x.Name == spaceName);
+      if (exists)
+        return;
+
+      var space = new PhysicalSpace(spaceName);
+      space.CreatePhysicalFolder();
+      this.spaces.Add(space);
+    }
+
+    public List<ISpace> RestoreSpaces(IConfiguration configuration)
+    {
+      var spaces = new List<ISpace>();
       var spacesConfiguration = configuration?.GetSection("Spaces");
 
       if (spacesConfiguration != null)
@@ -47,11 +56,12 @@ namespace Drive
         {
           var spaceName = spaceConfiguration.Key.ChangeCase(TextCase.PascalCase);
           var space = new PhysicalSpace(spaceName, spaceConfiguration);
+          space.CreatePhysicalFolder();
           spaces.Add(space);
         }
       }
 
-      return new DriveHub(spaces, configuration);
+      return spaces;
     }
   }
 }

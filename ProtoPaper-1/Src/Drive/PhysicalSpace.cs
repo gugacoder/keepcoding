@@ -37,6 +37,14 @@ namespace Drive
 
     public string PhysicalFolder { get; }
 
+    public void CreatePhysicalFolder()
+    {
+      if (!Directory.Exists(PhysicalFolder))
+      {
+        Directory.CreateDirectory(PhysicalFolder);
+      }
+    }
+
     public IRet<string[]> GetChildren(string path)
     {
       try
@@ -46,11 +54,13 @@ namespace Drive
         if (!Directory.Exists(path))
           return Ret.Fail<string[]>("not-found");
 
-        var files = Directory.EnumerateFiles(path);
-        var dirs = (
+        var files =
+          from subpath in Directory.EnumerateFiles(path)
+          select Path.GetFileName(subpath);
+
+        var dirs =
           from subpath in Directory.EnumerateDirectories(path)
-          select Path.GetFileName(subpath) + "/"
-        ).ToArray();
+          select Path.GetFileName(subpath) + "/";
 
         var names = dirs.Concat(files).ToArray();
         return Ret.Succeed(names);
@@ -101,6 +111,7 @@ namespace Drive
 
     private string GetFullPath(string path)
     {
+      path = path ?? "";
       path = path.Replace('/', Path.DirectorySeparatorChar);
       if (path.StartsWith(Path.DirectorySeparatorChar))
       {
