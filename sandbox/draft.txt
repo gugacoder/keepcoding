@@ -1,0 +1,49 @@
+
+      /*
+            var entity = new Entity
+            {
+              TypeInfo = "users,collection",
+              Properties = new PropertyCollection
+              {
+                { "count", 2 },
+                { "date", DateTime.Now }
+              },
+              Links = new LinkCollection
+              {
+                { "self", "/Users" },
+                { "next", "/Users?p=2" }
+              },
+              Entities = new EntityCollection
+              {
+                new Entity
+                {
+                  TypeInfo = "user",
+                  Properties = new PropertyCollection
+                  {
+                    { "id", 1 },
+                    { "name", "Ten" }
+                  },
+                  Links = new LinkCollection
+                  {
+                    { "self", "/Users/1" }
+                  }
+                },
+                new Entity
+                {
+                  TypeInfo = "user",
+                  Properties = new PropertyCollection
+                  {
+                    { "id", 2 },
+                    { "name", "Twenty" }
+                  },
+                  Links = new LinkCollection
+                  {
+                    { "self", "/Users/2" }
+                  }
+                }
+              }
+            };
+
+            var json = entity.ToSiren();
+            System.Diagnostics.Debug.WriteLine(json);
+            */

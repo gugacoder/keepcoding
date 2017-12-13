@@ -1,0 +1,10 @@
+/home/gugacoder/sources/localhost/sandbox/bin/Debug/netcoreapp2.0/sandbox.deps.json
+/home/gugacoder/sources/localhost/sandbox/bin/Debug/netcoreapp2.0/sandbox.runtimeconfig.json
+/home/gugacoder/sources/localhost/sandbox/bin/Debug/netcoreapp2.0/sandbox.runtimeconfig.dev.json
+/home/gugacoder/sources/localhost/sandbox/bin/Debug/netcoreapp2.0/sandbox.dll
+/home/gugacoder/sources/localhost/sandbox/bin/Debug/netcoreapp2.0/sandbox.pdb
+/home/gugacoder/sources/localhost/sandbox/obj/Debug/netcoreapp2.0/sandbox.csproj.CoreCompileInputs.cache
+/home/gugacoder/sources/localhost/sandbox/obj/Debug/netcoreapp2.0/sandbox.AssemblyInfoInputs.cache
+/home/gugacoder/sources/localhost/sandbox/obj/Debug/netcoreapp2.0/sandbox.AssemblyInfo.cs
+/home/gugacoder/sources/localhost/sandbox/obj/Debug/netcoreapp2.0/sandbox.dll
+/home/gugacoder/sources/localhost/sandbox/obj/Debug/netcoreapp2.0/sandbox.pdb
