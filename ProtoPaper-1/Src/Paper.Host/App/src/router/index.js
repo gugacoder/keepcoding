@@ -4,7 +4,6 @@ import Grid from '@/components/GridView'
 import Home from '@/components/HomeView'
 import NotFound from '@/components/NotFoundView'
 import Sandbox from '@/components/SandboxView'
-import Page from '@/components/PageView'
 
 Vue.use(Router)
 
@@ -16,7 +15,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/page/:id',
+      path: '/page/:path(.*)*',
       name: 'page',
       component: Grid,
       props: true
@@ -32,11 +31,6 @@ export default new Router({
       name: 'sandbox',
       component: Sandbox,
       props: true
-    },
-    {
-      path: '/page',
-      name: 'page',
-      component: Page
     }
   ]
 })

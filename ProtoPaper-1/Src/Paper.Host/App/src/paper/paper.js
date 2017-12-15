@@ -1,17 +1,48 @@
+import Vue from 'vue'
+import VueResource from 'vue-resource'
 import router from '../router'
+
+Vue.use(VueResource)
+
 export default {
   methods: {
-    print: function () {
-      console.log('paper')
+    load: function (path) {
+      /*
+      Vue.http.get('http://localhost:3000/' + path).then(response => {
+        var json = response.body
+        if (json) {
+          this.loadPage(path, json)
+        }
+      }, response => {
+        router.push({name: 'notFound', params: { routerName: path }})
+      })
+      */
+      Vue.http.get(path).then(response => {
+        var json = response.body
+        if (json) {
+          this.loadPage(path, json)
+        }
+      }, response => {
+        router.push({name: 'notFound', params: { routerName: path }})
+      })
     },
-    load: function (siren) {
+
+    loadPage: function (path, siren) {
       const sirenParser = require('siren-parser')
-
       var resource = sirenParser(siren)
-      var component = resource.class[0]
+      var params = path.split('/')
+      params = params.filter(function (x) {
+        return (x !== (undefined || null || ''))
+      })
+      router.push({name: 'page', params: { path: params, siren: resource }})
+    },
 
-      console.log('resource ', resource)
-      router.push({name: 'page', params: { id: component, siren: resource }})
+    save: function (path, siren) {
+      Vue.http.post(path, siren).then(response => {
+        this.loadPage(path, siren)
+      }, response => {
+        console.log('error')
+      })
     }
   }
 }

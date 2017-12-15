@@ -34,14 +34,10 @@
     },
     methods: {
       save: function () {
-        this.$http.post(this.routerName, this.jsonData).then(response => {
-          var json = this.jsonData
-          if (json) {
-            paper.methods.load(json)
-          }
-        }, response => {
-          console.log('error')
-        })
+        var json = this.jsonData
+        if (json) {
+          paper.methods.save(this.routerName, json)
+        }
       }
     }
   }
