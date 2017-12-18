@@ -44,6 +44,10 @@ namespace Paper.Modules.Static.Helpers
         }
       }
 
+      // casos especiais para browsers
+      if (accept.Contains("text/html") || accept.Contains("text/plain"))
+        return contentTypeChoices.FirstOrDefault();
+
       return null;
     }
   }

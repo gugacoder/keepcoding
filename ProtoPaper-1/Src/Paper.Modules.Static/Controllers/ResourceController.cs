@@ -13,8 +13,8 @@ using Drive;
 
 namespace Paper.Modules.Static.Controllers
 {
-  [Route("Paper/Api")]
-  [Route("Paper/Api/Modules/Static/Resources")]
+  [Route("")]
+  [Route("Api/Paper/Modules/Static/Resources")]
   public class ResourceController : Controller
   {
     private readonly ResourceStorage storage;
