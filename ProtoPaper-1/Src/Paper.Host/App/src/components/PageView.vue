@@ -1,5 +1,5 @@
 <template>
-  <component :is='dynamicComponent' :data="siren"></component>
+  <component :is='dynamicComponent' :data="sirenData"></component>
 </template>
 
 <script>
@@ -13,7 +13,8 @@
     props: ['siren'],
     data () {
       return {
-        viewShow: ''
+        viewShow: '',
+        sirenData: ''
       }
     },
     components: {
@@ -22,18 +23,16 @@
       Home
     },
     beforeRouteUpdate (to, from, next) {
+      next()
       if (!to.params.siren) {
         this.loadPage()
-        this.load(this.siren)
         return
       }
-      console.log('beforeRouteUpdate 2', to.params.siren.class)
       EventBus.$emit('reset', to.params.siren)
-      this.load(to.params.siren)
-      next()
+      this.loadData(to.params.siren)
     },
     methods: {
-      load (siren) {
+      loadData (siren) {
         this.setLinks(siren)
         if (siren) {
           var isCollection = siren.class.indexOf('collection') > 0
@@ -50,10 +49,15 @@
           EventBus.$emit('links', siren.links)
         }
       },
-      async loadPage () {
+      loadPage () {
         var path = this.$route.params.path
-        var newSiren = await paper.methods.loadSiren(path)
-        this.siren = newSiren
+        console.log('path ', this.$route)
+        paper.methods.loadSiren(path).then(data => {
+          console.log('loadPage ', data)
+          this.sirenData = data
+          this.loadData(data)
+          EventBus.$emit('reset', data)
+        })
       }
     },
     computed: {
@@ -70,9 +74,11 @@
     },
     created: function () {
       if (this.siren) {
-        this.load(this.siren)
+        this.sirenData = this.siren
+        this.loadData(this.siren)
         return
       }
+      this.loadPage()
     }
   }
 </script>

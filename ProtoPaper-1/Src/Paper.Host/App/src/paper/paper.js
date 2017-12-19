@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import router from '../router'
-import { EventBus } from '../event-bus.js'
 
 Vue.use(VueResource)
 
@@ -19,12 +18,11 @@ export default {
     },
 
     loadSiren (path) {
-      Vue.http.get(path).then(response => {
+      return Vue.http.get(path).then(response => {
         var json = response.body
         if (json) {
           const sirenParser = require('siren-parser')
           var resource = sirenParser(json)
-          EventBus.$emit('reset', resource)
           return resource
         }
       }, response => {
