@@ -33,7 +33,7 @@
       }
     },
     methods: {
-      save: function () {
+      save () {
         var json = this.jsonData
         if (json) {
           paper.methods.save(this.routerName, json)

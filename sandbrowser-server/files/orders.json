@@ -1,32 +1,44 @@
 {
-  "class": ["users", "collection"],
+  "class": ["orders", "collection"],
   "properties": {
     "count": 2,
     "date": "2017-12-13 21:53:07"
   },
-  "links": {
+  "links": [
     { "rel": ["self"], "href": "/Users" },
     { "rel": ["next"], "href": "/Users?p=2" }
-  },
-  "entities": {
+  ],
+  "entities": [
     {
       "class": ["user"],
+      "rel": [ "users" ], 
       "properties": {
         "id": 1,
-        "name": "Ten"
+        "name": "One"
       },
-      "links": {
-        { "rel": ["self"], "href": "/Users/1" }
-      }
+      "links": [
+        { "rel": ["self"], "href": "/page/Users/1" }
+      ]
     }, {
       "class": ["user"],
+      "rel": [ "users" ], 
       "properties": {
         "id": 2,
-        "name": "Twenty"
+        "name": "Two"
       },
-      "links": {
-        { "rel": ["self"], "href": "/Users/2" }
-      }
+      "links": [
+        { "rel": ["self"], "href": "/page/Users/2" }
+      ]
+    }, {
+      "class": ["user"],
+      "rel": [ "users" ], 
+      "properties": {
+        "id": 2,
+        "name": "Three"
+      },
+      "links": [
+        { "rel": ["self"], "href": "/page/Users/2" }
+      ]
     }
-  }
+  ]
 }

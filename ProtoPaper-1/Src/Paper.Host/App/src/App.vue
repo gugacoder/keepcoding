@@ -4,13 +4,15 @@
       fixed
       right
       clipped
+      v-model="drawerRight"
       v-if="showRightDrawer"
       app>
       <v-list subheader>
-        <v-subheader>Ações</v-subheader>
-        <v-list-tile v-for="item in actions" v-bind:href="item.href" target="_blank">
+        <!--v-subheader>Links</v-subheader-->
+        <v-list-tile v-for="item in actions" v-bind:href="item.href">
           <v-list-tile-content>
-            <v-list-tile-title v-html="item.title"></v-list-tile-title>
+            <v-list-tile-title v-if="item.title" v-html="item.title"></v-list-tile-title>
+            <v-list-tile-title v-else v-html="item.rel[0]"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -69,7 +71,7 @@
     data: () => ({
       searchParams: '',
       drawerLeft: false,
-      drawerRight: false,
+      drawerRight: null,
       showLeftDrawer: false,
       showRightDrawer: false,
       right: false,
@@ -98,18 +100,14 @@
       refreshRightDrawer: function (newTodo) {
         this.showRightDrawer = newTodo
       },
-      setActions: function (actions) {
+      setLinks: function (actions) {
         this.actions = actions
-      },
-      setFilters: function (filters) {
-        this.filters = filters
       }
     },
     created: function () {
       EventBus.$on('updateShowLeftDrawer', this.refreshLeftDrawer)
       EventBus.$on('updateShowRightDrawer', this.refreshRightDrawer)
-      EventBus.$on('actions', this.setActions)
-      EventBus.$on('filters', this.setFilters)
+      EventBus.$on('links', this.setLinks)
     }
   }
 </script>

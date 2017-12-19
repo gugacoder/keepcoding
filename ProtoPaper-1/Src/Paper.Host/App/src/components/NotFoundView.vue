@@ -42,7 +42,7 @@
       }
     },
     methods: {
-      createRouter: function () {
+      createRouter () {
         this.$router.push({name: 'sandbox', params: { routerName: this.routerName }})
       }
     }

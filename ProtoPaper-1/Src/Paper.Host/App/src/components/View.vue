@@ -2,30 +2,13 @@
   <v-card color="grey lighten-4" flat>
     <v-card-text>
       <v-container fluid>
-        <v-data-table
-            hide-actions
-            v-bind:headers="headers"
-            v-bind:items="items"
-            item-key="name">
-          <template slot="items" slot-scope="items">
-            <tr @click="items.expanded = !items.expanded">
-              <td v-for="item in items.item" class="text-xs-left">
-                {{ item }}
-              </td>
-            </tr>
-          </template>
-          <template slot="expand" slot-scope="items" v-if="siren.entities[items.index].links">
-            <v-list subheader>
-              <v-list-tile v-for="item in siren.entities[items.index].links" v-bind:href="item.href" target="_blank">
-                <v-list-tile-content>
-                  <a v-if="item.title" v-bind:href="item.href">{{ item.title }}</a>
-                  <a v-else v-bind:href="item.href">{{ item.rel[0] }}</a>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-          </template>
-        </v-data-table>
-      </v-container>  
+        <h3>Propriedades de {{ siren.class[0] }}</h3>
+        <v-layout row v-for="item in items">
+          <v-flex xs12 sm10>
+            <v-text-field box readonly v-bind:label="item.key" v-model="item.value"></v-text-field>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card-text>
   </v-card>
 </template>
@@ -36,10 +19,8 @@
     props: ['data'],
     data () {
       return {
-        showLeftDrawer: '',
         headers: [],
         items: [],
-        showLinks: false,
         siren: ''
       }
     },
@@ -60,11 +41,16 @@
         this.load()
       },
       setItems () {
-        var self = this
-        if (this.siren && this.siren.entities) {
-          this.siren.entities.forEach(function (item) {
-            self.items.push(item.properties)
+        if (this.siren) {
+          var keys = Object.keys(this.siren.properties)
+          var self = this
+          keys.forEach(function (key) {
+            self.items.push({
+              key: key,
+              value: self.siren.properties[key].toString()
+            })
           })
+          console.log('items ', this.items)
         }
       },
       setHeaders () {

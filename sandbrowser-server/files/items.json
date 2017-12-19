@@ -1,6 +1,6 @@
 {
   "class":[
-    "items"
+    "items", "collection"
   ],
   "properties":{
     "component":"grid",
