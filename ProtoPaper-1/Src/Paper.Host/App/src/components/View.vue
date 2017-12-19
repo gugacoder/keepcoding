@@ -28,12 +28,8 @@
       next()
     },
     methods: {
-      show () {
-        this.showLinks = !this.showLinks
-      },
       load () {
         this.setItems()
-        this.setHeaders()
       },
       reset (newValue) {
         Object.assign(this.$data, this.$options.data())
@@ -48,21 +44,6 @@
             self.items.push({
               key: key,
               value: self.siren.properties[key].toString()
-            })
-          })
-          console.log('items ', this.items)
-        }
-      },
-      setHeaders () {
-        var item = this.items[0]
-        if (item) {
-          var keys = Object.keys(item)
-          var self = this
-          keys.forEach(function (key) {
-            self.headers.push({
-              text: key,
-              align: 'left',
-              sortable: false
             })
           })
         }
