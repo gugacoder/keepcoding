@@ -2,7 +2,6 @@
   <v-card color="grey lighten-4" flat>
     <v-card-text>
       <v-container fluid>
-        <h3 v-if="siren">Propriedades de {{ siren.class[0] }}</h3>
         <v-layout row v-for="item in items">
           <v-flex xs12 sm10>
             <v-text-field box readonly v-bind:label="item.key" v-model="item.value"></v-text-field>
