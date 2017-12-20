@@ -9,7 +9,7 @@
       app>
       <v-list subheader>
         <!--v-subheader>Links</v-subheader-->
-        <v-list-tile v-for="item in actions" v-bind:href="item.href">
+        <v-list-tile v-for="item in actions" v-bind:href="item.href" :key="item.href">
           <v-list-tile-content>
             <v-list-tile-title v-if="item.title" v-html="item.title"></v-list-tile-title>
             <v-list-tile-title v-else v-html="item.rel[0]"></v-list-tile-title>
@@ -48,7 +48,7 @@
       app>
       <v-list subheader>
         <v-subheader>Filtros</v-subheader>
-        <v-list-tile avatar v-for="item in filters" v-bind:href="item.href" target="_blank">
+        <v-list-tile avatar v-for="item in filters" v-bind:href="item.href" :key="item.href" target="_blank">
           <v-list-tile-content>
             <v-list-tile-title v-html="item.title"></v-list-tile-title>
           </v-list-tile-content>

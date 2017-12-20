@@ -2,7 +2,7 @@
   <v-card color="grey lighten-4" flat>
     <v-card-text>
       <v-container fluid>
-        <v-layout row v-for="item in items">
+        <v-layout row v-for="item in items" :key="item.key">
           <v-flex xs12 sm10>
             <v-text-field box readonly v-bind:label="item.key" v-model="item.value"></v-text-field>
           </v-flex>
