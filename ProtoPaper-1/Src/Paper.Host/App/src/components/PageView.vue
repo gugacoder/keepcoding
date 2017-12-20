@@ -51,9 +51,7 @@
       },
       loadPage () {
         var path = this.$route.params.path
-        console.log('path ', this.$route)
         paper.methods.loadSiren(path).then(data => {
-          console.log('loadPage ', data)
           this.sirenData = data
           this.loadData(data)
           EventBus.$emit('reset', data)
@@ -63,7 +61,6 @@
     computed: {
       dynamicComponent () {
         if (this.viewShow === 'Grid') {
-          Grid.data.siren = this.siren
           return Grid
         } else if (this.viewShow === 'View') {
           return View
