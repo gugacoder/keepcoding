@@ -34,6 +34,7 @@
     methods: {
       loadData (siren) {
         this.setLinks(siren)
+        this.setActions(siren)
         if (siren) {
           var isCollection = siren.class.indexOf('collection') > 0
           if (isCollection) {
@@ -47,6 +48,12 @@
         if (siren && siren.links) {
           EventBus.$emit('updateShowRightDrawer', true)
           EventBus.$emit('links', siren.links)
+        }
+      },
+      setActions (siren) {
+        if (siren && siren.actions) {
+          EventBus.$emit('updateShowLeftDrawer', true)
+          EventBus.$emit('actions', siren.actions)
         }
       },
       loadPage () {
@@ -69,7 +76,7 @@
         }
       }
     },
-    created: function () {
+    created () {
       if (this.siren) {
         this.sirenData = this.siren
         this.loadData(this.siren)

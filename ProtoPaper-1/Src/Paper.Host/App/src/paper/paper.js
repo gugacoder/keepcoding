@@ -7,7 +7,7 @@ Vue.use(VueResource)
 export default {
   methods: {
     load (path) {
-      Vue.http.get(path).then(response => {
+      Vue.http.get('http://localhost:3000/' + path).then(response => {
         var json = response.body
         if (json) {
           this.loadPage(path, json)
@@ -18,7 +18,7 @@ export default {
     },
 
     loadSiren (path) {
-      return Vue.http.get(path).then(response => {
+      return Vue.http.get('http://localhost:3000/' + path).then(response => {
         var json = response.body
         if (json) {
           const sirenParser = require('siren-parser')
@@ -41,7 +41,7 @@ export default {
     },
 
     save (path, data) {
-      Vue.http.post(path, data).then(response => {
+      Vue.http.post('http://localhost:3000/' + path, data).then(response => {
         this.loadPage(path, data)
       }, response => {
         console.log('error ', response)

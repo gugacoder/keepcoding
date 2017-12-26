@@ -1,29 +1,13 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-      fixed
-      right
-      clipped
-      v-model="drawerRight"
-      v-if="showRightDrawer"
-      app>
-      <v-list subheader>
-        <!--v-subheader>Links</v-subheader-->
-        <v-list-tile v-for="item in actions" :key="item.rel[0]" v-bind:href="item.href">
-          <v-list-tile-content>
-            <v-list-tile-title v-if="item.title" v-html="item.title"></v-list-tile-title>
-            <v-list-tile-title v-else v-html="item.rel[0]"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+    <links></links>
     <v-toolbar
       color="indigo"
       dark
       fixed
       app
       clipped-right>
-      <v-toolbar-side-icon v-if="showLeftDrawer" @click.stop="drawerLeft = !drawerLeft"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="showLeftDrawer" @click.stop="setDrawerLeft"></v-toolbar-side-icon>
       <v-toolbar-title :style="$vuetify.breakpoint.smAndUp ? 'width: 200px; min-width: 200px' : 'min-width: 72px'" class="ml-0 pl-3">
         <span class="hidden-xs-only">Sandbrowser</span>
       </v-toolbar-title>
@@ -38,23 +22,9 @@
         style="max-width: 600px; min-width: 128px">
       </v-text-field>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon v-if="showRightDrawer" @click.stop="drawerRight = !drawerRight"></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="showRightDrawer" @click.stop="setDrawerRight"></v-toolbar-side-icon>
     </v-toolbar>
-    <v-navigation-drawer
-      fixed
-      v-if="showLeftDrawer"
-      v-model="drawerLeft"
-      :stateless="left"
-      app>
-      <v-list subheader>
-        <v-subheader>Filtros</v-subheader>
-        <v-list-tile avatar v-for="item in filters" :key="item.rel[0]" v-bind:href="item.href" target="_blank">
-          <v-list-tile-content>
-            <v-list-tile-title v-html="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+    <actions></actions>
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -66,48 +36,54 @@
 
 <script>
   import paper from './paper/paper.js'
+  import Actions from './components/ActionsView.vue'
+  import Links from './components/MenuLinksView.vue'
   import { EventBus } from './event-bus.js'
   export default {
     data: () => ({
       searchParams: '',
-      drawerLeft: false,
-      drawerRight: null,
+      drawerLeft: true,
+      drawerRight: true,
       showLeftDrawer: false,
-      showRightDrawer: false,
-      right: false,
-      left: false,
-      actions: [],
-      filters: []
+      showRightDrawer: false
     }),
     props: {
       source: String
     },
+    components: {
+      Actions,
+      Links
+    },
     methods: {
-      search: function () {
+      search () {
         paper.methods.load(this.searchParams)
       },
-      clearSearch: function () {
+      clearSearch () {
         this.searchParams = ''
       },
-      checkKeyUp: function (event) {
+      checkKeyUp (event) {
         if (event.key === 'Enter') {
           this.search()
         }
       },
-      refreshLeftDrawer: function (newTodo) {
-        this.showLeftDrawer = newTodo
+      refreshLeftDrawer (showDrawer) {
+        this.showLeftDrawer = showDrawer
       },
-      refreshRightDrawer: function (newTodo) {
-        this.showRightDrawer = newTodo
+      refreshRightDrawer (showDrawer) {
+        this.showRightDrawer = showDrawer
       },
-      setLinks: function (actions) {
-        this.actions = actions
+      setDrawerLeft () {
+        this.drawerLeft = !this.drawerLeft
+        EventBus.$emit('drawerLeft', this.drawerLeft)
+      },
+      setDrawerRight () {
+        this.drawerRight = !this.drawerRight
+        EventBus.$emit('drawerRight', this.drawerRight)
       }
     },
-    created: function () {
+    created () {
       EventBus.$on('updateShowLeftDrawer', this.refreshLeftDrawer)
       EventBus.$on('updateShowRightDrawer', this.refreshRightDrawer)
-      EventBus.$on('links', this.setLinks)
     }
   }
 </script>

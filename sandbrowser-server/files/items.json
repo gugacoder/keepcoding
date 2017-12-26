@@ -192,6 +192,14 @@
           {
              "name":"quantity",
              "type":"number"
+          },
+          {
+             "name":"active",
+             "type":"checkbox"
+          },
+          {
+             "name":"option",
+             "type":"radio"
           }
        ]
     }
