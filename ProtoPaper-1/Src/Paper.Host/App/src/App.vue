@@ -24,9 +24,9 @@
       <v-spacer></v-spacer>
       <v-toolbar-side-icon v-if="showRightDrawer" @click.stop="setDrawerRight"></v-toolbar-side-icon>
     </v-toolbar>
-    <actions></actions>
+    <!--actions></actions-->
     <v-content>
-      <router-view></router-view>
+      <router-view :key="$route.fullPath"></router-view>
     </v-content>
     <v-footer color="indigo" app>
       <span class="white--text">KeepCoding &copy; 2017</span>

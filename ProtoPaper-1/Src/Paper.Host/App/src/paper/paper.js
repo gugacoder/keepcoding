@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import router from '../router'
+import store from '../store/store'
 
 Vue.use(VueResource)
 
@@ -10,7 +11,10 @@ export default {
       Vue.http.get('http://localhost:3000/' + path).then(response => {
         var json = response.body
         if (json) {
-          this.loadPage(path, json)
+          const sirenParser = require('siren-parser')
+          var resource = sirenParser(json)
+          store.commit('update', resource)
+          this.loadPage(path)
         }
       }, response => {
         router.push({name: 'notFound', params: { routerName: path }})
@@ -30,14 +34,12 @@ export default {
       })
     },
 
-    loadPage (path, data) {
-      const sirenParser = require('siren-parser')
-      var resource = sirenParser(data)
+    loadPage (path) {
       var params = path.split('/')
       params = params.filter(function (x) {
         return (x !== (undefined || null || ''))
       })
-      router.push({name: 'page', params: { path: params, siren: resource }})
+      router.push({name: 'page', params: { path: params }})
     },
 
     save (path, data) {

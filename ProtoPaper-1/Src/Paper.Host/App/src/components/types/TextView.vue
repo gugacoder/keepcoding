@@ -1,7 +1,8 @@
 <template>
   <v-text-field
-    :label="field.name"
+    :label="field.title"
     :value="field.value"
+    :name="field.name"
     v-model="field.value">
   </v-text-field>
 </template>

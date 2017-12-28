@@ -1,21 +1,15 @@
 <template>
-  <v-navigation-drawer
-    fixed
-    v-model="drawerLeft"
-    :stateless="left"
-    app>
-    <v-container fluid>
-      <form v-for="action in actions" :key="actions[0].name">
-        <v-layout row wrap v-for="field in action.fields" :key="field.name">
-          <v-flex xs12>
-            <component :is="field.type + 'View'" :field="field"></component>
-          </v-flex>
-        </v-layout>
-        <v-btn @click="submit">{{ action.title }}</v-btn>
-        <v-btn @click="clear">clear</v-btn>
-      </form>
-    </v-container>
-  </v-navigation-drawer>
+  <v-container fluid>
+    <v-form :ref="'form-' + action.name">
+      <v-layout row wrap v-for="field in action.fields" :key="field.name">
+        <v-flex xs12>
+          <component :is="field.type + 'View'" :field="field"></component>
+        </v-flex>
+      </v-layout>
+      <v-btn @click="submit()">{{ action.title }}</v-btn>
+      <v-btn @click="clear()">Limpar</v-btn>
+    </v-form>
+  </v-container>
 </template>
 
 <script>
@@ -28,16 +22,22 @@
   export default {
     $validates: true,
     data: () => ({
-      actions: [],
+      action: [],
       drawerLeft: true,
-      left: false
+      left: false,
+      valid: true
     }),
     beforeRouteUpdate (to, from, next) {
       next()
+      console.log('before')
     },
     created () {
-      EventBus.$on('drawerLeft', this.setLeftDrawer)
-      EventBus.$on('actions', this.setActions)
+      EventBus.$emit('updateShowRightDrawer', false)
+      EventBus.$emit('updateShowLeftDrawer', false)
+      this.$store.dispatch('reloadAsync').then(() => {
+        var actionName = this.$route.query.actions
+        this.action = this.$store.state.data.getActionByName(actionName)
+      })
     },
     components: {
       TextView,
@@ -54,9 +54,38 @@
         this.drawerLeft = drawer
       },
       submit () {
-        this.$validator.validateAll()
+        var params = this.makeParams()
+        if (this.action && this.action.method === 'POST') {
+          console.log('params ', params)
+          this.$http.get(this.action.href + params).then(response => {
+            this.$router.push({name: 'page', params: { path: this.action.href }})
+          }, response => {
+            console.log('error ', response)
+          })
+        }
+      },
+      makeParams () {
+        var params = ''
+        var formName = 'form-' + this.action.name
+        var form = this.$refs[formName]
+        form.inputs.forEach((field) => {
+          var param = field.$attrs.name
+          var value = field.value
+          if (value !== undefined) {
+            if (params.length === 0) {
+              params = '?'
+            } else {
+              params = params + '&'
+            }
+            params = params + param + '=' + value
+          }
+        })
+        return params
       },
       clear () {
+        var formName = 'form-' + this.action.name
+        var form = this.$refs[formName]
+        form.reset()
       }
     }
   }

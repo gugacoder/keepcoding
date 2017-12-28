@@ -31,16 +31,14 @@
 </template>
 
 <script>
-  import { EventBus } from '../event-bus.js'
   export default {
-    props: ['data'],
     data () {
       return {
         showLeftDrawer: '',
         headers: [],
         items: [],
         showLinks: false,
-        siren: ''
+        data: ''
       }
     },
     beforeRouteUpdate (to, from, next) {
@@ -54,15 +52,11 @@
         this.setItems()
         this.setHeaders()
       },
-      reset (newValue) {
-        Object.assign(this.$data, this.$options.data())
-        this.siren = newValue
-        this.load()
-      },
       setItems () {
         var self = this
-        if (this.siren && this.siren.entities) {
-          this.siren.entities.forEach(function (item) {
+        var data = this.$store.state.data
+        if (data && data.entities) {
+          data.entities.forEach(function (item) {
             self.items.push(item.properties)
           })
         }
@@ -83,12 +77,7 @@
       }
     },
     created () {
-      EventBus.$on('reset', this.reset)
-      this.siren = this.data
-      if (this.siren) {
-        this.load()
-        return
-      }
+      this.load()
     }
   }
 </script>

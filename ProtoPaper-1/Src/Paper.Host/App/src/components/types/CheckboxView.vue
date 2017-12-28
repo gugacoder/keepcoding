@@ -1,9 +1,12 @@
 <template>
   <v-checkbox
     color="green"
-    v-model="field.value">
-    <div slot="label" @click.stop="">
-      {{field.name}}
+    :name="field.name"
+    :value="field.value"
+    v-model="field.value"
+    @click.stop="field.value = !field.value">
+    <div slot="label">
+      {{field.title}}
     </div>
   </v-checkbox>
 </template>

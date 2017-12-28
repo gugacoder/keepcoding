@@ -1,6 +1,6 @@
 <template>
-  <v-radio-group v-model="field" :mandatory="false">
-    <v-radio :label="field.name" :value="field.value"></v-radio>
+  <v-radio-group v-model="field.value" :mandatory="false">
+    <v-radio :label="field.title" :value="field.value"></v-radio>
   </v-radio-group>
 </template>  
 

@@ -5,12 +5,21 @@
     clipped
     v-model="drawerRight"
     app>
-    <v-list subheader>
-      <!--v-subheader>Links</v-subheader-->
-      <v-list-tile v-for="item in links" :key="item.href" v-bind:href="item.href">
+    <v-list subheader v-if="$store.state.data.links">
+      <v-subheader>NAVEGAÇÃO</v-subheader>
+      <v-list-tile v-for="item in $store.state.data.links" :key="item.href" v-bind:href="item.href">
         <v-list-tile-content>
           <v-list-tile-title v-if="item.title" v-html="item.title"></v-list-tile-title>
           <v-list-tile-title v-else v-html="item.rel[0]"></v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
+    <v-divider></v-divider>
+    <v-list subheader v-if="$store.state.data.actions">
+      <v-subheader>AÇÕES</v-subheader>
+      <v-list-tile v-for="item in $store.state.data.actions" :key="item.name" :href="'/#' + $route.path + '?actions=' + item.name">
+        <v-list-tile-content>
+          <v-list-tile-title v-html="item.title"></v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -21,21 +30,17 @@
   import { EventBus } from '../event-bus.js'
   export default {
     data: () => ({
-      links: [],
-      drawerRight: false,
+      drawerRight: true,
       right: false
     }),
     beforeRouteUpdate (to, from, next) {
       next()
     },
     created () {
+      console.log('store ', this.$store.state.data)
       EventBus.$on('drawerRight', this.setRightDrawer)
-      EventBus.$on('links', this.setLinks)
     },
     methods: {
-      setLinks (links) {
-        this.links = links
-      },
       setRightDrawer (drawer) {
         this.drawerRight = drawer
       }

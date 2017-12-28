@@ -175,31 +175,63 @@
   "actions":[
     {
        "name":"add-item",
-       "title":"Add Item",
+       "title":"Adicionar Item",
        "method":"POST",
-       "href":"http://api.x.io/orders/42/items",
+       "href":"http://localhost:8080/#/page/items",
        "type":"application/x-www-form-urlencoded",
        "fields":[
           {
-             "name":"orderNumber",
-             "type":"hidden",
-             "value":"42"
-          },
-          {
              "name":"productCode",
+             "title":"Código do produto",
              "type":"text"
           },
           {
              "name":"quantity",
+             "title":"Quantidade",
              "type":"number"
           },
           {
              "name":"active",
-             "type":"checkbox"
+             "title":"Ativo",
+             "type":"checkbox",
+             "value": false
           },
           {
-             "name":"option",
-             "type":"radio"
+             "name":"activia",
+             "title":"Ativio",
+             "type":"checkbox",
+             "value": true
+          }
+       ]
+    },
+    {
+       "name":"config-item",
+       "title":"Configurar Item",
+       "method":"POST",
+       "href":"items",
+       "type":"application/x-www-form-urlencoded",
+       "fields":[
+          {
+             "name":"productCode",
+             "title":"Código do produto",
+             "type":"text"
+          },
+          {
+             "name":"quantity",
+             "title":"Quantidade",
+             "type":"number"
+          },
+          {
+             "name":"active",
+             "title":"Ativo",
+             "type":"checkbox",
+             "value": false
+          },
+          {
+             "name":"activia",
+             "title":"Ativio",
+             "type":"checkbox",
+             "value": true
           }
        ]
     }
