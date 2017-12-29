@@ -1,5 +1,5 @@
 <template>
-  <component :is='dynamicComponent' :data="sirenData"></component>
+  <component :is='dynamicComponent'></component>
 </template>
 
 <script>
@@ -7,78 +7,52 @@
   import Grid from './GridView.vue'
   import View from './View.vue'
   import Home from './HomeView.vue'
-  import paper from '../paper/paper.js'
+  import Actions from './ActionsView.vue'
   import { EventBus } from '../event-bus.js'
   export default {
-    props: ['siren'],
     data () {
       return {
-        viewShow: '',
-        sirenData: ''
+        viewShow: ''
       }
     },
     components: {
       Grid,
       View,
-      Home
+      Home,
+      Actions
     },
     beforeRouteUpdate (to, from, next) {
       next()
-      if (!to.params.siren) {
-        this.loadPage()
-        return
-      }
-      EventBus.$emit('reset', to.params.siren)
-      this.loadData(to.params.siren)
+      this.$store.dispatch('reloadAsync').then(() => {
+        this.loadData()
+      })
     },
     methods: {
-      loadData (siren) {
-        this.setLinks(siren)
-        if (siren) {
-          var isCollection = siren.class.indexOf('collection') > 0
-          if (isCollection) {
-            this.viewShow = 'Grid'
-          } else {
-            this.viewShow = 'View'
-          }
-        }
-      },
-      setLinks (siren) {
-        if (siren && siren.links) {
-          EventBus.$emit('updateShowRightDrawer', true)
-          EventBus.$emit('links', siren.links)
-        }
-      },
-      loadPage () {
-        var path = this.$route.params.path
-        console.log('path ', this.$route)
-        paper.methods.loadSiren(path).then(data => {
-          console.log('loadPage ', data)
-          this.sirenData = data
-          this.loadData(data)
-          EventBus.$emit('reset', data)
-        })
+      loadData () {
+        var data = this.$store.state.data
+        var showRightDrawer = data && (data.actions || data.links)
+        EventBus.$emit('updateShowRightDrawer', showRightDrawer)
       }
     },
     computed: {
       dynamicComponent () {
-        if (this.viewShow === 'Grid') {
-          Grid.data.siren = this.siren
+        var data = this.$store.state.data
+        var isCollection = data && data.class && data.class.indexOf('collection') > 0
+        if (this.$route.query && this.$route.query.actions) {
+          return Actions
+        } else if (isCollection) {
           return Grid
-        } else if (this.viewShow === 'View') {
+        } else if (!isCollection) {
           return View
         } else {
           return Home
         }
       }
     },
-    created: function () {
-      if (this.siren) {
-        this.sirenData = this.siren
-        this.loadData(this.siren)
-        return
-      }
-      this.loadPage()
+    created () {
+      this.$store.dispatch('reloadAsync').then(() => {
+        this.loadData()
+      })
     }
   }
 </script>

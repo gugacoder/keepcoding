@@ -17,8 +17,7 @@ export default new Router({
     {
       path: '/page/:path(.*)*',
       name: 'page',
-      component: Page,
-      props: true
+      component: Page
     },
     {
       path: '/notFound',

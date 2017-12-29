@@ -14,9 +14,13 @@
               </td>
             </tr>
           </template>
-          <template slot="expand" slot-scope="items" v-if="siren.entities[items.index].links">
+          <template slot="expand" slot-scope="items" v-if="$store.state.data.entities[items.index] && $store.state.data.entities[items.index].links">
             <v-list subheader>
+<<<<<<< HEAD
               <v-list-tile v-for="item in siren.entities[items.index].links" :key="item.href" v-bind:href="item.href">
+=======
+              <v-list-tile v-for="item in $store.state.data.entities[items.index].links" :key="item.href" v-bind:href="item.href">
+>>>>>>> actions
                 <v-list-tile-content>
                   <a v-if="item.title" v-bind:href="item.href">{{ item.title }}</a>
                   <a v-else v-bind:href="item.href">{{ item.rel[0] }}</a>
@@ -31,16 +35,14 @@
 </template>
 
 <script>
-  import { EventBus } from '../event-bus.js'
   export default {
-    props: ['data'],
     data () {
       return {
         showLeftDrawer: '',
         headers: [],
         items: [],
         showLinks: false,
-        siren: ''
+        data: ''
       }
     },
     beforeRouteUpdate (to, from, next) {
@@ -54,15 +56,11 @@
         this.setItems()
         this.setHeaders()
       },
-      reset (newValue) {
-        Object.assign(this.$data, this.$options.data())
-        this.siren = newValue
-        this.load()
-      },
       setItems () {
         var self = this
-        if (this.siren && this.siren.entities) {
-          this.siren.entities.forEach(function (item) {
+        var data = this.$store.state.data
+        if (data && data.entities) {
+          data.entities.forEach(function (item) {
             self.items.push(item.properties)
           })
         }
@@ -83,12 +81,7 @@
       }
     },
     created () {
-      EventBus.$on('reset', this.reset)
-      this.siren = this.data
-      if (this.siren) {
-        this.load()
-        return
-      }
+      this.load()
     }
   }
 </script>
