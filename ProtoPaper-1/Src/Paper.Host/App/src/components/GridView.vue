@@ -24,6 +24,26 @@
               </v-list-tile>
             </v-list>
           </template>
+          <template slot="links" slot-scope="items" v-if="$store.state.data.entities[items.index] && $store.state.data.entities[items.index].links">
+            <v-edit-dialog
+              @open="items.expanded"
+              @save="props.item.iron = tmp || props.item.iron"
+              large
+              lazy
+            >
+              <div>{{ props.item.iron }}</div>
+              <div slot="input" class="mt-3 title">Update Iron</div>
+              <v-text-field
+                slot="input"
+                label="Edit"
+                v-model="tmp"
+                single-line
+                counter
+                autofocus
+                :rules="[max25chars]"
+              ></v-text-field>
+            </v-edit-dialog>
+          </template>
         </v-data-table>
       </v-container>  
     </v-card-text>

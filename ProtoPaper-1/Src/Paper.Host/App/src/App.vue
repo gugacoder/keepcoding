@@ -1,26 +1,6 @@
 <template>
   <v-app id="inspire">
-<<<<<<< HEAD
-    <v-navigation-drawer
-      fixed
-      right
-      clipped
-      v-model="drawerRight"
-      v-if="showRightDrawer"
-      app>
-      <v-list subheader>
-        <!--v-subheader>Links</v-subheader-->
-        <v-list-tile v-for="item in actions" v-bind:href="item.href" :key="item.href">
-          <v-list-tile-content>
-            <v-list-tile-title v-if="item.title" v-html="item.title"></v-list-tile-title>
-            <v-list-tile-title v-else v-html="item.rel[0]"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-=======
     <links></links>
->>>>>>> actions
     <v-toolbar
       color="indigo"
       dark
@@ -44,25 +24,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-side-icon v-if="showRightDrawer" @click.stop="setDrawerRight"></v-toolbar-side-icon>
     </v-toolbar>
-<<<<<<< HEAD
-    <v-navigation-drawer
-      fixed
-      v-if="showLeftDrawer"
-      v-model="drawerLeft"
-      :stateless="left"
-      app>
-      <v-list subheader>
-        <v-subheader>Filtros</v-subheader>
-        <v-list-tile avatar v-for="item in filters" v-bind:href="item.href" :key="item.href" target="_blank">
-          <v-list-tile-content>
-            <v-list-tile-title v-html="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-=======
     <!--actions></actions-->
->>>>>>> actions
     <v-content>
       <router-view :key="$route.fullPath"></router-view>
     </v-content>
