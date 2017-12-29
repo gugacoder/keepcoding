@@ -13,14 +13,11 @@
 </template>
 
 <script>
-  import { EventBus } from '../event-bus.js'
   export default {
-    props: ['data'],
     data () {
       return {
         headers: [],
-        items: [],
-        siren: ''
+        items: []
       }
     },
     beforeRouteUpdate (to, from, next) {
@@ -30,31 +27,22 @@
       load () {
         this.setItems()
       },
-      reset (newValue) {
-        Object.assign(this.$data, this.$options.data())
-        this.siren = newValue
-        this.load()
-      },
       setItems () {
-        if (this.siren) {
-          var keys = Object.keys(this.siren.properties)
-          var self = this
-          keys.forEach(function (key) {
-            self.items.push({
-              key: key,
-              value: self.siren.properties[key].toString()
-            })
+        var data = this.$store.state.data
+        var keys = Object.keys(data.properties)
+        var self = this
+        keys.forEach(function (key) {
+          self.items.push({
+            key: key,
+            value: data.properties[key]
           })
-        }
+        })
       }
     },
     created () {
-      EventBus.$on('reset', this.reset)
-      this.siren = this.data
-      if (this.siren) {
+      this.$store.dispatch('reloadAsync').then(() => {
         this.load()
-        return
-      }
+      })
     }
   }
 </script>

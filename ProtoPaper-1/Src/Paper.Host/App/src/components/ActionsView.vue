@@ -29,7 +29,6 @@
     }),
     beforeRouteUpdate (to, from, next) {
       next()
-      console.log('before')
     },
     created () {
       EventBus.$emit('updateShowRightDrawer', false)
@@ -54,31 +53,23 @@
         this.drawerLeft = drawer
       },
       submit () {
-        var params = this.makeParams()
+        var queryParams = this.makeParams()
         if (this.action && this.action.method === 'POST') {
-          console.log('params ', params)
-          this.$http.get(this.action.href + params).then(response => {
-            this.$router.push({name: 'page', params: { path: this.action.href }})
-          }, response => {
-            console.log('error ', response)
+          var params = this.action.href.split('/')
+          params = params.filter(function (x) {
+            return (x !== (undefined || null || ''))
           })
+          this.$router.push({name: 'page', params: { path: params }, query: queryParams})
         }
       },
       makeParams () {
-        var params = ''
+        var params = {}
         var formName = 'form-' + this.action.name
         var form = this.$refs[formName]
         form.inputs.forEach((field) => {
           var param = field.$attrs.name
           var value = field.value
-          if (value !== undefined) {
-            if (params.length === 0) {
-              params = '?'
-            } else {
-              params = params + '&'
-            }
-            params = params + param + '=' + value
-          }
+          params[param] = value
         })
         return params
       },

@@ -16,9 +16,10 @@ const mutations = {
 }
 
 const actions = {
-  reloadAsync ({ commit, path }) {
+  reloadAsync ({ commit }) {
     return new Promise((resolve, reject) => {
       var path = router.currentRoute.params.path
+      path = Array.isArray(path) ? path.join('/') : path
       paper.methods.loadSiren(path).then(data => {
         state.data = data
         resolve()

@@ -14,9 +14,9 @@
               </td>
             </tr>
           </template>
-          <template slot="expand" slot-scope="items" v-if="siren.entities[items.index].links">
+          <template slot="expand" slot-scope="items" v-if="$store.state.data.entities[items.index] && $store.state.data.entities[items.index].links">
             <v-list subheader>
-              <v-list-tile v-for="item in siren.entities[items.index].links" :key="item.href" v-bind:href="item.href">
+              <v-list-tile v-for="item in $store.state.data.entities[items.index].links" :key="item.href" v-bind:href="item.href">
                 <v-list-tile-content>
                   <a v-if="item.title" v-bind:href="item.href">{{ item.title }}</a>
                   <a v-else v-bind:href="item.href">{{ item.rel[0] }}</a>

@@ -30,14 +30,13 @@
   import { EventBus } from '../event-bus.js'
   export default {
     data: () => ({
-      drawerRight: true,
+      drawerRight: false,
       right: false
     }),
     beforeRouteUpdate (to, from, next) {
       next()
     },
     created () {
-      console.log('store ', this.$store.state.data)
       EventBus.$on('drawerRight', this.setRightDrawer)
     },
     methods: {

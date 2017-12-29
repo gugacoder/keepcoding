@@ -177,7 +177,7 @@
        "name":"add-item",
        "title":"Adicionar Item",
        "method":"POST",
-       "href":"http://localhost:8080/#/page/items",
+       "href":"items",
        "type":"application/x-www-form-urlencoded",
        "fields":[
           {
