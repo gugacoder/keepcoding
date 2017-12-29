@@ -8,41 +8,26 @@
             v-bind:items="items"
             item-key="name">
           <template slot="items" slot-scope="items">
-            <tr @click="items.expanded = !items.expanded">
-              <td v-for="item in items.item" class="text-xs-left">
+            <tr @click.stop="dialog = true">
+              <td v-for="item in items.item" :key="item.key" class="text-xs-left">
                 {{ item }}
               </td>
+              <v-menu offset-x left bottom>
+                <v-btn
+                    icon
+                    slot="activator">
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+                <v-list>
+                  <v-list-tile v-for="item in $store.state.data.entities[items.index].links" :key="item.href">
+                    <v-list-tile-content>
+                      <a v-if="item.title" v-bind:href="item.href">{{ item.title }}</a>
+                      <a v-else v-bind:href="item.href">{{ item.rel[0] }}</a>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
             </tr>
-          </template>
-          <template slot="expand" slot-scope="items" v-if="$store.state.data.entities[items.index] && $store.state.data.entities[items.index].links">
-            <v-list subheader>
-              <v-list-tile v-for="item in $store.state.data.entities[items.index].links" :key="item.href" v-bind:href="item.href">
-                <v-list-tile-content>
-                  <a v-if="item.title" v-bind:href="item.href">{{ item.title }}</a>
-                  <a v-else v-bind:href="item.href">{{ item.rel[0] }}</a>
-                </v-list-tile-content>
-              </v-list-tile>
-            </v-list>
-          </template>
-          <template slot="links" slot-scope="items" v-if="$store.state.data.entities[items.index] && $store.state.data.entities[items.index].links">
-            <v-edit-dialog
-              @open="items.expanded"
-              @save="props.item.iron = tmp || props.item.iron"
-              large
-              lazy
-            >
-              <div>{{ props.item.iron }}</div>
-              <div slot="input" class="mt-3 title">Update Iron</div>
-              <v-text-field
-                slot="input"
-                label="Edit"
-                v-model="tmp"
-                single-line
-                counter
-                autofocus
-                :rules="[max25chars]"
-              ></v-text-field>
-            </v-edit-dialog>
           </template>
         </v-data-table>
       </v-container>  
@@ -58,7 +43,8 @@
         headers: [],
         items: [],
         showLinks: false,
-        data: ''
+        data: '',
+        dialog: false
       }
     },
     beforeRouteUpdate (to, from, next) {
