@@ -22,7 +22,7 @@
   },
   "entities":[
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Frozen",
@@ -39,7 +39,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Ice cream",
@@ -56,7 +56,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Eclair",
@@ -73,7 +73,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Cupcake",
@@ -90,7 +90,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Gingerbread",
@@ -107,7 +107,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Jelly bean",
@@ -124,7 +124,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Lollipop",
@@ -141,7 +141,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Honeycomb",
@@ -158,7 +158,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Donut",
@@ -175,7 +175,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "KitKat",
@@ -192,7 +192,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Jelly bean",
@@ -209,7 +209,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Lollipop",
@@ -226,7 +226,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Honeycomb",
@@ -243,7 +243,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Donut",
@@ -260,7 +260,7 @@
       ]
    },
    {
-     "class": [ "order" ],
+     "class": [ "order", "collectionItem" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "KitKat",

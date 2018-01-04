@@ -8,7 +8,7 @@
 
     v-btn(
       icon 
-      @click="$store.commit('selectMode', false)"
+      @click="deselected"
     )
       v-icon arrow_back
     
@@ -31,11 +31,18 @@
 </template>
 
 <script>
+  import { Events } from '../event-bus.js'
   export default {
     computed: {
       showClass () {
         var show = this.$store.state.selectedMode ? 'hidden-sm-and-down' : 'hidden-sm-and-up'
         return show
+      }
+    },
+    methods: {
+      deselected () {
+        Events.$emit('selectMode', false)
+        this.$store.commit('selectMode', false)
       }
     }
   }

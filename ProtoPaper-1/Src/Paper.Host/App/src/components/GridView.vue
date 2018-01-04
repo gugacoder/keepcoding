@@ -15,65 +15,61 @@
     v-card-text
       v-container(fluid)
         v-data-table(
-            :headers="headers"
-            :items="items"
-            hide-actions=true
-            v-model="selected"
-            select-all
-            item-key="name"
+          :headers="headers"
+          :items="items"
+          :item-key="itemKey"
+          hide-actions=true
+          v-model="selected"
+          select-all
         )
           template(
             slot="items" slot-scope="items"
           )
-            tr(
-              @click.stop="dialog = true" 
-              :active="items.selected" 
-              @click="items.selected = !items.selected"
-            )
-              td
-                v-checkbox(
-                  primary
-                  hide-details
-                  :input-value="items.selected"
-                )
-                
-              td(
-                v-for="item in items.item" 
-                :key="item" 
-                class="text-xs-left"
-              ) {{ item }}
-
-              td(
-                class="text-xs-center" 
-                @click.stop=""
+            td
+              v-checkbox(
+                primarytem
+                hide-details
+                v-model="items.selected"
               )
-                v-menu(
-                  offset-x 
-                  left 
-                  bottom 
-                  v-if="$store.state.data.entities[items.index].links"
-                )
-                  v-btn(
-                    icon
-                    slot="activator"
-                  )
-                    v-icon
-                      | more_vert
+              
+            td(
+              v-for="item in items.item" 
+              :key="item" 
+              class="text-xs-left"
+              nowrap
+            ) {{ item }}
 
-                  v-list
-                    v-list-tile(
-                      v-for="item in $store.state.data.entities[items.index].links" 
-                      :key="item.href"
-                    )
-                      v-list-tile-content
-                        a(
-                          v-if="item.title" 
-                          :href="item.href"
-                        ) {{ item.title }}
-                        a(
-                          v-else
-                          :href="item.href"
-                        ) {{ item.rel[0] }}
+            td(
+              class="text-xs-center" 
+              @click.stop=""
+            )
+              v-menu(
+                offset-x 
+                left 
+                bottom 
+                v-if="$store.state.data.entities[items.index].links"
+              )
+                v-btn(
+                  icon
+                  slot="activator"
+                )
+                  v-icon
+                    | more_vert
+
+                v-list
+                  v-list-tile(
+                    v-for="item in $store.state.data.entities[items.index].links" 
+                    :key="item.href"
+                  )
+                    v-list-tile-content
+                      a(
+                        v-if="item.title" 
+                        :href="item.href"
+                      ) {{ item.title }}
+                      a(
+                        v-else
+                        :href="item.href"
+                      ) {{ item.rel[0] }}
 </template>
 
 <script>
@@ -105,7 +101,7 @@
         var self = this
         var entities = this.$store.state.data.getSubEntitiesByClass('collectionItem')
         if (entities) {
-          entities.forEach(function (item) {
+          entities.forEach((item) => {
             self.items.push(item.properties)
           })
         }
@@ -115,7 +111,7 @@
         if (item) {
           var keys = Object.keys(item)
           var self = this
-          keys.forEach(function (key) {
+          keys.forEach((key) => {
             self.headers.push({
               text: key,
               align: 'left',
@@ -124,13 +120,24 @@
           })
         }
       },
+      selectedMode (selected) {
+        if (!selected) {
+          this.selected = []
+        }
+      },
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
       }
     },
     created () {
+      Events.$on('selectMode', this.selectedMode)
       this.load()
+    },
+    computed: {
+      itemKey () {
+        return this.headers && this.headers.length > 0 ? this.headers[0].text : ''
+      }
     },
     watch: {
       selected () {
