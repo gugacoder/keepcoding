@@ -17,11 +17,8 @@
         v-data-table(
             :headers="headers"
             :items="items"
-            :pagination.sync="pagination"
-            :rows-per-page-items="rowsPerPageItems"
             hide-actions=true
             v-model="selected"
-            rows-per-page-text="Itens por página"
             select-all
             item-key="name"
         )
@@ -90,9 +87,7 @@
         showLinks: false,
         data: '',
         dialog: false,
-        selected: [],
-        pagination: {rowsPerPage: 10},
-        rowsPerPageItems: [5, 10, 15, { text: 'Todos', value: -1 }]
+        selected: []
       }
     },
     beforeRouteUpdate (to, from, next) {
