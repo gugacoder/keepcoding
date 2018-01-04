@@ -19,6 +19,7 @@
             :items="items"
             :pagination.sync="pagination"
             :rows-per-page-items="rowsPerPageItems"
+            hide-actions=true
             v-model="selected"
             rows-per-page-text="Itens por página"
             select-all
@@ -76,12 +77,6 @@
                           v-else
                           :href="item.href"
                         ) {{ item.rel[0] }}
-
-          template(
-            slot="pageText" 
-            slot-scope="{ pageStart, pageStop }"
-          ) 
-            | Itens de {{ pageStart }} a {{ pageStop }}
 </template>
 
 <script>
