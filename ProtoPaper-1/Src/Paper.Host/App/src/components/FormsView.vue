@@ -1,5 +1,7 @@
 <template lang="pug">
-  v-container(fluid)
+  v-container(
+    fluid
+  )
     v-form(
       :ref="'form-' + action.name"
     )
@@ -60,8 +62,7 @@
       submit () {
         var queryParams = this.makeParams()
         if (this.action && this.action.method === 'POST') {
-          var contentType = { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
-          this.$http.post(this.action.href, {params: queryParams, headers: contentType}).then(response => {
+          this.$http.post(this.action.href, queryParams).then(response => {
             this.$router.go(-1)
           }, response => {
             console.log('error ', response)
