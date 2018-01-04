@@ -7,7 +7,7 @@
   import Grid from './GridView.vue'
   import View from './View.vue'
   import Home from './HomeView.vue'
-  import Actions from './ActionsView.vue'
+  import Forms from './FormsView.vue'
   export default {
     data () {
       return {
@@ -18,7 +18,7 @@
       Grid,
       View,
       Home,
-      Actions
+      Forms
     },
     beforeRouteUpdate (to, from, next) {
       next()
@@ -38,7 +38,7 @@
         var data = this.$store.state.data
         var isCollection = data && data.class && data.class.indexOf('collection') > 0
         if (this.$route.query && this.$route.query.actions) {
-          return Actions
+          return Forms
         } else if (isCollection) {
           return Grid
         } else if (!isCollection) {

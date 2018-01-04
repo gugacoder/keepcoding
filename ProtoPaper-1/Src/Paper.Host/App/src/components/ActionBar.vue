@@ -1,18 +1,16 @@
 <template lang="pug">
   v-toolbar(
-    dark 
-    color="indigo"
+    color="amber lighten-2"
     :class="showClass"
     fixed
   )
-
     v-btn(
       icon 
       @click="deselected"
     )
       v-icon arrow_back
     
-    v-toolbar-title(class="white--text")
+    v-toolbar-title
       | Cancelar
 
     v-spacer
