@@ -8,7 +8,6 @@
   import View from './View.vue'
   import Home from './HomeView.vue'
   import Actions from './ActionsView.vue'
-  import { Events } from '../event-bus.js'
   export default {
     data () {
       return {
@@ -30,8 +29,8 @@
     methods: {
       loadData () {
         var data = this.$store.state.data
-        var showRightDrawer = data && (data.actions || data.links)
-        Events.$emit('updateShowRightDrawer', showRightDrawer)
+        var showLinksBar = (data.actions !== undefined) || (data.links !== undefined)
+        this.$store.commit('update', showLinksBar)
       }
     },
     computed: {

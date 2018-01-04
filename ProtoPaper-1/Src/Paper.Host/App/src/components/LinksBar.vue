@@ -3,9 +3,9 @@
     fixed
     right
     clipped
-    v-model="drawerRight"
+    v-model="$store.state.navigation.show"
     app
-    v-if="showLinks || showActions"
+    v-if="show"
   )
     v-list(
       subheader v-if="showLinks"
@@ -46,19 +46,15 @@
 </template>
 
 <script>
-  import { Events } from '../event-bus.js'
   export default {
-    data: () => ({
-      drawerRight: false,
-      right: false
-    }),
     beforeRouteUpdate (to, from, next) {
       next()
     },
-    created () {
-      Events.$on('drawerRight', this.setRightDrawer)
-    },
     computed: {
+      show () {
+        var show = !this.$store.state.selection.selectedMode && (this.showLinks || this.showActions)
+        return show
+      },
       showLinks () {
         var show = this.$store.state.data && this.$store.state.data.links
         return show
@@ -66,11 +62,6 @@
       showActions () {
         var show = this.$store.state.data && this.$store.state.data.actions
         return show
-      }
-    },
-    methods: {
-      setRightDrawer (drawer) {
-        this.drawerRight = drawer
       }
     }
   }

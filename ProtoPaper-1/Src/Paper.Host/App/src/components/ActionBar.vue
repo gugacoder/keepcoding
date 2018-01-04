@@ -26,8 +26,11 @@
     v-btn(icon)
       v-icon refresh
 
-    v-btn(icon)
+    v-btn(
+      icon
+    )
       v-icon more_vert
+
 </template>
 
 <script>
@@ -35,7 +38,7 @@
   export default {
     computed: {
       showClass () {
-        var show = this.$store.state.selectedMode ? 'hidden-sm-and-down' : 'hidden-sm-and-up'
+        var show = this.$store.state.selection.selectedMode ? 'hidden-sm-and-down' : 'hidden-sm-and-up'
         return show
       }
     },

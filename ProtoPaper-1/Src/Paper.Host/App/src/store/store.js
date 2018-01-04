@@ -3,19 +3,18 @@ import Vuex from 'vuex'
 import paper from '../paper/paper.js'
 import router from '../router'
 
+import navigation from './modules/navigation.js'
+import selection from './modules/selection.js'
+
 Vue.use(Vuex)
 
 const state = {
-  data: {},
-  selectedMode: false
+  data: {}
 }
 
 const mutations = {
   update (state, data) {
     state.data = data
-  },
-  selectMode (state, selectedMode) {
-    state.selectedMode = selectedMode
   }
 }
 
@@ -35,5 +34,9 @@ const actions = {
 export default new Vuex.Store({
   state,
   actions,
-  mutations
+  mutations,
+  modules: {
+    navigation,
+    selection
+  }
 })

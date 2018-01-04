@@ -142,13 +142,6 @@
     watch: {
       selected () {
         this.$store.commit('selectMode', this.selected.length > 0)
-        if (this.$store.state.selectedMode) {
-          Events.$emit('updateShowLeftDrawer', false)
-          Events.$emit('updateShowRightDrawer', false)
-          Events.$emit('drawerRight', false)
-        } else {
-          Events.$emit('drawerRight', this.$store.state.data && this.$store.state.data.links)
-        }
       }
     }
   }
