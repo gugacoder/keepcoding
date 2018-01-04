@@ -1,15 +1,23 @@
-<template>
-  <v-container fluid>
-    <v-form :ref="'form-' + action.name">
-      <v-layout row wrap v-for="field in action.fields" :key="field.name">
-        <v-flex xs12>
-          <component :is="field.type + 'View'" :field="field"></component>
-        </v-flex>
-      </v-layout>
-      <v-btn @click="submit()">{{ action.title }}</v-btn>
-      <v-btn @click="clear()">Limpar</v-btn>
-    </v-form>
-  </v-container>
+<template lang="pug">
+  v-container(fluid)
+    v-form(
+      :ref="'form-' + action.name"
+    )
+      v-layout(
+        row 
+        wrap 
+        v-for="field in action.fields" 
+        :key="field.name"
+      )
+        v-flex(xs12)
+          component(
+            :is="field.type + 'View'" 
+            :field="field"
+          )
+      v-btn(@click="submit()")
+        | {{ action.title }}
+      v-btn(@click="clear()")
+        | Limpar
 </template>
 
 <script>
@@ -18,7 +26,6 @@
   import CheckboxView from './types/CheckboxView.vue'
   import RadioView from './types/RadioView.vue'
   import HiddenView from './types/HiddenView.vue'
-  import { EventBus } from '../event-bus.js'
   export default {
     $validates: true,
     data: () => ({
@@ -31,8 +38,6 @@
       next()
     },
     created () {
-      EventBus.$emit('updateShowRightDrawer', false)
-      EventBus.$emit('updateShowLeftDrawer', false)
       this.$store.dispatch('reloadAsync').then(() => {
         var actionName = this.$route.query.actions
         this.action = this.$store.state.data.getActionByName(actionName)

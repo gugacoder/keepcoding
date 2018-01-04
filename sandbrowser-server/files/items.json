@@ -25,7 +25,6 @@
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Frozen",
        "calories": 159,
        "fat": 6.0,
@@ -34,13 +33,15 @@
        "sodium": 87,
        "calcium": "14%",
        "iron": "1%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/1", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Ice cream",
        "calories": 237,
        "fat": 9.0,
@@ -49,13 +50,15 @@
        "sodium": 129,
        "calcium": "8%",
        "iron": "1%"
-      }
+      },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/2", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Eclair",
        "calories": 262,
        "fat": 16.0,
@@ -64,13 +67,15 @@
        "sodium": 337,
        "calcium": "6%",
        "iron": "7%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/3", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Cupcake",
        "calories": 305,
        "fat": 3.7,
@@ -79,13 +84,15 @@
        "sodium": 413,
        "calcium": "3%",
        "iron": "8%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/4", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Gingerbread",
        "calories": 356,
        "fat": 16.0,
@@ -94,13 +101,15 @@
        "sodium": 327,
        "calcium": "7%",
        "iron": "16%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/5", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Jelly bean",
        "calories": 375,
        "fat": 0.0,
@@ -109,13 +118,15 @@
        "sodium": 50,
        "calcium": "0%",
        "iron": "0%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/6", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Lollipop",
        "calories": 392,
        "fat": 0.2,
@@ -124,13 +135,15 @@
        "sodium": 38,
        "calcium": "0%",
        "iron": "2%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/7", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Honeycomb",
        "calories": 408,
        "fat": 3.2,
@@ -139,13 +152,15 @@
        "sodium": 562,
        "calcium": "0%",
        "iron": "45%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/8", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "Donut",
        "calories": 452,
        "fat": 25.0,
@@ -154,13 +169,15 @@
        "sodium": 326,
        "calcium": "2%",
        "iron": "22%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/9", "title": "Detalhes" }
+      ]
    },
    {
      "class": [ "order" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
-       "value": false,
        "name": "KitKat",
        "calories": 518,
        "fat": 26.0,
@@ -169,7 +186,95 @@
        "sodium": 54,
        "calcium": "12%",
        "iron": "6%"
-     }
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/10", "title": "Detalhes" }
+      ]
+   },
+   {
+     "class": [ "order" ],
+     "rel": [ "http://x.io/rels/customer" ],
+     "properties": {
+       "name": "Jelly bean",
+       "calories": 375,
+       "fat": 0.0,
+       "carbs": 94,
+       "protein": 0.0,
+       "sodium": 50,
+       "calcium": "0%",
+       "iron": "0%"
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/11", "title": "Detalhes" }
+      ]
+   },
+   {
+     "class": [ "order" ],
+     "rel": [ "http://x.io/rels/customer" ],
+     "properties": {
+       "name": "Lollipop",
+       "calories": 392,
+       "fat": 0.2,
+       "carbs": 98,
+       "protein": 0,
+       "sodium": 38,
+       "calcium": "0%",
+       "iron": "2%"
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/12", "title": "Detalhes" }
+      ]
+   },
+   {
+     "class": [ "order" ],
+     "rel": [ "http://x.io/rels/customer" ],
+     "properties": {
+       "name": "Honeycomb",
+       "calories": 408,
+       "fat": 3.2,
+       "carbs": 87,
+       "protein": 6.5,
+       "sodium": 562,
+       "calcium": "0%",
+       "iron": "45%"
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/13", "title": "Detalhes" }
+      ]
+   },
+   {
+     "class": [ "order" ],
+     "rel": [ "http://x.io/rels/customer" ],
+     "properties": {
+       "name": "Donut",
+       "calories": 452,
+       "fat": 25.0,
+       "carbs": 51,
+       "protein": 4.9,
+       "sodium": 326,
+       "calcium": "2%",
+       "iron": "22%"
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/14", "title": "Detalhes" }
+      ]
+   },
+   {
+     "class": [ "order" ],
+     "rel": [ "http://x.io/rels/customer" ],
+     "properties": {
+       "name": "KitKat",
+       "calories": 518,
+       "fat": 26.0,
+       "carbs": 65,
+       "protein": 7,
+       "sodium": 54,
+       "calcium": "12%",
+       "iron": "6%"
+     },
+      "links": [
+        { "rel": ["self"], "href": "/#/page/items/15", "title": "Detalhes" }
+      ]
    }
   ],
   "actions":[

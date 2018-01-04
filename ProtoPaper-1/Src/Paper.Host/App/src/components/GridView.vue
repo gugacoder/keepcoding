@@ -1,41 +1,91 @@
-<template>
-  <v-card color="grey lighten-4" flat>
-    <v-card-text>
-      <v-container fluid>
-        <v-data-table
-            hide-actions
-            v-bind:headers="headers"
-            v-bind:items="items"
-            item-key="name">
-          <template slot="items" slot-scope="items">
-            <tr @click.stop="dialog = true">
-              <td v-for="item in items.item" :key="item.key" class="text-xs-left">
-                {{ item }}
-              </td>
-              <v-menu offset-x left bottom>
-                <v-btn
+<template lang="pug">
+  v-card(
+    color="grey lighten-4" 
+    flat
+  )
+    v-card-title(
+      primary-title
+      v-if="$store.state.data.title"
+    ) 
+      div
+        div(
+          class="headline"
+        ) {{ $store.state.data.title }}
+      
+    v-card-text
+      v-container(fluid)
+        v-data-table(
+            :headers="headers"
+            :items="items"
+            :pagination.sync="pagination"
+            :rows-per-page-items="rowsPerPageItems"
+            v-model="selected"
+            rows-per-page-text="Itens por página"
+            select-all
+            item-key="name"
+        )
+          template(
+            slot="items" slot-scope="items"
+          )
+            tr(
+              @click.stop="dialog = true" 
+              :active="items.selected" 
+              @click="items.selected = !items.selected"
+            )
+              td
+                v-checkbox(
+                  primary
+                  hide-details
+                  :input-value="items.selected"
+                )
+                
+              td(
+                v-for="item in items.item" 
+                :key="item" 
+                class="text-xs-left"
+              ) {{ item }}
+
+              td(
+                class="text-xs-center" 
+                @click.stop=""
+              )
+                v-menu(
+                  offset-x 
+                  left 
+                  bottom 
+                  v-if="$store.state.data.entities[items.index].links"
+                )
+                  v-btn(
                     icon
-                    slot="activator">
-                  <v-icon>more_vert</v-icon>
-                </v-btn>
-                <v-list>
-                  <v-list-tile v-for="item in $store.state.data.entities[items.index].links" :key="item.href">
-                    <v-list-tile-content>
-                      <a v-if="item.title" v-bind:href="item.href">{{ item.title }}</a>
-                      <a v-else v-bind:href="item.href">{{ item.rel[0] }}</a>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
-            </tr>
-          </template>
-        </v-data-table>
-      </v-container>  
-    </v-card-text>
-  </v-card>
+                    slot="activator"
+                  )
+                    v-icon
+                      | more_vert
+
+                  v-list
+                    v-list-tile(
+                      v-for="item in $store.state.data.entities[items.index].links" 
+                      :key="item.href"
+                    )
+                      v-list-tile-content
+                        a(
+                          v-if="item.title" 
+                          :href="item.href"
+                        ) {{ item.title }}
+                        a(
+                          v-else
+                          :href="item.href"
+                        ) {{ item.rel[0] }}
+
+          template(
+            slot="pageText" 
+            slot-scope="{ pageStart, pageStop }"
+          ) 
+            | Itens de {{ pageStart }} a {{ pageStop }}
 </template>
 
 <script>
+  import { Events } from '../event-bus.js'
   export default {
     data () {
       return {
@@ -44,7 +94,10 @@
         items: [],
         showLinks: false,
         data: '',
-        dialog: false
+        dialog: false,
+        selected: [],
+        pagination: {rowsPerPage: 10},
+        rowsPerPageItems: [5, 10, 15, { text: 'Todos', value: -1 }]
       }
     },
     beforeRouteUpdate (to, from, next) {
@@ -60,9 +113,9 @@
       },
       setItems () {
         var self = this
-        var data = this.$store.state.data
-        if (data && data.entities) {
-          data.entities.forEach(function (item) {
+        var entities = this.$store.state.data.getSubEntitiesByClass('collectionItem')
+        if (entities) {
+          entities.forEach(function (item) {
             self.items.push(item.properties)
           })
         }
@@ -80,10 +133,26 @@
             })
           })
         }
+      },
+      toggleAll () {
+        if (this.selected.length) this.selected = []
+        else this.selected = this.items.slice()
       }
     },
     created () {
       this.load()
+    },
+    watch: {
+      selected () {
+        this.$store.commit('selectMode', this.selected.length > 0)
+        if (this.$store.state.selectedMode) {
+          Events.$emit('updateShowLeftDrawer', false)
+          Events.$emit('updateShowRightDrawer', false)
+          Events.$emit('drawerRight', false)
+        } else {
+          Events.$emit('drawerRight', this.$store.state.data && this.$store.state.data.links)
+        }
+      }
     }
   }
 </script>

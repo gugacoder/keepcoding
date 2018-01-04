@@ -8,7 +8,7 @@ Vue.use(VueResource)
 export default {
   methods: {
     load (path) {
-      Vue.http.get(path).then(response => {
+      Vue.http.get('http://localhost:3000' + path).then(response => {
         var json = response.body
         if (json) {
           const sirenParser = require('siren-parser')
@@ -17,12 +17,13 @@ export default {
           this.loadPage(path)
         }
       }, response => {
+        store.commit('update', null)
         router.push({name: 'notFound', params: { routerName: path }})
       })
     },
 
     loadSiren (path) {
-      return Vue.http.get('/' + path).then(response => {
+      return Vue.http.get('http://localhost:3000/' + path).then(response => {
         var json = response.body
         if (json) {
           const sirenParser = require('siren-parser')
@@ -30,6 +31,7 @@ export default {
           return resource
         }
       }, response => {
+        store.commit('update', null)
         router.push({name: 'notFound', params: { routerName: path }})
       })
     },

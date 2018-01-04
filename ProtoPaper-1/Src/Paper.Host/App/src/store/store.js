@@ -6,12 +6,16 @@ import router from '../router'
 Vue.use(Vuex)
 
 const state = {
-  data: {}
+  data: {},
+  selectedMode: false
 }
 
 const mutations = {
   update (state, data) {
     state.data = data
+  },
+  selectMode (state, selectedMode) {
+    state.selectedMode = selectedMode
   }
 }
 

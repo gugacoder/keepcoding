@@ -1,15 +1,24 @@
-<template>
-  <v-card color="grey lighten-4" flat>
-    <v-card-text>
-      <v-container fluid>
-        <v-layout row v-for="item in items" :key="item.key">
-          <v-flex xs12 sm10>
-            <v-text-field box readonly v-bind:label="item.key" v-model="item.value"></v-text-field>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
+<template lang="pug">
+  v-card(
+    color="grey lighten-4" 
+    flat
+  )
+    v-card-text
+      v-container(fluid)
+        v-flex(
+          xs12 
+          sm12
+        )
+          v-list(two-line)
+            v-list-tile(
+              v-for="item in items" 
+              :key="item.key"
+            )
+              v-list-tile-content
+                v-list-tile-title
+                  | {{ item.value }}
+                v-list-tile-sub-title
+                  | {{ item.key }}
 </template>
 
 <script>

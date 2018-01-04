@@ -1,5 +1,5 @@
-<template>
-  <component :is='dynamicComponent'></component>
+<template lang="pug">
+  component(:is='dynamicComponent')
 </template>
 
 <script>
@@ -8,7 +8,7 @@
   import View from './View.vue'
   import Home from './HomeView.vue'
   import Actions from './ActionsView.vue'
-  import { EventBus } from '../event-bus.js'
+  import { Events } from '../event-bus.js'
   export default {
     data () {
       return {
@@ -31,7 +31,7 @@
       loadData () {
         var data = this.$store.state.data
         var showRightDrawer = data && (data.actions || data.links)
-        EventBus.$emit('updateShowRightDrawer', showRightDrawer)
+        Events.$emit('updateShowRightDrawer', showRightDrawer)
       }
     },
     computed: {

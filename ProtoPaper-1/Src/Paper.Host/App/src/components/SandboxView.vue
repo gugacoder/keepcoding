@@ -1,26 +1,26 @@
-<template>
-  <v-card color="grey lighten-4" flat>
-    <v-card-text>
-      <v-container fluid>
-        <v-layout row>
-          <v-flex xs12>
-            <v-text-field
+<template lang="pug">
+  v-card(
+    color="grey lighten-4" 
+    flat
+  )
+    v-card-text
+      v-container(fluid)
+        v-layout(row)
+          v-flex(xs12)
+            v-text-field(
               name="input-1"
               label="Json"
               textarea
               rows="15"
-              v-model="jsonData">
-            </v-text-field>
-          </v-flex>
-        </v-layout>
-        <v-layout row>
-          <v-flex xs12>
-            <v-btn color="primary" flat @click.native="save">Salvar</v-btn>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card-text>
-  </v-card>
+              v-model="jsonData"
+            )
+        v-layout(row)
+          v-flex(xs12)
+            v-btn(
+              color="primary" 
+              flat 
+              @click.native="save"
+            ) Salvar
 </template>
 
 <script>
