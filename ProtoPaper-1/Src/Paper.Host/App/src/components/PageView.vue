@@ -44,10 +44,6 @@
         return Home
       }
     },
-    created () {
-      this.$store.dispatch('reloadAsync').then(() => {
-        this.loadData()
-      })
-    }
+    created () {}
   }
 </script>
