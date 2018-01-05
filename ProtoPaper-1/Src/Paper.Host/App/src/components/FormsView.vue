@@ -2,32 +2,37 @@
   v-container(
     fluid
   )
-    v-card(
-      class="elevation-3"
+    v-flex(
+      xs12
+      sm8
+      offset-sm2
     )
-      v-card-title(primary-title)
-        h2 {{ action.title }}
+      v-card(
+        class="elevation-3"
+      )
+        v-card-title(primary-title)
+          h2 {{ action.title }}
 
-      v-card-text
-        v-form(
-          v-model="valid"
-          :ref="'form-' + action.name"
-          lazy-validation
-        )
-          v-layout(
-            row 
-            wrap 
-            v-for="field in action.fields" 
-            :key="field.name"
+        v-card-text
+          v-form(
+            v-model="valid"
+            :ref="'form-' + action.name"
+            lazy-validation
           )
+            v-layout(
+              row 
+              wrap 
+              v-for="field in action.fields" 
+              :key="field.name"
+            )
 
-            v-flex(xs12)
-              component(:is="dynamicComponent(field)" :field="field")
+              v-flex(xs12)
+                component(:is="dynamicComponent(field)" :field="field")
 
-          v-btn(@click="submit()")
-            | {{ action.title }}
-          v-btn(@click="clear()")
-            | Limpar
+            v-btn(@click="submit()")
+              | {{ action.title }}
+            v-btn(@click="clear()")
+              | Limpar
 </template>
 
 <script>
@@ -40,6 +45,7 @@
   import SelectView from './types/SelectView.vue'
   import SwitchView from './types/SwitchView.vue'
   import DatetimeView from './types/DatetimeView.vue'
+  import paper from '../paper/paper.js'
   export default {
     $validates: true,
     data: () => ({
@@ -102,14 +108,18 @@
       },
       submit () {
         var queryParams = this.makeParams()
-        if (this.action && this.action.method === 'POST') {
-          this.$http.post(this.action.href, queryParams).then(response => {
+        var method = this.action.method.toLowerCase()
+        this.$http[method](this.action.href, queryParams).then(response => {
+          var location = response.headers.get('location')
+          if (location && location.length > 0) {
+            paper.load(location)
+          } else {
             this.$router.go(-1)
-          }, response => {
-            console.log('error ', response)
-            this.$router.go(-1)
-          })
-        }
+          }
+        }, response => {
+          console.log('error ', response)
+          this.$router.go(-1)
+        })
       },
       makeParams () {
         var params = {}

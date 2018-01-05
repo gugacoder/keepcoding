@@ -99,7 +99,7 @@
       },
       setItems () {
         var self = this
-        var entities = this.$store.state.data.getSubEntitiesByClass('collectionItem')
+        var entities = this.$store.state.data.getSubEntitiesByClass('item')
         if (entities) {
           entities.forEach((item) => {
             self.items.push(item.properties)

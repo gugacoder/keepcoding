@@ -1,28 +1,10 @@
 {
   "class":[
-    "items", "collection"
+    "items", "list"
   ],
-  "properties":{
-    "component":"grid",
-    "headers": [
-      {
-        "text": "Dessert (100g serving)",
-        "align": "left",
-        "sortable": false,
-        "value": "name"
-      },
-      { "text": "Calories", "value": "calories" },
-      { "text": "Fat (g)", "value": "fat" },
-      { "text": "Carbs (g)", "value": "carbs" },
-      { "text": "Protein (g)", "value": "protein" },
-      { "text": "Sodium (mg)", "value": "sodium" },
-      { "text": "Calcium (%)", "value": "calcium" },
-      { "text": "Iron (%)", "value": "iron" }
-    ]
-  },
   "entities":[
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Frozen",
@@ -35,11 +17,11 @@
        "iron": "1%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/1", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/1", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Ice cream",
@@ -52,11 +34,11 @@
        "iron": "1%"
       },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/2", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/2", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Eclair",
@@ -69,11 +51,11 @@
        "iron": "7%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/3", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/3", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Cupcake",
@@ -86,11 +68,11 @@
        "iron": "8%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/4", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/4", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Gingerbread",
@@ -103,11 +85,11 @@
        "iron": "16%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/5", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/5", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Jelly bean",
@@ -120,11 +102,11 @@
        "iron": "0%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/6", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/6", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Lollipop",
@@ -137,11 +119,11 @@
        "iron": "2%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/7", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/7", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Honeycomb",
@@ -154,11 +136,11 @@
        "iron": "45%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/8", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/8", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Donut",
@@ -171,11 +153,11 @@
        "iron": "22%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/9", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/9", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "KitKat",
@@ -188,11 +170,11 @@
        "iron": "6%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/10", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/10", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Jelly bean",
@@ -205,11 +187,11 @@
        "iron": "0%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/11", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/11", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Lollipop",
@@ -222,11 +204,11 @@
        "iron": "2%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/12", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/12", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Honeycomb",
@@ -239,11 +221,11 @@
        "iron": "45%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/13", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/13", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "Donut",
@@ -256,11 +238,11 @@
        "iron": "22%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/14", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/14", "title": "Detalhes" }
       ]
    },
    {
-     "class": [ "order", "collectionItem" ],
+     "class": [ "order", "item" ],
      "rel": [ "http://x.io/rels/customer" ],
      "properties": {
        "name": "KitKat",
@@ -273,7 +255,7 @@
        "iron": "6%"
      },
       "links": [
-        { "rel": ["self"], "href": "/#/page/items/15", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/#/page/demo/15", "title": "Detalhes" }
       ]
    }
   ],
@@ -363,21 +345,17 @@
   ],
   "links":[
     {
-       "rel":[
-          "self"
-       ],
+       "rel":["self"],
        "href":"http://api.x.io/orders/42"
     },
     {
-       "rel":[
-          "previous"
-       ],
-       "href":"http://api.x.io/orders/41"
+       "rel":["previous"],
+       "title":"Anterior",
+       "href":"/#/page/demo"
     },
     {
-       "rel":[
-          "next"
-       ],
+       "rel":["next"],
+       "title":"Próximo",
        "href":"http://api.x.io/orders/43"
     }
   ]

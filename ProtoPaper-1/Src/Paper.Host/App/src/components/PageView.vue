@@ -36,16 +36,15 @@
     computed: {
       dynamicComponent () {
         var data = this.$store.state.data
-        var isCollection = data && data.class && data.class.indexOf('collection') > 0
+        var isCollection = data && data.class && data.class.indexOf('list') > 0
         if (this.$route.query && this.$route.query.actions) {
           return Forms
         } else if (isCollection) {
           return Grid
         } else if (!isCollection) {
           return View
-        } else {
-          return Home
         }
+        return Home
       }
     },
     created () {

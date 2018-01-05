@@ -14,6 +14,7 @@
         | NAVEGAÇÃO
       v-list-tile(
         v-for="item in $store.state.data.links" 
+        v-if="item.rel.indexOf('self')"
         :key="item.href" 
         :href="item.href"
       )
