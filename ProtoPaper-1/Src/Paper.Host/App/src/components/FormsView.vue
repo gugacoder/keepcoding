@@ -110,7 +110,7 @@
         this.$http[method](this.action.href, queryParams).then(response => {
           var location = response.headers.get('location')
           if (location && location.length > 0) {
-            paper.load(location)
+            paper.methods.load(location)
           } else {
             this.$router.go(-1)
           }

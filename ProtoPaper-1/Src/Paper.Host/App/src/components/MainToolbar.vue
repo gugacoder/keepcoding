@@ -57,6 +57,7 @@
     methods: {
       search () {
         paper.methods.load(this.searchParams)
+        this.searchParams = ''
       },
       clearSearch () {
         this.searchParams = ''
