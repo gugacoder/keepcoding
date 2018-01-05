@@ -78,8 +78,6 @@
     data () {
       return {
         showLeftDrawer: '',
-        headers: [],
-        items: [],
         showLinks: false,
         data: '',
         dialog: false,
@@ -92,33 +90,6 @@
     methods: {
       show () {
         this.showLinks = !this.showLinks
-      },
-      load () {
-        this.setItems()
-        this.setHeaders()
-      },
-      setItems () {
-        var self = this
-        var entities = this.$store.state.data.getSubEntitiesByClass('item')
-        if (entities) {
-          entities.forEach((item) => {
-            self.items.push(item.properties)
-          })
-        }
-      },
-      setHeaders () {
-        var item = this.items[0]
-        if (item) {
-          var keys = Object.keys(item)
-          var self = this
-          keys.forEach((key) => {
-            self.headers.push({
-              text: key,
-              align: 'left',
-              sortable: false
-            })
-          })
-        }
       },
       selectedMode (selected) {
         if (!selected) {
@@ -137,6 +108,31 @@
     computed: {
       itemKey () {
         return this.headers && this.headers.length > 0 ? this.headers[0].text : ''
+      },
+      items () {
+        var items = []
+        var entities = this.$store.state.data.getSubEntitiesByClass('item')
+        if (entities) {
+          entities.forEach((item) => {
+            items.push(item.properties)
+          })
+        }
+        return items
+      },
+      headers () {
+        var headers = []
+        var item = this.items[0]
+        if (item) {
+          var keys = Object.keys(item)
+          keys.forEach((key) => {
+            headers.push({
+              text: key,
+              align: 'left',
+              sortable: false
+            })
+          })
+        }
+        return headers
       }
     },
     watch: {

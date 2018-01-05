@@ -33,33 +33,27 @@
 
 <script>
   export default {
-    data () {
-      return {
-        headers: [],
-        items: []
-      }
-    },
+    data: () => ({
+      headers: []
+    }),
     beforeRouteUpdate (to, from, next) {
       next()
     },
-    methods: {
-      load () {
-        this.setItems()
-      },
-      setItems () {
+    computed: {
+      items () {
         var data = this.$store.state.data
-        var keys = Object.keys(data.properties)
-        var self = this
-        keys.forEach(function (key) {
-          self.items.push({
-            key: key,
-            value: data.properties[key]
+        var items = []
+        if (data.properties) {
+          var keys = Object.keys(data.properties)
+          keys.forEach(function (key) {
+            items.push({
+              key: key,
+              value: data.properties[key]
+            })
           })
-        })
+        }
+        return items
       }
-    },
-    created () {
-      this.load()
     }
   }
 </script>

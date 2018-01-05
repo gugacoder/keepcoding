@@ -9,11 +9,9 @@
   import Home from './HomeView.vue'
   import Forms from './FormsView.vue'
   export default {
-    data () {
-      return {
-        viewShow: ''
-      }
-    },
+    data: () => ({
+      viewShow: ''
+    }),
     components: {
       Grid,
       View,
@@ -22,6 +20,7 @@
     },
     beforeRouteUpdate (to, from, next) {
       next()
+      console.log('pageView')
     },
     methods: {
       loadData () {
@@ -32,6 +31,7 @@
     },
     computed: {
       dynamicComponent () {
+        console.log('dynamicComponent')
         var data = this.$store.state.data
         var isCollection = data && data.class && data.class.indexOf('list') > 0
         if (this.$route.query && this.$route.query.actions) {
@@ -43,7 +43,6 @@
         }
         return Home
       }
-    },
-    created () {}
+    }
   }
 </script>

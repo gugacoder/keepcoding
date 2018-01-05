@@ -21,6 +21,9 @@
       MainFooter,
       MainToolbar,
       LinksBar
+    },
+    created () {
+      this.$store.dispatch('reloadAsync')
     }
   }
 </script>

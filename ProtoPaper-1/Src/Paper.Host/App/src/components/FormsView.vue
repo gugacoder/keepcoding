@@ -108,7 +108,7 @@
         var queryParams = this.makeParams()
         var method = this.action.method.toLowerCase()
         this.$http[method](this.action.href, queryParams).then(response => {
-          var location = response.headers.get('location')
+          var location = response.headers.get('Location')
           if (location && location.length > 0) {
             paper.methods.load(location)
           } else {
