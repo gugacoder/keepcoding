@@ -57,11 +57,6 @@
           })
         })
       }
-    },
-    created () {
-      this.$store.dispatch('reloadAsync').then(() => {
-        this.load()
-      })
     }
   }
 </script>

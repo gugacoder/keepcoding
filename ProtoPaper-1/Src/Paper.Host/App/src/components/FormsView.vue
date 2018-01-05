@@ -56,10 +56,8 @@
       next()
     },
     created () {
-      this.$store.dispatch('reloadAsync').then(() => {
-        var actionName = this.$route.query.actions
-        this.action = this.$store.state.data.getActionByName(actionName)
-      })
+      var actionName = this.$route.query.actions
+      this.action = this.$store.state.data.getActionByName(actionName)
     },
     components: {
       TextView,

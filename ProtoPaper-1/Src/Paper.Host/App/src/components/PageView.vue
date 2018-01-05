@@ -22,9 +22,6 @@
     },
     beforeRouteUpdate (to, from, next) {
       next()
-      this.$store.dispatch('reloadAsync').then(() => {
-        this.loadData()
-      })
     },
     methods: {
       loadData () {
