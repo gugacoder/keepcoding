@@ -5,7 +5,7 @@
     app
     clipped-right
     fixed
-    :class="showClass"
+    :style="showClass"
   )
     v-toolbar-title(
       :style="$vuetify.breakpoint.smAndUp ? 'width: 200px; min-width: 200px' : 'min-width: 72px'" 
@@ -49,8 +49,9 @@
         return this.$store.state.data && (this.$store.state.data.links || this.$store.state.data.actions)
       },
       showClass () {
-        var show = this.$store.state.selection.selectedMode ? 'hidden-sm-and-up' : 'hidden-sm-and-down'
-        return show
+        if (this.$store.state.selection.selectedMode) {
+          return 'display: none'
+        }
       }
     },
     methods: {

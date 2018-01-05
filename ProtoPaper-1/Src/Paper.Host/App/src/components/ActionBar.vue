@@ -36,8 +36,9 @@
   export default {
     computed: {
       showClass () {
-        var show = this.$store.state.selection.selectedMode ? 'hidden-sm-and-down' : 'hidden-sm-and-up'
-        return show
+        if (!this.$store.state.selection.selectedMode) {
+          return 'display: none'
+        }
       }
     },
     methods: {

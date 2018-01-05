@@ -2,38 +2,48 @@
   v-container(
     fluid
   )
-    v-form(
-      :ref="'form-' + action.name"
+    v-card(
+      class="elevation-3"
     )
-      v-layout(
-        row 
-        wrap 
-        v-for="field in action.fields" 
-        :key="field.name"
-      )
-        v-flex(xs12)
-          component(
-            :is="field.type + 'View'" 
-            :field="field"
+      v-card-title(primary-title)
+        h2 {{ action.title }}
+
+      v-card-text
+        v-form(
+          v-model="valid"
+          :ref="'form-' + action.name"
+          lazy-validation
+        )
+          v-layout(
+            row 
+            wrap 
+            v-for="field in action.fields" 
+            :key="field.name"
           )
-      v-btn(@click="submit()")
-        | {{ action.title }}
-      v-btn(@click="clear()")
-        | Limpar
+
+            v-flex(xs12)
+              component(:is="dynamicComponent(field)" :field="field")
+
+          v-btn(@click="submit()")
+            | {{ action.title }}
+          v-btn(@click="clear()")
+            | Limpar
 </template>
 
 <script>
   import TextView from './types/TextView.vue'
   import NumberView from './types/NumberView.vue'
   import CheckboxView from './types/CheckboxView.vue'
-  import RadioView from './types/RadioView.vue'
   import HiddenView from './types/HiddenView.vue'
+  import DateView from './types/DateView.vue'
+  import TimeView from './types/TimeView.vue'
+  import SelectView from './types/SelectView.vue'
+  import SwitchView from './types/SwitchView.vue'
+  import DatetimeView from './types/DatetimeView.vue'
   export default {
     $validates: true,
     data: () => ({
       action: [],
-      drawerLeft: true,
-      left: false,
       valid: true
     }),
     beforeRouteUpdate (to, from, next) {
@@ -49,15 +59,46 @@
       TextView,
       NumberView,
       CheckboxView,
-      RadioView,
-      HiddenView
+      HiddenView,
+      DateView,
+      TimeView,
+      DatetimeView,
+      SelectView,
+      SwitchView
     },
     methods: {
-      setActions (actions) {
-        this.actions = actions
-      },
-      setLeftDrawer (drawer) {
-        this.drawerLeft = drawer
+      dynamicComponent (field) {
+        switch (field.dataType) {
+          case 'date':
+            return 'DateView'
+          case 'time':
+            return 'TimeView'
+          case 'bit':
+            return 'SwitchView'
+          case 'bool':
+            return 'SwitchView'
+          case 'boolean':
+            return 'SwitchView'
+          case 'number':
+            return 'NumberView'
+          case 'int':
+            return 'NumberView'
+          case 'long':
+            return 'NumberView'
+          case 'decimal':
+            return 'NumberView'
+          case 'double':
+            return 'NumberView'
+          case 'float':
+            return 'NumberView'
+          case 'multi':
+            if (field.type === 'text') {
+              return 'SelectView'
+            }
+            break
+          default:
+            return 'TextView'
+        }
       },
       submit () {
         var queryParams = this.makeParams()

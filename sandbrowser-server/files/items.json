@@ -288,24 +288,44 @@
           {
              "name":"productCode",
              "title":"Código do produto",
-             "type":"text"
+             "type":"text",
+             "dataType":"string"
           },
           {
              "name":"quantity",
              "title":"Quantidade",
-             "type":"number"
+             "type":"number",
+             "dataType":"int"
           },
           {
              "name":"active",
              "title":"Ativo",
-             "type":"checkbox",
-             "value": false
+             "type":"number",
+             "dataType":"int"
           },
           {
-             "name":"activia",
-             "title":"Ativio",
-             "type":"checkbox",
-             "value": true
+             "name":"data",
+             "title":"Data de Hoje",
+             "type":"date",
+             "dataType":"date"
+          },
+          {
+             "name":"hora",
+             "title":"Hora de Hoje",
+             "type":"time",
+             "dataType":"time"
+          },
+          {
+             "name":"select",
+             "title":"Selecione",
+             "type":"text",
+             "dataType":"multi"
+          },
+          {
+             "name":"ligado",
+             "title":"Ligado",
+             "type":"text",
+             "dataType":"bool"
           }
        ]
     },
