@@ -49,15 +49,10 @@
   export default {
     $validates: true,
     data: () => ({
-      action: [],
       valid: true
     }),
     beforeRouteUpdate (to, from, next) {
       next()
-    },
-    created () {
-      var actionName = this.$route.query.actions
-      this.action = this.$store.state.data.getActionByName(actionName)
     },
     components: {
       TextView,
@@ -69,6 +64,15 @@
       DatetimeView,
       SelectView,
       SwitchView
+    },
+    computed: {
+      action () {
+        if (this.$store.state.data.actions) {
+          var actionName = this.$route.query.actions
+          return this.$store.state.data.getActionByName(actionName)
+        }
+        return []
+      }
     },
     methods: {
       dynamicComponent (field) {
