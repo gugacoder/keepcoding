@@ -24,6 +24,11 @@
     },
     created () {
       this.$store.dispatch('reloadAsync')
+    },
+    watch: {
+      $route () {
+        this.$store.dispatch('reloadAsync')
+      }
     }
   }
 </script>

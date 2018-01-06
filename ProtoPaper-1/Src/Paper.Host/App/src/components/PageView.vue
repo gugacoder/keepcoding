@@ -20,7 +20,6 @@
     },
     beforeRouteUpdate (to, from, next) {
       next()
-      console.log('pageView')
     },
     methods: {
       loadData () {
@@ -31,7 +30,6 @@
     },
     computed: {
       dynamicComponent () {
-        console.log('dynamicComponent')
         var data = this.$store.state.data
         var isCollection = data && data.class && data.class.indexOf('list') > 0
         if (this.$route.query && this.$route.query.actions) {

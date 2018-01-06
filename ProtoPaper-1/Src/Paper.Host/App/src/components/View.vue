@@ -10,7 +10,10 @@
         v-card(
           class="elevation-3"
         )
-          v-card-title(primary-title)
+          v-card-title(
+            primary-title
+            v-if="$store.state.data"
+          )
             h2 {{ $store.state.data.title }}
 
           v-card-text

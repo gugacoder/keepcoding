@@ -16,7 +16,7 @@
         v-for="item in $store.state.data.links" 
         v-if="item.rel.indexOf('self')"
         :key="item.href" 
-        :href="item.href"
+        :href="'/#/page' + item.href"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -57,7 +57,7 @@
         return show
       },
       showLinks () {
-        var show = this.$store.state.data && this.$store.state.data.links
+        var show = this.$store.state.data && this.$store.state.data.links && this.$store.state.data.links.length > 1
         return show
       },
       showActions () {

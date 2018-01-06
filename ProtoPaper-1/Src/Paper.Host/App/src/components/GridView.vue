@@ -62,14 +62,10 @@
                     :key="item.href"
                   )
                     v-list-tile-content
-                      a(
-                        v-if="item.title" 
-                        :href="item.href"
-                      ) {{ item.title }}
-                      a(
-                        v-else
-                        :href="item.href"
-                      ) {{ item.rel[0] }}
+                      router-link(
+                        :to="'/page' + item.href"
+                      ) {{ item.title ? item.title : item.rel[0] }}
+
 </template>
 
 <script>
@@ -103,7 +99,6 @@
     },
     created () {
       Events.$on('selectMode', this.selectedMode)
-      this.load()
     },
     computed: {
       itemKey () {
