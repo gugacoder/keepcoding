@@ -23,7 +23,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       var path = router.currentRoute.params.path
       path = Array.isArray(path) ? path.join('/') : path
-      paper.methods.loadSiren(path).then(data => {
+      paper.methods.load(path).then(data => {
         state.data = data
         resolve()
       })

@@ -53,7 +53,7 @@
     },
     computed: {
       show () {
-        var show = !this.$store.state.selection.selectedMode && (this.showLinks || this.showActions)
+        var show = !this.$store.state.selection.selectionState && (this.showLinks || this.showActions)
         return show
       },
       showLinks () {

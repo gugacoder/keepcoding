@@ -1,10 +1,10 @@
 const state = {
-  selectedMode: false
+  selectionState: false
 }
 
 const mutations = {
-  selectMode (state, selectedMode) {
-    state.selectedMode = selectedMode
+  selectState (state, selectionState) {
+    state.selectionState = selectionState
   }
 }
 

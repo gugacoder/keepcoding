@@ -36,15 +36,15 @@
   export default {
     computed: {
       showClass () {
-        if (!this.$store.state.selection.selectedMode) {
+        if (!this.$store.state.selection.selectState) {
           return 'display: none'
         }
       }
     },
     methods: {
       deselected () {
-        Events.$emit('selectMode', false)
-        this.$store.commit('selectMode', false)
+        Events.$emit('selectState', false)
+        this.$store.commit('selectState', false)
       }
     }
   }

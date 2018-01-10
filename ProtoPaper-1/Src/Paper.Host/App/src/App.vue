@@ -28,6 +28,7 @@
     watch: {
       $route () {
         this.$store.dispatch('reloadAsync')
+        this.$store.commit('selectState', false)
       }
     }
   }

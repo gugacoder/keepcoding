@@ -15,25 +15,27 @@
     v-card-text
       v-container(fluid)
         v-data-table(
+          v-model="selected"
           :headers="headers"
           :items="items"
-          :item-key="itemKey"
+          item-key="item.id"
           hide-actions=true
-          v-model="selected"
           select-all
         )
           template(
             slot="items" slot-scope="items"
           )
-            td
-              v-checkbox(
-                primarytem
-                hide-details
-                v-model="items.selected"
-              )
-              
+
+            v-checkbox(
+              primary
+              hide-details
+              v-model="items.selected"
+              @click="items.selected = !items.selected"
+            )
+            
             td(
-              v-for="item in items.item" 
+              v-for="(item, index) in items.item"
+              v-if="!index.startsWith('_')"
               :key="item" 
               class="text-xs-left"
               nowrap
@@ -95,14 +97,25 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
+      },
+      select (item) {
+        if (this.selected.indexOf(item) > 0) {
+          // console.log('no')
+        } else {
+          // console.log('yes')
+          this.selected.push(item)
+        }
+        // console.log(item)
+        // console.log('select')
       }
     },
     created () {
-      Events.$on('selectMode', this.selectedMode)
+      Events.$on('selectState', this.selectedMode)
     },
     computed: {
       itemKey () {
-        return this.headers && this.headers.length > 0 ? this.headers[0].text : ''
+        // return this.headers && this.headers.length > 0 ? this.headers[0].text : ''
+        return this.$store.state.data.entities[0].properties[0]
       },
       items () {
         var items = []
@@ -120,11 +133,13 @@
         if (item) {
           var keys = Object.keys(item)
           keys.forEach((key) => {
-            headers.push({
-              text: key,
-              align: 'left',
-              sortable: false
-            })
+            if (!key.startsWith('_')) {
+              headers.push({
+                text: key,
+                align: 'left',
+                sortable: false
+              })
+            }
           })
         }
         return headers
@@ -132,7 +147,10 @@
     },
     watch: {
       selected () {
-        this.$store.commit('selectMode', this.selected.length > 0)
+        // console.log('items: ', this.items['id'])
+        // console.log('properties: ', this.$store.state.data.entities)
+        // console.log('itens selecionados: ', this.selected)
+        this.$store.commit('selectState', this.selected.length > 0)
       }
     }
   }

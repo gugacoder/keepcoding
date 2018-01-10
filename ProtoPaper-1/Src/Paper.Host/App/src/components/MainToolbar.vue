@@ -49,7 +49,7 @@
         return this.$store.state.data && (this.$store.state.data.links || this.$store.state.data.actions)
       },
       showClass () {
-        if (this.$store.state.selection.selectedMode) {
+        if (this.$store.state.selection.selectionState) {
           return 'display: none'
         }
       }
