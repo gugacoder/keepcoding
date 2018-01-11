@@ -15,30 +15,30 @@
 
     v-spacer
 
-    v-btn(icon)
-      v-icon search
-
-    v-btn(icon)
-      v-icon apps
-    
-    v-btn(icon)
-      v-icon refresh
-
     v-btn(
-      icon
-    )
-      v-icon more_vert
+      flat
+      v-if="actions.length > 0"
+      v-for="action in actions" 
+      :key="action.name"
+      :href="'/#' + $route.path + '?actions=' + action.name"
+    ) {{ action ? action.title : ''}}
 
 </template>
 
 <script>
   import { Events } from '../event-bus.js'
+  import parser from '../paper/parser.js'
   export default {
     computed: {
       showClass () {
         if (!this.$store.state.selection.selectState) {
           return 'display: none'
         }
+      },
+      actions () {
+        var selectedItems = this.$store.state.selection.itemsSelected
+        var actions = parser.methods.getActions(selectedItems)
+        return actions
       }
     },
     methods: {

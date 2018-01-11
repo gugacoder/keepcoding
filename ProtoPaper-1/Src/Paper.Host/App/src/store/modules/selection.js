@@ -1,10 +1,12 @@
 const state = {
-  selectionState: false
+  selectionState: false,
+  itemsSelected: []
 }
 
 const mutations = {
-  selectState (state, selectionState) {
-    state.selectionState = selectionState
+  selectState (state, items) {
+    state.selectionState = items.length > 0
+    state.itemsSelected = items
   }
 }
 

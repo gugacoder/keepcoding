@@ -27,18 +27,22 @@
         "title": "Exportar",
         "fields": [
           {
-            "name": "id",
-            "type": "hidden",
-            "value": "1"
+             "name":"productCode",
+             "title":"Código do produto",
+             "type":"text",
+             "dataType":"string"
           },
           {
-            "name": "tipo",
-            "type": "hidden",
-            "value": "E"
+             "name":"quantity",
+             "title":"Quantidade",
+             "type":"number",
+             "dataType":"int"
           },
           {
-            "name": "destino",
-            "type": "text"
+             "name":"active",
+             "title":"Ativo",
+             "type":"number",
+             "dataType":"int"
           }
         ]
       }

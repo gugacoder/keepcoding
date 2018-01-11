@@ -11,10 +11,11 @@
         class="elevation-3"
       )
         v-card-title(primary-title)
-          h2 {{ action.title }}
+          h2 {{ action ? action.title : ''}}
 
         v-card-text
           v-form(
+            v-if="action"
             v-model="valid"
             :ref="'form-' + action.name"
             lazy-validation

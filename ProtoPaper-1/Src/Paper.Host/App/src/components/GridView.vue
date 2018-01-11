@@ -18,7 +18,7 @@
           v-model="selected"
           :headers="headers"
           :items="items"
-          item-key="item.id"
+          :item-key="itemKey"
           hide-actions=true
           select-all
         )
@@ -97,16 +97,6 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
-      },
-      select (item) {
-        if (this.selected.indexOf(item) > 0) {
-          // console.log('no')
-        } else {
-          // console.log('yes')
-          this.selected.push(item)
-        }
-        // console.log(item)
-        // console.log('select')
       }
     },
     created () {
@@ -114,15 +104,18 @@
     },
     computed: {
       itemKey () {
-        // return this.headers && this.headers.length > 0 ? this.headers[0].text : ''
-        return this.$store.state.data.entities[0].properties[0]
+        var key = this.headers && this.headers.length > 0 ? this.headers[0].text : ''
+        return key
       },
       items () {
         var items = []
         var entities = this.$store.state.data.getSubEntitiesByClass('item')
         if (entities) {
-          entities.forEach((item) => {
-            items.push(item.properties)
+          entities.forEach((item, index) => {
+            var itensWithIndex = Object.assign(
+              { _indexRowItemTable: index }, item.properties
+            )
+            items.push(itensWithIndex)
           })
         }
         return items
@@ -143,14 +136,18 @@
           })
         }
         return headers
+      },
+      selectedItems () {
+        var selectedItems = []
+        this.selected.forEach(item => {
+          selectedItems.push(this.$store.state.data.entities[item._indexRowItemTable])
+        })
+        return selectedItems
       }
     },
     watch: {
       selected () {
-        // console.log('items: ', this.items['id'])
-        // console.log('properties: ', this.$store.state.data.entities)
-        // console.log('itens selecionados: ', this.selected)
-        this.$store.commit('selectState', this.selected.length > 0)
+        this.$store.commit('selectState', this.selectedItems)
       }
     }
   }
