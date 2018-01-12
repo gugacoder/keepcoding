@@ -15,6 +15,10 @@
 
     v-spacer
 
+    subheading
+      | {{ $store.state.selection.itemsSelected.length }} 
+      | {{ $store.state.selection.itemsSelected.length > 1 ? 'itens selecionados' : 'item selecionado'}} 
+
     v-btn(
       flat
       v-if="actions.length > 0"
