@@ -25,6 +25,7 @@
         "name": "exportar",
         "href": "/Demo/Exportar",
         "title": "Exportar",
+        "method": "POST",
         "fields": [
           {
              "name":"productCode",
@@ -449,7 +450,6 @@
     {
        "name":"config-item",
        "title":"Configurar Item",
-       "method":"POST",
        "href":"items",
        "type":"application/x-www-form-urlencoded",
        "fields":[

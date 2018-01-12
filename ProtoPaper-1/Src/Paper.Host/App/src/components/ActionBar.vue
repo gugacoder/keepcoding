@@ -15,13 +15,13 @@
 
     v-spacer
 
-    subheading
+    v-subheader(name="itensSelecionadosLabel")
       | {{ $store.state.selection.itemsSelected.length }} 
       | {{ $store.state.selection.itemsSelected.length > 1 ? 'itens selecionados' : 'item selecionado'}} 
 
     v-btn(
       flat
-      v-if="actions.length > 0"
+      v-if="actions && actions.length > 0"
       v-for="action in actions" 
       :key="action.name"
       :href="'/#' + $route.path + '?actions=' + action.name"
