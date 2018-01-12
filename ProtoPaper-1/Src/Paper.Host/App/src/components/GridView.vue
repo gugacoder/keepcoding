@@ -147,7 +147,7 @@
     },
     watch: {
       selected () {
-        this.$store.commit('selectState', this.selectedItems)
+        this.$store.commit('itemsSelected', this.selectedItems)
       }
     }
   }

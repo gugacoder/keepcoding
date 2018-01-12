@@ -11,7 +11,7 @@
         class="elevation-3"
       )
         v-card-title(primary-title)
-          h2 {{ action ? action.title : ''}}
+          h2 {{ action ? action.title : '' }}
 
         v-card-text
           v-form(
@@ -23,7 +23,7 @@
             v-layout(
               row 
               wrap 
-              v-for="field in action.fields" 
+              v-for="field in fields" 
               :key="field.name"
             )
 
@@ -31,7 +31,7 @@
                 component(:is="dynamicComponent(field)" :field="field")
 
             v-btn(@click="submit()")
-              | {{ action.title }}
+              | {{ action ? action.title : '' }}
             v-btn(@click="clear()")
               | Limpar
 </template>
@@ -47,6 +47,7 @@
   import SwitchView from './types/SwitchView.vue'
   import DatetimeView from './types/DatetimeView.vue'
   import paper from '../paper/paper.js'
+  import parser from '../paper/parser.js'
   export default {
     $validates: true,
     data: () => ({
@@ -68,11 +69,31 @@
     },
     computed: {
       action () {
+        var action = []
         if (this.$store.state.data.actions) {
           var actionName = this.$route.query.actions
-          return this.$store.state.data.getActionByName(actionName)
+          action = this.$store.state.data.getActionByName(actionName)
+          if (!action) {
+            var selectedItems = this.$store.state.selection.itemsSelected
+            var actions = parser.methods.getActions(selectedItems)
+            action = actions.filter(a => a.name === actionName)[0]
+          }
         }
-        return []
+        return action
+      },
+      fields () {
+        var fields = []
+        if (this.$store.state.data.actions) {
+          var actionName = this.$route.query.actions
+          var action = this.$store.state.data.getActionByName(actionName)
+          if (!action) {
+            var selectedItems = this.$store.state.selection.itemsSelected
+            fields = parser.methods.getActionsField(selectedItems, actionName)
+          } else {
+            fields = this.action.fields
+          }
+        }
+        return fields
       }
     },
     methods: {

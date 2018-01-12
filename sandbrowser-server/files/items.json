@@ -73,6 +73,18 @@
         "title": "Exportar",
         "fields": [
           {
+             "name":"productCode",
+             "title":"Código do produto",
+             "type":"text",
+             "dataType":"string"
+          },
+          {
+             "name":"quantity",
+             "title":"Quantidade",
+             "type":"number",
+             "dataType":"int"
+          },
+          {
             "name": "id",
             "type": "hidden",
             "value": "1"
