@@ -46,7 +46,7 @@
       items () {
         var data = this.$store.state.data
         var items = []
-        if (data.properties) {
+        if (data && data.properties) {
           var keys = Object.keys(data.properties)
           keys.forEach(function (key) {
             items.push({

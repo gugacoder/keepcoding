@@ -20,14 +20,24 @@ const mutations = {
 
 const actions = {
   reloadAsync ({ commit }) {
-    return new Promise((resolve, reject) => {
-      var path = router.currentRoute.params.path
-      path = Array.isArray(path) ? path.join('/') : path
-      paper.methods.load(path).then(data => {
-        state.data = data
-        resolve()
+    var path = router.currentRoute.path
+    if (path.startsWith('/page/demo')) {
+      return new Promise((resolve, reject) => {
+        paper.methods.loadDemo(path).then(data => {
+          state.data = data
+          resolve()
+        })
       })
-    })
+    } else {
+      path = router.currentRoute.params.path
+      return new Promise((resolve, reject) => {
+        path = Array.isArray(path) ? path.join('/') : path
+        paper.methods.load(path).then(data => {
+          state.data = data
+          resolve()
+        })
+      })
+    }
   }
 }
 

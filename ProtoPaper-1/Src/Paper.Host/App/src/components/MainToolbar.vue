@@ -36,7 +36,8 @@
   import paper from '../paper/paper.js'
   export default {
     data: () => ({
-      searchParams: ''
+      searchParams: '',
+      demoPage: '/demo'
     }),
     props: {
       source: String
