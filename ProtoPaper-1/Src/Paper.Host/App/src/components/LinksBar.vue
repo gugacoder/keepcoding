@@ -3,6 +3,7 @@
     fixed
     right
     clipped
+    :temporary="isMobile"
     v-model="$store.state.navigation.show"
     app
     v-if="show"
@@ -12,11 +13,18 @@
     )
       v-subheader
         | NAVEGAÇÃO
+
+      v-list-tile(
+        href="javascript:history.go(-1)"
+      )
+        v-list-tile-content
+          v-list-tile-title Voltar  
+
       v-list-tile(
         v-for="item in $store.state.data.links" 
         v-if="item.rel.indexOf('self')"
         :key="item.href" 
-        :href="'/#/page' + item.href"
+        :href="item.href"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -63,6 +71,9 @@
       showActions () {
         var show = this.$store.state.data && this.$store.state.data.actions
         return show
+      },
+      isMobile () {
+        return window.innerWidth < 993
       }
     }
   }

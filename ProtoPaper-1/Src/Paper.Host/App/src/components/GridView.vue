@@ -11,7 +11,7 @@
         div(
           class="headline"
         ) {{ $store.state.data.title }}
-      
+
     v-card-text
       v-container(fluid)
         v-data-table(
@@ -23,7 +23,8 @@
           select-all
         )
           template(
-            slot="items" slot-scope="items"
+            slot="items" 
+            slot-scope="items"
           )
 
             v-checkbox(

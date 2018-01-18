@@ -8,13 +8,13 @@
     :style="showClass"
   )
     v-toolbar-title(
-      :style="$vuetify.breakpoint.smAndUp ? 'width: 200px; min-width: 200px' : 'min-width: 72px'" 
-      class="ml-0 pl-3"
+      :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 50px' : 'min-width: 20px'" 
+      class="ml-0 pl-3 "
     )
       span(
         class="hidden-xs-only"
-      )
-      | Sandbrowser
+      ) Sandbrowser
+
     v-text-field(
       v-on:keyup="checkKeyUp"
       v-model="searchParams"
@@ -23,7 +23,7 @@
       solo
       prepend-icon="search"
       placeholder="Buscar Rota"
-      style="max-width: 600px; min-width: 128px"
+      style="max-width: 700px; min-width: 200px"
     )
     v-spacer
     v-toolbar-side-icon(
