@@ -25,6 +25,7 @@
         v-if="item.rel.indexOf('self')"
         :key="item.href" 
         :href="item.href"
+        :target="target(item)"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -74,6 +75,14 @@
       },
       isMobile () {
         return window.innerWidth < 993
+      }
+    },
+    methods: {
+      target (link) {
+        if (link.type !== undefined && !link.type.match(/json/g)) {
+          return '_blank'
+        }
+        return '_self'
       }
     }
   }

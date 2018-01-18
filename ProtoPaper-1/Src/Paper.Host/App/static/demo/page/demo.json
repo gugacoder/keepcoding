@@ -480,18 +480,25 @@
     ],
     "links":[
       {
-         "rel":["self"],
-         "href":"http://api.x.io/orders/42"
+        "rel":["self"],
+        "href":"http://api.x.io/orders/42"
       },
       {
-         "rel":["previous"],
-         "title":"Anterior",
-         "href":"/demo"
+        "rel":["next"],
+        "title":"Próximo",
+        "href":"http://api.x.io/orders/43"
       },
       {
-         "rel":["next"],
-         "title":"Próximo",
-         "href":"http://api.x.io/orders/43"
+        "rel":["book"],
+        "title":"A Semente de Mostarda",
+        "href":"https://goo.gl/8wgSF8",
+        "type":"pdf"
+      },
+      {
+        "rel":["next"],
+        "title":"Próximo",
+        "href":"http://api.x.io/orders/43",
+        "type":"application/vnd.siren+json; charset=UTF-8"
       }
     ]
   }
