@@ -7,7 +7,7 @@ Vue.use(VueResource)
 export default {
   methods: {
     load (path) {
-      return Vue.http.get('/' + path).then(response => {
+      return Vue.http.get('/' + path, { headers: {'Accept': 'application/vnd.siren+json; charset=UTF-8'}} ).then(response => {
         var json = response.body
         if (json) {
           const sirenParser = require('siren-parser')
