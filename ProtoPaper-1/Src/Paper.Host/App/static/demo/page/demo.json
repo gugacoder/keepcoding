@@ -18,12 +18,12 @@
          "iron": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/1", "title": "Detalhes" }
+          { "rel": ["self"], "href": "http://localhost:8080/page/demo/1", "title": "Detalhes" }
         ],
        "actions": [
         {
           "name": "exportar",
-          "href": "/Demo/Exportar",
+          "href": "demo/Exportar",
           "title": "Exportar",
           "method": "POST",
           "fields": [
@@ -65,12 +65,12 @@
          "_teste": "1%"
         },
         "links": [
-          { "rel": ["self"], "href": "/demo/2", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/2", "title": "Detalhes" }
         ],
         "actions": [
         {
           "name": "exportar",
-          "href": "/Demo/Exportar",
+          "href": "demo/Exportar",
           "title": "Exportar",
           "method": "POST",
           "fields": [
@@ -107,7 +107,7 @@
         },
         {
           "name": "enviarEmail",
-          "href": "/Demo/Email",
+          "href": "demo/Email",
           "title": "Enviar Email",
           "fields": [
             {
@@ -147,12 +147,12 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/3", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/3", "title": "Detalhes" }
         ],
         "actions": [
         {
           "name": "enviarEmail",
-          "href": "/Demo/Email",
+          "href": "demo/Email",
           "title": "Enviar Email",
           "method": "POST",
           "fields": [
@@ -193,7 +193,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/4", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/4", "title": "Detalhes" }
         ]
      },
      {
@@ -212,7 +212,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/5", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/5", "title": "Detalhes" }
         ]
      },
      {
@@ -231,7 +231,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/6", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/6", "title": "Detalhes" }
         ]
      },
      {
@@ -250,7 +250,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/7", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/7", "title": "Detalhes" }
         ]
      },
      {
@@ -269,7 +269,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/8", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/8", "title": "Detalhes" }
         ]
      },
      {
@@ -288,7 +288,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/9", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/9", "title": "Detalhes" }
         ]
      },
      {
@@ -307,7 +307,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/10", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/10", "title": "Detalhes" }
         ]
      },
      {
@@ -326,7 +326,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/11", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/11", "title": "Detalhes" }
         ]
      },
      {
@@ -345,7 +345,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/12", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/12", "title": "Detalhes" }
         ]
      },
      {
@@ -364,7 +364,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/13", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/13", "title": "Detalhes" }
         ]
      },
      {
@@ -383,7 +383,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/14", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/14", "title": "Detalhes" }
         ]
      },
      {
@@ -402,7 +402,7 @@
          "_teste": "1%"
        },
         "links": [
-          { "rel": ["self"], "href": "/demo/15", "title": "Detalhes" }
+          { "rel": ["self"], "href": "demo/15", "title": "Detalhes" }
         ]
      }
     ],

@@ -65,14 +65,15 @@
                     :key="item.href"
                   )
                     v-list-tile-content
-                      router-link(
-                        :to="'/page' + item.href"
+                      a(
+                        @click.stop="request(item.href)"
                       ) {{ item.title ? item.title : item.rel[0] }}
 
 </template>
 
 <script>
   import { Events } from '../event-bus.js'
+  import paper from '../paper/paper.js'
   export default {
     data () {
       return {
@@ -97,6 +98,9 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
+      },
+      request (link) {
+        paper.methods.request(link)
       }
     },
     created () {

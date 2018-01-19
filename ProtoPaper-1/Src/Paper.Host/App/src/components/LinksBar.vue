@@ -16,7 +16,7 @@
         v-for="item in $store.state.data.links" 
         v-if="item.rel.indexOf('self')"
         :key="item.href" 
-        :href="item.href"
+        @click.stop="request(item.href)"
         :target="target(item)"
       )
         v-list-tile-content
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+  import paper from '../paper/paper.js'
   export default {
     beforeRouteUpdate (to, from, next) {
       next()
@@ -78,6 +79,9 @@
       },
       push (action) {
         this.$router.push({ query: { actions: action.name } })
+      },
+      request (link) {
+        paper.methods.request(link)
       }
     }
   }

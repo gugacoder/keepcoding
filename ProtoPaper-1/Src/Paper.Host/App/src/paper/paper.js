@@ -7,7 +7,7 @@ Vue.use(VueResource)
 export default {
   methods: {
     load (path) {
-      return Vue.http.get('/' + path, { headers: {'Accept': 'application/vnd.siren+json; charset=UTF-8'}} ).then(response => {
+      return Vue.http.get('/' + path, {headers: {'Accept': 'application/vnd.siren+json'}}).then(response => {
         var json = response.body
         if (json) {
           const sirenParser = require('siren-parser')
@@ -37,7 +37,7 @@ export default {
       params = params.filter(function (x) {
         return (x !== (undefined || null || ''))
       })
-      router.push({name: 'page', params: { path: params }})
+      router.push({name: 'page', params: {path: params}})
     },
 
     save (path, data) {
@@ -46,6 +46,15 @@ export default {
       }, response => {
         console.log('error ', response)
       })
+    },
+
+    request (link) {
+      if (link.startsWith('http')) {
+        location.href = link
+      } else {
+        console.log('link ', link)
+        this.loadPage(link)
+      }
     }
   }
 }
