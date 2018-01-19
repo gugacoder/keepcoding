@@ -72,6 +72,7 @@
           "name": "exportar",
           "href": "/Demo/Exportar",
           "title": "Exportar",
+          "method": "POST",
           "fields": [
             {
                "name":"productCode",
@@ -88,15 +89,18 @@
             {
               "name": "id",
               "type": "hidden",
+              "title":"Id",
               "value": "1"
             },
             {
               "name": "tipo",
               "type": "hidden",
+              "title":"Tipo",
               "value": "E"
             },
             {
               "name": "destino",
+              "title":"Destino",
               "type": "text"
             }
           ]
@@ -109,15 +113,18 @@
             {
               "name": "id",
               "type": "hidden",
+              "title":"Id",
               "value": "1"
             },
             {
               "name": "tipo",
               "type": "hidden",
+              "title":"Tipo",
               "value": "E"
             },
             {
               "name": "destino",
+              "title":"Destino",
               "type": "text"
             }
           ]
@@ -147,19 +154,23 @@
           "name": "enviarEmail",
           "href": "/Demo/Email",
           "title": "Enviar Email",
+          "method": "POST",
           "fields": [
             {
               "name": "id",
               "type": "hidden",
+              "title":"Id",
               "value": "1"
             },
             {
               "name": "tipo",
               "type": "hidden",
+              "title":"Tipo",
               "value": "E"
             },
             {
               "name": "destino",
+              "title":"Destino",
               "type": "text"
             }
           ]
@@ -484,8 +495,8 @@
         "href":"http://api.x.io/orders/42"
       },
       {
-        "rel":["next"],
-        "title":"Próximo",
+        "rel":["orders"],
+        "title":"Orders",
         "href":"http://api.x.io/orders/43"
       },
       {
@@ -495,8 +506,8 @@
         "type":"pdf"
       },
       {
-        "rel":["next"],
-        "title":"Próximo",
+        "rel":["siren"],
+        "title":"Siren",
         "href":"http://api.x.io/orders/43",
         "type":"application/vnd.siren+json; charset=UTF-8"
       }

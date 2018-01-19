@@ -40,7 +40,7 @@ export default {
       var actions = entities
                       .filter(entity => entity.actions.map(action => action.name === actionName))
                       .map(entity => entity.actions)
-      var commomFields = this.getDiffFields(entities)
+      var commomFields = this.getDiffFields(entities, actionName)
       actions.forEach(action => {
         action = action[0]
         var keys = Object.keys(commomFields)
@@ -51,14 +51,13 @@ export default {
       })
       return Object.values(commomFields)
     },
-    getDiffFields (entities) {
+    getDiffFields (entities, actionName) {
       var flags = []
       entities.forEach(entity => {
         if (entity.hasAction()) {
-          entity.actions.forEach(action => {
-            action.fields.forEach(field => {
-              flags[field.name] = field
-            })
+          var action = entity.actions.find(action => action.name === actionName)
+          action.fields.forEach(field => {
+            flags[field.name] = field
           })
         }
       })

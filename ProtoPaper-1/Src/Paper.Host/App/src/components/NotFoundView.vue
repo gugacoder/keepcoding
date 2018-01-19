@@ -57,14 +57,13 @@
                   color="primary" 
                   flat 
                   @click.native="dialog=false"
-                ) 
-                  | Cancelar
+                ) Cancelar
+
                 v-btn(
                   color="primary" 
                   flat 
                   @click.native="createRouter"
-                )
-                  | Ok
+                ) Ok
 </template>
 
 <script>

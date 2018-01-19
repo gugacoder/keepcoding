@@ -1,5 +1,5 @@
 {
-  "class": ["orders", "collection"],
+  "class": ["orders", "list"],
   "properties": {
     "count": 2,
     "date": "2017-12-13 21:53:07"

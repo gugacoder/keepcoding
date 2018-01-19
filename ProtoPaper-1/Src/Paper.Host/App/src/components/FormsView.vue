@@ -30,10 +30,16 @@
               v-flex(xs12)
                 component(:is="dynamicComponent(field)" :field="field")
 
-            v-btn(@click="submit()")
-              | {{ action ? action.title : '' }}
-            v-btn(@click="clear()")
-              | Limpar
+            v-btn(
+              color="primary"
+              @click="submit()"
+            ) {{ action ? action.title : '' }}
+
+            v-btn(
+              color="primary"
+              flat 
+              @click="clear()"
+            ) Limpar
 </template>
 
 <script>

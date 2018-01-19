@@ -8,17 +8,9 @@
     app
     v-if="show"
   )
-    v-list(
-      subheader v-if="showLinks"
-    )
+    v-list(subheader)
       v-subheader
         | NAVEGAÇÃO
-
-      v-list-tile(
-        href="javascript:history.go(-1)"
-      )
-        v-list-tile-content
-          v-list-tile-title Voltar  
 
       v-list-tile(
         v-for="item in $store.state.data.links" 
@@ -45,13 +37,13 @@
       v-subheader
         | AÇÕES
       v-list-tile(
-        v-for="item in $store.state.data.actions" 
-        :key="item.name" 
-        :href="'/#' + $route.path + '?actions=' + item.name"
+        v-for="action in $store.state.data.actions" 
+        :key="action.name" 
+        @click.stop="push(action)"
       )
         v-list-tile-content
           v-list-tile-title(
-            v-html="item.title"
+            v-html="action.title"
           )
 </template>
 
@@ -83,6 +75,9 @@
           return '_blank'
         }
         return '_self'
+      },
+      push (action) {
+        this.$router.push({ query: { actions: action.name } })
       }
     }
   }

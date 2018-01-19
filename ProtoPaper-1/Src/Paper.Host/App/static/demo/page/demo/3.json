@@ -13,7 +13,6 @@
        "iron": "7%"
      },
       "links": [
-        { "rel": ["self"], "href": "/demo/3" },
-        { "rel": ["back"], "href": "/demo", "title": "Voltar" }
+        { "rel": ["self"], "href": "/demo/3" }
       ]
    }

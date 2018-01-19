@@ -31,7 +31,7 @@
               primary
               hide-details
               v-model="items.selected"
-              @click="items.selected = !items.selected"
+              @click.stop="items.selected = !items.selected"
             )
             
             td(
@@ -79,7 +79,6 @@
         showLeftDrawer: '',
         showLinks: false,
         data: '',
-        dialog: false,
         selected: []
       }
     },
