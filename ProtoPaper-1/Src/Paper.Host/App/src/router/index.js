@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/HomeView'
 import NotFound from '@/components/NotFoundView'
+import ErrorPage from '@/components/ErrorPageView'
 import Sandbox from '@/components/SandboxView'
 import Page from '@/components/PageView'
 
@@ -30,6 +31,12 @@ export default new Router({
       path: '/sandbox',
       name: 'sandbox',
       component: Sandbox,
+      props: true
+    },
+    {
+      path: '/error',
+      name: 'error',
+      component: ErrorPage,
       props: true
     }
   ]

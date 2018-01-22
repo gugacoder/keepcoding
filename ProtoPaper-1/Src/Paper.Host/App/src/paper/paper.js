@@ -1,21 +1,30 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
 import router from '../router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
-Vue.use(VueResource)
+Vue.use(VueAxios, axios)
 
 export default {
   methods: {
     load (path) {
-      return Vue.http.get('/' + path, {headers: {'Accept': 'application/vnd.siren+json'}}).then(response => {
-        var json = response.body
+      var header = {
+        headers: {'Accept': 'application/vnd.siren+json'}
+      }
+      return Vue.axios.get('/' + path, header).then(response => {
+        var json = response.data
         if (json) {
           const sirenParser = require('siren-parser')
           var resource = sirenParser(json)
           return resource
         }
-      }, response => {
-        router.push({name: 'notFound', params: { routerName: path }})
+      }).catch(error => {
+        console.log('Erro: ', error.response)
+        if (error.response.status === 404) {
+          router.push({name: 'notFound', params: { routerName: path }})
+        } else {
+          router.push({name: 'error', params: { error: error }})
+        }
         return null
       })
     },
@@ -41,10 +50,10 @@ export default {
     },
 
     save (path, data) {
-      Vue.http.post(path, data).then(response => {
-        this.loadPage(path, data)
-      }, response => {
-        console.log('error ', response)
+      Vue.axios.post(path, data).then(response => {
+        this.loadPage(path)
+      }).catch(error => {
+        console.log('Erro: ', error.response)
       })
     },
 
@@ -52,7 +61,6 @@ export default {
       if (link.startsWith('http')) {
         location.href = link
       } else {
-        console.log('link ', link)
         this.loadPage(link)
       }
     }

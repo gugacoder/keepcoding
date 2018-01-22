@@ -41,8 +41,8 @@ namespace Paper.Modules.Static.Controllers
         var choices =
           (content.ContentType != null)
             ? new[] { content.ContentType }
-            : new[] { "text/json", "application/json" };
-
+            : new[] { "text/json", "application/json", "application/vnd.siren+json" };
+        
         var validContentType = ContentTypes.GetBestMatch(this, choices);
         if (validContentType == null)
           return StatusCode(406); // Not Acceptable
@@ -55,8 +55,8 @@ namespace Paper.Modules.Static.Controllers
       {
         var names = string.Join(", ", resourceNames.Select(x => "\"" + x + "\""));
         names = "{ \"resources\": [ " + names + " ] }";
-
-        var validContentType = ContentTypes.GetBestMatch(this, "text/json", "application/json");
+      
+        var validContentType = ContentTypes.GetBestMatch(this, "text/json", "application/json", "application/vnd.siren+json");
         if (validContentType == null)
           return StatusCode(406); // Not Acceptable
 

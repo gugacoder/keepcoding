@@ -2,7 +2,8 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import VueResource from 'vue-resource'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import 'vuetify/dist/vuetify.css'
 
@@ -11,7 +12,7 @@ import router from './router'
 import store from './store/store'
 
 Vue.use(Vuetify)
-Vue.use(VueResource)
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 

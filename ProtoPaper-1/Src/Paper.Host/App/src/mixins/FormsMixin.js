@@ -38,7 +38,7 @@ export default {
         action = actions.filter(a => a.name === this.actionName)[0]
         return action
       }
-      if (this.$store.state.data.actions) {
+      if (this.$store.state.data && this.$store.state.data.actions) {
         action = this.$store.state.data.getActionByName(this.actionName)
         return action
       }
@@ -52,7 +52,7 @@ export default {
         fieldsAction = parser.methods.getActionsField(selectedItems, this.actionName)
         return fieldsAction
       }
-      if (this.$store.state.data.actions) {
+      if (this.$store.state.data && this.$store.state.data.actions) {
         var action = this.$store.state.data.getActionByName(this.actionName)
         fieldsAction = action.fields
         return fieldsAction

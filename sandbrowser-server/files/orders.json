@@ -10,7 +10,7 @@
   ],
   "entities": [
     {
-      "class": ["user"],
+      "class": ["user", "item"],
       "rel": [ "users" ], 
       "properties": {
         "id": 1,
@@ -20,7 +20,7 @@
         { "rel": ["self"], "href": "/page/Users/1" }
       ]
     }, {
-      "class": ["user"],
+      "class": ["user", "item"],
       "rel": [ "users" ], 
       "properties": {
         "id": 2,
@@ -30,7 +30,7 @@
         { "rel": ["self"], "href": "/page/Users/2" }
       ]
     }, {
-      "class": ["user"],
+      "class": ["user", "item"],
       "rel": [ "users" ], 
       "properties": {
         "id": 2,

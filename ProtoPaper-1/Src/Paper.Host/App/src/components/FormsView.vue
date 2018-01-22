@@ -139,6 +139,9 @@
       submit () {
         var queryParams = this.makeParams()
         var method = this.action.method.toLowerCase()
+        if (method === 'get') {
+          queryParams = { params: queryParams }
+        }
         this.$http[method](this.action.href, queryParams).then(response => {
           var location = response.headers.get('Location')
           if (location && location.length > 0) {
@@ -156,7 +159,7 @@
         var formName = 'form-' + this.action.name
         var form = this.$refs[formName]
         form.inputs.forEach((field) => {
-          if (field.value !== undefined) {
+          if (field.value !== undefined && field.value !== null) {
             var param = field.$attrs.name
             var value = field.value
             params[param] = value
