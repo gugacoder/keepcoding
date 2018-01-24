@@ -409,7 +409,6 @@
     "actions":[
       {
          "name":"add-item",
-         "title":"Adicionar Item",
          "method":"GET",
          "href":"items",
          "type":"application/x-www-form-urlencoded",
@@ -417,7 +416,8 @@
             {
                "name":"productCode",
                "title":"Código do produto",
-               "type":"text",
+               "type":"hidden",
+               "value":"valor",
                "dataType":"string"
             },
             {

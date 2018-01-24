@@ -43,7 +43,7 @@
       )
         v-list-tile-content
           v-list-tile-title(
-            v-html="action.title"
+            v-html="actionTitle(action)"
           )
 </template>
 
@@ -94,6 +94,16 @@
 
       request (link) {
         paper.methods.request(link)
+      },
+
+      actionTitle (action) {
+        if (action.title !== null && action.title !== undefined && action.title.length > 0) {
+          return action.title
+        }
+        if (action.name !== null && action.name !== undefined && action.name.length > 0) {
+          return action.name
+        }
+        return ''
       }
     }
   }

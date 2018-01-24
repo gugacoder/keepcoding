@@ -9,7 +9,6 @@ import Page from '@/components/PageView'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',

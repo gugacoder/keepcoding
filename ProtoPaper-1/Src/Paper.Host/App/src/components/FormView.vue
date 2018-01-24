@@ -31,7 +31,7 @@
             v-btn(
               color="primary"
               @click="submit()"
-            ) {{ action ? action.title : '' }}
+            ) {{ actionTitle }}
 
             v-btn(
               color="primary"
@@ -60,6 +60,15 @@
 
       actionName () {
         return this.$route.query.action
+      },
+
+      actionTitle () {
+        if (this.action.title !== null && this.action.title !== undefined && this.action.title.length > 0) {
+          return this.action.title
+        } else if (this.action.name !== null && this.action.name !== undefined && this.action.name.length > 0) {
+          return this.action.name
+        }
+        return ''
       }
     },
     methods: {

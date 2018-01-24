@@ -7,9 +7,6 @@ Vue.use(VueAxios, axios)
 export default {
   methods: {
     async request (method, href, params) {
-      console.log('method ', method)
-      console.log('href ', href)
-      console.log('params ', params)
       method = method.toLowerCase()
       if (method === 'get' && params) {
         params = { params: params }

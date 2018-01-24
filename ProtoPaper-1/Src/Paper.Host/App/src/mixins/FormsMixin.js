@@ -21,6 +21,9 @@ export default {
   },
   methods: {
     $_formsMixin_dynamicComponent (field) {
+      if (field.type === 'hidden') {
+        return 'VPaperHidden'
+      }
       switch (field.dataType) {
         case 'date':
           return 'VPaperDate'

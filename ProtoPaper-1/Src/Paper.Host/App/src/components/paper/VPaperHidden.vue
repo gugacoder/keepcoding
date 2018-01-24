@@ -4,7 +4,7 @@
     :value="field.value"
     :name="field.name"
     v-model="field.value"
-    type="hidden"
+    v-show="false"
   )
 </template>
 
