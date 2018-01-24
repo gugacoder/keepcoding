@@ -68,7 +68,9 @@
 
 <script>
   export default {
-    props: ['routerName'],
+    props: {
+      routerName: String
+    },
     data () {
       return {
         dialog1: 'sandbox',

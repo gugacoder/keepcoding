@@ -53,7 +53,7 @@ export default {
       Vue.axios.post(path, data).then(response => {
         this.loadPage(path)
       }).catch(error => {
-        console.log('Erro: ', error.response)
+        console.log(error.response)
       })
     },
 

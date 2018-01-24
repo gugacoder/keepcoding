@@ -26,7 +26,9 @@
 <script>
   import paper from '../paper/paper.js'
   export default {
-    props: ['routerName'],
+    props: {
+      routerName: String
+    },
     data () {
       return {
         jsonData: ''

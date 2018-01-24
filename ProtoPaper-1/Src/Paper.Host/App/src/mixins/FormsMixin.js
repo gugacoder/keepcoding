@@ -1,105 +1,64 @@
-import TextView from '../components/types/TextView.vue'
-import NumberView from '../components/types/NumberView.vue'
-import CheckboxView from '../components/types/CheckboxView.vue'
-import HiddenView from '../components/types/HiddenView.vue'
-import DateView from '../components/types/DateView.vue'
-import TimeView from '../components/types/TimeView.vue'
-import SelectView from '../components/types/SelectView.vue'
-import SwitchView from '../components/types/SwitchView.vue'
-import DatetimeView from '../components/types/DatetimeView.vue'
-import parser from '../paper/parser.js'
+import VPaperText from '../components/paper/VPaperText.vue'
+import VPaperNumber from '../components/paper/VPaperNumber.vue'
+import VPaperCheckbox from '../components/paper/VPaperCheckbox.vue'
+import VPaperHidden from '../components/paper/VPaperHidden.vue'
+import VPaperDate from '../components/paper/VPaperDate.vue'
+import VPaperTime from '../components/paper/VPaperTime.vue'
+import VPaperSelect from '../components/paper/VPaperSelect.vue'
+import VPaperSwitch from '../components/paper/VPaperSwitch.vue'
+import VPaperDatetime from '../components/paper/VPaperDatetime.vue'
 export default {
-  $validates: true,
-  data: () => ({
-    valid: true,
-    actionName: ''
-  }),
-  beforeRouteUpdate (to, from, next) {
-    next()
-  },
   components: {
-    TextView,
-    NumberView,
-    CheckboxView,
-    HiddenView,
-    DateView,
-    TimeView,
-    DatetimeView,
-    SelectView,
-    SwitchView
-  },
-  computed: {
-    action () {
-      var action = []
-      var selectionMode = this.$store.state.selection.selectionState
-      if (selectionMode) {
-        var selectedItems = this.$store.state.selection.itemsSelected
-        var actions = parser.methods.getActions(selectedItems)
-        action = actions.filter(a => a.name === this.actionName)[0]
-        return action
-      }
-      if (this.$store.state.data && this.$store.state.data.actions) {
-        action = this.$store.state.data.getActionByName(this.actionName)
-        return action
-      }
-      return action
-    },
-    fields () {
-      var fieldsAction = []
-      var selectionMode = this.$store.state.selection.selectionState
-      if (selectionMode) {
-        var selectedItems = this.$store.state.selection.itemsSelected
-        fieldsAction = parser.methods.getActionsField(selectedItems, this.actionName)
-        return fieldsAction
-      }
-      if (this.$store.state.data && this.$store.state.data.actions) {
-        var action = this.$store.state.data.getActionByName(this.actionName)
-        fieldsAction = action.fields
-        return fieldsAction
-      }
-      return fieldsAction
-    }
+    VPaperText,
+    VPaperNumber,
+    VPaperCheckbox,
+    VPaperHidden,
+    VPaperDate,
+    VPaperTime,
+    VPaperSelect,
+    VPaperSwitch,
+    VPaperDatetime
   },
   methods: {
-    dynamicComponent (field) {
+    $_formsMixin_dynamicComponent (field) {
       switch (field.dataType) {
         case 'date':
-          return 'DateView'
+          return 'VPaperDate'
         case 'time':
-          return 'TimeView'
+          return 'VPaperTime'
         case 'bit':
-          return 'SwitchView'
+          return 'VPaperSwitch'
         case 'bool':
-          return 'SwitchView'
+          return 'VPaperSwitch'
         case 'boolean':
-          return 'SwitchView'
+          return 'VPaperSwitch'
         case 'number':
-          return 'NumberView'
+          return 'VPaperNumber'
         case 'int':
-          return 'NumberView'
+          return 'VPaperNumber'
         case 'long':
-          return 'NumberView'
+          return 'VPaperNumber'
         case 'decimal':
-          return 'NumberView'
+          return 'VPaperNumber'
         case 'double':
-          return 'NumberView'
+          return 'VPaperNumber'
         case 'float':
-          return 'NumberView'
+          return 'VPaperNumber'
         case 'multi':
           if (field.type === 'text') {
-            return 'SelectView'
+            return 'VPaperSelect'
           }
           break
         default:
-          return 'TextView'
+          return 'VPaperText'
       }
     },
-    makeParams () {
+    $_formsMixin_makeParams (actionName) {
       var params = {}
-      var formName = 'form-' + this.actionName
+      var formName = 'form-' + actionName
       var form = this.$refs[formName]
       form.inputs.forEach((field) => {
-        if (field.value !== undefined) {
+        if (field.value !== null && field.value !== undefined) {
           var param = field.$attrs.name
           var value = field.value
           params[param] = value
@@ -107,8 +66,8 @@ export default {
       })
       return params
     },
-    clear () {
-      var formName = 'form-' + this.actionName
+    $_formsMixin_clear (actionName) {
+      var formName = 'form-' + actionName
       var form = this.$refs[formName]
       form.reset()
     }

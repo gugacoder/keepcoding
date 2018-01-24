@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/HomeView'
-import NotFound from '@/components/NotFoundView'
-import ErrorPage from '@/components/ErrorPageView'
-import Sandbox from '@/components/SandboxView'
+import Home from '@/components/Home'
+import NotFound from '@/components/NotFoundPage'
+import ErrorPage from '@/components/ErrorPage'
+import Sandbox from '@/components/Sandbox'
 import Page from '@/components/PageView'
 
 Vue.use(Router)

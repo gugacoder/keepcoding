@@ -83,6 +83,9 @@
         selected: []
       }
     },
+    created () {
+      Events.$on('selectState', this.selectedMode)
+    },
     beforeRouteUpdate (to, from, next) {
       next()
     },
@@ -90,27 +93,28 @@
       show () {
         this.showLinks = !this.showLinks
       },
+
       selectedMode (selected) {
         if (!selected) {
           this.selected = []
         }
       },
+
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
       },
+
       request (link) {
         paper.methods.request(link)
       }
-    },
-    created () {
-      Events.$on('selectState', this.selectedMode)
     },
     computed: {
       itemKey () {
         var key = this.headers && this.headers.length > 0 ? this.headers[0].text : ''
         return key
       },
+
       items () {
         var items = []
         var entities = this.$store.state.data.getSubEntitiesByClass('item')
@@ -124,6 +128,7 @@
         }
         return items
       },
+
       headers () {
         var headers = []
         var item = this.items[0]
@@ -141,6 +146,7 @@
         }
         return headers
       },
+
       selectedItems () {
         var selectedItems = []
         this.selected.forEach(item => {

@@ -14,7 +14,7 @@
         justify-space-between
       )
         v-flex(xs12)
-          h1 {{ error.response.status }}
+          h1 {{ status }}
 
         v-flex(xs12)
           h2 {{ message }}
@@ -23,10 +23,24 @@
 <script>
   import errors from '../paper/errors.js'
   export default {
-    props: ['error'],
+    props: {
+      error: Object
+    },
     computed: {
+      show () {
+        return this.error && this.error.response
+      },
       message () {
-        return errors.methods.translate(this.error.response.status)
+        if (this.show) {
+          return errors.methods.translate(this.error.response.status)
+        }
+        return 'Página de Erro'
+      },
+      status () {
+        if (this.show) {
+          return this.error.response.status
+        }
+        return 'ERRO'
       }
     }
   }

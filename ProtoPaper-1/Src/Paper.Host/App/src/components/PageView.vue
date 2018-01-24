@@ -6,8 +6,8 @@
   // Register another component to render in this one dynamically.
   import Grid from './GridView.vue'
   import View from './View.vue'
-  import Home from './HomeView.vue'
-  import Forms from './FormsView.vue'
+  import Home from './Home.vue'
+  import Form from './FormView.vue'
   export default {
     data: () => ({
       viewShow: ''
@@ -16,7 +16,7 @@
       Grid,
       View,
       Home,
-      Forms
+      Form
     },
     beforeRouteUpdate (to, from, next) {
       next()
@@ -32,8 +32,8 @@
       dynamicComponent () {
         var data = this.$store.state.data
         var isCollection = data && data.class && data.class.indexOf('list') > 0
-        if (this.$route.query && this.$route.query.actions) {
-          return Forms
+        if (this.$route.query && this.$route.query.action) {
+          return Form
         } else if (isCollection) {
           return Grid
         } else if (!isCollection) {

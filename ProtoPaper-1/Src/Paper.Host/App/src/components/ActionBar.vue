@@ -21,7 +21,6 @@
 
     v-btn(
       flat
-      v-if="actions && actions.length > 0"
       v-for="action in actions" 
       :key="action.name"
       @click.stop="actionClick(action)"
@@ -38,11 +37,11 @@
           h2 {{ action ? action.title : '' }}
 
         v-card-text
+          alert(ref="alert")
+
           v-form(
             v-if="action"
-            v-model="valid"
             :ref="'form-' + action.name"
-            lazy-validation
           )
             v-layout(
               row 
@@ -52,7 +51,7 @@
             )
 
               v-flex(xs12)
-                component(:is="dynamicComponent(field)" :field="field")
+                component(:is="$_formsMixin_dynamicComponent(field)" :field="field")
         
         v-divider
 
@@ -66,7 +65,7 @@
           v-btn(
             color="primary"
             flat
-            @click="clear()"
+            @click="$_formsMixin_clear(actionName)"
           ) Limpar
 
           v-btn(
@@ -79,12 +78,16 @@
 
 <script>
   import { Events } from '../event-bus.js'
+  import requester from '../paper/requester.js'
   import parser from '../paper/parser.js'
+  import errors from '../paper/errors.js'
   import FormsMixin from '../mixins/FormsMixin.js'
+  import Alert from './AlertView.vue'
   export default {
     mixins: [FormsMixin],
     data: () => ({
-      dialogActionBarForm: false
+      dialogActionBarForm: false,
+      actionName: ''
     }),
     computed: {
       showClass () {
@@ -92,40 +95,65 @@
           return 'display: none'
         }
       },
+
       actions () {
         var selectedItems = this.$store.state.selection.itemsSelected
         var actions = parser.methods.getActions(selectedItems)
-        return actions
+        return actions && actions.length > 0 ? actions : []
+      },
+
+      action () {
+        var action = this.actions.filter(a => a.name === this.actionName)[0]
+        return action
+      },
+
+      fields () {
+        var selectedItems = this.$store.state.selection.itemsSelected
+        var fields = parser.methods.getActionsField(selectedItems, this.actionName)
+        return fields
       }
+    },
+    components: {
+      Alert
     },
     methods: {
       deselected () {
         Events.$emit('selectState', false)
         this.$store.commit('selectState', false)
       },
+
       actionClick (action) {
         this.openDialog()
         this.actionName = action.name
       },
+
       submit () {
-        var queryParams = this.makeParams()
-        var method = this.action.method.toLowerCase()
-        this.$http[method](this.action.href, queryParams).then(response => {
+        var queryParams = this.$_formsMixin_makeParams(this.actionName)
+        requester.methods.request(this.action.method, this.action.href, queryParams).then(response => {
+          if (!response.ok) {
+            var message = errors.methods.translate(response.response.statusText)
+            this.$refs.alert.alertMessage = message
+            this.$refs.alert.alertType = 'error'
+            this.$refs.alert.show()
+            return
+          }
           this.closeDialog()
-        }, response => {
-          console.log('error ', response)
         })
       },
+
       escapeKeyListener (event) {
         if (event.keyCode === 27) {
           this.closeDialog()
         }
       },
+
       openDialog () {
         this.dialogActionBarForm = true
       },
+
       closeDialog () {
         this.dialogActionBarForm = false
+        this.$refs.alert.hide()
       }
     },
     created () {

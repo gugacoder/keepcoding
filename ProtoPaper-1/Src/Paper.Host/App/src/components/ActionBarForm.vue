@@ -20,9 +20,11 @@
 
 <script>
   export default {
-    props: ['showDialogActionBarForm'],
+    props: {
+      'showDialog': Boolean
+    },
     data: () => ({
-      dialog: this.showDialogActionBarForm,
+      dialog: this.showDialog,
       items: [
         {
           title: 'Click Me'

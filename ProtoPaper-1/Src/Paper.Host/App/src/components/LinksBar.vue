@@ -13,22 +13,22 @@
         | NAVEGAÇÃO
 
       v-list-tile(
-        v-for="item in $store.state.data.links" 
-        v-if="item.rel.indexOf('self')"
-        :key="item.href" 
-        @click.stop="request(item.href)"
-        :target="target(item)"
+        v-for="link in links" 
+        :key="link.href"
+        :target="target(link)"
+        @click.stop="request(link.href)"
       )
         v-list-tile-content
           v-list-tile-title(
-            v-if="item.title" 
-            v-html="item.title"
+            v-if="link.title" 
+            v-html="link.title"
           )
           v-list-tile-title(
-            v-else v-html="item.rel[0]"
+            v-else 
+            v-html="link.rel[0]"
           )
 
-    v-divider
+    v-divider(v-if="showActions")
     
     v-list(
       subheader 
@@ -58,16 +58,26 @@
         var show = !this.$store.state.selection.selectionState && (this.showLinks || this.showActions)
         return show
       },
+
       showLinks () {
         var show = this.$store.state.data && this.$store.state.data.links && this.$store.state.data.links.length > 1
         return show
       },
+
       showActions () {
         var show = this.$store.state.data && this.$store.state.data.actions
         return show
       },
+
       isMobile () {
         return window.innerWidth < 993
+      },
+
+      links () {
+        var items = this.$store.state.data.links.filter(
+          item => item.rel.indexOf('self')
+        )
+        return items
       }
     },
     methods: {
@@ -77,9 +87,11 @@
         }
         return '_self'
       },
+
       push (action) {
-        this.$router.push({ query: { actions: action.name } })
+        this.$router.push({ query: { action: action.name } })
       },
+
       request (link) {
         paper.methods.request(link)
       }
