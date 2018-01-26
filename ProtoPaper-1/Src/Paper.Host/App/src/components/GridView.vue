@@ -20,7 +20,7 @@
           :items="items"
           :item-key="itemKey"
           hide-actions=true
-          select-all
+          :select-all="hasActions"
         )
           template(
             slot="items" 
@@ -28,6 +28,7 @@
           )
 
             v-checkbox(
+              v-if="hasActions"
               primary
               hide-details
               v-model="items.selected"
@@ -66,15 +67,18 @@
                   )
                     v-list-tile-content
                       a(
-                        @click.stop="request(item.href)"
+                        @click.stop="$_routerMixin_request(item.href)"
                       ) {{ item.title ? item.title : item.rel[0] }}
 
 </template>
 
 <script>
   import { Events } from '../event-bus.js'
-  import paper from '../paper/paper.js'
+  import RouterMixin from '../mixins/RouterMixin.js'
   export default {
+    mixins: [
+      RouterMixin
+    ],
     data () {
       return {
         showLeftDrawer: '',
@@ -103,13 +107,14 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
-      },
-
-      request (link) {
-        paper.methods.request(link)
       }
     },
     computed: {
+      hasActions () {
+        var exist = this.$store.state.data.entities.filter(entity => entity.hasAction())
+        return exist && exist.length > 0
+      },
+
       itemKey () {
         var key = this.headers && this.headers.length > 0 ? this.headers[0].text : ''
         return key

@@ -31,7 +31,7 @@
             v-btn(
               color="primary"
               @click="submit()"
-            ) {{ actionTitle }}
+            ) {{ $_actionsMixin_getActionTitle(action) }}
 
             v-btn(
               color="primary"
@@ -41,11 +41,17 @@
 </template>
 
 <script>
-  import paper from '../paper/paper.js'
+  import errors from '../paper/errors.js'
   import requester from '../paper/requester.js'
   import FormsMixin from '../mixins/FormsMixin.js'
+  import ActionsMixin from '../mixins/ActionsMixin.js'
+  import RouterMixin from '../mixins/RouterMixin.js'
   export default {
-    mixins: [FormsMixin],
+    mixins: [
+      FormsMixin,
+      ActionsMixin,
+      RouterMixin
+    ],
     computed: {
       action () {
         if (this.$store.state.data.actions) {
@@ -60,15 +66,6 @@
 
       actionName () {
         return this.$route.query.action
-      },
-
-      actionTitle () {
-        if (this.action.title !== null && this.action.title !== undefined && this.action.title.length > 0) {
-          return this.action.title
-        } else if (this.action.name !== null && this.action.name !== undefined && this.action.name.length > 0) {
-          return this.action.name
-        }
-        return ''
       }
     },
     methods: {
@@ -76,14 +73,15 @@
         var queryParams = this.$_formsMixin_makeParams(this.actionName)
         requester.methods.request(this.action.method, this.action.href, queryParams).then(response => {
           if (!response.ok) {
-            this.$router.go(-1)
+            var message = errors.methods.translate(response.response.statusText)
+            this.$notify({ message: message, type: 'danger' })
             return
           }
-          var location = response.headers.get('Location')
+          var location = response.response.headers.get('Location')
           if (location && location.length > 0) {
-            paper.methods.load(location)
+            this.$_routerMixin_request(location)
           } else {
-            this.$router.go(-1)
+            this.$_routerMixin_goToIndex()
           }
         })
       }

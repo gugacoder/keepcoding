@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from '../router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import routerMixin from '../mixins/RouterMixin'
 
 Vue.use(VueAxios, axios)
 
@@ -14,9 +15,7 @@ export default {
       return Vue.axios.get('/' + path, header).then(response => {
         var json = response.data
         if (json) {
-          const sirenParser = require('siren-parser')
-          var resource = sirenParser(json)
-          return resource
+          return this.sirenParse(json)
         }
       }).catch(error => {
         console.log('Erro: ', error.response)
@@ -29,40 +28,28 @@ export default {
       })
     },
 
+    sirenParse (file) {
+      const sirenParser = require('siren-parser')
+      var resource = sirenParser(file)
+      return resource
+    },
+
     demoFileLoader (jsonFile) {
       return import(`../../static/demo${jsonFile}.json`)
     },
 
     loadDemo (jsonFile) {
       return this.demoFileLoader(jsonFile).then(json => {
-        const sirenParser = require('siren-parser')
-        var resource = sirenParser(json)
-        return resource
+        return this.sirenParse(json)
       })
-    },
-
-    loadPage (path) {
-      var params = path.split('/')
-      params = params.filter(function (x) {
-        return (x !== (undefined || null || ''))
-      })
-      router.push({name: 'page', params: {path: params}})
     },
 
     save (path, data) {
       Vue.axios.post(path, data).then(response => {
-        this.loadPage(path)
+        routerMixin.$_routerMixin_redirectPage(path)
       }).catch(error => {
         console.log(error.response)
       })
-    },
-
-    request (link) {
-      if (link.startsWith('http')) {
-        location.href = link
-      } else {
-        this.loadPage(link)
-      }
     }
   }
 }

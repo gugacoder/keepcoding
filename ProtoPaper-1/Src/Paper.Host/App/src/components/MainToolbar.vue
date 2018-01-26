@@ -20,7 +20,11 @@
     )
       span(
         class="hidden-xs-only"
-      ) Sandbrowser
+      ) 
+        router-link(
+          style="text-decoration: none; color: white"
+          to="/"
+        ) Sandbrowser
 
     v-text-field(
       @keyup.enter="search"
@@ -40,17 +44,20 @@
 </template>
 
 <script>
-  import paper from '../paper/paper.js'
+  import RouterMixin from '../mixins/RouterMixin.js'
   export default {
     data: () => ({
       searchParams: '',
       demoPage: '/demo'
     }),
-    props: {
-      source: String
-    },
     beforeRouteUpdate (to, from, next) {
       next()
+    },
+    mixins: [
+      RouterMixin
+    ],
+    props: {
+      source: String
     },
     computed: {
       showLinks () {
@@ -65,7 +72,7 @@
     },
     methods: {
       search () {
-        paper.methods.loadPage(this.searchParams)
+        this.$_routerMixin_redirectPage(this.searchParams)
       },
 
       clearSearch () {

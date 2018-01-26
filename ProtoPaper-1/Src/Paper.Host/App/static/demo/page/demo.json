@@ -410,6 +410,7 @@
       {
          "name":"add-item",
          "method":"GET",
+         "title":"Adicionar Item",
          "href":"items",
          "type":"application/x-www-form-urlencoded",
          "fields":[
@@ -492,7 +493,7 @@
     "links":[
       {
         "rel":["self"],
-        "href":"http://api.x.io/orders/42"
+        "href":"demo"
       },
       {
         "rel":["orders"],

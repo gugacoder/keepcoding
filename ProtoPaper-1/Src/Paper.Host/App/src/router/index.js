@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
 import NotFound from '@/components/NotFoundPage'
 import ErrorPage from '@/components/ErrorPage'
 import Sandbox from '@/components/Sandbox'
@@ -13,7 +12,11 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      redirect:
+      {
+        name: 'page',
+        params: { path: ['Api', '1', 'Index'] }
+      }
     },
     {
       path: '/page/:path(.*)*',

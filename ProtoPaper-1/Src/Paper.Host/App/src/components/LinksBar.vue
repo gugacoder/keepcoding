@@ -16,7 +16,7 @@
         v-for="link in links" 
         :key="link.href"
         :target="target(link)"
-        @click.stop="request(link.href)"
+        @click.stop="$_routerMixin_request(link.href)"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -43,13 +43,18 @@
       )
         v-list-tile-content
           v-list-tile-title(
-            v-html="actionTitle(action)"
+            v-html="$_actionsMixin_getActionTitle(action)"
           )
 </template>
 
 <script>
-  import paper from '../paper/paper.js'
+  import ActionsMixin from '../mixins/ActionsMixin.js'
+  import RouterMixin from '../mixins/RouterMixin.js'
   export default {
+    mixins: [
+      ActionsMixin,
+      RouterMixin
+    ],
     beforeRouteUpdate (to, from, next) {
       next()
     },
@@ -90,20 +95,6 @@
 
       push (action) {
         this.$router.push({ query: { action: action.name } })
-      },
-
-      request (link) {
-        paper.methods.request(link)
-      },
-
-      actionTitle (action) {
-        if (action.title !== null && action.title !== undefined && action.title.length > 0) {
-          return action.title
-        }
-        if (action.name !== null && action.name !== undefined && action.name.length > 0) {
-          return action.name
-        }
-        return ''
       }
     }
   }

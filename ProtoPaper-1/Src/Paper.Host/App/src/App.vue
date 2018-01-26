@@ -8,6 +8,7 @@
         :key="$route.fullPath"
       )
     main-footer
+    notifications
 </template>
 
 <script>
@@ -33,3 +34,11 @@
     }
   }
 </script>
+
+<style src="vue-notifyjs/themes/material.css"></style>
+<style>
+  .vue-notifyjs .alert {
+    z-index: 99999;
+  }
+</style>
+

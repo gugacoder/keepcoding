@@ -24,7 +24,7 @@
       v-for="action in actions" 
       :key="action.name"
       @click.stop="actionClick(action)"
-    ) {{ action ? action.title : ''}}
+    ) {{ $_actionsMixin_getActionTitle(action) }}
 
     v-dialog(
       v-model="dialogActionBarForm"
@@ -34,11 +34,9 @@
 
       v-card
         v-card-title(primary-title)
-          h2 {{ action ? action.title : '' }}
+          h2 {{ $_actionsMixin_getActionTitle(action) }}
 
         v-card-text
-          alert(ref="alert")
-
           v-form(
             v-if="action"
             :ref="'form-' + action.name"
@@ -60,7 +58,7 @@
             color="primary"
             flat
             @click="submit()"
-          ) {{ action ? action.title : '' }}
+          ) {{ $_actionsMixin_getActionTitle(action) }}
 
           v-btn(
             color="primary"
@@ -82,9 +80,12 @@
   import parser from '../paper/parser.js'
   import errors from '../paper/errors.js'
   import FormsMixin from '../mixins/FormsMixin.js'
-  import Alert from './AlertView.vue'
+  import ActionsMixin from '../mixins/ActionsMixin.js'
   export default {
-    mixins: [FormsMixin],
+    mixins: [
+      FormsMixin,
+      ActionsMixin
+    ],
     data: () => ({
       dialogActionBarForm: false,
       actionName: ''
@@ -113,9 +114,6 @@
         return fields
       }
     },
-    components: {
-      Alert
-    },
     methods: {
       deselected () {
         Events.$emit('selectState', false)
@@ -132,9 +130,7 @@
         requester.methods.request(this.action.method, this.action.href, queryParams).then(response => {
           if (!response.ok) {
             var message = errors.methods.translate(response.response.statusText)
-            this.$refs.alert.alertMessage = message
-            this.$refs.alert.alertType = 'error'
-            this.$refs.alert.show()
+            this.$notify({ message: message, type: 'danger' })
             return
           }
           this.closeDialog()
