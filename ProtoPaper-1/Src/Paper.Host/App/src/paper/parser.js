@@ -51,9 +51,11 @@ export default {
       entities.forEach(entity => {
         if (entity.hasAction()) {
           var action = entity.actions.find(action => action.name === actionName)
-          action.fields.forEach(field => {
-            flags[field.name] = field
-          })
+          if (action && action.length > 0) {
+            action.fields.forEach(field => {
+              flags[field.name] = field
+            })
+          }
         }
       })
       return flags

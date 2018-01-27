@@ -41,8 +41,6 @@
 </template>
 
 <script>
-  import errors from '../paper/errors.js'
-  import requester from '../paper/requester.js'
   import FormsMixin from '../mixins/FormsMixin.js'
   import ActionsMixin from '../mixins/ActionsMixin.js'
   import RouterMixin from '../mixins/RouterMixin.js'
@@ -71,23 +69,18 @@
     methods: {
       submit () {
         var queryParams = this.$_formsMixin_makeParams(this.actionName)
-        requester.methods.request(this.action.method, this.action.href, queryParams).then(response => {
-          if (!response.ok) {
-            var message = errors.methods.translate(response.response.statusText)
-            this.$notify({ message: message, type: 'danger' })
-            return
-          }
-          var location = response.response.headers.get('Location')
-          if (location && location.length > 0) {
-            this.$_routerMixin_request(location)
-          } else {
-            this.$_routerMixin_goToIndex()
+        this.$_routerMixin_httpRequest(this.action.method, this.action.href, queryParams).then(response => {
+          if (response.ok) {
+            this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
+            var location = response.data.headers.get('Location')
+            if (location && location.length > 0) {
+              this.$_routerMixin_request(location)
+            } else {
+              this.$_routerMixin_goToIndex()
+            }
           }
         })
       }
-    },
-    beforeRouteUpdate (to, from, next) {
-      next()
     }
   }
 </script>

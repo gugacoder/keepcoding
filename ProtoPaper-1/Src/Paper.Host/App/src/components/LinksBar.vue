@@ -15,7 +15,7 @@
       v-list-tile(
         v-for="link in links" 
         :key="link.href"
-        :target="target(link)"
+        :target="$_routerMixin_target(link)"
         @click.stop="$_routerMixin_request(link.href)"
       )
         v-list-tile-content
@@ -38,7 +38,7 @@
         | AÇÕES
       v-list-tile(
         v-for="action in $store.state.data.actions" 
-        :key="action.name" 
+        :key="action.name"
         @click.stop="push(action)"
       )
         v-list-tile-content
@@ -86,13 +86,6 @@
       }
     },
     methods: {
-      target (link) {
-        if (link.type !== undefined && !link.type.match(/json/g)) {
-          return '_blank'
-        }
-        return '_self'
-      },
-
       push (action) {
         this.$router.push({ query: { action: action.name } })
       }

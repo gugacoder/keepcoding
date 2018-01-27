@@ -18,9 +18,10 @@
           v-model="selected"
           :headers="headers"
           :items="items"
-          :item-key="itemKey"
+          item-key="_indexRowItemTable"
           hide-actions=true
           :select-all="hasActions"
+          no-data-text="Não existem dados para exibir"
         )
           template(
             slot="items" 
@@ -90,9 +91,6 @@
     created () {
       Events.$on('selectState', this.selectedMode)
     },
-    beforeRouteUpdate (to, from, next) {
-      next()
-    },
     methods: {
       show () {
         this.showLinks = !this.showLinks
@@ -110,21 +108,22 @@
       }
     },
     computed: {
-      hasActions () {
-        var exist = this.$store.state.data.entities.filter(entity => entity.hasAction())
-        return exist && exist.length > 0
+      validEntities () {
+        if (this.$store.state.data && this.$store.state.data.hasSubEntityByClass('item')) {
+          return this.$store.state.data.getSubEntitiesByClass('item')
+        }
+        return []
       },
 
-      itemKey () {
-        var key = this.headers && this.headers.length > 0 ? this.headers[0].text : ''
-        return key
+      hasActions () {
+        var exist = this.validEntities.filter(entity => entity.hasAction())
+        return exist && exist.length > 0
       },
 
       items () {
         var items = []
-        var entities = this.$store.state.data.getSubEntitiesByClass('item')
-        if (entities) {
-          entities.forEach((item, index) => {
+        if (this.validEntities) {
+          this.validEntities.forEach((item, index) => {
             var itensWithIndex = Object.assign(
               { _indexRowItemTable: index }, item.properties
             )
@@ -155,7 +154,8 @@
       selectedItems () {
         var selectedItems = []
         this.selected.forEach(item => {
-          selectedItems.push(this.$store.state.data.entities[item._indexRowItemTable])
+          var itemSelected = this.validEntities[item._indexRowItemTable]
+          selectedItems.push(itemSelected)
         })
         return selectedItems
       }

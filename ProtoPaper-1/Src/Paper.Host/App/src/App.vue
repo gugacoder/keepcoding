@@ -16,7 +16,11 @@
   import LinksBar from './components/LinksBar.vue'
   import MainFooter from './components/MainFooter.vue'
   import MainToolbar from './components/MainToolbar.vue'
+  import PaperMixin from './mixins/PaperMixin.js'
   export default {
+    mixins: [
+      PaperMixin
+    ],
     components: {
       ActionBar,
       MainFooter,
@@ -24,12 +28,17 @@
       LinksBar
     },
     created () {
-      this.$store.dispatch('reloadAsync')
+      this.redirect()
     },
     watch: {
       $route () {
-        this.$store.dispatch('reloadAsync')
-        this.$store.commit('selectState', false)
+        this.$_paperMixin_load()
+      }
+    },
+    methods: {
+      redirect () {
+        console.log('pathname ', window.location.pathname)
+        this.$_paperMixin_load()
       }
     }
   }

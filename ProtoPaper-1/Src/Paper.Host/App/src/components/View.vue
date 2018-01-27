@@ -12,9 +12,8 @@
         )
           v-card-title(
             primary-title
-            v-if="$store.state.data"
           )
-            h2 {{ $store.state.data.title }}
+            h2 {{ title }}
 
           v-card-text
             v-container(fluid)
@@ -39,10 +38,11 @@
     data: () => ({
       headers: []
     }),
-    beforeRouteUpdate (to, from, next) {
-      next()
-    },
     computed: {
+      title () {
+        return (this.$store.state.data && this.$store.state.data.title) ? this.$store.state.data.title : ''
+      },
+
       items () {
         var data = this.$store.state.data
         var items = []

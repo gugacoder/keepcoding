@@ -4,19 +4,19 @@
 
 <script>
   // Register another component to render in this one dynamically.
-  import Grid from './GridView.vue'
-  import View from './View.vue'
-  import Home from './Home.vue'
-  import Form from './FormView.vue'
+  import PaperGrid from './GridView.vue'
+  import PaperView from './View.vue'
+  import PaperHome from './Home.vue'
+  import PaperForm from './FormView.vue'
   export default {
     data: () => ({
       viewShow: ''
     }),
     components: {
-      Grid,
-      View,
-      Home,
-      Form
+      PaperGrid,
+      PaperView,
+      PaperHome,
+      PaperForm
     },
     beforeRouteUpdate (to, from, next) {
       next()
@@ -33,13 +33,13 @@
         var data = this.$store.state.data
         var isCollection = data && data.class && data.class.indexOf('list') > 0
         if (this.$route.query && this.$route.query.action) {
-          return Form
+          return PaperForm
         } else if (isCollection) {
-          return Grid
+          return PaperGrid
         } else if (!isCollection) {
-          return View
+          return PaperView
         }
-        return Home
+        return PaperHome
       }
     }
   }

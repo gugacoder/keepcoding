@@ -9,22 +9,20 @@ Vue.use(VueAxios, axios)
 export default {
   methods: {
     load (path) {
-      var header = {
-        headers: {'Accept': 'application/vnd.siren+json'}
-      }
-      return Vue.axios.get('/' + path, header).then(response => {
-        var json = response.data
-        if (json) {
-          return this.sirenParse(json)
-        }
-      }).catch(error => {
-        console.log('Erro: ', error.response)
-        if (error.response.status === 404) {
-          router.push({name: 'notFound', params: { routerName: path }})
+      path = '/' + path
+      routerMixin.$_routerMixin_httpRequest('get', path, {}).then(response => {
+        if (response.ok) {
+          var json = response.data
+          if (json) {
+            return this.sirenParse(json)
+          }
         } else {
-          router.push({name: 'error', params: { error: error }})
+          if (response.data.status === 404) {
+            router.push({name: 'notFound', params: { routerName: path }})
+          } else {
+            router.push({name: 'error', params: { error: response.data }})
+          }
         }
-        return null
       })
     },
 
@@ -45,10 +43,10 @@ export default {
     },
 
     save (path, data) {
-      Vue.axios.post(path, data).then(response => {
-        routerMixin.$_routerMixin_redirectPage(path)
-      }).catch(error => {
-        console.log(error.response)
+      routerMixin.$_routerMixin_httpRequest('POST', path, data).then(response => {
+        if (response.ok) {
+          routerMixin.$_routerMixin_redirectPage(path)
+        }
       })
     }
   }

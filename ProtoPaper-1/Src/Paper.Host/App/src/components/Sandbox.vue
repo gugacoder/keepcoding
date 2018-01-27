@@ -24,8 +24,11 @@
 </template>
 
 <script>
-  import paper from '../paper/paper.js'
+  import PaperMixin from '../mixins/PaperMixin.js'
   export default {
+    mixins: [
+      PaperMixin
+    ],
     props: {
       routerName: String
     },
@@ -38,7 +41,7 @@
       save () {
         var json = this.jsonData
         if (json) {
-          paper.methods.save(this.routerName, json)
+          this.$_paperMixin_save(this.routerName, json)
         }
       }
     }

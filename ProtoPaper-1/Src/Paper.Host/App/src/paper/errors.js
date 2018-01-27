@@ -8,6 +8,8 @@ export default {
           return 'Acesso negado'
         case 403:
           return 'Acesso proibido.'
+        case 404:
+          return 'Página não encontrada.'
         case 405:
           return 'O verbo HTTP usado para acessar esta página não é permitido'
         case 406:

@@ -72,7 +72,7 @@
     },
     methods: {
       search () {
-        this.$_routerMixin_redirectPage(this.searchParams)
+        this.$_routerMixin_request(this.searchParams)
       },
 
       clearSearch () {

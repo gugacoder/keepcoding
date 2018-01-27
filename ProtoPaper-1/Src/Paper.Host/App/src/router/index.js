@@ -8,15 +8,11 @@ import Page from '@/components/PageView'
 Vue.use(Router)
 
 export default new Router({
+  root: '/',
   routes: [
     {
       path: '/',
-      name: 'Home',
-      redirect:
-      {
-        name: 'page',
-        params: { path: ['Api', '1', 'Index'] }
-      }
+      name: 'Home'
     },
     {
       path: '/page/:path(.*)*',
