@@ -404,10 +404,6 @@
       "href":"demo"
     },
     {
-      "rel":["previous"],
-      "href":"demo"
-    },
-    {
       "rel":["next"],
       "href":"demoPage2"
     },

@@ -14,6 +14,11 @@
 
     v-card-text
       v-container(fluid)
+        
+        grid-view-pagination
+
+        div
+
         v-data-table(
           v-model="selected"
           :headers="headers"
@@ -71,47 +76,19 @@
                         @click.stop="$_routerMixin_request(item.href)"
                       ) {{ item.title ? item.title : item.rel[0] }}
 
-        v-flex(
-          xs12
-          right
-        )
-          v-btn(
-            v-if="$store.getters['pagination/showFirst']"
-            color="blue-grey"
-            dark
-            @click.stop="goToPage('first')"
-          )
-            v-icon first_page
-            span Primeira Página
-
-          v-btn(
-            v-if="$store.getters['pagination/showPrevious']"
-            color="blue-grey"
-            dark
-            @click.stop="goToPage('previous')"
-          )
-            v-icon navigate_before
-            span Anterior
-            
-          v-btn(
-            v-if="$store.getters['pagination/showNext']"
-            color="blue-grey"
-            dark
-            @click.stop="goToPage('next')"
-          )
-            v-icon navigate_next
-            span Próxima
-
 </template>
 
 <script>
   import { Events } from '../event-bus.js'
   import RouterMixin from '../mixins/RouterMixin.js'
-  var count = 0
+  import GridViewPagination from './GridViewPagination.vue'
   export default {
     mixins: [
       RouterMixin
     ],
+    components: {
+      GridViewPagination
+    },
     data () {
       return {
         showLeftDrawer: '',
@@ -138,21 +115,6 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
-      },
-
-      loadMore () {
-        this.busy = true
-        setTimeout(() => {
-          for (var i = 0, j = 10; i < j; i++) {
-            this.items.push({ name: count++ })
-          }
-          this.busy = false
-        }, 1000)
-      },
-
-      goToPage (page) {
-        var link = this.$store.getters[`pagination/${page}Link`]
-        this.$_routerMixin_request(link)
       }
     },
     computed: {
