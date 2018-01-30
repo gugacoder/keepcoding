@@ -49,7 +49,7 @@
 <script>
   import FormsMixin from '../mixins/FormsMixin.js'
   import ActionsMixin from '../mixins/ActionsMixin.js'
-  import RouterMixin from '../mixins/RouterMixin.js'
+  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     data: () => ({
       actionBarForm: false,
@@ -58,7 +58,7 @@
     mixins: [
       FormsMixin,
       ActionsMixin,
-      RouterMixin
+      RequestMixin
     ],
     computed: {
       fields () {
@@ -74,7 +74,7 @@
     methods: {
       submit () {
         var queryParams = this.$_formsMixin_makeParams(this.action.name)
-        this.$_routerMixin_httpRequest(this.action.method, this.action.href, queryParams).then(response => {
+        this.$_requestMixin_httpRequest(this.action.method, this.action.href, queryParams).then(response => {
           if (response.ok) {
             this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
             this.close()

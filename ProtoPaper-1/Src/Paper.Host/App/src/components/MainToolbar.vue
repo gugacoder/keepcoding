@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import RouterMixin from '../mixins/RouterMixin.js'
+  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     data: () => ({
       searchParams: '',
@@ -54,14 +54,12 @@
       next()
     },
     mixins: [
-      RouterMixin
+      RequestMixin
     ],
-    props: {
-      source: String
-    },
     computed: {
       showLinks () {
-        return this.$store.state.entity && ((this.$store.state.entity.links && this.$store.state.entity.links.length > 1) || this.$store.state.entity.actions)
+        return this.$store.state.entity &&
+               (this.$store.getters.showLinks || this.$store.getters.showActions)
       },
 
       showClass () {
@@ -72,7 +70,7 @@
     },
     methods: {
       search () {
-        this.$_routerMixin_request(this.searchParams)
+        this.$_requestMixin_request(this.searchParams)
       },
 
       clearSearch () {

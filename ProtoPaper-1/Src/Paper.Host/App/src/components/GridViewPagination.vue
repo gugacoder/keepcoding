@@ -33,15 +33,15 @@
 
 
 <script>
-  import RouterMixin from '../mixins/RouterMixin.js'
+  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     mixins: [
-      RouterMixin
+      RequestMixin
     ],
     methods: {
       goToPage (page) {
         var link = this.$store.getters[`pagination/${page}Link`]
-        this.$_routerMixin_request(link)
+        this.$_requestMixin_request(link)
       }
     }
   }

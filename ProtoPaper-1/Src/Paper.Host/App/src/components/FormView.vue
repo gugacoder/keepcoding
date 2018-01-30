@@ -43,12 +43,12 @@
 <script>
   import FormsMixin from '../mixins/FormsMixin.js'
   import ActionsMixin from '../mixins/ActionsMixin.js'
-  import RouterMixin from '../mixins/RouterMixin.js'
+  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     mixins: [
       FormsMixin,
       ActionsMixin,
-      RouterMixin
+      RequestMixin
     ],
     computed: {
       action () {
@@ -69,14 +69,14 @@
     methods: {
       submit () {
         var queryParams = this.$_formsMixin_makeParams(this.actionName)
-        this.$_routerMixin_httpRequest(this.action.method, this.action.href, queryParams).then(response => {
+        this.$_requestMixin_httpRequest(this.action.method, this.action.href, queryParams).then(response => {
           if (response.ok) {
             this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
             var location = response.data.headers.get('Location')
             if (location && location.length > 0) {
-              this.$_routerMixin_request(location)
+              this.$_requestMixin_request(location)
             } else {
-              this.$_routerMixin_goToIndex()
+              this.$_requestMixin_goToIndex()
             }
           }
         })

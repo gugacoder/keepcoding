@@ -26,14 +26,24 @@ const getters = {
     return state.entity.hasLinks()
   },
 
-  showLinks: state => {
-    var show = state.entity && state.entity.links && state.entity.links.length > 1
-    return show
+  showLinks: (state, getters) => {
+    if (state.entity && state.entity.links && getters.links.length > 0) {
+      return true
+    }
+    return false
   },
 
   showActions: state => {
     var show = state.entity && state.entity.actions
     return show
+  },
+
+  gridItems: state => {
+    var entities = []
+    if (state.entity && state.entity.hasSubEntityByClass('item')) {
+      entities = state.entity.getSubEntitiesByClass('item')
+    }
+    return entities
   }
 }
 

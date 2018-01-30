@@ -15,8 +15,8 @@
       v-list-tile(
         v-for="link in $store.getters.links" 
         :key="link.href"
-        :target="$_routerMixin_target(link)"
-        @click.stop="$_routerMixin_request(link.href)"
+        :target="$_requestMixin_target(link)"
+        @click.stop="$_requestMixin_request(link.href)"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -49,11 +49,11 @@
 
 <script>
   import ActionsMixin from '../mixins/ActionsMixin.js'
-  import RouterMixin from '../mixins/RouterMixin.js'
+  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     mixins: [
       ActionsMixin,
-      RouterMixin
+      RequestMixin
     ],
     beforeRouteUpdate (to, from, next) {
       next()

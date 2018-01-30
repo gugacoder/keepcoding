@@ -4,7 +4,7 @@ export default {
     ErrorsMixin
   ],
   methods: {
-    $_routerMixin_redirectToPage (path) {
+    $_requestMixin_redirectToPage (path) {
       var params = path.split('/')
       params = params.filter(function (x) {
         return (x !== (undefined || null || ''))
@@ -12,7 +12,7 @@ export default {
       this.$router.push({name: 'page', params: { path: params }})
     },
 
-    $_routerMixin_request (link) {
+    $_requestMixin_request (link) {
       if (link) {
         if (link.startsWith('http')) {
           if (link.startsWith(window.location.origin)) {
@@ -22,11 +22,11 @@ export default {
           window.open(link, '_blank')
           return
         }
-        this.$_routerMixin_redirectToPage(link)
+        this.$_requestMixin_redirectToPage(link)
       }
     },
 
-    async $_routerMixin_httpRequest (method, href, params) {
+    async $_requestMixin_httpRequest (method, href, params) {
       var getParams = method.toLowerCase() === 'get' ? params : ''
       var header = { 'Accept': 'application/json;application/vnd.siren+json;charset=UTF-8;' }
       return this.$http.request({
@@ -59,26 +59,26 @@ export default {
       })
     },
 
-    $_routerMixin_linkIsExternal (link) {
+    $_requestMixin_linkIsExternal (link) {
       return link.startsWith('http') && !link.startsWith(window.location.origin)
     },
 
-    $_routerMixin_isOpenInAnotherPage (link) {
-      return (link.type !== undefined && !link.type.match(/json/g)) || this.$_routerMixin_linkIsExternal(link.href)
+    $_requestMixin_isOpenInAnotherPage (link) {
+      return (link.type !== undefined && !link.type.match(/json/g)) || this.$_requestMixin_linkIsExternal(link.href)
     },
 
-    $_routerMixin_target (link) {
-      if (this.$_routerMixin_isOpenInAnotherPage(link)) {
+    $_requestMixin_target (link) {
+      if (this.$_requestMixin_isOpenInAnotherPage(link)) {
         return '_blank'
       }
       return '_self'
     },
 
-    $_routerMixin_goToIndex () {
+    $_requestMixin_goToIndex () {
       var data = this.$store.state.entity
       if (data && data.hasLinkByRel('self')) {
         var link = data.getLinkByRel('self')
-        this.$_routerMixin_request(link.href)
+        this.$_requestMixin_request(link.href)
       }
     }
   }

@@ -1,12 +1,12 @@
-import RouterMixin from './RouterMixin.js'
+import RequestMixin from './RequestMixin.js'
 export default {
   mixins: [
-    RouterMixin
+    RequestMixin
   ],
   methods: {
     $_paperMixin_loadPaperPage (path) {
       path = '/' + path
-      return this.$_routerMixin_httpRequest('get', path, {}).then(response => {
+      return this.$_requestMixin_httpRequest('get', path, {}).then(response => {
         if (response.ok) {
           var json = response.data.data
           if (json) {
@@ -61,9 +61,9 @@ export default {
     },
 
     $_paperMixin_save (path, data) {
-      this.$_routerMixin_httpRequest('POST', path, data).then(response => {
+      this.$_requestMixin_httpRequest('POST', path, data).then(response => {
         if (response.ok) {
-          this.$_routerMixin_redirectPage(path)
+          this.$_requestMixin_redirectPage(path)
         }
       })
     }

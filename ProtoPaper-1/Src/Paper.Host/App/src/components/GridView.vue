@@ -17,8 +17,6 @@
         
         grid-view-pagination
 
-        div
-
         v-data-table(
           v-model="selected"
           :headers="headers"
@@ -73,18 +71,18 @@
                   )
                     v-list-tile-content
                       a(
-                        @click.stop="$_routerMixin_request(item.href)"
+                        @click.stop="$_requestMixin_request(item.href)"
                       ) {{ item.title ? item.title : item.rel[0] }}
 
 </template>
 
 <script>
   import { Events } from '../event-bus.js'
-  import RouterMixin from '../mixins/RouterMixin.js'
+  import RequestMixin from '../mixins/RequestMixin.js'
   import GridViewPagination from './GridViewPagination.vue'
   export default {
     mixins: [
-      RouterMixin
+      RequestMixin
     ],
     components: {
       GridViewPagination
@@ -93,9 +91,7 @@
       return {
         showLeftDrawer: '',
         showLinks: false,
-        data: '',
-        selected: [],
-        busy: false
+        selected: []
       }
     },
     created () {
@@ -118,22 +114,15 @@
       }
     },
     computed: {
-      validEntities () {
-        if (this.$store.state.entity && this.$store.state.entity.hasSubEntityByClass('item')) {
-          return this.$store.state.entity.getSubEntitiesByClass('item')
-        }
-        return []
-      },
-
       hasActions () {
-        var exist = this.validEntities.filter(entity => entity.hasAction())
+        var exist = this.$store.getters.gridItems.filter(entity => entity.hasAction())
         return exist && exist.length > 0
       },
 
       items () {
         var items = []
-        if (this.validEntities) {
-          this.validEntities.forEach((item, index) => {
+        if (this.$store.getters.gridItems) {
+          this.$store.getters.gridItems.forEach((item, index) => {
             var itensWithIndex = Object.assign(
               { _indexRowItemTable: index }, item.properties
             )
@@ -164,7 +153,7 @@
       selectedItems () {
         var selectedItems = []
         this.selected.forEach(item => {
-          var itemSelected = this.validEntities[item._indexRowItemTable]
+          var itemSelected = this.$store.getters.gridItems[item._indexRowItemTable]
           selectedItems.push(itemSelected)
         })
         return selectedItems
