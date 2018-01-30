@@ -13,7 +13,7 @@
         | NAVEGAÇÃO
 
       v-list-tile(
-        v-for="link in links" 
+        v-for="link in $store.getters.links" 
         :key="link.href"
         :target="$_routerMixin_target(link)"
         @click.stop="$_routerMixin_request(link.href)"
@@ -28,16 +28,16 @@
             v-html="link.rel[0]"
           )
 
-    v-divider(v-if="showActions")
+    v-divider(v-if="$store.getters.showActions")
     
     v-list(
       subheader 
-      v-if="showActions"
+      v-if="$store.getters.showActions"
     )
       v-subheader
         | AÇÕES
       v-list-tile(
-        v-for="action in $store.state.data.actions" 
+        v-for="action in $store.state.entity.actions" 
         :key="action.name"
         @click.stop="push(action)"
       )
@@ -60,29 +60,13 @@
     },
     computed: {
       show () {
-        var show = !this.$store.state.selection.selectionState && (this.showLinks || this.showActions)
-        return show
-      },
-
-      showLinks () {
-        var show = this.$store.state.data && this.$store.state.data.links && this.$store.state.data.links.length > 1
-        return show
-      },
-
-      showActions () {
-        var show = this.$store.state.data && this.$store.state.data.actions
+        var show = !this.$store.state.selection.selectionState &&
+                   (this.$store.getters.showLinks || this.$store.getters.showActions)
         return show
       },
 
       isMobile () {
         return window.innerWidth < 993
-      },
-
-      links () {
-        var items = this.$store.state.data.links.filter(
-          item => item.rel.indexOf('self')
-        )
-        return items
       }
     },
     methods: {

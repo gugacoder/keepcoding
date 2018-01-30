@@ -4,6 +4,7 @@ import NotFound from '@/components/NotFoundPage'
 import ErrorPage from '@/components/ErrorPage'
 import Sandbox from '@/components/Sandbox'
 import Page from '@/components/PageView'
+import Home from '@/components/Home'
 
 Vue.use(Router)
 
@@ -12,7 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home'
+      name: 'Home',
+      component: Home
     },
     {
       path: '/page/:path(.*)*',

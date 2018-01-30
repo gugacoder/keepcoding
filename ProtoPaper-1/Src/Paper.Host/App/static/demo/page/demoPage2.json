@@ -1,0 +1,433 @@
+{
+  "class":[
+    "items", "list"
+  ],
+  "entities":[
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "1",
+        "name": "Doce de Leite",
+        "calories": 159,
+        "fat": 6.0,
+        "carbs": 24,
+        "protein": 4.0,
+        "sodium": 87,
+        "calcium": "14%",
+        "iron": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "http://localhost:8080/page/demo/1", "title": "Detalhes" }
+      ],
+      "actions": [
+      {
+        "name": "exportar",
+        "href": "demo/Exportar",
+        "title": "Exportar",
+        "method": "GET",
+        "fields": [
+          {
+              "name":"productCode",
+              "title":"Código do produto",
+              "type":"text",
+              "dataType":"string"
+          },
+          {
+              "name":"quantity",
+              "title":"Quantidade",
+              "type":"number",
+              "dataType":"int"
+          },
+          {
+              "name":"active",
+              "title":"Ativo",
+              "type":"number",
+              "dataType":"int"
+          }
+        ]
+      }
+    ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "2",
+        "name": "Caramelo",
+        "calories": 237,
+        "fat": 9.0,
+        "carbs": 37,
+        "protein": 4.3,
+        "sodium": 129,
+        "calcium": "8%",
+        "iron": "1%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/2", "title": "Detalhes" }
+      ],
+      "actions": [
+      {
+        "name": "exportar",
+        "href": "demo/Exportar",
+        "title": "Exportar",
+        "method": "POST",
+        "fields": [
+          {
+              "name":"productCode",
+              "title":"Código do produto",
+              "type":"text",
+              "dataType":"string"
+          },
+          {
+              "name":"quantity",
+              "title":"Quantidade",
+              "type":"number",
+              "dataType":"int"
+          },
+          {
+            "name": "id",
+            "type": "hidden",
+            "title":"Id",
+            "value": "1"
+          },
+          {
+            "name": "tipo",
+            "type": "hidden",
+            "title":"Tipo",
+            "value": "E"
+          },
+          {
+            "name": "destino",
+            "title":"Destino",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "name": "enviarEmail",
+        "href": "demo/Email",
+        "title": "Enviar Email",
+        "fields": [
+          {
+            "name": "id",
+            "type": "hidden",
+            "title":"Id",
+            "value": "1"
+          },
+          {
+            "name": "tipo",
+            "type": "hidden",
+            "title":"Tipo",
+            "value": "E"
+          },
+          {
+            "name": "destino",
+            "title":"Destino",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "3",
+        "name": "Bala",
+        "calories": 262,
+        "fat": 16.0,
+        "carbs": 23,
+        "protein": 6.0,
+        "sodium": 337,
+        "calcium": "6%",
+        "iron": "7%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/3", "title": "Detalhes" }
+      ],
+      "actions": [
+      {
+        "name": "enviarEmail",
+        "href": "demo/Email",
+        "title": "Enviar Email",
+        "method": "POST",
+        "fields": [
+          {
+            "name": "id",
+            "type": "hidden",
+            "title":"Id",
+            "value": "1"
+          },
+          {
+            "name": "tipo",
+            "type": "hidden",
+            "title":"Tipo",
+            "value": "E"
+          },
+          {
+            "name": "destino",
+            "title":"Destino",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "4",
+        "name": "Chiclete",
+        "calories": 305,
+        "fat": 3.7,
+        "carbs": 67,
+        "protein": 4.3,
+        "sodium": 413,
+        "calcium": "3%",
+        "iron": "8%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/4", "title": "Detalhes" }
+      ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "5",
+        "name": "Chocolate",
+        "calories": 356,
+        "fat": 16.0,
+        "carbs": 49,
+        "protein": 3.9,
+        "sodium": 327,
+        "calcium": "7%",
+        "iron": "16%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/5", "title": "Detalhes" }
+      ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "6",
+        "name": "Chokito",
+        "calories": 375,
+        "fat": 0.0,
+        "carbs": 94,
+        "protein": 0.0,
+        "sodium": 50,
+        "calcium": "0%",
+        "iron": "0%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/6", "title": "Detalhes" }
+      ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "7",
+        "name": "Banana",
+        "calories": 392,
+        "fat": 0.2,
+        "carbs": 98,
+        "protein": 0,
+        "sodium": 38,
+        "calcium": "0%",
+        "iron": "2%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/7", "title": "Detalhes" }
+      ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "8",
+        "name": "Café",
+        "calories": 408,
+        "fat": 3.2,
+        "carbs": 87,
+        "protein": 6.5,
+        "sodium": 562,
+        "calcium": "0%",
+        "iron": "45%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/8", "title": "Detalhes" }
+      ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "9",
+        "name": "Doce de côco",
+        "calories": 452,
+        "fat": 25.0,
+        "carbs": 51,
+        "protein": 4.9,
+        "sodium": 326,
+        "calcium": "2%",
+        "iron": "22%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/9", "title": "Detalhes" }
+      ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "item" ],
+      "properties": {
+        "id": "10",
+        "name": "Jujuba",
+        "calories": 518,
+        "fat": 26.0,
+        "carbs": 65,
+        "protein": 7,
+        "sodium": 54,
+        "calcium": "12%",
+        "iron": "6%",
+        "_teste": "1%"
+      },
+      "links": [
+        { "rel": ["self"], "href": "demo/10", "title": "Detalhes" }
+      ]
+    }
+  ],
+  "actions":[
+    {
+        "name":"add-item",
+        "method":"GET",
+        "title":"Adicionar Item",
+        "href":"items",
+        "type":"application/x-www-form-urlencoded",
+        "fields":[
+          {
+              "name":"productCode",
+              "title":"Código do produto",
+              "type":"hidden",
+              "value":"valor",
+              "dataType":"string"
+          },
+          {
+              "name":"quantity",
+              "title":"Quantidade",
+              "type":"number",
+              "dataType":"int"
+          },
+          {
+              "name":"active",
+              "title":"Ativo",
+              "type":"number",
+              "dataType":"int"
+          },
+          {
+              "name":"data",
+              "title":"Data de Hoje",
+              "type":"date",
+              "dataType":"date"
+          },
+          {
+              "name":"hora",
+              "title":"Hora de Hoje",
+              "type":"time",
+              "dataType":"time"
+          },
+          {
+              "name":"select",
+              "title":"Selecione",
+              "type":"text",
+              "dataType":"multi"
+          },
+          {
+              "name":"ligado",
+              "title":"Ligado",
+              "type":"text",
+              "dataType":"bool"
+          }
+        ]
+    },
+    {
+        "name":"config-item",
+        "title":"Configurar Item",
+        "href":"items",
+        "type":"application/x-www-form-urlencoded",
+        "fields":[
+          {
+              "name":"productCode",
+              "title":"Código do produto",
+              "type":"text"
+          },
+          {
+              "name":"quantity",
+              "title":"Quantidade",
+              "type":"number"
+          },
+          {
+              "name":"active",
+              "title":"Ativo",
+              "type":"checkbox",
+              "value": false
+          },
+          {
+              "name":"activia",
+              "title":"Ativio",
+              "type":"checkbox",
+              "value": true
+          }
+        ]
+    }
+  ],
+  "links":[
+    {
+      "rel":["self"],
+      "href":"demoPage2"
+    },
+    {
+      "rel":["first"],
+      "href":"demo"
+    },
+    {
+      "rel":["previous"],
+      "href":"demo"
+    },
+    {
+      "rel":["next"],
+      "href":"demoPage3"
+    },
+    {
+      "rel":["orders"],
+      "title":"Orders",
+      "href":"http://api.x.io/orders/43"
+    },
+    {
+      "rel":["book"],
+      "title":"A Semente de Mostarda",
+      "href":"https://goo.gl/8wgSF8",
+      "type":"pdf"
+    },
+    {
+      "rel":["siren"],
+      "title":"Siren",
+      "href":"http://api.x.io/orders/43",
+      "type":"application/vnd.siren+json; charset=UTF-8"
+    }
+  ]
+}

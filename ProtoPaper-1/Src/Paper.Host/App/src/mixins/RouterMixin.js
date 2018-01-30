@@ -1,5 +1,8 @@
-import errors from '../paper/errors.js'
+import ErrorsMixin from './ErrorsMixin.js'
 export default {
+  mixins: [
+    ErrorsMixin
+  ],
   methods: {
     $_routerMixin_redirectToPage (path) {
       var params = path.split('/')
@@ -47,7 +50,7 @@ export default {
           }
         }
         console.log('Erro: ', error.response)
-        message = message + ': ' + href + '. ' + errors.methods.translate(error.response.status)
+        message = message + ': ' + href + '. ' + this.$_errorsMixin_httpTranslate(error.response.status)
         this.$notify({ message: message, type: 'danger' })
         return {
           ok: false,
@@ -72,7 +75,7 @@ export default {
     },
 
     $_routerMixin_goToIndex () {
-      var data = this.$store.state.data
+      var data = this.$store.state.entity
       if (data && data.hasLinkByRel('self')) {
         var link = data.getLinkByRel('self')
         this.$_routerMixin_request(link.href)

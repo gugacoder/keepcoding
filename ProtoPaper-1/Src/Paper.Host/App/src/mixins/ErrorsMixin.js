@@ -1,6 +1,6 @@
 export default {
   methods: {
-    translate (errorcode) {
+    $_errorsMixin_httpTranslate (errorcode) {
       switch (errorcode) {
         case 400:
           return 'Não é possível localizar a página da Web'

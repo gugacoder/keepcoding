@@ -23,15 +23,15 @@
     },
     methods: {
       loadData () {
-        var data = this.$store.state.data
+        var data = this.$store.state.entity
         var showLinksBar = (data.actions !== undefined) || (data.links !== undefined)
         this.$store.commit('update', showLinksBar)
       }
     },
     computed: {
       dynamicComponent () {
-        var data = this.$store.state.data
-        var isCollection = data && data.class && data.class.indexOf('list') > 0
+        var data = this.$store.state.entity
+        var isCollection = data && data.class && data.class.find(value => value === 'list')
         if (this.$route.query && this.$route.query.action) {
           return PaperForm
         } else if (isCollection) {

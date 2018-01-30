@@ -61,7 +61,7 @@
     },
     computed: {
       showLinks () {
-        return this.$store.state.data && ((this.$store.state.data.links && this.$store.state.data.links.length > 1) || this.$store.state.data.actions)
+        return this.$store.state.entity && ((this.$store.state.entity.links && this.$store.state.entity.links.length > 1) || this.$store.state.entity.actions)
       },
 
       showClass () {

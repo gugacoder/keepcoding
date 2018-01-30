@@ -4,7 +4,7 @@ export default {
       if (!entities) {
         return []
       }
-      var commomActions = this.getDiffActions(entities)
+      var commomActions = this.$_actionsMixin_getDiffActions(entities)
       entities.forEach(entity => {
         if (!entity.hasAction()) {
           commomActions = []
@@ -34,7 +34,7 @@ export default {
     },
 
     $_actionsMixin_hasActions () {
-      var exist = this.$store.state.data.entities.filter(entity => entity.hasAction())
+      var exist = this.$store.state.entity.entities.filter(entity => entity.hasAction())
       return exist
     },
 

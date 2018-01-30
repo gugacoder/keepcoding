@@ -40,11 +40,11 @@
     }),
     computed: {
       title () {
-        return (this.$store.state.data && this.$store.state.data.title) ? this.$store.state.data.title : ''
+        return (this.$store.state.entity && this.$store.state.entity.title) ? this.$store.state.entity.title : ''
       },
 
       items () {
-        var data = this.$store.state.data
+        var data = this.$store.state.entity
         var items = []
         if (data && data.properties) {
           var keys = Object.keys(data.properties)

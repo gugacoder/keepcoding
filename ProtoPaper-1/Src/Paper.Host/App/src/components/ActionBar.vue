@@ -32,7 +32,6 @@
 
 <script>
   import { Events } from '../event-bus.js'
-  import parser from '../paper/parser.js'
   import ActionsMixin from '../mixins/ActionsMixin.js'
   import ActionBarForm from './ActionBarForm.vue'
   export default {
@@ -54,7 +53,7 @@
 
       actions () {
         var selectedItems = this.$store.state.selection.itemsSelected
-        var actions = parser.methods.getActions(selectedItems)
+        var actions = this.$_actionsMixin_getActions(selectedItems)
         return actions && actions.length > 0 ? actions : []
       },
 

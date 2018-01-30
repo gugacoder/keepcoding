@@ -52,8 +52,8 @@
     ],
     computed: {
       action () {
-        if (this.$store.state.data.actions) {
-          var action = this.$store.state.data.getActionByName(this.actionName)
+        if (this.$store.state.entity.actions) {
+          var action = this.$store.state.entity.getActionByName(this.actionName)
           return action
         }
       },

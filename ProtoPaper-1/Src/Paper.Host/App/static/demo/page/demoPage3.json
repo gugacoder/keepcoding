@@ -1,0 +1,217 @@
+{
+  "class":[
+    "items", "list"
+  ],
+  "entities":[
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "http://x.io/rels/customer" ],
+      "properties": {
+        "id": "11",
+        "name": "Jelly bean",
+        "calories": 375,
+        "fat": 0.0,
+        "carbs": 94,
+        "protein": 0.0,
+        "sodium": 50,
+        "calcium": "0%",
+        "iron": "0%",
+        "_teste": "1%"
+      },
+        "links": [
+          { "rel": ["self"], "href": "demo/11", "title": "Detalhes" }
+        ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "http://x.io/rels/customer" ],
+      "properties": {
+        "id": "12",
+        "name": "Lollipop",
+        "calories": 392,
+        "fat": 0.2,
+        "carbs": 98,
+        "protein": 0,
+        "sodium": 38,
+        "calcium": "0%",
+        "iron": "2%",
+        "_teste": "1%"
+      },
+        "links": [
+          { "rel": ["self"], "href": "demo/12", "title": "Detalhes" }
+        ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "http://x.io/rels/customer" ],
+      "properties": {
+        "id": "13",
+        "name": "Honeycomb",
+        "calories": 408,
+        "fat": 3.2,
+        "carbs": 87,
+        "protein": 6.5,
+        "sodium": 562,
+        "calcium": "0%",
+        "iron": "45%",
+        "_teste": "1%"
+      },
+        "links": [
+          { "rel": ["self"], "href": "demo/13", "title": "Detalhes" }
+        ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "http://x.io/rels/customer" ],
+      "properties": {
+        "id": "14",
+        "name": "Donut",
+        "calories": 452,
+        "fat": 25.0,
+        "carbs": 51,
+        "protein": 4.9,
+        "sodium": 326,
+        "calcium": "2%",
+        "iron": "22%",
+        "_teste": "1%"
+      },
+        "links": [
+          { "rel": ["self"], "href": "demo/14", "title": "Detalhes" }
+        ]
+    },
+    {
+      "class": [ "order", "item" ],
+      "rel": [ "http://x.io/rels/customer" ],
+      "properties": {
+        "id": "15",
+        "name": "KitKat",
+        "calories": 518,
+        "fat": 26.0,
+        "carbs": 65,
+        "protein": 7,
+        "sodium": 54,
+        "calcium": "12%",
+        "iron": "6%",
+        "_teste": "1%"
+      },
+        "links": [
+          { "rel": ["self"], "href": "demo/15", "title": "Detalhes" }
+        ]
+    }
+  ],
+  "actions":[
+    {
+        "name":"add-item",
+        "method":"GET",
+        "title":"Adicionar Item",
+        "href":"items",
+        "type":"application/x-www-form-urlencoded",
+        "fields":[
+          {
+              "name":"productCode",
+              "title":"Código do produto",
+              "type":"hidden",
+              "value":"valor",
+              "dataType":"string"
+          },
+          {
+              "name":"quantity",
+              "title":"Quantidade",
+              "type":"number",
+              "dataType":"int"
+          },
+          {
+              "name":"active",
+              "title":"Ativo",
+              "type":"number",
+              "dataType":"int"
+          },
+          {
+              "name":"data",
+              "title":"Data de Hoje",
+              "type":"date",
+              "dataType":"date"
+          },
+          {
+              "name":"hora",
+              "title":"Hora de Hoje",
+              "type":"time",
+              "dataType":"time"
+          },
+          {
+              "name":"select",
+              "title":"Selecione",
+              "type":"text",
+              "dataType":"multi"
+          },
+          {
+              "name":"ligado",
+              "title":"Ligado",
+              "type":"text",
+              "dataType":"bool"
+          }
+        ]
+    },
+    {
+        "name":"config-item",
+        "title":"Configurar Item",
+        "href":"items",
+        "type":"application/x-www-form-urlencoded",
+        "fields":[
+          {
+              "name":"productCode",
+              "title":"Código do produto",
+              "type":"text"
+          },
+          {
+              "name":"quantity",
+              "title":"Quantidade",
+              "type":"number"
+          },
+          {
+              "name":"active",
+              "title":"Ativo",
+              "type":"checkbox",
+              "value": false
+          },
+          {
+              "name":"activia",
+              "title":"Ativio",
+              "type":"checkbox",
+              "value": true
+          }
+        ]
+    }
+  ],
+  "links":[
+    {
+      "rel":["self"],
+      "href":"demoPage3"
+    },
+    {
+      "rel":["first"],
+      "href":"demo"
+    },
+    {
+      "rel":["previous"],
+      "href":"demoPage2"
+    },
+    {
+      "rel":["orders"],
+      "title":"Orders",
+      "href":"http://api.x.io/orders/43"
+    },
+    {
+      "rel":["book"],
+      "title":"A Semente de Mostarda",
+      "href":"https://goo.gl/8wgSF8",
+      "type":"pdf"
+    },
+    {
+      "rel":["siren"],
+      "title":"Siren",
+      "href":"http://api.x.io/orders/43",
+      "type":"application/vnd.siren+json; charset=UTF-8"
+    }
+  ]
+}

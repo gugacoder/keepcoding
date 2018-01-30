@@ -53,6 +53,10 @@ export default {
     $_paperMixin_loadDemo (jsonFile) {
       return this.$_paperMixin_demoFileLoader(jsonFile).then(json => {
         return this.$_paperMixin_sirenParse(json)
+      }).catch(() => {
+        var message = 'Erro ao carregar a página de demonstração: ' + jsonFile
+        this.$notify({ message: message, type: 'danger' })
+        return
       })
     },
 
