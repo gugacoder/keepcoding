@@ -15,12 +15,11 @@ export default {
     $_requestMixin_request (link) {
       if (link) {
         if (link.startsWith('http')) {
-          if (link.startsWith(window.location.origin)) {
-            window.location.href = link
+          if (!link.startsWith(window.location.origin)) {
+            window.open(link, '_blank')
             return
           }
-          window.open(link, '_blank')
-          return
+          link = link.replace(window.location.origin + '/page', '')
         }
         this.$_requestMixin_redirectToPage(link)
       }
@@ -80,6 +79,18 @@ export default {
         var link = data.getLinkByRel('self')
         this.$_requestMixin_request(link.href)
       }
+    },
+
+    $_requestMixin_containsHash (path) {
+      var startsWithHash = path.startsWith(window.location.origin + '/#')
+      var startsWithIndex = path.toLowerCase().startsWith(window.location.origin + '/index')
+      return startsWithHash || startsWithIndex
+    },
+
+    $_requestMixin_addHashToUrl (path) {
+      path = path.replace('#/', '')
+      path = path.replace(window.location.origin, window.location.origin + '/#')
+      return path
     }
   }
 }

@@ -17,9 +17,11 @@
   import MainFooter from './components/MainFooter.vue'
   import MainToolbar from './components/MainToolbar.vue'
   import PaperMixin from './mixins/PaperMixin.js'
+  import RequestMixin from './mixins/RequestMixin.js'
   export default {
     mixins: [
-      PaperMixin
+      PaperMixin,
+      RequestMixin
     ],
     components: {
       ActionBar,
@@ -28,16 +30,17 @@
       LinksBar
     },
     created () {
-      this.redirect()
+      var containsHash = this.$_requestMixin_containsHash(window.location.href)
+      console.log('containsHash ', containsHash)
+      if (!containsHash) {
+        var path = this.$_requestMixin_addHashToUrl(window.location.href)
+        window.location = path
+        return
+      }
+      this.$_paperMixin_load()
     },
     watch: {
       $route () {
-        this.$_paperMixin_load()
-      }
-    },
-    methods: {
-      redirect () {
-        console.log('pathname ', window.location.pathname)
         this.$_paperMixin_load()
       }
     }

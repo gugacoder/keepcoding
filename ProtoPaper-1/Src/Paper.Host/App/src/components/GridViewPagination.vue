@@ -2,6 +2,7 @@
   v-flex(
     xs12
     right
+    v-if="!$store.state.selection.selectionState"
   )
     v-btn(
       color="primary"

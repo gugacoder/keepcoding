@@ -405,12 +405,12 @@
     },
     {
       "rel":["next"],
-      "href":"demoPage2"
+      "href":"http://localhost:8080/page/demoPage2"
     },
     {
       "rel":["orders"],
       "title":"Orders",
-      "href":"http://api.x.io/orders/43"
+      "href":"http://localhost:8080/page/demo/1"
     },
     {
       "rel":["book"],

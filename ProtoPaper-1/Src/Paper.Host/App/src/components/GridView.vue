@@ -79,10 +79,12 @@
 <script>
   import { Events } from '../event-bus.js'
   import RequestMixin from '../mixins/RequestMixin.js'
+  import PaperMixin from '../mixins/PaperMixin.js'
   import GridViewPagination from './GridViewPagination.vue'
   export default {
     mixins: [
-      RequestMixin
+      RequestMixin,
+      PaperMixin
     ],
     components: {
       GridViewPagination
@@ -91,11 +93,15 @@
       return {
         showLeftDrawer: '',
         showLinks: false,
-        selected: []
+        selected: [],
+        bottom: false
       }
     },
     created () {
       Events.$on('selectState', this.selectedMode)
+      window.addEventListener('scroll', () => {
+        this.bottom = true
+      })
     },
     methods: {
       show () {
@@ -111,6 +117,16 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
+      },
+
+      loadPageItems () {
+        var link = this.$store.getters['pagination/nextLink']
+        link = '/page/' + link
+        if (link) {
+          this.$_paperMixin_loadPage(link).then(data => {
+            this.items.push(data.entities)
+          })
+        }
       }
     },
     computed: {
@@ -162,6 +178,10 @@
     watch: {
       selected () {
         this.$store.commit('itemsSelected', this.selectedItems)
+      },
+      bottom () {
+        this.loadPageItems()
+        this.bottom = false
       }
     }
   }

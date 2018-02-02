@@ -10,7 +10,7 @@ export default {
         if (response.ok) {
           var json = response.data.data
           if (json) {
-            return this.$_paperMixin_sirenParse(json)
+            return this._sirenParse(json)
           }
         } else {
           if (response.data.status === 404) {
@@ -25,34 +25,29 @@ export default {
 
     $_paperMixin_load () {
       var path = this.$router.currentRoute.path
+      this.$_paperMixin_loadPage(path).then(data => {
+        this.$store.commit('update', data)
+      })
+    },
+
+    async $_paperMixin_loadPage (path) {
       if (path.match(/\/page/g)) {
         if (path.match(/\/page\/demo/g)) {
-          this.$_paperMixin_loadDemo(path).then(data => {
-            this.$store.commit('update', data)
-          })
-        } else {
-          path = this.$router.currentRoute.params.path
-          path = Array.isArray(path) ? path.join('/') : path
-          this.$_paperMixin_loadPaperPage(path).then(data => {
-            this.$store.commit('update', data)
+          return this.$_paperMixin_loadDemo(path).then(data => {
+            return data
           })
         }
+        path = this.$router.currentRoute.params.path
+        path = Array.isArray(path) ? path.join('/') : path
+        return this.$_paperMixin_loadPaperPage(path).then(data => {
+          return data
+        })
       }
     },
 
-    $_paperMixin_sirenParse (file) {
-      const sirenParser = require('siren-parser')
-      var resource = sirenParser(file)
-      return resource
-    },
-
-    $_paperMixin_demoFileLoader (jsonFile) {
-      return import(`../../static/demo${jsonFile}.json`)
-    },
-
     $_paperMixin_loadDemo (jsonFile) {
-      return this.$_paperMixin_demoFileLoader(jsonFile).then(json => {
-        return this.$_paperMixin_sirenParse(json)
+      return this._demoFileLoader(jsonFile).then(json => {
+        return this._sirenParse(json)
       }).catch(() => {
         var message = 'Erro ao carregar a página de demonstração: ' + jsonFile
         this.$notify({ message: message, type: 'danger' })
@@ -66,6 +61,16 @@ export default {
           this.$_requestMixin_redirectPage(path)
         }
       })
+    },
+
+    _sirenParse (file) {
+      const sirenParser = require('siren-parser')
+      var resource = sirenParser(file)
+      return resource
+    },
+
+    _demoFileLoader (jsonFile) {
+      return import(`../../static/demo${jsonFile}.json`)
     }
   }
 }
