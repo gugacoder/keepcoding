@@ -3,8 +3,8 @@
     :label="field.title" 
     :value="field.value"
     :name="field.name"
-    type="number"
-    step="any"
+    v-model="maskNumber"
+    v-mask-number
   )
 </template>
 

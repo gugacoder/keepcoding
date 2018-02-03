@@ -335,7 +335,7 @@
              "name":"active",
              "title":"Ativo",
              "type":"number",
-             "dataType":"int"
+             "dataType":"float"
           },
           {
              "name":"data",
@@ -343,6 +343,12 @@
              "type":"date",
              "dataType":"date"
           },
+          {
+            "name":"preco",
+            "title":"Preço",
+            "type":"number",
+            "dataType":"currency"
+         },
           {
              "name":"hora",
              "title":"Hora de Hoje",
@@ -397,10 +403,6 @@
   "links":[
     {
       "rel":["self"],
-      "href":"demo"
-    },
-    {
-      "rel":["first"],
       "href":"demo"
     },
     {

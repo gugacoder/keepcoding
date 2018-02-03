@@ -36,7 +36,7 @@
           v-btn(
             color="primary"
             flat
-            @click="$_formsMixin_clear(actionName)"
+            @click="$_formsMixin_clear(action.name)"
           ) Limpar
 
           v-btn(

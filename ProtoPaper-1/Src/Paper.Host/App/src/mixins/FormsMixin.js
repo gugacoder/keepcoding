@@ -1,5 +1,6 @@
 import VPaperText from '../components/paper/VPaperText.vue'
 import VPaperNumber from '../components/paper/VPaperNumber.vue'
+import VPaperNumberInt from '../components/paper/VPaperNumberInt.vue'
 import VPaperCheckbox from '../components/paper/VPaperCheckbox.vue'
 import VPaperHidden from '../components/paper/VPaperHidden.vue'
 import VPaperDate from '../components/paper/VPaperDate.vue'
@@ -7,17 +8,20 @@ import VPaperTime from '../components/paper/VPaperTime.vue'
 import VPaperSelect from '../components/paper/VPaperSelect.vue'
 import VPaperSwitch from '../components/paper/VPaperSwitch.vue'
 import VPaperDatetime from '../components/paper/VPaperDatetime.vue'
+import VPaperCurrency from '../components/paper/VPaperCurrency.vue'
 export default {
   components: {
     VPaperText,
     VPaperNumber,
+    VPaperNumberInt,
     VPaperCheckbox,
     VPaperHidden,
     VPaperDate,
     VPaperTime,
     VPaperSelect,
     VPaperSwitch,
-    VPaperDatetime
+    VPaperDatetime,
+    VPaperCurrency
   },
   methods: {
     $_formsMixin_dynamicComponent (field) {
@@ -38,15 +42,17 @@ export default {
         case 'number':
           return 'VPaperNumber'
         case 'int':
-          return 'VPaperNumber'
+          return 'VPaperNumberInt'
         case 'long':
-          return 'VPaperNumber'
+          return 'VPaperNumberInt'
         case 'decimal':
           return 'VPaperNumber'
         case 'double':
           return 'VPaperNumber'
         case 'float':
           return 'VPaperNumber'
+        case 'currency':
+          return 'VPaperCurrency'
         case 'multi':
           if (field.type === 'text') {
             return 'VPaperSelect'
@@ -61,9 +67,9 @@ export default {
       var formName = 'form-' + actionName
       var form = this.$refs[formName]
       form.inputs.forEach((field) => {
-        if (field.value !== null && field.value !== undefined) {
+        if (field.$attrs.value !== null && field.$attrs.value !== undefined) {
           var param = field.$attrs.name
-          var value = field.value
+          var value = field.$attrs.value
           params[param] = value
         }
       })

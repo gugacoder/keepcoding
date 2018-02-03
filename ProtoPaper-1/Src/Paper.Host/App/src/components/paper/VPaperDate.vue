@@ -23,9 +23,9 @@
           :label="field.title"
           :value="field.value"
           slot="activator"
+          readonly
           v-model="dateFormatted"
           prepend-icon="event"
-          @blur="date = parseDate(dateFormatted)"
         )
         v-date-picker(
           v-model="date" 
