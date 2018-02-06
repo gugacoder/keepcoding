@@ -12,8 +12,9 @@
         )
           v-card-title(
             primary-title
+            v-if="$paper.page.hasTitle()"
           )
-            h2 {{ title }}
+            h2 {{ $paper.page.title() }}
 
           v-card-text
             v-container(fluid)
@@ -39,10 +40,6 @@
       headers: []
     }),
     computed: {
-      title () {
-        return (this.$store.state.entity && this.$store.state.entity.title) ? this.$store.state.entity.title : ''
-      },
-
       items () {
         var data = this.$store.state.entity
         var items = []

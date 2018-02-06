@@ -15,8 +15,8 @@
       v-list-tile(
         v-for="link in $store.getters.links" 
         :key="link.href"
-        :target="$_requestMixin_target(link)"
-        @click.stop="$_requestMixin_request(link.href)"
+        :target="$paper.requester.target(link)"
+        @click.stop="$paper.requester.request(link.href)"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -43,25 +43,19 @@
       )
         v-list-tile-content
           v-list-tile-title(
-            v-html="$_actionsMixin_getActionTitle(action)"
+            v-html="$paper.actions.getTitle(action)"
           )
 </template>
 
 <script>
-  import ActionsMixin from '../mixins/ActionsMixin.js'
-  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
-    mixins: [
-      ActionsMixin,
-      RequestMixin
-    ],
     beforeRouteUpdate (to, from, next) {
       next()
     },
     computed: {
       show () {
         var show = !this.$store.state.selection.selectionState &&
-                   (this.$store.getters.showLinks || this.$store.getters.showActions)
+                   (this.$paper.navigation.hasLinks() || this.$paper.actions.hasActions)
         return show
       },
 

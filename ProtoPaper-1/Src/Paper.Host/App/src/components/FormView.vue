@@ -31,7 +31,7 @@
             v-btn(
               color="primary"
               @click="submit()"
-            ) {{ $_actionsMixin_getActionTitle(action) }}
+            ) {{ $paper.actions.getTitle(action) }}
 
             v-btn(
               color="primary"
@@ -42,13 +42,9 @@
 
 <script>
   import FormsMixin from '../mixins/FormsMixin.js'
-  import ActionsMixin from '../mixins/ActionsMixin.js'
-  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     mixins: [
-      FormsMixin,
-      ActionsMixin,
-      RequestMixin
+      FormsMixin
     ],
     computed: {
       action () {
@@ -69,15 +65,17 @@
     methods: {
       submit () {
         var queryParams = this.$_formsMixin_makeParams(this.actionName)
-        this.$_requestMixin_httpRequest(this.action.method, this.action.href, queryParams).then(response => {
+        this.$paper.requester.httpRequest(this.action.method, this.action.href, queryParams).then(response => {
           if (response.ok) {
             this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
             var location = response.data.headers.get('Location')
             if (location && location.length > 0) {
-              this.$_requestMixin_request(location)
+              this.$paper.resquester.request(location)
             } else {
-              this.$_requestMixin_goToIndex()
+              this.$paper.requester.goToIndex()
             }
+          } else {
+            this.$notify({ message: response.message, type: 'danger' })
           }
         })
       }

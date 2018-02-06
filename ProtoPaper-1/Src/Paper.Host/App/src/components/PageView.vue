@@ -25,7 +25,7 @@
       loadData () {
         var data = this.$store.state.entity
         var showLinksBar = (data.actions !== undefined) || (data.links !== undefined)
-        this.$store.commit('update', showLinksBar)
+        this.$store.commit('setEntity', showLinksBar)
       }
     },
     computed: {

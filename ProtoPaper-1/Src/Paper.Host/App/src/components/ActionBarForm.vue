@@ -6,7 +6,7 @@
     )
       v-card
         v-card-title(primary-title)
-          h2 {{ $_actionsMixin_getActionTitle(action) }}
+          h2 {{ $paper.actions.getTitle(action) }}
         v-card-text
           v-form(
             v-if="action"
@@ -31,7 +31,7 @@
             color="primary"
             flat
             @click="submit()"
-          ) {{ $_actionsMixin_getActionTitle(action) }}
+          ) {{ $paper.actions.getTitle(action) }}
 
           v-btn(
             color="primary"
@@ -48,22 +48,18 @@
 
 <script>
   import FormsMixin from '../mixins/FormsMixin.js'
-  import ActionsMixin from '../mixins/ActionsMixin.js'
-  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     data: () => ({
       actionBarForm: false,
       action: null
     }),
     mixins: [
-      FormsMixin,
-      ActionsMixin,
-      RequestMixin
+      FormsMixin
     ],
     computed: {
       fields () {
         var selectedItems = this.$store.state.selection.itemsSelected
-        var fields = this.$_actionsMixin_getActionsField(selectedItems, this.action.name)
+        var fields = this.$paper.actions.getActionFields(selectedItems, this.action.name)
         return fields
       },
 
@@ -74,10 +70,12 @@
     methods: {
       submit () {
         var queryParams = this.$_formsMixin_makeParams(this.action.name)
-        this.$_requestMixin_httpRequest(this.action.method, this.action.href, queryParams).then(response => {
+        this.$paper.requester.httpRequest(this.action.method, this.action.href, queryParams).then(response => {
           if (response.ok) {
             this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
             this.close()
+          } else {
+            this.$notify({ message: response.message, type: 'danger' })
           }
         })
       },

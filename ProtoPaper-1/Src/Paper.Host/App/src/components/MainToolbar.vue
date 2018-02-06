@@ -44,7 +44,6 @@
 </template>
 
 <script>
-  import RequestMixin from '../mixins/RequestMixin.js'
   export default {
     data: () => ({
       searchParams: '',
@@ -53,13 +52,10 @@
     beforeRouteUpdate (to, from, next) {
       next()
     },
-    mixins: [
-      RequestMixin
-    ],
     computed: {
       showLinks () {
         return this.$store.state.entity &&
-               (this.$store.getters.showLinks || this.$store.getters.showActions)
+               (this.$paper.navigation.hasLinks() || this.$paper.actions.hasActions())
       },
 
       showClass () {
@@ -70,7 +66,7 @@
     },
     methods: {
       search () {
-        this.$_requestMixin_request(this.searchParams)
+        this.$paper.requester.request(this.searchParams)
       },
 
       clearSearch () {

@@ -3,16 +3,12 @@
     :label="field.title" 
     :value="field.value"
     :name="field.name"
-    v-model="maskNumber"
-    v-mask-number
+    type="number"
   )
 </template>
 
 <script>
   export default {
-    data: () => ({
-      number: ''
-    }),
     props: ['field']
   }
 </script>

@@ -24,7 +24,7 @@
       v-for="action in actions" 
       :key="action.name"
       @click.stop="actionClick(action)"
-    ) {{ $_actionsMixin_getActionTitle(action) }}
+    ) {{ $paper.actions.getTitle(action) }}
 
 
     action-bar-form(ref="actionBarForm")
@@ -32,12 +32,8 @@
 
 <script>
   import { Events } from '../event-bus.js'
-  import ActionsMixin from '../mixins/ActionsMixin.js'
   import ActionBarForm from './ActionBarForm.vue'
   export default {
-    mixins: [
-      ActionsMixin
-    ],
     components: {
       ActionBarForm
     },
@@ -53,7 +49,7 @@
 
       actions () {
         var selectedItems = this.$store.state.selection.itemsSelected
-        var actions = this.$_actionsMixin_getActions(selectedItems)
+        var actions = this.$paper.actions.getActions(selectedItems)
         return actions && actions.length > 0 ? actions : []
       },
 

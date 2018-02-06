@@ -1,0 +1,10 @@
+{
+  "class": ["blueprint"],
+  "properties": {
+    "hasNavBox": 1
+  },
+  "links": [
+    { "rel": ["index"], "href": "/Api/1/Index" },
+    { "rel": ["planRoute"], "href": "/Api/1/Paper/PlanRoute" }
+  ]
+}

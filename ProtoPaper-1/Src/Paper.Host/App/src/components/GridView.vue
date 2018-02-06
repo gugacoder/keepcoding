@@ -5,12 +5,12 @@
   )
     v-card-title(
       primary-title
-      v-if="$store.state.entity.title"
+      v-if="$paper.page.hasTitle()"
     ) 
       div
         div(
           class="headline"
-        ) {{ $store.state.entity.title }}
+        ) {{ $paper.page.title }}
 
     v-card-text
       v-container(fluid)
@@ -23,7 +23,7 @@
           :items="items"
           item-key="_indexRowItemTable"
           hide-actions=true
-          :select-all="hasActions"
+          :select-all="$paper.grid.hasActions()"
           no-data-text="Não existem dados para exibir"
         )
           template(
@@ -32,7 +32,7 @@
           )
 
             v-checkbox(
-              v-if="hasActions"
+              v-if="$paper.grid.hasActions()"
               primary
               hide-details
               v-model="items.selected"
@@ -71,32 +71,24 @@
                   )
                     v-list-tile-content
                       a(
-                        @click.stop="$_requestMixin_request(item.href)"
+                        @click.stop="$paper.requester.request(item.href)"
                       ) {{ item.title ? item.title : item.rel[0] }}
 
 </template>
 
 <script>
   import { Events } from '../event-bus.js'
-  import RequestMixin from '../mixins/RequestMixin.js'
-  import PaperMixin from '../mixins/PaperMixin.js'
   import GridViewPagination from './GridViewPagination.vue'
   export default {
-    mixins: [
-      RequestMixin,
-      PaperMixin
-    ],
     components: {
       GridViewPagination
     },
-    data () {
-      return {
-        showLeftDrawer: '',
-        showLinks: false,
-        selected: [],
-        bottom: false
-      }
-    },
+    data: () => ({
+      showLeftDrawer: '',
+      showLinks: false,
+      selected: [],
+      bottom: false
+    }),
     created () {
       Events.$on('selectState', this.selectedMode)
       window.addEventListener('scroll', () => {
@@ -117,28 +109,13 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
-      },
-
-      loadPageItems () {
-        var link = this.$store.getters['pagination/nextLink']
-        link = '/page/' + link
-        if (link) {
-          this.$_paperMixin_loadPage(link).then(data => {
-            this.items.push(data.entities)
-          })
-        }
       }
     },
     computed: {
-      hasActions () {
-        var exist = this.$store.getters.gridItems.filter(entity => entity.hasAction())
-        return exist && exist.length > 0
-      },
-
       items () {
         var items = []
-        if (this.$store.getters.gridItems) {
-          this.$store.getters.gridItems.forEach((item, index) => {
+        if (this.$paper.grid.items) {
+          this.$paper.grid.items.forEach((item, index) => {
             var itensWithIndex = Object.assign(
               { _indexRowItemTable: index }, item.properties
             )
@@ -169,7 +146,7 @@
       selectedItems () {
         var selectedItems = []
         this.selected.forEach(item => {
-          var itemSelected = this.$store.getters.gridItems[item._indexRowItemTable]
+          var itemSelected = this.$paper.grid.items[item._indexRowItemTable]
           selectedItems.push(itemSelected)
         })
         return selectedItems

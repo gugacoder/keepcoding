@@ -4,7 +4,6 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import VueAxios from 'vue-axios'
 import Notify from 'vue-notifyjs'
-import InfiniteScroll from 'v-infinite-scroll'
 import VueMask from 'di-vue-mask'
 import axios from 'axios'
 import money from 'v-money'
@@ -14,16 +13,17 @@ import 'vuetify/dist/vuetify.css'
 import App from './App'
 import router from './router'
 import store from './store/store'
+import Paper from './paper/paper.js'
 
-Vue.use(Vuetify)
-Vue.use(VueAxios, axios)
-Vue.use(InfiniteScroll)
 Vue.use(VueMask)
 Vue.use(Notify, {
   timeout: 5000,
   horizontalAlign: 'left',
   verticalAlign: 'bottom'
 })
+Vue.use(Paper, {store, router, axios})
+Vue.use(Vuetify)
+Vue.use(VueAxios, axios)
 Vue.use(money, {
   precision: 4
 })

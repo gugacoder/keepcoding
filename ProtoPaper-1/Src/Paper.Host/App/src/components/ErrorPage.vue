@@ -21,11 +21,7 @@
 </template>
 
 <script>
-  import ErrorsMixin from '../mixins/ErrorsMixin.js'
   export default {
-    mixins: [
-      ErrorsMixin
-    ],
     props: {
       error: Object
     },
@@ -36,7 +32,7 @@
 
       message () {
         if (this.show) {
-          return this.$_errorsMixin_httpTranslate(this.error.response.status)
+          return this.$paper.errors.httpTranslate(this.error.response.status)
         }
         return 'Página de Erro'
       },
