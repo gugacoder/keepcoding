@@ -28,7 +28,7 @@
       LinksBar
     },
     created () {
-      if (this.$paper.requester.isRoot() || this.$paper.demo.isDemo()) {
+      if (this.$paper.requester.isRoot() || this.$paper.demo.isRoot()) {
         this.$paper.blueprint.load()
       }
       var containsHash = this.$paper.requester.containsHash(window.location.href)
@@ -37,7 +37,6 @@
         window.location = path
         return
       }
-      this.$paper.notify()
       this.$_paperMixin_load()
     },
     watch: {

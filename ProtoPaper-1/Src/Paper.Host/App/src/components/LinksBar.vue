@@ -13,7 +13,7 @@
         | NAVEGAÇÃO
 
       v-list-tile(
-        v-for="link in $store.getters.links" 
+        v-for="link in $paper.navigation.links()"
         :key="link.href"
         :target="$paper.requester.target(link)"
         @click.stop="$paper.requester.request(link.href)"
@@ -28,11 +28,11 @@
             v-html="link.rel[0]"
           )
 
-    v-divider(v-if="$store.getters.showActions")
+    v-divider(v-if="$paper.actions.hasActions()")
     
     v-list(
       subheader 
-      v-if="$store.getters.showActions"
+      v-if="$paper.actions.hasActions()"
     )
       v-subheader
         | AÇÕES

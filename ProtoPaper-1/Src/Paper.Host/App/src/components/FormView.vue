@@ -36,7 +36,7 @@
             v-btn(
               color="primary"
               flat 
-              @click="$_formsMixin_clear(actionName)"
+              @click="$_formsMixin_clear(action.name)"
             ) Limpar
 </template>
 
@@ -74,8 +74,6 @@
             } else {
               this.$paper.requester.goToIndex()
             }
-          } else {
-            this.$notify({ message: response.message, type: 'danger' })
           }
         })
       }

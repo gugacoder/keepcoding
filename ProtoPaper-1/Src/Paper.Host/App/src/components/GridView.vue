@@ -10,7 +10,7 @@
       div
         div(
           class="headline"
-        ) {{ $paper.page.title }}
+        ) {{ $paper.page.title() }}
 
     v-card-text
       v-container(fluid)
@@ -114,8 +114,8 @@
     computed: {
       items () {
         var items = []
-        if (this.$paper.grid.items) {
-          this.$paper.grid.items.forEach((item, index) => {
+        if (this.$paper.grid.getItems()) {
+          this.$paper.grid.getItems().forEach((item, index) => {
             var itensWithIndex = Object.assign(
               { _indexRowItemTable: index }, item.properties
             )
@@ -146,7 +146,7 @@
       selectedItems () {
         var selectedItems = []
         this.selected.forEach(item => {
-          var itemSelected = this.$paper.grid.items[item._indexRowItemTable]
+          var itemSelected = this.$paper.grid.getItems()[item._indexRowItemTable]
           selectedItems.push(itemSelected)
         })
         return selectedItems
@@ -155,10 +155,6 @@
     watch: {
       selected () {
         this.$store.commit('itemsSelected', this.selectedItems)
-      },
-      bottom () {
-        this.loadPageItems()
-        this.bottom = false
       }
     }
   }

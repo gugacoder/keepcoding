@@ -1,5 +1,8 @@
-module.exports = (store, router, requester, parser) => ({
-  title: (store.state.entity && store.state.entity.title) ? store.state.entity.title : '',
+module.exports = (store, router, requester, parser, vue) => ({
+  title () {
+    return (store.state.entity && store.state.entity.title) ? store.state.entity.title : ''
+  },
+
   load (path) {
     path = '/' + path
     return requester.httpRequest('get', path, {}).then(response => {
@@ -9,7 +12,7 @@ module.exports = (store, router, requester, parser) => ({
           return parser.parse(json)
         }
       } else {
-        this.$notify({ message: response.message, type: 'danger' })
+        vue.$notify({ message: response.message, type: 'danger' })
         if (response.data.status === 404) {
           router.push({name: 'notFound', params: { routerName: path }})
         } else {
@@ -24,8 +27,6 @@ module.exports = (store, router, requester, parser) => ({
     requester.httpRequest('POST', path, data).then(response => {
       if (response.ok) {
         requester.redirectToPage(path)
-      } else {
-        this.$notify({ message: response.message, type: 'danger' })
       }
     })
   },

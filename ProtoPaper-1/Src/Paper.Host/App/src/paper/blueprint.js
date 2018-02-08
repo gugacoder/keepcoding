@@ -11,7 +11,7 @@ module.exports = (store, demo, requester, page) => ({
   },
 
   load () {
-    if (demo.isDemo()) {
+    if (demo.isRoot()) {
       demo.loadDemoBlueprint()
       return
     }

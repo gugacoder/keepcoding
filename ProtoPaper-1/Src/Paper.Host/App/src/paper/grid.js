@@ -1,5 +1,5 @@
 module.exports = (store) => ({
-  items () {
+  getItems () {
     var entities = []
     if (store.state.entity && store.state.entity.hasSubEntityByClass('item')) {
       entities = store.state.entity.getSubEntitiesByClass('item')
@@ -8,7 +8,7 @@ module.exports = (store) => ({
   },
 
   hasActions () {
-    var exist = this.items.filter(entity => entity.hasAction())
+    var exist = this.getItems().filter(entity => entity.hasAction())
     return exist && exist.length > 0
   }
 })

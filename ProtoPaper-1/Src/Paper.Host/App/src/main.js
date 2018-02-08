@@ -16,17 +16,17 @@ import store from './store/store'
 import Paper from './paper/paper.js'
 
 Vue.use(VueMask)
+Vue.use(Vuetify)
+Vue.use(VueAxios, axios)
+Vue.use(money, {precision: 4})
 Vue.use(Notify, {
   timeout: 5000,
   horizontalAlign: 'left',
   verticalAlign: 'bottom'
 })
-Vue.use(Paper, {store, router, axios})
-Vue.use(Vuetify)
-Vue.use(VueAxios, axios)
-Vue.use(money, {
-  precision: 4
-})
+
+var vm = new Vue({})
+Vue.use(Paper, {store, router, axios, vm})
 
 Vue.config.productionTip = false
 

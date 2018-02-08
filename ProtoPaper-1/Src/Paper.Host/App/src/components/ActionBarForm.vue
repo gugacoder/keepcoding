@@ -72,10 +72,7 @@
         var queryParams = this.$_formsMixin_makeParams(this.action.name)
         this.$paper.requester.httpRequest(this.action.method, this.action.href, queryParams).then(response => {
           if (response.ok) {
-            this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
             this.close()
-          } else {
-            this.$notify({ message: response.message, type: 'danger' })
           }
         })
       },

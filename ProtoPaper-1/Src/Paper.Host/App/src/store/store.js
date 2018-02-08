@@ -17,9 +17,16 @@ const mutations = {
   }
 }
 
+const getters = {
+  getEntity: (state) => {
+    return state.entity
+  }
+}
+
 export default new Vuex.Store({
   state,
   mutations,
+  getters,
   modules: {
     navigation,
     selection,

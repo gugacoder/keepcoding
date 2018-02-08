@@ -1,4 +1,4 @@
-module.exports = (store, router, axios, error) => ({
+module.exports = (store, router, axios, errors, vue) => ({
   request (link) {
     if (link) {
       if (link.startsWith('http')) {
@@ -36,18 +36,20 @@ module.exports = (store, router, axios, error) => ({
         message: 'Operação realizada com sucesso'
       }
     }).catch(error => {
+      var message = 'Erro ao acessar a url'
       if (!error.response) {
+        vue.$notify({ message: message, type: 'danger' })
         return {
           ok: false,
-          data: {},
-          message: 'Erro ao acessar a url'
+          data: {}
         }
       }
       console.log('Erro: ', error.response)
+      message = message + ': ' + href + '. ' + errors.httpTranslate(error.response.status)
+      vue.$notify({ message: message, type: 'danger' })
       return {
         ok: false,
-        data: error.response,
-        message: 'Erro ao acessar a url: ' + href + '. ' + error.httpTranslate(error.response.status)
+        data: error.response
       }
     })
   },
@@ -88,7 +90,7 @@ module.exports = (store, router, axios, error) => ({
   },
 
   isRoot () {
-    var isRoot = /^\/(?:|index\.html?)$/i.test(location.pathname)
+    var isRoot = window.location.hash.toLowerCase() === '#/index.html' || window.location.hash === '#/'
     return isRoot
   }
 })

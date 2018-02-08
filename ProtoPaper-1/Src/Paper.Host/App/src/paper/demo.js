@@ -1,7 +1,7 @@
 module.exports = (store, requester, parser) => ({
   blueprintPage: '/page/Api/1/Paper/Blueprint',
 
-  isDemo () {
+  isRoot () {
     return location.hash === '#/demo'
   },
 

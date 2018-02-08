@@ -1,11 +1,14 @@
 module.exports = (store) => ({
   links () {
-    var items = store.state.entity.links.filter(
-      item => item.rel.indexOf('self') &&
-              item.rel.indexOf('next') &&
-              item.rel.indexOf('previous') &&
-              item.rel.indexOf('first')
-    )
+    var items = []
+    if (store.state.entity && store.state.entity.links) {
+      items = store.state.entity.links.filter(
+        item => item.rel.indexOf('self') &&
+                item.rel.indexOf('next') &&
+                item.rel.indexOf('previous') &&
+                item.rel.indexOf('first')
+      )
+    }
     return items
   },
 
