@@ -70,7 +70,7 @@
             this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
             var location = response.data.headers.get('Location')
             if (location && location.length > 0) {
-              this.$paper.resquester.request(location)
+              this.$paper.requester.request(location)
             } else {
               this.$paper.requester.goToIndex()
             }
