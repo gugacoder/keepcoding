@@ -23,47 +23,11 @@
           xs12 
           class="mt-5"
         )
-          v-dialog(
-            v-model="dialog" 
-            max-width="300px"
-          )
-            v-btn(
-              color="primary" 
-              dark 
-              slot="activator"
-            )
-              | Projetar essa rota
-            
-            v-card
-              v-card-title 
-                | Selecione um módulo
-
-              v-divider
-
-              v-card-text
-                v-radio-group(
-                  v-model="dialog1"
-                  column
-                )
-                  v-radio(
-                    label="Sandbox" 
-                    value="sandbox"
-                  )
-
-              v-divider
-
-              v-card-actions
-                v-btn(
-                  color="primary" 
-                  flat 
-                  @click.native="dialog=false"
-                ) Cancelar
-
-                v-btn(
-                  color="primary" 
-                  flat 
-                  @click.native="createRouter"
-                ) Ok
+          v-btn(
+            color="primary" 
+            dark 
+            @click.stop="createRouter()"
+          ) Projetar essa rota
 </template>
 
 <script>
@@ -79,7 +43,8 @@
     },
     methods: {
       createRouter () {
-        this.$router.push({name: 'sandbox', params: { routerName: this.routerName }})
+        var planRoute = this.$paper.blueprint.getPlanRoutePage()
+        this.$paper.requester.request(planRoute)
       }
     }
   }

@@ -17,7 +17,7 @@
         "name": "One"
       },
       "links": [
-        { "rel": ["self"], "href": "/page/Users/1" }
+        { "rel": ["self"], "href": "http://localhost:8080/Users/2" }
       ]
     }, {
       "class": ["user", "item"],
@@ -27,7 +27,7 @@
         "name": "Two"
       },
       "links": [
-        { "rel": ["self"], "href": "/page/Users/2" }
+        { "rel": ["self"], "href": "http://localhost:8080/Users/2" }
       ]
     }, {
       "class": ["user", "item"],
@@ -37,7 +37,17 @@
         "name": "Three"
       },
       "links": [
-        { "rel": ["self"], "href": "/page/Users/2" }
+        { "rel": ["self"], "href": "http://localhost:8080/Users/2" }
+      ]
+    }, {
+      "class": ["user", "item"],
+      "rel": [ "users" ], 
+      "properties": {
+        "id": 2,
+        "name": "Three"
+      },
+      "links": [
+        { "rel": ["self"], "href": "http://localhost:8080/page/Users/2" }
       ]
     }
   ]

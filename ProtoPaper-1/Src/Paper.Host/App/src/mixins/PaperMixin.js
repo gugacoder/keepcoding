@@ -1,25 +1,25 @@
 export default {
   methods: {
     $_paperMixin_load () {
-      var path = this.$router.currentRoute.path
-      this.$_paperMixin_loadPage(path).then(data => {
-        this.$store.commit('setEntity', data)
-      })
+      var path = location.href
+      if (this.$paper.isDemoPage(path)) {
+        path = this.$router.currentRoute.path
+      }
+      this.$_paperMixin_loadPage(path)
     },
 
-    async $_paperMixin_loadPage (path) {
-      if (path.match(/\/page/g)) {
-        if (path.match(/\/page\/demo/g)) {
-          return this.$paper.demo.load(path).then(data => {
-            return data
-          })
-        }
-        path = this.$router.currentRoute.params.path
-        path = Array.isArray(path) ? path.join('/') : path
-        return this.$paper.page.load(path).then(data => {
-          return data
-        })
+    $_paperMixin_loadPage (path) {
+      if (this.$paper.isDemoPage(path)) {
+        this.$paper.demo.load(path)
       }
+      if (path.match(/\/page/g)) {
+        path = path.replace('/page', '')
+      }
+      if (path.match(/\/#/g)) {
+        path = path.replace('/#', '')
+      }
+      this.$store.commit('setPathEntity', path)
+      this.$paper.requester.request(path)
     }
   }
 }

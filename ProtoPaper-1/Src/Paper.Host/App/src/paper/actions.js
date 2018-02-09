@@ -1,4 +1,8 @@
 module.exports = (store, object) => ({
+  getAction (name) {
+    return store.state.entity.getActionByName(name)
+  },
+
   getActions (entities) {
     if (!entities) {
       return []

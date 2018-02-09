@@ -1,34 +1,34 @@
 const state = {
-  entity: null
+  entity: undefined
 }
 
 const getters = {
-  hasNavBox: (state) => {
+  hasNavBox: state => {
     if (state.entity && state.entity.hasProperty('hasNavBox')) {
       return state.entity.properties.hasNavBox
     }
     return false
   },
 
-  indexPage: (state) => {
+  indexPage: state => {
     if (state.entity && state.entity.hasLinkByRel('index')) {
       return state.entity.getLinkByRel('index').href
     }
     return '#'
   },
 
-  planRoutePage: (state) => {
+  planRoutePage: state => {
     if (state.entity && state.entity.hasLinkByRel('routePlan')) {
       return state.entity.getLinkByRel('routePlan').href
     }
     return '#'
   },
 
-  hasRoutePage: (state) => {
+  hasRoutePage: state => {
     return state.entity && state.entity.hasLinkByRel('routePlan')
   },
 
-  hasIndexPage: (state) => {
+  hasIndexPage: state => {
     return state.entity && state.entity.hasLinkByRel('index')
   }
 }

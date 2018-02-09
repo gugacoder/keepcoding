@@ -8,18 +8,23 @@ import blueprint from './modules/blueprint.js'
 Vue.use(Vuex)
 
 const state = {
-  entity: {}
+  pathEntity: null,
+  entity: null
 }
 
 const mutations = {
   setEntity (state, data) {
     state.entity = data
+  },
+
+  setPathEntity (state, data) {
+    state.pathEntity = data
   }
 }
 
 const getters = {
-  getEntity: (state) => {
-    return state.entity
+  getEntity: state => {
+    return state.entity ? state.entity : {}
   }
 }
 

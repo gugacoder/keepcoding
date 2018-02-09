@@ -3,9 +3,9 @@ const paper = {
     var parser = require('./parser.js')
     var error = require('./errors.js')
     var requester = require('./requester.js')(options.store, options.router, options.axios, error, options.vm)
-    var demo = require('./demo.js')(options.store, requester, parser)
+    var demo = require('./demo.js')(options.router, options.store, requester, parser, options.vm)
     var page = require('./page.js')(options.store, options.router, requester, parser, options.vm)
-    var blueprint = require('./blueprint.js')(options.store, demo, requester, page)
+    var blueprint = require('./blueprint.js')(options.store, options.router, demo, requester, page, options.vm)
     var actions = require('./actions.js')(options.store, Object)
     var pagination = require('./pagination.js')(options.store, requester)
     var navigation = require('./navigation.js')(options.store)
@@ -19,7 +19,15 @@ const paper = {
       actions: actions,
       pagination: pagination,
       navigation: navigation,
-      grid: grid
+      grid: grid,
+
+      isPaperPage (path) {
+        return path.match(/\/page/g)
+      },
+
+      isDemoPage (path) {
+        return demo.isDemoPage(path)
+      }
     }
     Vue.prototype.$paper = paper
   }

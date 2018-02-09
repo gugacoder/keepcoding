@@ -28,8 +28,9 @@
       LinksBar
     },
     created () {
-      if (this.$paper.requester.isRoot() || this.$paper.demo.isRoot()) {
+      if (this.$paper.page.isRoot() || this.$paper.demo.isRoot()) {
         this.$paper.blueprint.load()
+        return
       }
       var containsHash = this.$paper.requester.containsHash(window.location.href)
       if (!containsHash) {
@@ -38,11 +39,6 @@
         return
       }
       this.$_paperMixin_load()
-    },
-    watch: {
-      $route () {
-        this.$_paperMixin_load()
-      }
     }
   }
 </script>

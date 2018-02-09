@@ -1,18 +1,22 @@
 module.exports = (store, router, axios, errors, vue) => ({
   request (link) {
     if (link) {
-      if (link.startsWith('http')) {
-        if (!link.startsWith(window.location.origin)) {
-          window.open(link, '_blank')
-          return
-        }
-        link = link.replace(window.location.origin + '/page', '')
+      if (link.startsWith('http') && !link.startsWith(window.location.origin)) {
+        window.open(link, '_blank')
+        return
       }
+      store.commit('setPathEntity', link)
       this.redirectToPage(link)
     }
   },
 
   redirectToPage (path) {
+    if (path.indexOf(location.origin) >= 0) {
+      path = path.replace(location.origin, '')
+    }
+    if (path.match(/page/g)) {
+      path = path.replace('page', '')
+    }
     var params = path.split('/')
     params = params.filter(function (x) {
       return (x !== (undefined || null || ''))

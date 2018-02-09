@@ -3,22 +3,45 @@ module.exports = (store, router, requester, parser, vue) => ({
     return (store.state.entity && store.state.entity.title) ? store.state.entity.title : ''
   },
 
-  load (path) {
-    path = '/' + path
-    return requester.httpRequest('get', path, {}).then(response => {
+  isRoot () {
+    var isRoot = window.location.hash.toLowerCase() === '#/index.html' || window.location.hash === '#/'
+    return isRoot
+  },
+
+  load () {
+    var path = store.state.pathEntity
+    requester.httpRequest('get', path, {}).then(response => {
       if (response.ok) {
         var json = response.data.data
         if (json) {
-          return parser.parse(json)
+          var data = parser.parse(json)
+          store.commit('setEntity', data)
         }
       } else {
-        vue.$notify({ message: response.message, type: 'danger' })
         if (response.data.status === 404) {
           router.push({name: 'notFound', params: { routerName: path }})
         } else {
           router.push({name: 'error', params: { error: response.data }})
         }
-        return null
+      }
+    })
+  },
+
+  parse (path) {
+    return requester.httpRequest('get', path, {}).then(response => {
+      if (response.ok) {
+        var json = response.data.data
+        if (json) {
+          return {
+            ok: true,
+            data: parser.parse(json)
+          }
+        }
+      } else {
+        return {
+          ok: false,
+          data: response.data
+        }
       }
     })
   },

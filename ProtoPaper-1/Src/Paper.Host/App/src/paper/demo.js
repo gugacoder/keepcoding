@@ -1,8 +1,12 @@
-module.exports = (store, requester, parser) => ({
+module.exports = (router, store, requester, parser, vue) => ({
   blueprintPage: '/page/Api/1/Paper/Blueprint',
 
   isRoot () {
     return location.hash === '#/demo'
+  },
+
+  isDemoPage (path) {
+    return path.match(/\/page\/demo/g) !== null
   },
 
   loadDemoBlueprint () {
@@ -16,12 +20,13 @@ module.exports = (store, requester, parser) => ({
   },
 
   load (jsonFile) {
-    return this.importDemoFile(jsonFile).then(json => {
-      return parser.parse(json)
+    this.importDemoFile(jsonFile).then(json => {
+      var data = parser.parse(json)
+      store.commit('setEntity', data)
     }).catch(() => {
-      // var message = 'Erro ao carregar a página de demonstração: ' + jsonFile
-      // this.$notify({ message: message, type: 'danger' })
-      return
+      var message = 'Erro ao carregar a página de demonstração: ' + jsonFile
+      vue.$notify({ message: message, type: 'danger' })
+      router.push({name: 'notFound', params: { routerName: jsonFile }})
     })
   },
 

@@ -25,7 +25,7 @@ Vue.use(Notify, {
   verticalAlign: 'bottom'
 })
 
-var vm = new Vue({})
+var vm = new Vue()
 Vue.use(Paper, {store, router, axios, vm})
 
 Vue.config.productionTip = false

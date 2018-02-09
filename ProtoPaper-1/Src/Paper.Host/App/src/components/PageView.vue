@@ -19,7 +19,11 @@
       PaperForm
     },
     beforeRouteUpdate (to, from, next) {
+      this.$paper.page.load()
       next()
+    },
+    created () {
+      this.$paper.page.load()
     },
     methods: {
       loadData () {
