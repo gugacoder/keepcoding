@@ -77,9 +77,7 @@ export default {
     },
     $_formsMixin_clear (actionName) {
       var formName = 'form-' + actionName
-      console.log('formName', formName)
       var form = this.$refs[formName]
-      console.log('form', form)
       form.reset()
     }
   }

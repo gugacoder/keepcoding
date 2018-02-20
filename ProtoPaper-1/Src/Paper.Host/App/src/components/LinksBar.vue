@@ -55,6 +55,7 @@
     computed: {
       show () {
         var show = !this.$store.state.selection.selectionState &&
+                   this.$paper.blueprint.hasNavBox() &&
                    (this.$paper.navigation.hasLinks() || this.$paper.actions.hasActions)
         return show
       },
