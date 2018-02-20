@@ -1,5 +1,5 @@
-module.exports = (store, router, requester, parser, vue) => ({
-  title () {
+module.exports = (store, router, requester, parser, vue, demo) => ({
+  getTitle () {
     return (store.state.entity && store.state.entity.title) ? store.state.entity.title : ''
   },
 
@@ -10,6 +10,10 @@ module.exports = (store, router, requester, parser, vue) => ({
 
   load () {
     var path = store.state.pathEntity
+    if (demo.isDemoPage(path)) {
+      demo.load(path)
+      return
+    }
     requester.httpRequest('get', path, {}).then(response => {
       if (response.ok) {
         var json = response.data.data

@@ -402,15 +402,15 @@
     },
     {
       "rel":["first"],
-      "href":"demo"
+      "href":"/demo"
     },
     {
       "rel":["previous"],
-      "href":"demo"
+      "href":"/demo"
     },
     {
       "rel":["next"],
-      "href":"demoPage3"
+      "href":"/demoPage3"
     },
     {
       "rel":["orders"],

@@ -3,7 +3,7 @@
     :label="field.title" 
     :value="formatValue"
     :name="field.name"
-    v-model.lazy="field.value"
+    v-model="field.value"
     v-money="money"
   )
 </template>

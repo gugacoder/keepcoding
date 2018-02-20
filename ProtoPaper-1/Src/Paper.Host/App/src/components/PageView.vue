@@ -3,7 +3,6 @@
 </template>
 
 <script>
-  // Register another component to render in this one dynamically.
   import PaperGrid from './GridView.vue'
   import PaperView from './View.vue'
   import PaperHome from './Home.vue'
@@ -19,18 +18,11 @@
       PaperForm
     },
     beforeRouteUpdate (to, from, next) {
-      this.$paper.page.load()
+      this.$store.commit('setPathEntity', to.path)
       next()
     },
     created () {
       this.$paper.page.load()
-    },
-    methods: {
-      loadData () {
-        var data = this.$store.state.entity
-        var showLinksBar = (data.actions !== undefined) || (data.links !== undefined)
-        this.$store.commit('setEntity', showLinksBar)
-      }
     },
     computed: {
       dynamicComponent () {

@@ -6,7 +6,7 @@ module.exports = (router, store, requester, parser, vue) => ({
   },
 
   isDemoPage (path) {
-    return path.match(/\/page\/demo/g) !== null
+    return path.match(/\/page\/demo/g) !== null || path.match(/\/demo/g) !== null
   },
 
   loadDemoBlueprint () {
@@ -20,7 +20,8 @@ module.exports = (router, store, requester, parser, vue) => ({
   },
 
   load (jsonFile) {
-    this.importDemoFile(jsonFile).then(json => {
+    jsonFile = this._makeJsonFilePath(jsonFile)
+    this._importDemoFile(jsonFile).then(json => {
       var data = parser.parse(json)
       store.commit('setEntity', data)
     }).catch(() => {
@@ -30,7 +31,17 @@ module.exports = (router, store, requester, parser, vue) => ({
     })
   },
 
-  importDemoFile (jsonFile) {
+  _importDemoFile (jsonFile) {
     return import(`../../static/demo${jsonFile}.json`)
+  },
+
+  _makeJsonFilePath (jsonFile) {
+    if (jsonFile.startsWith(location.origin)) {
+      jsonFile = jsonFile.replace(location.origin, '')
+    }
+    if (!jsonFile.startsWith('/page')) {
+      jsonFile = '/page' + jsonFile
+    }
+    return jsonFile
   }
 })

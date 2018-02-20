@@ -14,7 +14,7 @@
             primary-title
             v-if="$paper.page.hasTitle()"
           )
-            h2 {{ $paper.page.title() }}
+            h2 {{ $paper.page.getTitle() }}
 
           v-card-text
             v-container(fluid)

@@ -16,7 +16,7 @@
         v-card-text
           v-form(
             v-if="action"
-            :ref="'form-' + action.name"
+            :ref="formName"
           )
             v-layout(
               row 
@@ -36,7 +36,7 @@
             v-btn(
               color="primary"
               flat 
-              @click="$_formsMixin_clear(action.name)"
+              @click="$_formsMixin_clear(actionName)"
             ) Limpar
 </template>
 
@@ -61,6 +61,10 @@
 
       actionName () {
         return this.$route.query.action
+      },
+
+      formName () {
+        return 'form-' + this.actionName
       }
     },
     methods: {

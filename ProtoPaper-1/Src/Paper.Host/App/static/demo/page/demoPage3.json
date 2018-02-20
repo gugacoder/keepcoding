@@ -190,11 +190,11 @@
     },
     {
       "rel":["first"],
-      "href":"demo"
+      "href":"/demo"
     },
     {
       "rel":["previous"],
-      "href":"demoPage2"
+      "href":"/demoPage2"
     },
     {
       "rel":["orders"],

@@ -3,6 +3,7 @@
     :label="field.title" 
     :value="field.value"
     :name="field.name"
+    v-model="field.value"
     type="number"
     step="any"
   )
