@@ -19,7 +19,6 @@ const mutations = {
   },
 
   setPathEntity (state, data) {
-    console.log('setPathEntity', data)
     state.pathEntity = data
   },
 

@@ -18,11 +18,9 @@
       PaperForm
     },
     beforeRouteUpdate (to, from, next) {
-      console.log('before update', to.path)
       next()
     },
     created () {
-      console.log('created')
       this.$paper.page.load()
     },
     computed: {
