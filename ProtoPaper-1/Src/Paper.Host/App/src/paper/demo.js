@@ -1,5 +1,5 @@
 module.exports = (router, store, requester, parser, vue) => ({
-  blueprintPage: '/page/Api/1/Paper/Blueprint',
+  blueprintPage: '/page/Blueprint',
 
   isRoot () {
     return location.hash === '#/demo'
@@ -9,17 +9,18 @@ module.exports = (router, store, requester, parser, vue) => ({
     return path.match(/\/page\/demo/g) !== null || path.match(/\/demo/g) !== null
   },
 
-  loadDemoBlueprint () {
-    this.load(this.blueprintPage).then(data => {
-      if (data) {
-        store.commit('blueprint/setBlueprint', data)
-        var indexPage = store.getters['blueprint/indexPage']
-        requester.request(indexPage)
-      }
+  loadBlueprint () {
+    this._importDemoFile(this.blueprintPage).then(json => {
+      var data = parser.parse(json)
+      store.commit('blueprint/setBlueprint', data)
+    }).catch(error => {
+      console.log('erro', error)
+      vue.$notify({ message: 'Erro ao carregar o blueprint: ' + this.blueprintPage, type: 'danger' })
     })
   },
 
   load (jsonFile) {
+    this._setDemoState()
     jsonFile = this._makeJsonFilePath(jsonFile)
     this._importDemoFile(jsonFile).then(json => {
       var data = parser.parse(json)
@@ -29,6 +30,10 @@ module.exports = (router, store, requester, parser, vue) => ({
       vue.$notify({ message: message, type: 'danger' })
       router.push({name: 'notFound', params: { routerName: jsonFile }})
     })
+  },
+
+  _setDemoState () {
+    store.commit('setDemoState', true)
   },
 
   _importDemoFile (jsonFile) {

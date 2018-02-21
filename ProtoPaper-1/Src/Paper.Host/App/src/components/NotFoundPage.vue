@@ -45,7 +45,6 @@
     methods: {
       createRouter () {
         var planRoute = this.$paper.blueprint.getPlanRoutePage()
-        console.log('notfoundpage planRoute', planRoute)
         this.$paper.requester.request(planRoute)
       }
     }

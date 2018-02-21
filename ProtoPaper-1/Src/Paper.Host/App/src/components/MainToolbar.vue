@@ -54,7 +54,8 @@
     },
     computed: {
       showLinks () {
-        return this.$store.state.entity &&
+        return this.$store.state.entity !== null &&
+               this.$paper.blueprint.hasNavBox() &&
                (this.$paper.navigation.hasLinks() || this.$paper.actions.hasActions())
       },
 

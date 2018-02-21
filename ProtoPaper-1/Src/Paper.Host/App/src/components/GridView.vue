@@ -10,7 +10,7 @@
       div
         div(
           class="headline"
-        ) {{ $paper.page.title() }}
+        ) {{ $paper.page.getTitle() }}
 
     v-card-text
       v-container(fluid)

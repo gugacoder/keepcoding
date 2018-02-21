@@ -1,6 +1,6 @@
 const paper = {
   install (Vue, options) {
-    var parser = require('./parser.js')
+    var parser = require('./parser.js')(options.vm)
     var error = require('./errors.js')
     var requester = require('./requester.js')(options.store, options.router, options.axios, error, options.vm)
     var demo = require('./demo.js')(options.router, options.store, requester, parser, options.vm)

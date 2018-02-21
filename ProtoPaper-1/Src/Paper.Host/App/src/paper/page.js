@@ -41,11 +41,10 @@ module.exports = (store, router, requester, parser, vue, demo) => ({
             data: parser.parse(json)
           }
         }
-      } else {
-        return {
-          ok: false,
-          data: response.data
-        }
+      }
+      return {
+        ok: false,
+        data: response.data
       }
     })
   },

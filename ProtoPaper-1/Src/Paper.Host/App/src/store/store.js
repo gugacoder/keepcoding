@@ -9,7 +9,8 @@ Vue.use(Vuex)
 
 const state = {
   pathEntity: null,
-  entity: null
+  entity: null,
+  demo: false
 }
 
 const mutations = {
@@ -18,7 +19,12 @@ const mutations = {
   },
 
   setPathEntity (state, data) {
+    console.log('setPathEntity', data)
     state.pathEntity = data
+  },
+
+  setDemoState (state, data) {
+    state.demo = data
   }
 }
 

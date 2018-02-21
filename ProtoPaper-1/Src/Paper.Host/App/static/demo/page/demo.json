@@ -18,7 +18,7 @@
        "iron": "1%"
      },
       "links": [
-        { "rel": ["self"], "href": "http://localhost:8080/page/demo/1", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/page/demo/1", "title": "Detalhes" }
       ],
      "actions": [
       {
@@ -407,12 +407,12 @@
     },
     {
       "rel":["next"],
-      "href":"http://localhost:8080/page/demoPage2"
+      "href":"/page/demoPage2"
     },
     {
       "rel":["orders"],
       "title":"Orders",
-      "href":"http://localhost:8080/page/demo/1"
+      "href":"/page/demo/1"
     },
     {
       "rel":["book"],

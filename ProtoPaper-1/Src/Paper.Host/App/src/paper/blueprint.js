@@ -2,11 +2,8 @@ module.exports = (store, router, demo, requester, page, vue) => ({
   blueprintPage: '/Api/1/Paper/Blueprint',
 
   getPlanRoutePage () {
-    console.log('blueprint getPlanRoutePage')
     this.loadData()
-    console.log('blueprint hasPlanRoute 1', store.state.blueprint.entity.hasLinkByRel('planRoute'))
     if (store.state.blueprint.entity && store.state.blueprint.entity.hasLinkByRel('planRoute')) {
-      console.log('blueprint getPlanRoute 2', store.state.blueprint.entity.getLinkByRel('planRoute'))
       return store.state.blueprint.entity.getLinkByRel('planRoute').href
     }
     return '#'
@@ -33,7 +30,7 @@ module.exports = (store, router, demo, requester, page, vue) => ({
   hasNavBox () {
     this.loadData()
     if (store.state.blueprint.entity !== null && store.state.blueprint.entity.hasProperty('hasNavBox')) {
-      return store.state.blueprint.entity.properties.hasNavBox
+      return store.state.blueprint.entity.properties.hasNavBox === 1
     }
     return false
   },
@@ -43,8 +40,11 @@ module.exports = (store, router, demo, requester, page, vue) => ({
   },
 
   loadData () {
-    console.log('blueprint entity', store.state.blueprint.entity)
     if (store.state.blueprint.entity === null) {
+      if (store.state.demo) {
+        demo.loadBlueprint()
+        return
+      }
       page.parse(this.blueprintPage).then(response => {
         if (response.ok) {
           this.setBlueprint(response.data)

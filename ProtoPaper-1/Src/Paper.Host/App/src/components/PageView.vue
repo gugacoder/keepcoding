@@ -18,10 +18,11 @@
       PaperForm
     },
     beforeRouteUpdate (to, from, next) {
-      this.$store.commit('setPathEntity', to.path)
+      console.log('before update', to.path)
       next()
     },
     created () {
+      console.log('created')
       this.$paper.page.load()
     },
     computed: {
