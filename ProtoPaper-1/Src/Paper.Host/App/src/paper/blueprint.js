@@ -27,7 +27,7 @@ module.exports = (store, router, demo, requester, page, vue) => ({
     return store.state.blueprint.entity != null && store.state.blueprint.entity.hasLinkByRel('index')
   },
 
-  hasNavBox () {
+  showNavBox () {
     this.loadData()
     if (store.state.blueprint.entity !== null && store.state.blueprint.entity.hasProperty('hasNavBox')) {
       return store.state.blueprint.entity.properties.hasNavBox === 1

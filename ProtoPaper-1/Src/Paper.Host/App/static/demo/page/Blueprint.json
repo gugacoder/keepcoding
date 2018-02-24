@@ -1,7 +1,12 @@
 {
   "class": ["blueprint"],
   "properties": {
-    "hasNavBox": 1
+    "hasNavBox": 1,
+    "id":"001",
+    "name":"demoPage",
+    "title": "Demonstração",
+    "description": "Projeto de demonstração do Paper",
+    "version": "0.0.1"
   },
   "links": [
     { "rel": ["index"], "href": "/Api/1/Index" },

@@ -1,36 +1,30 @@
 <template lang="pug">
-  v-card(
-    color="grey lighten-4" 
-    flat
-  )
-    v-card-title(
-      primary-title
-      v-if="$paper.page.hasTitle()"
-    ) 
-      div
-        div(
-          class="headline"
-        ) {{ $paper.page.getTitle() }}
+  v-card(color="grey lighten-4")
+    v-container(
+      fluid
+      grid-list-md
+    )
+      div(v-if="$paper.page.hasTitle()")
+        div(class="headline") 
+          | {{ $paper.page.getTitle() }}
 
-    v-card-text
-      v-container(fluid)
-        
-        grid-view-pagination
+      grid-view-pagination
 
-        v-data-table(
-          v-model="selected"
-          :headers="headers"
-          :items="items"
-          item-key="_indexRowItemTable"
-          hide-actions=true
-          :select-all="$paper.grid.hasActions()"
-          no-data-text="Não existem dados para exibir"
+      v-data-table(
+        v-model="selected"
+        :headers="headers"
+        :items="items"
+        item-key="_indexRowItemTable"
+        hide-actions=true
+        :select-all="$paper.grid.hasActions()"
+        no-data-text="Não existem dados para exibir"
+      )
+        template(
+          slot="items" 
+          slot-scope="items"
         )
-          template(
-            slot="items" 
-            slot-scope="items"
-          )
 
+          td
             v-checkbox(
               v-if="$paper.grid.hasActions()"
               primary
@@ -38,41 +32,41 @@
               v-model="items.selected"
               @click.stop="items.selected = !items.selected"
             )
-            
-            td(
-              v-for="(item, index) in items.item"
-              v-if="!index.startsWith('_')"
-              :key="item" 
-              class="text-xs-left"
-              nowrap
-            ) {{ item }}
+          
+          td(
+            v-for="(item, index) in items.item"
+            v-if="!index.startsWith('_')"
+            :key="item" 
+            class="text-xs-left"
+            nowrap
+          ) {{ item }}
 
-            td(
-              class="text-xs-center" 
-              @click.stop=""
+          td(
+            class="text-xs-center" 
+            @click.stop=""
+          )
+            v-menu(
+              offset-x 
+              left 
+              bottom 
+              v-if="$store.state.entity.entities[items.index].links"
             )
-              v-menu(
-                offset-x 
-                left 
-                bottom 
-                v-if="$store.state.entity.entities[items.index].links"
+              v-btn(
+                icon
+                slot="activator"
               )
-                v-btn(
-                  icon
-                  slot="activator"
-                )
-                  v-icon
-                    | more_vert
+                v-icon
+                  | more_vert
 
-                v-list
-                  v-list-tile(
-                    v-for="item in $store.state.entity.entities[items.index].links" 
-                    :key="item.href"
-                  )
-                    v-list-tile-content
-                      a(
-                        @click.stop="$paper.requester.request(item.href)"
-                      ) {{ item.title ? item.title : item.rel[0] }}
+              v-list
+                v-list-tile(
+                  v-for="item in $store.state.entity.entities[items.index].links" 
+                  :key="item.href"
+                )
+                  v-list-tile-content
+                    a(
+                      @click.stop="$paper.requester.request(item.href)"
+                    ) {{ item.title ? item.title : item.rel[0] }}
 
 </template>
 

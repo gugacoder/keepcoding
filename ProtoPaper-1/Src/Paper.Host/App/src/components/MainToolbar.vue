@@ -9,7 +9,6 @@
   )
     v-btn(
       icon
-      class="hidden-xs-only"
       href="javascript:history.back()"
     )
       v-icon arrow_back
@@ -19,7 +18,7 @@
       class="ml-0 pl-3 "
     )
       span(
-        class="hidden-xs-only"
+        :class="showTitle"
       ) 
         router-link(
           style="text-decoration: none; color: white"
@@ -27,6 +26,7 @@
         ) Sandbrowser
 
     v-text-field(
+      v-if="$paper.blueprint.showNavBox()"
       @keyup.enter="search"
       v-model="searchParams"
       clearable
@@ -36,10 +36,12 @@
       placeholder="Buscar Rota"
       style="max-width: 700px; min-width: 200px"
     )
+
     v-spacer
+
     v-toolbar-side-icon(
       v-if="showLinks"
-      @click.stop="$store.commit('changeNavigation')"
+      @click.stop="openMenu"
     )
 </template>
 
@@ -55,7 +57,6 @@
     computed: {
       showLinks () {
         return this.$store.state.entity !== null &&
-               this.$paper.blueprint.hasNavBox() &&
                (this.$paper.navigation.hasLinks() || this.$paper.actions.hasActions())
       },
 
@@ -63,6 +64,10 @@
         if (this.$store.state.selection.selectionState) {
           return 'display: none'
         }
+      },
+
+      showTitle () {
+        return this.$paper.blueprint.showNavBox() ? 'hidden-xs-only' : ''
       }
     },
     methods: {
@@ -72,6 +77,10 @@
 
       clearSearch () {
         this.searchParams = ''
+      },
+
+      openMenu () {
+        this.$store.commit('showNavigation')
       }
     }
   }

@@ -1,5 +1,5 @@
 const state = {
-  show: !window.innerWidth < 993
+  show: false
 }
 
 const mutations = {

@@ -9,7 +9,7 @@ module.exports = (vue) => ({
       var resource = sirenParser(file)
       return resource
     } catch (err) {
-      vue.$notify({ message: 'Falhou a tentativa de realizar o parse do arquivo: ' + file, type: 'danger' })
+      vue.$notify({ message: 'Falhou a tentativa de realizar o parse do arquivo: ' + err, type: 'danger' })
     }
   }
 })

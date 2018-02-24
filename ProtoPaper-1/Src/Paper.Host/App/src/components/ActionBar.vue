@@ -10,14 +10,13 @@
     )
       v-icon arrow_back
     
-    v-toolbar-title
+    v-toolbar-title(v-if="!$breakpoint.xs")
       | Cancelar
 
     v-spacer
 
-    v-subheader(name="itensSelecionadosLabel")
-      | {{ $store.state.selection.itemsSelected.length }} 
-      | {{ $store.state.selection.itemsSelected.length > 1 ? 'itens selecionados' : 'item selecionado'}} 
+    v-subheader
+      | {{ selectedItemsLabel }}
 
     v-btn(
       flat
@@ -26,17 +25,20 @@
       @click.stop="actionClick(action)"
     ) {{ $paper.actions.getTitle(action) }}
 
-
     action-bar-form(ref="actionBarForm")
 </template>
 
 <script>
   import { Events } from '../event-bus.js'
   import ActionBarForm from './ActionBarForm.vue'
+  import Breakpoint from '../mixins/Breakpoint.js'
   export default {
     components: {
       ActionBarForm
     },
+    mixins: [
+      Breakpoint
+    ],
     data: () => ({
       actionName: ''
     }),
@@ -56,6 +58,11 @@
       action () {
         var action = this.actions.filter(a => a.name === this.actionName)[0]
         return action
+      },
+
+      selectedItemsLabel () {
+        var text = this.$store.state.selection.itemsSelected.length > 1 ? 'itens selecionados' : 'item selecionado'
+        return this.$store.state.selection.itemsSelected.length + ' ' + text
       }
     },
     methods: {

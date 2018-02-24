@@ -3,7 +3,6 @@
     fixed
     right
     clipped
-    :temporary="isMobile"
     v-model="$store.state.navigation.show"
     app
     v-if="show"
@@ -48,20 +47,19 @@
 </template>
 
 <script>
+  import Breakpoint from '../mixins/Breakpoint.js'
   export default {
     beforeRouteUpdate (to, from, next) {
       next()
     },
+    mixins: [
+      Breakpoint
+    ],
     computed: {
       show () {
         var show = !this.$store.state.selection.selectionState &&
-                   this.$paper.blueprint.hasNavBox() &&
-                   (this.$paper.navigation.hasLinks() || this.$paper.actions.hasActions)
+                   this.$store.state.navigation.show
         return show
-      },
-
-      isMobile () {
-        return window.innerWidth < 993
       }
     },
     methods: {

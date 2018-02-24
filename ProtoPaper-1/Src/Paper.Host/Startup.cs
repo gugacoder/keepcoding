@@ -52,6 +52,7 @@ namespace Paper.Host
       app.UseStatusCodePagesWithReExecute("/error/{0}");
       app.UseExceptionHandler("/error/500");
 
+      app.UseDefaultFiles();
       app.UseStaticFiles();
       app.UseDirectoryBrowser();
 
