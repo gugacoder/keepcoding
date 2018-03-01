@@ -44,6 +44,30 @@
              "title":"Ativo",
              "type":"number",
              "dataType":"int"
+          },
+          {
+             "name":"active2",
+             "title":"Ativo",
+             "type":"number",
+             "dataType":"int"
+          },
+          {
+             "name":"active3",
+             "title":"Ativo",
+             "type":"number",
+             "dataType":"int"
+          },
+          {
+             "name":"active4",
+             "title":"Ativo",
+             "type":"number",
+             "dataType":"int"
+          },
+          {
+             "name":"active5",
+             "title":"Ativo",
+             "type":"number",
+             "dataType":"int"
           }
         ]
       }

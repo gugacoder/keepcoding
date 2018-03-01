@@ -11,6 +11,7 @@ module.exports = (store, router, requester, parser, vue, demo) => ({
   load () {
     var path = store.state.pathEntity
     if (demo.isDemoPage(path)) {
+      store.commit('setDemoState')
       demo.load(path)
       return
     }

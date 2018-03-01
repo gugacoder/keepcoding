@@ -4,9 +4,7 @@
     action-bar
     main-toolbar
     v-content
-      router-view(
-        :key="$route.fullPath"
-      )
+      router-view(:key="$route.fullPath")
     main-footer
     notifications
 </template>

@@ -11,19 +11,40 @@
       v-icon arrow_back
     
     v-toolbar-title(v-if="!$breakpoint.xs")
-      | Cancelar
+      v-btn(
+        flat
+        @click="deselected"
+      )
+        | Cancelar
 
     v-spacer
 
     v-subheader
       | {{ selectedItemsLabel }}
 
-    v-btn(
-      flat
-      v-for="action in actions" 
-      :key="action.name"
-      @click.stop="actionClick(action)"
-    ) {{ $paper.actions.getTitle(action) }}
+    div(v-if="!$breakpoint.xs")
+      v-btn(
+        flat
+        v-for="action in actions" 
+        :key="action.name"
+        @click.stop="actionClick(action)"
+      ) {{ $paper.actions.getTitle(action) }}
+
+    v-menu(v-if="$breakpoint.xs")
+      v-btn(
+        icon
+        slot="activator"
+      )
+        v-icon more_vert
+      
+      v-list
+        v-list-tile(
+          v-for="action in actions" 
+          :key="action.name"
+          @click.stop="actionClick(action)"
+        )
+          v-list-tile-title 
+            | {{ $paper.actions.getTitle(action) }}
 
     action-bar-form(ref="actionBarForm")
 </template>

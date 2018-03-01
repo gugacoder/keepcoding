@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import NotFound from '@/components/NotFoundPage'
 import ErrorPage from '@/components/ErrorPage'
+import AboutPage from '@/components/AboutPage'
 import Page from '@/components/PageView'
 import Home from '@/components/Home'
 
@@ -29,6 +30,12 @@ export default new Router({
       path: '/error',
       name: 'error',
       component: ErrorPage,
+      props: true
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutPage,
       props: true
     }
   ]

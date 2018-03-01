@@ -17,6 +17,46 @@ module.exports = (store, router, demo, requester, page, vue) => ({
     return '#'
   },
 
+  getProjectName () {
+    if (this.hasProjectInfo()) {
+      return store.state.blueprint.entity.properties.info.name
+    }
+    return ''
+  },
+
+  getProjectTitle () {
+    if (this.hasProjectInfo()) {
+      var title = store.state.blueprint.entity.properties.info.title
+      return title !== null ? title : ''
+    }
+    return ''
+  },
+
+  getProjectDescription () {
+    if (this.hasProjectInfo()) {
+      return store.state.blueprint.entity.properties.info.description
+    }
+    return ''
+  },
+
+  getProjectVersion () {
+    if (this.hasProjectInfo()) {
+      return store.state.blueprint.entity.properties.info.version
+    }
+    return ''
+  },
+
+  getProjectInfo () {
+    if (this.hasProjectInfo()) {
+      return store.state.blueprint.entity.properties.info
+    }
+  },
+
+  hasProjectInfo () {
+    this.loadData()
+    return store.state.blueprint.entity !== null && store.state.blueprint.entity.hasProperty('info')
+  },
+
   hasPlanRoutePage () {
     this.loadData()
     return store.state.blueprint.entity !== null && store.state.blueprint.entity.hasLinkByRel('planRoute')

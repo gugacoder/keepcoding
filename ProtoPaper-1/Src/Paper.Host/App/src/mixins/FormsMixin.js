@@ -9,7 +9,43 @@ import VPaperSelect from '../components/paper/VPaperSelect.vue'
 import VPaperSwitch from '../components/paper/VPaperSwitch.vue'
 import VPaperDatetime from '../components/paper/VPaperDatetime.vue'
 import VPaperCurrency from '../components/paper/VPaperCurrency.vue'
+import VPaperUrl from '../components/paper/VPaperUrl.vue'
 export default {
+  data: () => ({
+    Type: {
+      HIDDEN: 'hidden',
+      TEXT: 'text',
+      SEARCH: 'search',
+      TEL: 'tel',
+      URL: 'url',
+      EMAIL: 'email',
+      PASSWORD: 'password',
+      DATETIME: 'datetime',
+      DATE: 'date',
+      MONTH: 'month',
+      WEEK: 'week',
+      TIME: 'time',
+      NUMBER: 'number',
+      RANGE: 'range',
+      COLOR: 'color',
+      CHECKBOX: 'checkbox',
+      RADIO: 'radio',
+      FILE: 'file'
+    },
+    DataType: {
+      BIT: 'bit',
+      BOOLEAN: 'boolean',
+      BOOL: 'bool',
+      NUMBER: 'numbr',
+      INT: 'int',
+      LONG: 'long',
+      DECIMAL: 'decimal',
+      DOUBLE: 'double',
+      FLOAT: 'float',
+      CURRENCY: 'currency',
+      STRING: 'string'
+    }
+  }),
   components: {
     VPaperText,
     VPaperNumber,
@@ -21,47 +57,29 @@ export default {
     VPaperSelect,
     VPaperSwitch,
     VPaperDatetime,
-    VPaperCurrency
+    VPaperCurrency,
+    VPaperUrl
   },
   methods: {
     $_formsMixin_dynamicComponent (field) {
-      if (field.type === 'hidden') {
-        return 'VPaperHidden'
-      }
-      switch (field.dataType) {
-        case 'date':
+      switch (field.type) {
+        case this.Type.HIDDEN:
+          return 'VPaperHidden'
+        case this.Type.DATE:
           return 'VPaperDate'
-        case 'time':
+        case this.Type.TIME:
           return 'VPaperTime'
-        case 'bit':
-          return 'VPaperSwitch'
-        case 'bool':
-          return 'VPaperSwitch'
-        case 'boolean':
-          return 'VPaperSwitch'
-        case 'number':
-          return 'VPaperNumber'
-        case 'int':
-          return 'VPaperNumberInt'
-        case 'long':
-          return 'VPaperNumberInt'
-        case 'decimal':
-          return 'VPaperNumber'
-        case 'double':
-          return 'VPaperNumber'
-        case 'float':
-          return 'VPaperNumber'
-        case 'currency':
-          return 'VPaperCurrency'
-        case 'multi':
-          if (field.type === 'text') {
-            return 'VPaperSelect'
-          }
-          break
+        case this.Type.URL:
+          return 'VPaperUrl'
+        case this.Type.TEXT:
+          return this._getSubDataType(field.dataType)
+        case this.Type.NUMBER:
+          return this._getSubDataType(field.dataType)
         default:
           return 'VPaperText'
       }
     },
+
     $_formsMixin_makeParams (actionName) {
       var params = {}
       var formName = 'form-' + actionName
@@ -75,10 +93,32 @@ export default {
       })
       return params
     },
+
     $_formsMixin_clear (actionName) {
       var formName = 'form-' + actionName
       var form = this.$refs[formName]
       form.reset()
+    },
+
+    _getSubDataType (dataType) {
+      switch (dataType) {
+        case this.DataType.BIT:
+        case this.DataType.BOOL:
+        case this.DataType.BOOLEAN:
+          return 'VPaperSwitch'
+        case this.DataType.NUMBER:
+        case this.DataType.INT:
+        case this.DataType.LONG:
+          return 'VPaperNumber'
+        case this.DataType.DECIMAL:
+        case this.DataType.DOUBLE:
+        case this.DataType.FLOAT:
+          return 'VPaperNumber'
+        case this.DataType.CURRENCY:
+          return 'VPaperCurrency'
+        default:
+          return 'VPaperText'
+      }
     }
   }
 }

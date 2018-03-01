@@ -7,6 +7,29 @@
       v-card
         v-card-title(primary-title)
           h2 {{ $paper.actions.getTitle(action) }}
+
+          v-spacer(v-if="$breakpoint.xs")
+          
+          v-menu(
+            bottom
+            left
+            v-if="$breakpoint.xs"
+          )
+            v-btn(
+              icon
+              slot="activator"
+            )
+              v-icon more_vert
+            
+            v-list
+              v-list-tile(
+                @click.stop="$_formsMixin_clear(action.name)"
+              ) Limpar
+
+              v-list-tile(
+                @click.stop="close"
+              ) Fechar
+            
         v-card-text
           v-form(
             v-if="action"
@@ -36,25 +59,29 @@
           v-btn(
             color="primary"
             flat
+            v-if="!$breakpoint.xs"
             @click="$_formsMixin_clear(action.name)"
           ) Limpar
 
           v-btn(
             color="primary"
             flat
+            v-if="!$breakpoint.xs"
             @click.stop="close"
           ) Fechar
 </template>
 
 <script>
   import FormsMixin from '../mixins/FormsMixin.js'
+  import Breakpoint from '../mixins/Breakpoint.js'
   export default {
     data: () => ({
       actionBarForm: false,
       action: null
     }),
     mixins: [
-      FormsMixin
+      FormsMixin,
+      Breakpoint
     ],
     computed: {
       fields () {

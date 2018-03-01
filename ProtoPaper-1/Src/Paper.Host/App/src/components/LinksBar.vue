@@ -38,12 +38,28 @@
       v-list-tile(
         v-for="action in $store.state.entity.actions" 
         :key="action.name"
-        @click.stop="push(action)"
+        @click.stop="pushAction(action)"
       )
         v-list-tile-content
           v-list-tile-title(
             v-html="$paper.actions.getTitle(action)"
           )
+
+    v-divider(v-if="$paper.blueprint.hasProjectInfo()")
+    
+    v-list(
+      subheader 
+      v-if="$paper.blueprint.hasProjectInfo()"
+    )
+      v-subheader
+        | SOBRE
+      v-list-tile(
+        @click.stop="pushAboutPage()"
+      )
+        v-list-tile-content
+          v-list-tile-title
+            | Sobre o {{ $paper.blueprint.getProjectTitle() }}
+          
 </template>
 
 <script>
@@ -63,8 +79,12 @@
       }
     },
     methods: {
-      push (action) {
+      pushAction (action) {
         this.$router.push({ query: { action: action.name } })
+      },
+
+      pushAboutPage () {
+        this.$router.push({ name: 'about' })
       }
     }
   }

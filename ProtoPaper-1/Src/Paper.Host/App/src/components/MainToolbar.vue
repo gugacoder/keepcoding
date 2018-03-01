@@ -20,10 +20,10 @@
       span(
         :class="showTitle"
       ) 
-        router-link(
+        a(
           style="text-decoration: none; color: white"
-          to="/"
-        ) Sandbrowser
+          @click.stop="$paper.goToIndex()"
+        ) {{ $paper.blueprint.getProjectTitle() }}
 
     v-text-field(
       v-if="$paper.blueprint.showNavBox()"

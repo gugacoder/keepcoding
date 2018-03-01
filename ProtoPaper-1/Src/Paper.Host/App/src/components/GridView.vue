@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-card(color="grey lighten-4")
+  v-card
     v-container(
       fluid
       grid-list-md
@@ -24,9 +24,8 @@
           slot-scope="items"
         )
 
-          td
+          td(v-if="$paper.grid.hasActions()")
             v-checkbox(
-              v-if="$paper.grid.hasActions()"
               primary
               hide-details
               v-model="items.selected"

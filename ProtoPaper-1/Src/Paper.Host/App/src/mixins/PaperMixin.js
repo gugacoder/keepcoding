@@ -3,6 +3,7 @@ export default {
     $_paperMixin_load () {
       var path = location.href
       if (this.$paper.isDemoPage(path)) {
+        this.$store.commit('setDemoState')
         path = this.$router.currentRoute.path
       }
       this.$_paperMixin_loadPage(path)
@@ -10,6 +11,7 @@ export default {
 
     $_paperMixin_loadPage (path) {
       if (this.$paper.isDemoPage(path)) {
+        this.$store.commit('setDemoState')
         this.$paper.demo.load(path)
       }
       if (path.match(/\/page/g)) {

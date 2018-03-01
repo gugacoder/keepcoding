@@ -27,6 +27,11 @@ const paper = {
 
       isDemoPage (path) {
         return demo.isDemoPage(path)
+      },
+
+      goToIndex () {
+        var indexPage = blueprint.getIndexPage()
+        requester.request(indexPage)
       }
     }
     Vue.prototype.$paper = paper

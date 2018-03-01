@@ -2,14 +2,16 @@
   "class": ["blueprint"],
   "properties": {
     "hasNavBox": 1,
-    "id":"001",
-    "name":"demoPage",
-    "title": "Demonstração",
-    "description": "Projeto de demonstração do Paper",
-    "version": "0.0.1"
+    "info": {
+      "id":"001",
+      "name":"demoPage",
+      "title": "Sandbrowser",
+      "description": "Projeto de demonstração do Paper",
+      "version": "0.0.1"
+    }
   },
   "links": [
-    { "rel": ["index"], "href": "/Api/1/Index" },
+    { "rel": ["index"], "href": "/page/demo/index" },
     { "rel": ["planRoute"], "href": "/Api/1/Paper/PlanRoute" }
   ]
 }
