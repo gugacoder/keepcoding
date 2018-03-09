@@ -24,15 +24,15 @@ module.exports = (store, requester) => ({
   },
 
   goToFirstPage () {
-    requester.request(this.firstLink())
+    requester.redirectToPage(this.firstLink())
   },
 
   goToNextPage () {
-    requester.request(this.nextLink())
+    requester.redirectToPage(this.nextLink())
   },
 
   goToPreviousPage () {
-    requester.request(this.previousLink())
+    requester.redirectToPage(this.previousLink())
   },
 
   getLink (page) {

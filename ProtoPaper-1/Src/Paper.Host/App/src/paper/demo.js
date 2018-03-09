@@ -1,4 +1,4 @@
-module.exports = (router, store, requester, parser, vue) => ({
+module.exports = (router, store, parser, vue) => ({
   blueprintPage: '/page/Blueprint',
 
   isRoot () {
@@ -6,10 +6,10 @@ module.exports = (router, store, requester, parser, vue) => ({
   },
 
   isDemoPage (path) {
-    return path.match(/\/page\/demo/g) !== null || path.match(/\/demo/g) !== null
+    return path !== null && (path.match(/\/page\/demo/g) !== null || path.match(/demo/g) !== null || path.match(/\/demo/g) !== null)
   },
 
-  loadBlueprint () {
+  loadBlueprint (indexPage) {
     this._importDemoFile(this.blueprintPage).then(json => {
       var data = parser.parse(json)
       store.commit('blueprint/setBlueprint', data)
@@ -20,7 +20,8 @@ module.exports = (router, store, requester, parser, vue) => ({
   },
 
   load (jsonFile) {
-    this._setDemoState()
+    store.commit('setDemonstrationState', true)
+    store.commit('setPathEntity', jsonFile)
     jsonFile = this._makeJsonFilePath(jsonFile)
     this._importDemoFile(jsonFile).then(json => {
       var data = parser.parse(json)
@@ -32,10 +33,6 @@ module.exports = (router, store, requester, parser, vue) => ({
     })
   },
 
-  _setDemoState () {
-    store.commit('setDemoState', true)
-  },
-
   _importDemoFile (jsonFile) {
     return import(`../../static/demo${jsonFile}.json`)
   },
@@ -45,6 +42,9 @@ module.exports = (router, store, requester, parser, vue) => ({
       jsonFile = jsonFile.replace(location.origin, '')
     }
     if (!jsonFile.startsWith('/page')) {
+      if (!jsonFile.startsWith('/')) {
+        jsonFile = '/' + jsonFile
+      }
       jsonFile = '/page' + jsonFile
     }
     return jsonFile

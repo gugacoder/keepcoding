@@ -1,26 +1,52 @@
 const state = {
-  show: false
+  openedRightMenu: false,
+  rightMenuVisible: false
+}
+
+const getters = {
+  showRightMenu (state, getters, rootState) {
+    var hasActions = rootState.entity && rootState.entity.actions
+    return hasActions !== null && getters.hasLinks && state.rightMenuVisible
+  },
+
+  links (state, getters, rootState) {
+    var items = []
+    if (rootState.entity && rootState.entity.links) {
+      items = rootState.entity.links.filter(
+        item => item.rel.indexOf('self') &&
+                item.rel.indexOf('next') &&
+                item.rel.indexOf('previous') &&
+                item.rel.indexOf('first')
+      )
+    }
+    return items
+  },
+
+  hasLinks (state, getters, rootState) {
+    if (rootState.entity && rootState.entity.links) {
+      return getters.links.length > 0
+    }
+    return false
+  }
 }
 
 const mutations = {
-  updateNavigation (state, newState) {
-    state.show = newState
+  setRightMenuVisible (state, newState) {
+    state.rightMenuVisible = newState
   },
 
-  changeNavigation (state) {
-    state.show = !state.show
+  openRightMenu (state) {
+    state.openedRightMenu = true
   },
 
-  showNavigation (state) {
-    state.show = true
-  },
-
-  hideNavigation (state) {
-    state.show = false
+  closeRightMenu (state) {
+    state.openedRightMenu = false
   }
 }
 
 export default {
   state,
-  mutations
+  getters,
+  mutations,
+  namespaced: true
 }

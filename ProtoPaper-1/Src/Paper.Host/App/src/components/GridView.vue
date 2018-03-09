@@ -64,7 +64,7 @@
                 )
                   v-list-tile-content
                     a(
-                      @click.stop="$paper.requester.request(item.href)"
+                      @click.stop="$paper.requester.redirectToPage(item.href)"
                     ) {{ item.title ? item.title : item.rel[0] }}
 
 </template>
@@ -87,6 +87,10 @@
       window.addEventListener('scroll', () => {
         this.bottom = true
       })
+    },
+    beforeRouteLeave (to, from, next) {
+      this.$store.commit('selectState', false)
+      next()
     },
     methods: {
       show () {

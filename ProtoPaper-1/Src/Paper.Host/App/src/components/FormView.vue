@@ -75,13 +75,28 @@
             this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
             var location = response.data.headers.get('Location')
             if (location && location.length > 0) {
-              this.$paper.requester.request(location)
+              this.$paper.requester.redirectToPage(location)
             } else {
               this.$paper.requester.goToIndex()
             }
           }
         })
       }
+    },
+    beforeRouteUpdate (to, from, next) {
+      if (to.params.length > 0) {
+        var path = '/' + to.params.path.join('/')
+        this.$store.commit('setPathEntity', path)
+      }
+      next()
+    },
+    created () {
+      var path = '/' + this.$route.params.path
+      if (this.$route.params.path instanceof Array) {
+        path = '/' + this.$route.params.path.join('/')
+      }
+      this.$store.commit('setPathEntity', path)
+      this.$paper.page.load()
     }
   }
 </script>

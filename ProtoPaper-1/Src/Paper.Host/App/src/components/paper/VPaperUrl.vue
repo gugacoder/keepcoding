@@ -10,7 +10,7 @@
     ],
     methods: {
       goToLink () {
-        this.$paper.requester.request(this.field.value)
+        this.$paper.requester.redirectToPage(this.field.value)
       }
     }
   }

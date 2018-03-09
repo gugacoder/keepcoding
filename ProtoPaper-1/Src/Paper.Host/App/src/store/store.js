@@ -10,7 +10,7 @@ Vue.use(Vuex)
 const state = {
   pathEntity: null,
   entity: null,
-  demo: false
+  demonstrationState: false
 }
 
 const mutations = {
@@ -22,8 +22,16 @@ const mutations = {
     state.pathEntity = data
   },
 
-  setDemoState (state, data) {
-    state.demo = data
+  setPageState (state, data) {
+    state.pageState = data
+  },
+
+  setPathName (state, data) {
+    state.pathName = data
+  },
+
+  setDemonstrationState (state, data) {
+    state.isDemo = data
   }
 }
 

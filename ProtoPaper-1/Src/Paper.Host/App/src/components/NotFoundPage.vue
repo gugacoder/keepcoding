@@ -45,7 +45,7 @@
     methods: {
       createRouter () {
         var planRoute = this.$paper.blueprint.getPlanRoutePage()
-        this.$paper.requester.request(planRoute)
+        this.$paper.requester.redirectToPage(planRoute)
       }
     }
   }

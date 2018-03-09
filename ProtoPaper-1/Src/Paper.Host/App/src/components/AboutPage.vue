@@ -51,6 +51,9 @@
         }
         return items
       }
+    },
+    created () {
+      this.$paper.navigation.setRightMenuVisible(false)
     }
   }
 </script>

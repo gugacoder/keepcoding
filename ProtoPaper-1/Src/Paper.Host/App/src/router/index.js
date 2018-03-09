@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import NotFound from '@/components/NotFoundPage'
 import ErrorPage from '@/components/ErrorPage'
 import AboutPage from '@/components/AboutPage'
+import FormPage from '@/components/FormView'
+import LoginPage from '@/components/LoginPage'
 import Page from '@/components/PageView'
 import Home from '@/components/Home'
 
@@ -35,8 +37,17 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: AboutPage,
-      props: true
+      component: AboutPage
+    },
+    {
+      path: '/form/:path(.*)*',
+      name: 'form',
+      component: FormPage
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginPage
     }
   ]
 })

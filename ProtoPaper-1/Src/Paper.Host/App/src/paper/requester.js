@@ -1,27 +1,17 @@
-module.exports = (store, router, axios, errors, vue) => ({
-  request (link) {
+module.exports = (store, router, axios, errors, vue, demo) => ({
+  redirectToPage (link) {
     if (link) {
       if (link.startsWith('http') && !link.startsWith(window.location.origin)) {
         window.open(link, '_blank')
         return
       }
       store.commit('setPathEntity', link)
-      this.redirectToPage(link)
+      if (demo.isDemoPage(link)) {
+        demo.load(link)
+      }
+      var params = this._makeParams(link)
+      router.push({ name: 'page', params: { path: params } })
     }
-  },
-
-  redirectToPage (path) {
-    if (path.indexOf(location.origin) >= 0) {
-      path = path.replace(location.origin, '')
-    }
-    if (path.match(/page/g)) {
-      path = path.replace('page', '')
-    }
-    var params = path.split('/')
-    params = params.filter(function (x) {
-      return (x !== (undefined || null || ''))
-    })
-    router.push({name: 'page', params: { path: params }})
   },
 
   httpRequest (method, href, params) {
@@ -96,5 +86,19 @@ module.exports = (store, router, axios, errors, vue) => ({
   isRoot () {
     var isRoot = window.location.hash.toLowerCase() === '#/index.html' || window.location.hash === '#/'
     return isRoot
+  },
+
+  _makeParams (path) {
+    if (path.indexOf(location.origin) >= 0) {
+      path = path.replace(location.origin, '')
+    }
+    if (path.match(/page/g)) {
+      path = path.replace('page', '')
+    }
+    var params = path.split('/')
+    params = params.filter(function (x) {
+      return (x !== (undefined || null || ''))
+    })
+    return params
   }
 })

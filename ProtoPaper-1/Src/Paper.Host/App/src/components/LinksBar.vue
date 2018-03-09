@@ -3,7 +3,7 @@
     fixed
     right
     clipped
-    v-model="$store.state.navigation.show"
+    v-model="$store.state.navigation.openedRightMenu"
     app
     v-if="show"
   )
@@ -15,7 +15,7 @@
         v-for="link in $paper.navigation.links()"
         :key="link.href"
         :target="$paper.requester.target(link)"
-        @click.stop="$paper.requester.request(link.href)"
+        @click.stop="$paper.requester.redirectToPage(link.href)"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -71,20 +71,29 @@
     mixins: [
       Breakpoint
     ],
-    computed: {
-      show () {
-        var show = !this.$store.state.selection.selectionState &&
-                   this.$store.state.navigation.show
-        return show
-      }
-    },
     methods: {
       pushAction (action) {
-        this.$router.push({ query: { action: action.name } })
+        this.$router.push({
+          name: 'form',
+          params: {
+            path: this.$route.params.path
+          },
+          query: {
+            action: action.name
+          }
+        })
       },
 
       pushAboutPage () {
         this.$router.push({ name: 'about' })
+      }
+    },
+
+    computed: {
+      show () {
+        var show = !this.$store.state.selection.selectionState &&
+                   this.$store.state.navigation.openedRightMenu
+        return show
       }
     }
   }

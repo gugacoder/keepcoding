@@ -7,11 +7,11 @@
     fixed
     :style="showClass"
   )
-    v-btn(
-      icon
-      href="javascript:history.back()"
-    )
-      v-icon arrow_back
+    // v-btn(
+    //   icon
+    //   href="javascript:history.back()"
+    // )
+    //   v-icon arrow_back
 
     v-toolbar-title(
       :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 50px' : 'min-width: 20px'" 
@@ -22,7 +22,7 @@
       ) 
         a(
           style="text-decoration: none; color: white"
-          @click.stop="$paper.goToIndex()"
+          @click.stop="$paper.goToIndexPage()"
         ) {{ $paper.blueprint.getProjectTitle() }}
 
     v-text-field(
@@ -40,8 +40,8 @@
     v-spacer
 
     v-toolbar-side-icon(
-      v-if="showLinks"
-      @click.stop="openMenu"
+      v-if="$paper.navigation.showRightMenu()"
+      @click.stop="$paper.navigation.openRightMenu()"
     )
 </template>
 
@@ -55,11 +55,6 @@
       next()
     },
     computed: {
-      showLinks () {
-        return this.$store.state.entity !== null &&
-               (this.$paper.navigation.hasLinks() || this.$paper.actions.hasActions())
-      },
-
       showClass () {
         if (this.$store.state.selection.selectionState) {
           return 'display: none'
@@ -72,15 +67,11 @@
     },
     methods: {
       search () {
-        this.$paper.requester.request(this.searchParams)
+        this.$paper.requester.redirectToPage(this.searchParams)
       },
 
       clearSearch () {
         this.searchParams = ''
-      },
-
-      openMenu () {
-        this.$store.commit('showNavigation')
       }
     }
   }

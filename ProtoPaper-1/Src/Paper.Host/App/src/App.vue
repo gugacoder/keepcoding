@@ -14,20 +14,19 @@
   import LinksBar from './components/LinksBar.vue'
   import MainFooter from './components/MainFooter.vue'
   import MainToolbar from './components/MainToolbar.vue'
-  import PaperMixin from './mixins/PaperMixin.js'
   export default {
-    mixins: [
-      PaperMixin
-    ],
     components: {
       ActionBar,
       MainFooter,
       MainToolbar,
       LinksBar
     },
+    beforeRouteUpdate (to, from, next) {
+      next()
+    },
     created () {
+      this.$paper.blueprint.load()
       if (this.$paper.page.isRoot() || this.$paper.demo.isRoot()) {
-        this.$paper.blueprint.load()
         return
       }
       var containsHash = this.$paper.requester.containsHash(window.location.href)
@@ -36,7 +35,29 @@
         window.location = path
         return
       }
-      this.$_paperMixin_load()
+      this.load()
+    },
+    computed: {
+      blueprint () {
+        return this.$store.state.blueprint.entity
+      }
+    },
+    methods: {
+      load () {
+        var validRoute = this.$router.options.routes.find(route => route.name === this.$route.name)
+        var isPaperPage = this.$paper.isPaperPage(this.$route.name)
+        if (isPaperPage || !validRoute) {
+          var path = this.$route.path
+          this.$paper.requester.redirectToPage(path)
+        }
+      }
+    },
+    watch: {
+      blueprint (newQuestion, oldQuestion) {
+        if (this.$paper.page.isRoot() || this.$paper.demo.isRoot()) {
+          this.$paper.goToIndexPage()
+        }
+      }
     }
   }
 </script>

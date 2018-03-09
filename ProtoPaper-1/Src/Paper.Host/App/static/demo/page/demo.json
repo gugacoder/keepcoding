@@ -434,21 +434,14 @@
       "href":"/page/demoPage2"
     },
     {
-      "rel":["orders"],
-      "title":"Orders",
-      "href":"/page/demo/1"
+      "rel":["home"],
+      "title":"Página Inicial",
+      "href":"/page/demo"
     },
     {
-      "rel":["book"],
-      "title":"A Semente de Mostarda",
-      "href":"https://goo.gl/8wgSF8",
-      "type":"pdf"
-    },
-    {
-      "rel":["siren"],
-      "title":"Siren",
-      "href":"http://api.x.io/orders/43",
-      "type":"application/vnd.siren+json; charset=UTF-8"
+      "rel":["vue"],
+      "title":"VueJS",
+      "href":"https://vuejs.org/"
     }
   ]
 }
