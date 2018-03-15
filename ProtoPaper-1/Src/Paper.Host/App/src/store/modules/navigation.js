@@ -41,6 +41,10 @@ const mutations = {
 
   closeRightMenu (state) {
     state.openedRightMenu = false
+  },
+
+  changeRightMenuState (state) {
+    state.openedRightMenu = !state.openedRightMenu
   }
 }
 

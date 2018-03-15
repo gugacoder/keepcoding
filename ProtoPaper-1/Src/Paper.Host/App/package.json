@@ -13,6 +13,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "@websanova/vue-auth": "^2.21.3-beta",
     "axios": "^0.17.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "di-vue-mask": "^1.1.0",

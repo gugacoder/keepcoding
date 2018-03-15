@@ -11,6 +11,10 @@ module.exports = (store) => ({
     return store.getters['navigation/showRightMenu']
   },
 
+  changeRightMenuState () {
+    store.commit('navigation/changeRightMenuState')
+  },
+
   openRightMenu () {
     store.commit('navigation/openRightMenu')
   },

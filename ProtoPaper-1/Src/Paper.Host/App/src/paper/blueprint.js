@@ -1,6 +1,10 @@
 module.exports = (store, router, demo, requester, page, vue) => ({
   blueprintPage: '/Api/1/Paper/Blueprint',
 
+  getEntity () {
+    return store.state.blueprint.entity
+  },
+
   getPlanRoutePage () {
     if (store.state.blueprint.entity && store.state.blueprint.entity.hasLinkByRel('planRoute')) {
       return store.state.blueprint.entity.getLinkByRel('planRoute').href
@@ -81,7 +85,7 @@ module.exports = (store, router, demo, requester, page, vue) => ({
         return
       }
       page.parse(this.blueprintPage).then(response => {
-        if (response.ok) {
+        if (response && response.ok) {
           this.setBlueprint(response.data)
         } else {
           vue.notify({ message: 'A página Blueprint (' + this.blueprintPage + ') não existe!', type: 'warning' })

@@ -10,6 +10,7 @@ const paper = {
     var pagination = require('./pagination.js')(options.store, requester)
     var navigation = require('./navigation.js')(options.store)
     var grid = require('./grid.js')(options.store)
+    var authentication = require('./authentication')
     var paper = {
       blueprint: blueprint,
       requester: requester,
@@ -20,6 +21,7 @@ const paper = {
       pagination: pagination,
       navigation: navigation,
       grid: grid,
+      authentication: authentication,
 
       isPaperPage (path) {
         var isPaperPage = path.match(/\/page/g) || path.match(/page/g)

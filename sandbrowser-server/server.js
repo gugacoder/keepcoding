@@ -1,11 +1,29 @@
 // Require express and create an instance of it
 var express = require('express');
 var app = express();
-
+var jwt = require('express-jwt');
+var jwks = require('jwks-rsa');
+var cors = require('cors');
 var bodyParser = require('body-parser');
 
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
+var authCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: "https://keepcoding.auth0.com/.well-known/jwks.json"
+  }),
+  audience: 'https://sandbrowser.paper.com/api/v1',
+  issuer: "https://keepcoding.auth0.com/",
+  algorithms: ['RS256']
+});
+
+app.use(jwtCheck);
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -34,6 +52,10 @@ app.get('/:path', function (req, res) {
     var json = JSON.parse(data);
     res.json(json);
   });
+});
+
+app.get('/authorized', function (req, res) {
+  res.send('Secured Resource');
 });
 
 // on the request to root (localhost:3000/)

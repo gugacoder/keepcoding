@@ -92,7 +92,8 @@
     computed: {
       show () {
         var show = !this.$store.state.selection.selectionState &&
-                   this.$store.state.navigation.openedRightMenu
+                   this.$store.state.navigation.openedRightMenu &&
+                   this.$paper.navigation.showRightMenu()
         return show
       }
     }

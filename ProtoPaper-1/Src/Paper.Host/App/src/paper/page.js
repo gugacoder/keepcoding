@@ -34,6 +34,9 @@ module.exports = (store, router, requester, parser, vue, demo) => ({
   parse (path) {
     return requester.httpRequest('get', path, {}).then(response => {
       if (response.ok) {
+        if (!response.data) {
+          return
+        }
         var json = response.data.data
         if (json) {
           return {

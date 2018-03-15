@@ -41,7 +41,7 @@
 
     v-toolbar-side-icon(
       v-if="$paper.navigation.showRightMenu()"
-      @click.stop="$paper.navigation.openRightMenu()"
+      @click.stop="$paper.navigation.changeRightMenuState()"
     )
 </template>
 

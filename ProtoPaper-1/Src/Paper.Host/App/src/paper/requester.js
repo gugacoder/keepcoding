@@ -16,7 +16,7 @@ module.exports = (store, router, axios, errors, vue, demo) => ({
 
   httpRequest (method, href, params) {
     var getParams = method.toLowerCase() === 'get' ? params : ''
-    var header = { 'Accept': 'application/json;application/vnd.siren+json;charset=UTF-8;' }
+    var header = {'Accept': 'application/json;application/vnd.siren+json;charset=UTF-8;'}
     return axios.request({
       url: href,
       method: method,

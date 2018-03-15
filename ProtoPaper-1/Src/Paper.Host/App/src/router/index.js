@@ -37,7 +37,8 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: AboutPage
+      component: AboutPage,
+      meta: { auth: true }
     },
     {
       path: '/form/:path(.*)*',
@@ -47,7 +48,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: LoginPage
+      component: LoginPage,
+      meta: { auth: false }
     }
   ]
 })
