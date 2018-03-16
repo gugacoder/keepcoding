@@ -1,14 +1,20 @@
-module.exports = (store) => ({
+export default class Grid {
+
+  constructor (options) {
+    this.store = options.store
+  }
+
   getItems () {
     var entities = []
-    if (store.state.entity && store.state.entity.hasSubEntityByClass('item')) {
-      entities = store.state.entity.getSubEntitiesByClass('item')
+    if (this.store.state.entity && this.store.state.entity.hasSubEntityByClass('item')) {
+      entities = this.store.state.entity.getSubEntitiesByClass('item')
     }
     return entities
-  },
+  }
 
   hasActions () {
     var exist = this.getItems().filter(entity => entity.hasAction())
     return exist && exist.length > 0
   }
-})
+
+}

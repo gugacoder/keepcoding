@@ -1,25 +1,31 @@
-module.exports = (store) => ({
+export default class Navigation {
+
+  constructor (options) {
+    this.store = options.store
+  }
+
   links () {
-    return store.getters['navigation/links']
-  },
+    return this.store.getters['navigation/links']
+  }
 
   openedRightMenu () {
-    return store.getters['navigation/openedRightMenu']
-  },
+    return this.store.getters['navigation/openedRightMenu']
+  }
 
   showRightMenu () {
-    return store.getters['navigation/showRightMenu']
-  },
+    return this.store.getters['navigation/showRightMenu']
+  }
 
   changeRightMenuState () {
-    store.commit('navigation/changeRightMenuState')
-  },
+    this.store.commit('navigation/changeRightMenuState')
+  }
 
   openRightMenu () {
-    store.commit('navigation/openRightMenu')
-  },
+    this.store.commit('navigation/openRightMenu')
+  }
 
   setRightMenuVisible (visible) {
-    store.commit('navigation/setRightMenuVisible', visible)
+    this.store.commit('navigation/setRightMenuVisible', visible)
   }
-})
+
+}

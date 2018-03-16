@@ -14,37 +14,24 @@ const state = {
 }
 
 const mutations = {
-  setEntity (state, data) {
+
+  setEntity: (state, data) => {
     state.entity = data
   },
 
-  setPathEntity (state, data) {
+  setEntityPath: (state, data) => {
     state.pathEntity = data
-  },
-
-  setPageState (state, data) {
-    state.pageState = data
-  },
-
-  setPathName (state, data) {
-    state.pathName = data
   },
 
   setDemonstrationState (state, data) {
     state.isDemo = data
   }
-}
 
-const getters = {
-  getEntity: state => {
-    return state.entity ? state.entity : {}
-  }
 }
 
 export default new Vuex.Store({
   state,
   mutations,
-  getters,
   modules: {
     navigation,
     selection,

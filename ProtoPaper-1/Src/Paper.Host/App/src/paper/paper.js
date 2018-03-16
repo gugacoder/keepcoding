@@ -1,16 +1,29 @@
+import Parser from './Parser.js'
+import Errors from './Errors.js'
+import Demo from './Demo.js'
+import Requester from './Requester.js'
+import Page from './Page.js'
+import Blueprint from './Blueprint.js'
+import Actions from './Actions.js'
+import Pagination from './Pagination.js'
+import Navigation from './Navigation.js'
+import Grid from './Grid.js'
+import Auth from './Auth.js'
+
 const paper = {
   install (Vue, options) {
-    var parser = require('./parser.js')(options.vm)
-    var error = require('./errors.js')
-    var demo = require('./demo.js')(options.router, options.store, parser, options.vm)
-    var requester = require('./requester.js')(options.store, options.router, options.axios, error, options.vm, demo)
-    var page = require('./page.js')(options.store, options.router, requester, parser, options.vm, demo)
-    var blueprint = require('./blueprint.js')(options.store, options.router, demo, requester, page, options.vm)
-    var actions = require('./actions.js')(options.store, Object)
-    var pagination = require('./pagination.js')(options.store, requester)
-    var navigation = require('./navigation.js')(options.store)
-    var grid = require('./grid.js')(options.store)
-    var authentication = require('./authentication')
+    var error = new Errors()
+    var parser = new Parser(options)
+    var demo = new Demo(options, parser)
+    var requester = new Requester(options, demo)
+    var page = new Page(options, requester, parser, demo)
+    var blueprint = new Blueprint(options, page, demo)
+    var actions = new Actions(options)
+    var pagination = new Pagination(options, requester)
+    var navigation = new Navigation(options)
+    var grid = new Grid(options)
+    var auth = new Auth(options)
+
     var paper = {
       blueprint: blueprint,
       requester: requester,
@@ -21,7 +34,7 @@ const paper = {
       pagination: pagination,
       navigation: navigation,
       grid: grid,
-      authentication: authentication,
+      auth: auth,
 
       isPaperPage (path) {
         var isPaperPage = path.match(/\/page/g) || path.match(/page/g)
@@ -37,6 +50,7 @@ const paper = {
         requester.redirectToPage(indexPage)
       }
     }
+
     Vue.prototype.$paper = paper
   }
 }

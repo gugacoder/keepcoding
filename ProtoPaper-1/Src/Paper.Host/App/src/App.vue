@@ -27,6 +27,15 @@
       next()
     },
     created () {
+      this.$axios.interceptors.response.use(undefined, (err) => {
+        return new Promise(function (resolve, reject) {
+          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+            this.$store.dispatch('auth/logout')
+          }
+          throw err
+        })
+      })
+
       this.$paper.blueprint.load()
       if (this.$paper.page.isRoot() || this.$paper.demo.isRoot()) {
         return

@@ -10,6 +10,22 @@ import Home from '@/components/Home'
 
 Vue.use(Router)
 
+const ifNotAuthenticated = (to, from, next) => {
+  if (!this.$store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifAuthenticated = (to, from, next) => {
+  if (this.$store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/login')
+}
+
 export default new Router({
   routes: [
     {
@@ -20,7 +36,8 @@ export default new Router({
     {
       path: '/page/:path(.*)*',
       name: 'page',
-      component: Page
+      component: Page,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/notFound',
@@ -38,7 +55,7 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: AboutPage,
-      meta: { auth: true }
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/form/:path(.*)*',
@@ -49,7 +66,7 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: LoginPage,
-      meta: { auth: false }
+      beforeEnter: ifNotAuthenticated
     }
   ]
 })

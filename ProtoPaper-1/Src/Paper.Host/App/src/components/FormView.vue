@@ -86,7 +86,7 @@
     beforeRouteUpdate (to, from, next) {
       if (to.params.length > 0) {
         var path = '/' + to.params.path.join('/')
-        this.$store.commit('setPathEntity', path)
+        this.$store.commit('setEntityPath', path)
       }
       next()
     },
@@ -95,7 +95,7 @@
       if (this.$route.params.path instanceof Array) {
         path = '/' + this.$route.params.path.join('/')
       }
-      this.$store.commit('setPathEntity', path)
+      this.$store.commit('setEntityPath', path)
       this.$paper.page.load()
     }
   }

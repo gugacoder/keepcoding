@@ -13,7 +13,7 @@
           h2 Login
 
         v-card-text
-          v-form(v-on:submit="login()")
+          v-form
             v-layout(column)
 
               v-flex
@@ -48,7 +48,7 @@
               )
                 v-btn(
                   color="primary"
-                  type="submit"
+                  @click.stop="login()"
                 ) Entrar
 
                 v-btn(
@@ -67,12 +67,8 @@
     data: () => ({
       data: {
         body: {
-          username: 'francinescosta@gmail.com',
-          password: '#Fr4nc1n3',
-          client_id: 'AT1gdHZ40YSs59xR2COd67Z1DbRrIviB',
-          response_type: 'token',
-          connection: 'Username-Password-Authentication',
-          redirect_uri: 'http://localhost:5000/home'
+          username: 'admin',
+          password: 'admin'
         },
         rememberMe: false
       },
@@ -85,27 +81,7 @@
 
     methods: {
       login () {
-        console.log('login', this.$auth)
-        this.$auth.login({
-          data: this.data.body,
-          success: function () {
-            console.log('Usuário logado com sucesso.')
-          },
-          error: function () {
-            console.log('Usuário e/ou senha inválidos.')
-          },
-          rememberMe: this.data.rememberMe,
-          redirect: { name: 'about' }
-        })
-        // // this.$paper.authentication.login(this.username, this.password)
-      },
-
-      signup () {
-        console.log('Signup')
-      },
-
-      logout () {
-        console.log('Logout')
+        this.$paper.auth.login(this.data.body)
       }
     }
   }

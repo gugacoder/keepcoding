@@ -1,38 +1,47 @@
-module.exports = (store, router, requester, parser, vue, demo) => ({
+export default class Page {
+
+  constructor (options, requester, parser, demo) {
+    this.store = options.store
+    this.router = options.router
+    this.requester = requester
+    this.demo = demo
+    this.parser = parser
+  }
+
   getTitle () {
-    return (store.state.entity && store.state.entity.title) ? store.state.entity.title : ''
-  },
+    return (this.store.state.entity && this.store.state.entity.title) ? this.store.state.entity.title : ''
+  }
 
   isRoot () {
     var isRoot = window.location.hash.toLowerCase() === '#/index.html' || window.location.hash === '#/'
     return isRoot
-  },
+  }
 
   load () {
-    var pathEntity = store.state.pathEntity
-    if (demo.isDemoPage(pathEntity)) {
-      demo.load(pathEntity)
+    var pathEntity = this.store.state.pathEntity
+    if (this.demo.isDemoPage(pathEntity)) {
+      this.demo.load(pathEntity)
       return
     }
-    requester.httpRequest('get', pathEntity, {}).then(response => {
+    this.requester.httpRequest('get', pathEntity, {}).then(response => {
       if (response.ok) {
         var json = response.data.data
         if (json) {
-          var data = parser.parse(json)
-          store.commit('setEntity', data)
+          var data = this.parser.parse(json)
+          this.store.commit('setEntity', data)
         }
       } else {
         if (response.data.status === 404) {
-          router.push({name: 'notFound', params: { routerName: pathEntity }})
+          this.router.push({name: 'notFound', params: { routerName: pathEntity }})
         } else {
-          router.push({name: 'error', params: { error: response.data }})
+          this.router.push({name: 'error', params: { error: response.data }})
         }
       }
     })
-  },
+  }
 
   parse (path) {
-    return requester.httpRequest('get', path, {}).then(response => {
+    return this.requester.httpRequest('get', path, {}).then(response => {
       if (response.ok) {
         if (!response.data) {
           return
@@ -41,7 +50,7 @@ module.exports = (store, router, requester, parser, vue, demo) => ({
         if (json) {
           return {
             ok: true,
-            data: parser.parse(json)
+            data: this.parser.parse(json)
           }
         }
       }
@@ -50,17 +59,18 @@ module.exports = (store, router, requester, parser, vue, demo) => ({
         data: response.data
       }
     })
-  },
+  }
 
   save (path, data) {
-    requester.httpRequest('POST', path, data).then(response => {
+    this.requester.httpRequest('POST', path, data).then(response => {
       if (response.ok) {
-        requester.redirectToPage(path)
+        this.requester.redirectToPage(path)
       }
     })
-  },
+  }
 
   hasTitle () {
-    return store.state.entity && store.state.entity.title
+    return this.store.state.entity && this.store.state.entity.title
   }
-})
+
+}

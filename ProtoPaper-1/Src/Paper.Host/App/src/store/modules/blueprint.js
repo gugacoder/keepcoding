@@ -3,13 +3,18 @@ const state = {
 }
 
 const mutations = {
-  setBlueprint (state, entity) {
+  setEntity (state, entity) {
     state.entity = entity
   }
 }
 
+const getters = {
+  blueprint: state => state.entity
+}
+
 export default {
   state,
+  getters,
   mutations,
   namespaced: true
 }

@@ -1,39 +1,45 @@
-module.exports = (store, requester) => ({
+export default class Pagination {
+
+  constructor (options, requester) {
+    this.store = options.store
+    this.requester = requester
+  }
+
   previousLink () {
-    return this.showPrevious ? store.state.entity.getLinkByRel('previous').href : '#'
-  },
+    return this.showPrevious ? this.store.state.entity.getLinkByRel('previous').href : '#'
+  }
 
   nextLink () {
-    return this.showPrevious ? store.state.entity.getLinkByRel('next').href : '#'
-  },
+    return this.showPrevious ? this.store.state.entity.getLinkByRel('next').href : '#'
+  }
 
   firstLink () {
-    return this.showPrevious ? store.state.entity.getLinkByRel('first').href : '#'
-  },
+    return this.showPrevious ? this.store.state.entity.getLinkByRel('first').href : '#'
+  }
 
   showPrevious () {
-    return store.state.entity && store.state.entity.hasLinkByRel('previous')
-  },
+    return this.store.state.entity && this.store.state.entity.hasLinkByRel('previous')
+  }
 
   showNext () {
-    return store.state.entity && store.state.entity.hasLinkByRel('next')
-  },
+    return this.store.state.entity && this.store.state.entity.hasLinkByRel('next')
+  }
 
   showFirst () {
-    return store.state.entity && store.state.entity.hasLinkByRel('first')
-  },
+    return this.store.state.entity && this.store.state.entity.hasLinkByRel('first')
+  }
 
   goToFirstPage () {
-    requester.redirectToPage(this.firstLink())
-  },
+    this.requester.redirectToPage(this.firstLink())
+  }
 
   goToNextPage () {
-    requester.redirectToPage(this.nextLink())
-  },
+    this.requester.redirectToPage(this.nextLink())
+  }
 
   goToPreviousPage () {
-    requester.redirectToPage(this.previousLink())
-  },
+    this.requester.redirectToPage(this.previousLink())
+  }
 
   getLink (page) {
     switch (page) {
@@ -47,4 +53,5 @@ module.exports = (store, requester) => ({
         return '#'
     }
   }
-})
+
+}

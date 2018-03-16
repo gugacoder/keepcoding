@@ -12,7 +12,7 @@ import 'vuetify/dist/vuetify.css'
 import App from './App'
 import router from './router'
 import store from './store/store'
-import Paper from './paper/paper.js'
+import Paper from './paper/Paper.js'
 
 Vue.router = router
 
@@ -29,34 +29,20 @@ Vue.use(VueAuth, {
   auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
-  rolesVar: 'type',
-  loginData: { url: 'authorize', method: 'GET', redirect: '/home', fetchUser: false }
+  rolesVar: 'type'
 })
 
 Vue.config.productionTip = false
-Vue.axios.defaults.baseURL = process.env.API
+Vue.axios.defaults.baseURL = 'http://localhost:3000'
 
 // Adiciona o plugin do Paper
 var vm = new Vue()
 Vue.use(Paper, { store, router, axios, vm })
 
-axios.interceptors.response.use((response) => {
-  if (response.status === 401 &&
-      ['UnauthorizedAccess', 'InvalidToken'].indexOf(response.data.code) > -1) {
-    Vue.auth.logout({
-      redirect: { name: 'login' }
-    })
-  }
-  return response
-}, (error) => {
-  if (error.status === 401 &&
-      ['UnauthorizedAccess', 'InvalidToken'].indexOf(error.data.code) > -1) {
-    Vue.auth.logout({
-      redirect: { name: 'login' }
-    })
-  }
-  return error
-})
+const token = localStorage.getItem('user-token')
+if (token) {
+  axios.defaults.headers.common['Authorization'] = token
+}
 
 /* eslint-disable no-new */
 new Vue({

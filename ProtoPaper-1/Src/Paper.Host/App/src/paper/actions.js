@@ -1,7 +1,12 @@
-module.exports = (store, object) => ({
+export default class Actions {
+
+  constructor (options) {
+    this.store = options.store
+  }
+
   getAction (name) {
-    return store.state.entity.getActionByName(name)
-  },
+    return this.store.state.entity.getActionByName(name)
+  }
 
   getActions (entities) {
     if (!entities) {
@@ -13,7 +18,7 @@ module.exports = (store, object) => ({
         commomActions = []
         return
       }
-      var keys = object.keys(commomActions)
+      var keys = Object.keys(commomActions)
       var diffs = keys.filter(diff =>
         entity.actions.filter(action => action.name === diff).length === 0
       )
@@ -21,31 +26,31 @@ module.exports = (store, object) => ({
         delete commomActions[diff]
       })
     })
-    return object.values(commomActions)
-  },
+    return Object.values(commomActions)
+  }
 
   getActionFields (entities, actionName) {
     var actions = entities.filter(entity => entity.actions.map(action => action.name === actionName)).map(entity => entity.actions)
     var commomFields = this._getDiffFields(entities, actionName)
     actions.forEach(action => {
       action = action[0]
-      var keys = object.keys(commomFields)
+      var keys = Object.keys(commomFields)
       var diffs = keys.filter(diff => action.fields.filter(field => field.name === diff).length === 0)
       diffs.forEach(diff => {
         delete commomFields[diff]
       })
     })
-    return object.values(commomFields)
-  },
+    return Object.values(commomFields)
+  }
 
   hasSubEntitiesActions () {
-    var exist = store.state.entity.entities.filter(entity => entity.hasAction())
+    var exist = this.store.state.entity.entities.filter(entity => entity.hasAction())
     return exist
-  },
+  }
 
   hasActions () {
-    return store.state.entity && store.state.entity.actions
-  },
+    return this.store.state.entity && this.store.state.entity.actions
+  }
 
   getTitle (action) {
     if (action && action.title !== null && action.title !== undefined && action.title.length > 0) {
@@ -55,7 +60,7 @@ module.exports = (store, object) => ({
       return action.name
     }
     return ''
-  },
+  }
 
   _getDiffActions (entities) {
     var flags = []
@@ -67,7 +72,7 @@ module.exports = (store, object) => ({
       }
     })
     return flags
-  },
+  }
 
   _getDiffFields (entities, actionName) {
     var flags = []
@@ -83,4 +88,4 @@ module.exports = (store, object) => ({
     })
     return flags
   }
-})
+}
