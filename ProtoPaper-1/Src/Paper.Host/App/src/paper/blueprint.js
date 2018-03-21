@@ -1,11 +1,13 @@
 export default class Blueprint {
 
-  constructor (options, page, demo) {
+  constructor (options, page, demo, requester) {
     this.store = options.store
     this.page = page
     this.vue = options.vm
+    this.requester = requester
     this.blueprintPage = '/Api/1/Paper/Blueprint'
-    this.blueprint = this.store.getters.blueprint
+    this.blueprint = this.store.getters['blueprint/blueprint']
+    this.demo = demo
   }
 
   getPlanRoutePage () {
@@ -58,19 +60,19 @@ export default class Blueprint {
   }
 
   hasProjectInfo () {
-    return this.blueprint !== null && this.blueprint.hasProperty('info')
+    return this.blueprint && this.blueprint.hasProperty('info')
   }
 
   hasPlanRoutePage () {
-    return this.blueprint !== null && this.blueprint.hasLinkByRel('planRoute')
+    return this.blueprint && this.blueprint.hasLinkByRel('planRoute')
   }
 
   hasIndexPage () {
-    return this.blueprint !== null && this.blueprint.hasLinkByRel('index')
+    return this.blueprint && this.blueprint.hasLinkByRel('index')
   }
 
   showNavBox () {
-    if (this.blueprint !== null && this.blueprint.hasProperty('hasNavBox')) {
+    if (this.blueprint && this.blueprint.hasProperty('hasNavBox')) {
       return this.blueprint.properties.hasNavBox === 1
     }
     return false
@@ -78,26 +80,39 @@ export default class Blueprint {
 
   setBlueprint (blueprint) {
     this.store.commit('blueprint/setEntity', blueprint)
+    this.blueprint = this.store.getters['blueprint/blueprint']
+  }
+
+  goToIndexPage () {
+    var indexPage = this.getIndexPage()
+    this.requester.redirectToPage(indexPage)
   }
 
   load () {
-    if (this.blueprint === null) {
-      var isDemonstrationState = this.store.state.demonstrationState
-      if (isDemonstrationState) {
-        this.demo.loadBlueprint(this.getIndexPage)
-        return
+    return new Promise((resolve, reject) => {
+      if (this.blueprint === null) {
+        // var isDemoState = this.store.state.isDemoState
+        // if (isDemoState) {
+        //   this.demo.loadBlueprint(this.getIndexPage)
+        //   resolve()
+        //   return
+        // }
+
+        this.page.parse(this.blueprintPage).then(response => {
+          if (response && response.ok) {
+            this.setBlueprint(response.data)
+          } else {
+            var message = 'A página Blueprint (' + this.blueprintPage + ') não existe!'
+            this.vue.notify({
+              message: message,
+              type: 'warning'
+            })
+          }
+          resolve()
+        })
+      } else {
+        resolve()
       }
-      this.page.parse(this.blueprintPage).then(response => {
-        if (response && response.ok) {
-          this.setBlueprint(response.data)
-        } else {
-          var message = 'A página Blueprint (' + this.blueprintPage + ') não existe!'
-          this.vue.notify({
-            message: message,
-            type: 'warning'
-          })
-        }
-      })
-    }
+    })
   }
 }

@@ -22,7 +22,7 @@
       ) 
         a(
           style="text-decoration: none; color: white"
-          @click.stop="$paper.goToIndexPage()"
+          @click.stop="$paper.blueprint.goToIndexPage()"
         ) {{ $paper.blueprint.getProjectTitle() }}
 
     v-text-field(

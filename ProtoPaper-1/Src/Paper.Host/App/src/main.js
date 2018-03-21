@@ -33,7 +33,7 @@ Vue.use(VueAuth, {
 })
 
 Vue.config.productionTip = false
-Vue.axios.defaults.baseURL = 'http://localhost:3000'
+// Vue.axios.defaults.baseURL = 'http://localhost:3000'
 
 // Adiciona o plugin do Paper
 var vm = new Vue()

@@ -3,7 +3,7 @@
     fluid
   )
     v-flex(
-      xs10
+      xs12
       sm6
       offset-sm3
     )

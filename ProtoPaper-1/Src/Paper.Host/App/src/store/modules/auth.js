@@ -1,17 +1,13 @@
-import Vue from 'vue'
 import axios from 'axios'
 
 const state = {
   token: localStorage.getItem('user-token') || '',
-  status: '',
-  endpoints: {
-    login: 'http://localhost:3000/auth/login'
-  }
+  status: ''
 }
 
 const getters = {
   isAuthenticated: state => !!state.token,
-  authStatus: state => state.status,
+  authStatus: state => state.status
 }
 
 const mutations = {
@@ -28,22 +24,24 @@ const mutations = {
   error (state) {
     state.status = 'error'
   }
+
 }
 
 const actions = {
 
   request ({ commit, dispatch }, user) {
     return new Promise((resolve, reject) => {
-      commit('auth/request')
-      axios({ url: this.endpoints.login, data: user, method: 'POST' }).then(resp => {
-        const token = resp.data.token
+      commit('request')
+      var loginUrl = 'http://localhost:3000/auth/login'
+      axios({ url: loginUrl, data: user, method: 'POST' }).then(response => {
+        var token = response.data.token
         localStorage.setItem('user-token', token)
         axios.defaults.headers.common['Authorization'] = token
-        commit('auth/success', resp)
+        commit('success', response)
         // dispatch(USER_REQUEST)
-        resolve(resp)
+        resolve(response)
       }).catch(err => {
-        commit('auth/error', err)
+        commit('error', err)
         localStorage.removeItem('user-token')
         reject(err)
       })
@@ -52,7 +50,6 @@ const actions = {
 
   logout ({commit, dispatch}) {
     return new Promise((resolve, reject) => {
-      commit('auth/logout')
       localStorage.removeItem('user-token')
       delete axios.defaults.headers.common['Authorization']
       resolve()
@@ -65,5 +62,6 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
+  namespaced: true
 }

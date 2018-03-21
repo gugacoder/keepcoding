@@ -7,24 +7,25 @@ import FormPage from '@/components/FormView'
 import LoginPage from '@/components/LoginPage'
 import Page from '@/components/PageView'
 import Home from '@/components/Home'
+// import store from '../store/store'
 
 Vue.use(Router)
 
-const ifNotAuthenticated = (to, from, next) => {
-  if (!this.$store.getters.isAuthenticated) {
-    next()
-    return
-  }
-  next('/')
-}
+// const ifNotAuthenticated = (to, from, next) => {
+//   if (!store.getters['auth/isAuthenticated']) {
+//     next()
+//     return
+//   }
+//   next('/')
+// }
 
-const ifAuthenticated = (to, from, next) => {
-  if (this.$store.getters.isAuthenticated) {
-    next()
-    return
-  }
-  next('/login')
-}
+// const ifAuthenticated = (to, from, next) => {
+//   if (store.getters['auth/isAuthenticated']) {
+//     next()
+//     return
+//   }
+//   next('/login')
+// }
 
 export default new Router({
   routes: [
@@ -36,8 +37,8 @@ export default new Router({
     {
       path: '/page/:path(.*)*',
       name: 'page',
-      component: Page,
-      beforeEnter: ifAuthenticated
+      component: Page
+      // , beforeEnter: ifAuthenticated
     },
     {
       path: '/notFound',
@@ -54,8 +55,8 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: AboutPage,
-      beforeEnter: ifAuthenticated
+      component: AboutPage
+      // , beforeEnter: ifAuthenticated
     },
     {
       path: '/form/:path(.*)*',
@@ -65,8 +66,8 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      component: LoginPage,
-      beforeEnter: ifNotAuthenticated
+      component: LoginPage
+      // , beforeEnter: ifNotAuthenticated
     }
   ]
 })

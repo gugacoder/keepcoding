@@ -17,7 +17,7 @@ const paper = {
     var demo = new Demo(options, parser)
     var requester = new Requester(options, demo)
     var page = new Page(options, requester, parser, demo)
-    var blueprint = new Blueprint(options, page, demo)
+    var blueprint = new Blueprint(options, page, demo, requester)
     var actions = new Actions(options)
     var pagination = new Pagination(options, requester)
     var navigation = new Navigation(options)
@@ -45,9 +45,18 @@ const paper = {
         return demo.isDemoPage(path)
       },
 
-      goToIndexPage () {
-        var indexPage = blueprint.getIndexPage()
-        requester.redirectToPage(indexPage)
+      load (route) {
+        this.blueprint.load().then(() => {
+          if (this.page.isRoot() || this.demo.isRoot()) {
+            this.blueprint.goToIndexPage()
+          } else {
+            var validRoute = options.router.options.routes.find(route => route.name === route.name)
+            var isPaperPage = this.isPaperPage(route.name)
+            if (isPaperPage || !validRoute) {
+              this.requester.redirectToPage(route.path)
+            }
+          }
+        })
       }
     }
 

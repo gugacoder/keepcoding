@@ -27,48 +27,23 @@
       next()
     },
     created () {
-      this.$axios.interceptors.response.use(undefined, (err) => {
-        return new Promise(function (resolve, reject) {
+      this.$http.interceptors.response.use(undefined, (err) => {
+        return new Promise((resolve, reject) => {
           if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-            this.$store.dispatch('auth/logout')
+            this.$paper.auth.logout
           }
           throw err
         })
       })
 
-      this.$paper.blueprint.load()
-      if (this.$paper.page.isRoot() || this.$paper.demo.isRoot()) {
-        return
-      }
       var containsHash = this.$paper.requester.containsHash(window.location.href)
       if (!containsHash) {
         var path = this.$paper.requester.addHashToUrl(window.location.href)
         window.location = path
         return
       }
-      this.load()
-    },
-    computed: {
-      blueprint () {
-        return this.$store.state.blueprint.entity
-      }
-    },
-    methods: {
-      load () {
-        var validRoute = this.$router.options.routes.find(route => route.name === this.$route.name)
-        var isPaperPage = this.$paper.isPaperPage(this.$route.name)
-        if (isPaperPage || !validRoute) {
-          var path = this.$route.path
-          this.$paper.requester.redirectToPage(path)
-        }
-      }
-    },
-    watch: {
-      blueprint (newQuestion, oldQuestion) {
-        if (this.$paper.page.isRoot() || this.$paper.demo.isRoot()) {
-          this.$paper.goToIndexPage()
-        }
-      }
+
+      this.$paper.load(this.$route)
     }
   }
 </script>

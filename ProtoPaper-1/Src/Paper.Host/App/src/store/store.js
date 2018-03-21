@@ -4,13 +4,14 @@ import Vuex from 'vuex'
 import navigation from './modules/navigation.js'
 import selection from './modules/selection.js'
 import blueprint from './modules/blueprint.js'
+import auth from './modules/auth.js'
 
 Vue.use(Vuex)
 
 const state = {
   pathEntity: null,
   entity: null,
-  demonstrationState: false
+  isDemoState: false
 }
 
 const mutations = {
@@ -23,8 +24,8 @@ const mutations = {
     state.pathEntity = data
   },
 
-  setDemonstrationState (state, data) {
-    state.isDemo = data
+  setDemoState (state, data) {
+    state.isDemoState = data
   }
 
 }
@@ -35,6 +36,7 @@ export default new Vuex.Store({
   modules: {
     navigation,
     selection,
-    blueprint
+    blueprint,
+    auth
   }
 })
