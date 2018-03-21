@@ -9,6 +9,7 @@ import Pagination from './Pagination.js'
 import Navigation from './Navigation.js'
 import Grid from './Grid.js'
 import Auth from './Auth.js'
+import State from './State.js'
 
 const paper = {
   install (Vue, options) {
@@ -23,6 +24,7 @@ const paper = {
     var navigation = new Navigation(options)
     var grid = new Grid(options)
     var auth = new Auth(options)
+    var state = new State(options)
 
     var paper = {
       blueprint: blueprint,
@@ -35,6 +37,8 @@ const paper = {
       navigation: navigation,
       grid: grid,
       auth: auth,
+      state: state,
+      entity: options.store.state.entity,
 
       isPaperPage (path) {
         var isPaperPage = path.match(/\/page/g) || path.match(/page/g)
@@ -57,6 +61,10 @@ const paper = {
             }
           }
         })
+      },
+
+      setEntityPath (path) {
+        options.store.commit('setEntityPath', path)
       }
     }
 

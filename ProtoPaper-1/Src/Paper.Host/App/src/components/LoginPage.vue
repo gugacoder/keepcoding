@@ -76,7 +76,7 @@
     }),
 
     created () {
-      this.$paper.navigation.setRightMenuVisible(false)
+      this.$paper.navigation.closeRightMenu()
     },
 
     methods: {

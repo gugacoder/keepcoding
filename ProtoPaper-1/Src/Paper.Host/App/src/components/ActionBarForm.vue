@@ -79,13 +79,15 @@
       actionBarForm: false,
       action: null
     }),
+
     mixins: [
       FormsMixin,
       Breakpoint
     ],
+
     computed: {
       fields () {
-        var selectedItems = this.$store.state.selection.itemsSelected
+        var selectedItems = this.$paper.grid.selectedItems
         var fields = this.$paper.actions.getActionFields(selectedItems, this.action.name)
         return fields
       },
@@ -94,6 +96,7 @@
         return 'form-' + this.action.name
       }
     },
+
     methods: {
       submit () {
         var queryParams = this.$_formsMixin_makeParams(this.action.name)
@@ -119,9 +122,11 @@
         this.actionBarForm = false
       }
     },
+
     created () {
       document.addEventListener('keyup', this.escapeKeyListener)
     },
+
     destroyed () {
       document.removeEventListener('keyup', this.escapeKeyListener)
     }

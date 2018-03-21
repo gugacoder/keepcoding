@@ -57,21 +57,24 @@
     components: {
       ActionBarForm
     },
+
     mixins: [
       Breakpoint
     ],
+
     data: () => ({
       actionName: ''
     }),
+
     computed: {
       showClass () {
-        if (!this.$store.state.selection.selectState) {
+        if (!this.$paper.state.selection) {
           return 'display: none'
         }
       },
 
       actions () {
-        var selectedItems = this.$store.state.selection.itemsSelected
+        var selectedItems = this.$paper.grid.selectedItems
         var actions = this.$paper.actions.getActions(selectedItems)
         return actions && actions.length > 0 ? actions : []
       },
@@ -82,14 +85,16 @@
       },
 
       selectedItemsLabel () {
-        var text = this.$store.state.selection.itemsSelected.length > 1 ? 'itens selecionados' : 'item selecionado'
-        return this.$store.state.selection.itemsSelected.length + ' ' + text
+        var selectedItems = this.$paper.grid.selectedItems
+        var text = selectedItems.length > 1 ? 'itens selecionados' : 'item selecionado'
+        return selectedItems.length + ' ' + text
       }
     },
+
     methods: {
       deselected () {
         Events.$emit('selectState', false)
-        this.$store.commit('selectState', false)
+        this.$paper.state.disableSelectionState()
       },
 
       actionClick (action) {

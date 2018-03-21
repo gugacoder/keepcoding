@@ -8,7 +8,7 @@ export default class Page {
     this.parser = parser
   }
 
-  getTitle () {
+  get title () {
     return (this.store.state.entity && this.store.state.entity.title) ? this.store.state.entity.title : ''
   }
 

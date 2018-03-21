@@ -9,7 +9,7 @@ export default class Actions {
   }
 
   getActions (entities) {
-    if (!entities) {
+    if (!entities || !this.store.state.entity || !this.store.state.entity.actions) {
       return []
     }
     var commomActions = this._getDiffActions(entities)

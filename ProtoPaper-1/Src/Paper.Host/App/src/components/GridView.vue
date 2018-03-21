@@ -6,7 +6,7 @@
     )
       div(v-if="$paper.page.hasTitle()")
         div(class="headline") 
-          | {{ $paper.page.getTitle() }}
+          | {{ $paper.page.title }}
 
       grid-view-pagination
 
@@ -48,7 +48,7 @@
               offset-x 
               left 
               bottom 
-              v-if="$store.state.entity.entities[items.index].links"
+              v-if="$paper.entity.entities[items.index].links"
             )
               v-btn(
                 icon
@@ -59,7 +59,7 @@
 
               v-list
                 v-list-tile(
-                  v-for="item in $store.state.entity.entities[items.index].links" 
+                  v-for="item in $paper.entity.entities[items.index].links" 
                   :key="item.href"
                 )
                   v-list-tile-content
@@ -76,22 +76,26 @@
     components: {
       GridViewPagination
     },
+
     data: () => ({
       showLeftDrawer: '',
       showLinks: false,
       selected: [],
       bottom: false
     }),
+
     created () {
       Events.$on('selectState', this.selectedMode)
       window.addEventListener('scroll', () => {
         this.bottom = true
       })
     },
+
     beforeRouteLeave (to, from, next) {
-      this.$store.commit('selectState', false)
+      this.$paper.state.disableSelectionState()
       next()
     },
+
     methods: {
       show () {
         this.showLinks = !this.showLinks
@@ -108,6 +112,7 @@
         else this.selected = this.items.slice()
       }
     },
+
     computed: {
       items () {
         var items = []
@@ -149,9 +154,10 @@
         return selectedItems
       }
     },
+
     watch: {
       selected () {
-        this.$store.commit('itemsSelected', this.selectedItems)
+        this.$paper.grid.setSelectedItems(this.selectedItems)
       }
     }
   }

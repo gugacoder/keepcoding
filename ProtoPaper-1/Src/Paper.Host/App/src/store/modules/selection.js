@@ -1,20 +1,29 @@
 const state = {
   selectionState: false,
-  itemsSelected: []
+  selectedItems: []
+}
+
+const getters = {
+  items: state => state.selectedItems,
+  isActive: state => state.selectionState
 }
 
 const mutations = {
-  selectState (state, status) {
+  
+  changeSelectionState (state, status) {
     state.selectionState = status
   },
 
-  itemsSelected (state, items) {
+  setSelectedItems (state, items) {
     state.selectionState = items.length > 0
-    state.itemsSelected = items
+    state.selectedItems = items
   }
+
 }
 
 export default {
   state,
-  mutations
+  mutations,
+  getters,
+  namespaced: true
 }

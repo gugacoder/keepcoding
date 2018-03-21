@@ -4,28 +4,32 @@ export default class Navigation {
     this.store = options.store
   }
 
-  links () {
+  get links () {
     return this.store.getters['navigation/links']
   }
 
-  openedRightMenu () {
+  get openedRightMenu () {
     return this.store.getters['navigation/openedRightMenu']
   }
 
-  showRightMenu () {
+  get showRightMenu () {
     return this.store.getters['navigation/showRightMenu']
-  }
-
-  changeRightMenuState () {
-    this.store.commit('navigation/changeRightMenuState')
   }
 
   openRightMenu () {
     this.store.commit('navigation/openRightMenu')
   }
 
+  closeRightMenu () {
+    this.store.commit('navigation/closeRightMenu')
+  }
+
   setRightMenuVisible (visible) {
     this.store.commit('navigation/setRightMenuVisible', visible)
+  }
+
+  changeRightMenuState () {
+    this.store.commit('navigation/changeRightMenuState')
   }
 
 }

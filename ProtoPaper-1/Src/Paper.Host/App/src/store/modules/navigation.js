@@ -4,6 +4,9 @@ const state = {
 }
 
 const getters = {
+  openedRightMenu: state => state.openedRightMenu,
+  rightMenuVisible: state => state.rightMenuVisible,
+
   showRightMenu (state, getters, rootState) {
     var hasActions = rootState.entity && rootState.entity.actions
     return hasActions !== null && getters.hasLinks && state.rightMenuVisible

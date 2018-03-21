@@ -25,6 +25,7 @@
     props: {
       error: Object
     },
+
     computed: {
       show () {
         return this.error && this.error.response

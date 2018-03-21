@@ -36,6 +36,7 @@
     data: () => ({
       headers: []
     }),
+
     computed: {
       items () {
         var data = this.$paper.blueprint.getProjectInfo()
@@ -52,6 +53,7 @@
         return items
       }
     },
+
     created () {
       this.$paper.navigation.setRightMenuVisible(false)
     }

@@ -40,7 +40,7 @@
     v-spacer
 
     v-toolbar-side-icon(
-      v-if="$paper.navigation.showRightMenu()"
+      v-if="$paper.navigation.showRightMenu"
       @click.stop="$paper.navigation.changeRightMenuState()"
     )
 </template>
@@ -51,12 +51,14 @@
       searchParams: '',
       demoPage: '/demo'
     }),
+
     beforeRouteUpdate (to, from, next) {
       next()
     },
+
     computed: {
       showClass () {
-        if (this.$store.state.selection.selectionState) {
+        if (this.$paper.state.selection) {
           return 'display: none'
         }
       },
@@ -65,6 +67,7 @@
         return this.$paper.blueprint.showNavBox() ? 'hidden-xs-only' : ''
       }
     },
+
     methods: {
       search () {
         this.$paper.requester.redirectToPage(this.searchParams)

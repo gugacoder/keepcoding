@@ -4,7 +4,11 @@ export default class Grid {
     this.store = options.store
   }
 
-  getItems () {
+  get selectedItems () {
+    return this.store.getters['selection/items']
+  }
+
+  get items () {
     var entities = []
     if (this.store.state.entity && this.store.state.entity.hasSubEntityByClass('item')) {
       entities = this.store.state.entity.getSubEntitiesByClass('item')
@@ -15,6 +19,10 @@ export default class Grid {
   hasActions () {
     var exist = this.getItems().filter(entity => entity.hasAction())
     return exist && exist.length > 0
+  }
+
+  setSelectedItems (items) {
+    this.store.commit('selection/setSelectedItems', items)
   }
 
 }

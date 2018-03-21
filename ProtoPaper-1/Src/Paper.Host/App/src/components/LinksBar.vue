@@ -3,7 +3,7 @@
     fixed
     right
     clipped
-    v-model="$store.state.navigation.openedRightMenu"
+    v-model="$paper.navigation.openedRightMenu"
     app
     v-if="show"
   )
@@ -12,7 +12,7 @@
         | NAVEGAÇÃO
 
       v-list-tile(
-        v-for="link in $paper.navigation.links()"
+        v-for="link in $paper.navigation.links"
         :key="link.href"
         :target="$paper.requester.target(link)"
         @click.stop="$paper.requester.redirectToPage(link.href)"
@@ -36,9 +36,9 @@
       v-subheader
         | AÇÕES
       v-list-tile(
-        v-for="action in $store.state.entity.actions" 
+        v-for="action in $paper.entity.actions" 
         :key="action.name"
-        @click.stop="pushAction(action)"
+        @click.stop="opneActionPage(action)"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -54,7 +54,7 @@
       v-subheader
         | SOBRE
       v-list-tile(
-        @click.stop="pushAboutPage()"
+        @click.stop="openAboutPage()"
       )
         v-list-tile-content
           v-list-tile-title
@@ -68,11 +68,13 @@
     beforeRouteUpdate (to, from, next) {
       next()
     },
+
     mixins: [
       Breakpoint
     ],
+
     methods: {
-      pushAction (action) {
+      opneActionPage (action) {
         this.$router.push({
           name: 'form',
           params: {
@@ -84,16 +86,16 @@
         })
       },
 
-      pushAboutPage () {
+      openAboutPage () {
         this.$router.push({ name: 'about' })
       }
     },
 
     computed: {
       show () {
-        var show = !this.$store.state.selection.selectionState &&
-                   this.$store.state.navigation.openedRightMenu &&
-                   this.$paper.navigation.showRightMenu()
+        var show = !this.$paper.state.selection &&
+                   this.$paper.navigation.openedRightMenu &&
+                   this.$paper.navigation.showRightMenu
         return show
       }
     }

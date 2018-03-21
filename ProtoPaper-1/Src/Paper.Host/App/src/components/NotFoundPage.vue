@@ -36,12 +36,14 @@
     props: {
       routerName: String
     },
+
     data () {
       return {
         dialog1: 'sandbox',
         dialog: false
       }
     },
+
     methods: {
       createRouter () {
         var planRoute = this.$paper.blueprint.getPlanRoutePage()

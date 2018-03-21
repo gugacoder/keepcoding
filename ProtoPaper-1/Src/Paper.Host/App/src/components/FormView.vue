@@ -46,13 +46,11 @@
     mixins: [
       FormsMixin
     ],
+
     computed: {
       action () {
-        if (this.$store.state.entity && this.$store.state.entity.actions) {
-          var action = this.$paper.actions.getAction(this.actionName)
-          return action
-        }
-        return {}
+        var action = this.$paper.actions.getAction(this.actionName)
+        return action
       },
 
       fields () {
@@ -67,6 +65,7 @@
         return 'form-' + this.actionName
       }
     },
+
     methods: {
       submit () {
         var queryParams = this.$_formsMixin_makeParams(this.actionName)
@@ -83,20 +82,23 @@
         })
       }
     },
+
     beforeRouteUpdate (to, from, next) {
       if (to.params.length > 0) {
         var path = '/' + to.params.path.join('/')
-        this.$store.commit('setEntityPath', path)
+        this.$paper.setEntityPath(path)
       }
       next()
     },
+
     created () {
       var path = '/' + this.$route.params.path
       if (this.$route.params.path instanceof Array) {
         path = '/' + this.$route.params.path.join('/')
       }
-      this.$store.commit('setEntityPath', path)
+      this.$paper.setEntityPath(path)
       this.$paper.page.load()
     }
+
   }
 </script>
