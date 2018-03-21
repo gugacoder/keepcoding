@@ -38,7 +38,10 @@ const paper = {
       grid: grid,
       auth: auth,
       state: state,
-      entity: options.store.state.entity,
+
+      getEntity () {
+        return options.store.getters.entity
+      },
 
       isPaperPage (path) {
         var isPaperPage = path.match(/\/page/g) || path.match(/page/g)

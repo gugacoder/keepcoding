@@ -4,15 +4,15 @@ export default class Navigation {
     this.store = options.store
   }
 
-  get links () {
+  getLinks () {
     return this.store.getters['navigation/links']
   }
 
-  get openedRightMenu () {
+  openedRightMenu () {
     return this.store.getters['navigation/openedRightMenu']
   }
 
-  get showRightMenu () {
+  showRightMenu () {
     return this.store.getters['navigation/showRightMenu']
   }
 

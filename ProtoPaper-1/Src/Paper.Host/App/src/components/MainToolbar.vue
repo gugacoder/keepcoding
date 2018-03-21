@@ -40,7 +40,7 @@
     v-spacer
 
     v-toolbar-side-icon(
-      v-if="$paper.navigation.showRightMenu"
+      v-if="$paper.navigation.showRightMenu()"
       @click.stop="$paper.navigation.changeRightMenuState()"
     )
 </template>
@@ -58,7 +58,7 @@
 
     computed: {
       showClass () {
-        if (this.$paper.state.selection) {
+        if (this.$paper.state.selection()) {
           return 'display: none'
         }
       },

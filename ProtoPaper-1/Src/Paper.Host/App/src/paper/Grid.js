@@ -4,11 +4,11 @@ export default class Grid {
     this.store = options.store
   }
 
-  get selectedItems () {
+  getSelectedItems () {
     return this.store.getters['selection/items']
   }
 
-  get items () {
+  getItems () {
     var entities = []
     if (this.store.state.entity && this.store.state.entity.hasSubEntityByClass('item')) {
       entities = this.store.state.entity.getSubEntitiesByClass('item')

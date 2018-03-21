@@ -6,7 +6,7 @@
     )
       div(v-if="$paper.page.hasTitle()")
         div(class="headline") 
-          | {{ $paper.page.title }}
+          | {{ $paper.page.title() }}
 
       grid-view-pagination
 
@@ -48,7 +48,7 @@
               offset-x 
               left 
               bottom 
-              v-if="$paper.entity.entities[items.index].links"
+              v-if="$paper.getEntity().entities[items.index].links"
             )
               v-btn(
                 icon
@@ -59,7 +59,7 @@
 
               v-list
                 v-list-tile(
-                  v-for="item in $paper.entity.entities[items.index].links" 
+                  v-for="item in $paper.getEntity().entities[items.index].links" 
                   :key="item.href"
                 )
                   v-list-tile-content

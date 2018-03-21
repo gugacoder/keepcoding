@@ -36,7 +36,7 @@
 
     computed: {
       dynamicComponent () {
-        var data = this.$paper.entity
+        var data = this.$paper.getEntity()
         var isCollection = data && data.class && data.class.find(value => value === 'list')
         return isCollection ? PaperGrid : PaperView
       }

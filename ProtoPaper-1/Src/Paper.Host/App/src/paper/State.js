@@ -4,7 +4,7 @@ export default class State {
     this.store = options.store
   }
 
-  get selection () {
+  selection () {
     return this.store.getters['selection/isActive']
   }
 

@@ -14,6 +14,10 @@ const state = {
   isDemoState: false
 }
 
+const getters = {
+  entity: state => state.entity
+}
+
 const mutations = {
 
   setEntity: (state, data) => {
@@ -33,6 +37,7 @@ const mutations = {
 export default new Vuex.Store({
   state,
   mutations,
+  getters,
   modules: {
     navigation,
     selection,

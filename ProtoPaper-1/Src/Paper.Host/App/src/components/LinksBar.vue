@@ -3,7 +3,7 @@
     fixed
     right
     clipped
-    v-model="$paper.navigation.openedRightMenu"
+    v-model="$paper.navigation.openedRightMenu()"
     app
     v-if="show"
   )
@@ -12,7 +12,7 @@
         | NAVEGAÇÃO
 
       v-list-tile(
-        v-for="link in $paper.navigation.links"
+        v-for="link in $paper.navigation.getLinks()"
         :key="link.href"
         :target="$paper.requester.target(link)"
         @click.stop="$paper.requester.redirectToPage(link.href)"
@@ -36,7 +36,7 @@
       v-subheader
         | AÇÕES
       v-list-tile(
-        v-for="action in $paper.entity.actions" 
+        v-for="action in $paper.getEntity().actions" 
         :key="action.name"
         @click.stop="opneActionPage(action)"
       )
@@ -93,9 +93,9 @@
 
     computed: {
       show () {
-        var show = !this.$paper.state.selection &&
-                   this.$paper.navigation.openedRightMenu &&
-                   this.$paper.navigation.showRightMenu
+        var show = !this.$paper.state.selection() &&
+                   this.$paper.navigation.openedRightMenu() &&
+                   this.$paper.navigation.showRightMenu()
         return show
       }
     }
