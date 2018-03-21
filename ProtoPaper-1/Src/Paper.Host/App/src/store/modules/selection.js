@@ -9,7 +9,7 @@ const getters = {
 }
 
 const mutations = {
-  
+
   changeSelectionState (state, status) {
     state.selectionState = status
   },

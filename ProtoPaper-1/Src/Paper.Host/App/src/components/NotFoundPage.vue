@@ -22,7 +22,7 @@
         v-flex(
           xs12 
           class="mt-5"
-          v-if="$paper.blueprint.hasPlanRoutePage()"
+          v-if="$paper.blueprint.hasPlannerPage()"
         )
           v-btn(
             color="primary" 
@@ -46,8 +46,8 @@
 
     methods: {
       createRouter () {
-        var planRoute = this.$paper.blueprint.getPlanRoutePage()
-        this.$paper.requester.redirectToPage(planRoute)
+        var planner = this.$paper.blueprint.getPlannerPage()
+        this.$paper.requester.redirectToPage(planner)
       }
     }
   }

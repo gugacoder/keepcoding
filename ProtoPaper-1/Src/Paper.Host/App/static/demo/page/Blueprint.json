@@ -12,6 +12,6 @@
   },
   "links": [
     { "rel": ["index"], "href": "/page/demo/index" },
-    { "rel": ["planRoute"], "href": "/Api/1/Paper/PlanRoute" }
+    { "rel": ["planner"], "href": "/Api/1/Paper/PlanRoute" }
   ]
 }

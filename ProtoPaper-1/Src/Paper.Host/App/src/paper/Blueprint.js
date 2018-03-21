@@ -10,9 +10,9 @@ export default class Blueprint {
     this.demo = demo
   }
 
-  getPlanRoutePage () {
-    if (this.blueprint && this.blueprint.hasLinkByRel('planRoute')) {
-      return this.blueprint.getLinkByRel('planRoute').href
+  getPlannerPage () {
+    if (this.blueprint && this.blueprint.hasLinkByRel('planner')) {
+      return this.blueprint.getLinkByRel('planner').href
     }
     return '#'
   }
@@ -63,8 +63,8 @@ export default class Blueprint {
     return this.blueprint && this.blueprint.hasProperty('info')
   }
 
-  hasPlanRoutePage () {
-    return this.blueprint && this.blueprint.hasLinkByRel('planRoute')
+  hasPlannerPage () {
+    return this.blueprint && this.blueprint.hasLinkByRel('planner')
   }
 
   hasIndexPage () {
