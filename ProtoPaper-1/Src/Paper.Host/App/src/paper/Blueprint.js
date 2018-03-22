@@ -5,7 +5,7 @@ export default class Blueprint {
     this.page = page
     this.vue = options.vm
     this.requester = requester
-    this.blueprintPage = '/Blueprint'
+    this.blueprintPage = '/Api/1/Blueprint'
     this.blueprint = this.store.getters['blueprint/blueprint']
     this.demo = demo
   }
