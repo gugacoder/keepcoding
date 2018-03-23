@@ -11,7 +11,7 @@
     }
   },
   "links": [
-    { "rel": ["index"], "href": "/page/demo/index" },
-    { "rel": ["planner"], "href": "/Api/1/Paper/PlanRoute" }
+    { "rel": ["index"], "href": "/Index" },
+    { "rel": ["planner"], "href": "/Api/1/Paper/Planner" }
   ]
 }

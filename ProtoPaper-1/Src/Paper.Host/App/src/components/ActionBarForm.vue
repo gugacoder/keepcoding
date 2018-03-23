@@ -87,7 +87,7 @@
 
     computed: {
       fields () {
-        var selectedItems = this.$paper.grid.getSelectedItems()
+        var selectedItems = this.$paper.grid.selectedItems
         var fields = this.$paper.actions.getActionFields(selectedItems, this.action.name)
         return fields
       },

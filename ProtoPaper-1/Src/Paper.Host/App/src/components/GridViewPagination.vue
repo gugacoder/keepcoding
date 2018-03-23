@@ -2,7 +2,7 @@
   v-flex(
     xs12
     right
-    v-if="!$paper.state.selection()"
+    v-if="!$paper.state.selection"
   )
     v-btn(
       color="primary"

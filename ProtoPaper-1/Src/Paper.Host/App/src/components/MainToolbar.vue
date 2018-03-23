@@ -58,7 +58,7 @@
 
     computed: {
       showClass () {
-        if (this.$paper.state.selection()) {
+        if (this.$paper.state.selection) {
           return 'display: none'
         }
       },

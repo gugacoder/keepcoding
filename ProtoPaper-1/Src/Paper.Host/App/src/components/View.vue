@@ -14,7 +14,7 @@
           primary-title
           v-if="$paper.page.hasTitle()"
         )
-          h2 {{ $paper.page.title() }}
+          h2 {{ $paper.page.title }}
 
         v-card-text
           v-container(fluid)
@@ -47,7 +47,6 @@
     computed: {
       items () {
         var data = this.$paper.getEntity()
-        console.log('data', data)
         var items = []
         if (data && data.properties) {
           var keys = Object.keys(data.properties)

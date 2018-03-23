@@ -4,20 +4,21 @@ export default class Grid {
     this.store = options.store
   }
 
-  getSelectedItems () {
+  get selectedItems () {
     return this.store.getters['selection/items']
   }
 
-  getItems () {
+  get items () {
     var entities = []
-    if (this.store.state.entity && this.store.state.entity.hasSubEntityByClass('item')) {
-      entities = this.store.state.entity.getSubEntitiesByClass('item')
+    var entity = this.store.getters.entity
+    if (entity && entity.hasSubEntityByClass('item')) {
+      entities = entity.getSubEntitiesByClass('item')
     }
     return entities
   }
 
   hasActions () {
-    var exist = this.getItems().filter(entity => entity.hasAction())
+    var exist = this.items.filter(entity => entity.hasAction())
     return exist && exist.length > 0
   }
 

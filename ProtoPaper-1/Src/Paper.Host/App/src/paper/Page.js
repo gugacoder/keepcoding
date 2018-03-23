@@ -8,7 +8,11 @@ export default class Page {
     this.parser = parser
   }
 
-  title () {
+  get latest () {
+    return 'teste'
+  }
+
+  get title () {
     return (this.store.state.entity && this.store.state.entity.title) ? this.store.state.entity.title : ''
   }
 

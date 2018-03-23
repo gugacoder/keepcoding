@@ -72,7 +72,7 @@
         this.$paper.requester.httpRequest(this.action.method, this.action.href, queryParams).then(response => {
           if (response.ok) {
             this.$notify({ message: 'Operação realizada com sucesso!', type: 'success' })
-            var location = response.data.headers.get('Location')
+            var location = response.data.headers['Location']
             if (location && location.length > 0) {
               this.$paper.requester.redirectToPage(location)
             } else {

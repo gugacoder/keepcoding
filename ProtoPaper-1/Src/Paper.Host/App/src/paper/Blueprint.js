@@ -1,3 +1,5 @@
+import staticBlueprint from '../../static/Blueprint.json'
+import Parser from './Parser.js'
 export default class Blueprint {
 
   constructor (options, page, demo, requester) {
@@ -7,6 +9,7 @@ export default class Blueprint {
     this.requester = requester
     this.blueprintPage = '/Api/1/Blueprint'
     this.blueprint = this.store.getters['blueprint/blueprint']
+    this.parser = new Parser(options)
     this.demo = demo
   }
 
@@ -72,10 +75,14 @@ export default class Blueprint {
   }
 
   showNavBox () {
+    // console.log('showNavBox 1', this.blueprint)
     if (this.blueprint && this.blueprint.hasProperty('hasNavBox')) {
+      // console.log('showNavBox', this.blueprint.properties.hasNavBox)
+      // console.log('showNavBox int', this.blueprint.properties.hasNavBox === 1)
       return this.blueprint.properties.hasNavBox === 1
     }
-    return false
+    // console.log('return showNavBox')
+    return true
   }
 
   setBlueprint (blueprint) {
@@ -95,10 +102,8 @@ export default class Blueprint {
           if (response && response.ok) {
             this.setBlueprint(response.data)
           } else {
-            this.vue.notify({
-              message: 'A página Blueprint (' + this.blueprintPage + ') não existe!',
-              type: 'warning'
-            })
+            var blueprint = this.parser.parse(staticBlueprint)
+            this.setBlueprint(blueprint)
           }
           resolve()
         })

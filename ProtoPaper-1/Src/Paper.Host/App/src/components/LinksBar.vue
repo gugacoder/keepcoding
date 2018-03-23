@@ -93,7 +93,7 @@
 
     computed: {
       show () {
-        var show = !this.$paper.state.selection() &&
+        var show = !this.$paper.state.selection &&
                    this.$paper.navigation.openedRightMenu() &&
                    this.$paper.navigation.showRightMenu()
         return show

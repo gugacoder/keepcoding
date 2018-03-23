@@ -52,7 +52,7 @@ export default class Requester {
       }
       console.log('Erro: ', error.response)
       message = message + ': ' + href + '. ' + this.errors.httpTranslate(error.response.status)
-      this.vue.$notify({ message: message, type: 'danger' })
+      // this.vue.$notify({ message: message, type: 'danger' })
       return {
         ok: false,
         data: error.response

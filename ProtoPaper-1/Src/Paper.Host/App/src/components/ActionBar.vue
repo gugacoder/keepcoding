@@ -68,13 +68,13 @@
 
     computed: {
       showClass () {
-        if (!this.$paper.state.selection()) {
+        if (!this.$paper.state.selection) {
           return 'display: none'
         }
       },
 
       actions () {
-        var selectedItems = this.$paper.grid.getSelectedItems()
+        var selectedItems = this.$paper.grid.selectedItems
         var actions = this.$paper.actions.getActions(selectedItems)
         return actions && actions.length > 0 ? actions : []
       },
@@ -85,7 +85,7 @@
       },
 
       selectedItemsLabel () {
-        var selectedItems = this.$paper.grid.getSelectedItems()
+        var selectedItems = this.$paper.grid.selectedItems
         var text = selectedItems.length > 1 ? 'itens selecionados' : 'item selecionado'
         return selectedItems.length + ' ' + text
       }
