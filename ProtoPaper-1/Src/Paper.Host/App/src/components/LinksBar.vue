@@ -7,12 +7,15 @@
     app
     v-if="show"
   )
-    v-list(subheader)
+    v-list(
+      subheader
+      v-if="$paper.navigation.hasLinks()"
+    )
       v-subheader
         | NAVEGAÇÃO
 
       v-list-tile(
-        v-for="link in $paper.navigation.getLinks()"
+        v-for="link in $paper.navigation.links"
         :key="link.href"
         :target="$paper.requester.target(link)"
         @click.stop="$paper.requester.redirectToPage(link.href)"

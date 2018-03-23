@@ -75,11 +75,11 @@ export default class Requester {
     return '_self'
   }
 
-  goToIndex () {
+  goToSelf () {
     var data = this.store.state.entity
     if (data && data.hasLinkByRel('self')) {
       var link = data.getLinkByRel('self')
-      this.request(link.href)
+      this.redirectToPage(link.href)
     }
   }
 

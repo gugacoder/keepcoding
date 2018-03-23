@@ -5,32 +5,7 @@ const state = {
 
 const getters = {
   openedRightMenu: state => state.openedRightMenu,
-  rightMenuVisible: state => state.rightMenuVisible,
-
-  showRightMenu (state, getters, rootState) {
-    var hasActions = rootState.entity && rootState.entity.actions
-    return hasActions !== null && getters.hasLinks && state.rightMenuVisible
-  },
-
-  links (state, getters, rootState) {
-    var items = []
-    if (rootState.entity && rootState.entity.links) {
-      items = rootState.entity.links.filter(
-        item => item.rel.indexOf('self') &&
-                item.rel.indexOf('next') &&
-                item.rel.indexOf('previous') &&
-                item.rel.indexOf('first')
-      )
-    }
-    return items
-  },
-
-  hasLinks (state, getters, rootState) {
-    if (rootState.entity && rootState.entity.links) {
-      return getters.links.length > 0
-    }
-    return false
-  }
+  rightMenuVisible: state => state.rightMenuVisible
 }
 
 const mutations = {

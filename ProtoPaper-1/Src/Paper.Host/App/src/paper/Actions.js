@@ -5,11 +5,11 @@ export default class Actions {
   }
 
   getAction (name) {
-    return this.store.state.entity.getActionByName(name)
+    return this.store.getters.entity.getActionByName(name)
   }
 
   getActions (entities) {
-    if (!entities || !this.store.state.entity || !this.store.state.entity.actions) {
+    if (!entities || !this.hasActions()) {
       return []
     }
     var commomActions = this._getDiffActions(entities)
@@ -44,12 +44,13 @@ export default class Actions {
   }
 
   hasSubEntitiesActions () {
-    var exist = this.store.state.entity.entities.filter(entity => entity.hasAction())
+    var exist = this.store.getters.entity.entities.filter(entity => entity.hasAction())
     return exist
   }
 
   hasActions () {
-    return this.store.state.entity && this.store.state.entity.actions
+    var entity = this.store.getters.entity
+    return (entity && entity.actions) !== undefined
   }
 
   getTitle (action) {

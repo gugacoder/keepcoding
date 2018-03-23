@@ -76,7 +76,7 @@
             if (location && location.length > 0) {
               this.$paper.requester.redirectToPage(location)
             } else {
-              this.$paper.requester.goToIndex()
+              this.$paper.requester.goToSelf()
             }
           }
         })

@@ -1,11 +1,30 @@
 export default class Navigation {
 
-  constructor (options) {
+  constructor (options, actions) {
     this.store = options.store
+    this.actions = actions
   }
 
-  getLinks () {
-    return this.store.getters['navigation/links']
+  get links () {
+    var items = []
+    var entity = this.store.getters.entity
+    if (entity && entity.links) {
+      items = entity.links.filter(
+        item => item.rel.indexOf('self') &&
+                item.rel.indexOf('next') &&
+                item.rel.indexOf('previous') &&
+                item.rel.indexOf('first')
+      )
+    }
+    return items
+  }
+
+  hasLinks () {
+    var entity = this.store.getters.entity
+    if (entity && entity.links) {
+      return this.links.length > 0
+    }
+    return false
   }
 
   openedRightMenu () {
@@ -13,7 +32,9 @@ export default class Navigation {
   }
 
   showRightMenu () {
-    return this.store.getters['navigation/showRightMenu']
+    var hasLinkOrAction = this.actions.hasActions() || this.hasLinks()
+    var rightMenuVisible = this.store.getters['navigation/rightMenuVisible']
+    return hasLinkOrAction && rightMenuVisible
   }
 
   openRightMenu () {
