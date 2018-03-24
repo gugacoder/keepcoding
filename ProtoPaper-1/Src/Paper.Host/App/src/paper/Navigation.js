@@ -3,6 +3,7 @@ export default class Navigation {
   constructor (options, actions) {
     this.store = options.store
     this.actions = actions
+    this.openedRightMenu = this.store.getters['navigation/openedRightMenu']
   }
 
   get links () {
@@ -25,10 +26,6 @@ export default class Navigation {
       return this.links.length > 0
     }
     return false
-  }
-
-  openedRightMenu () {
-    return this.store.getters['navigation/openedRightMenu']
   }
 
   showRightMenu () {

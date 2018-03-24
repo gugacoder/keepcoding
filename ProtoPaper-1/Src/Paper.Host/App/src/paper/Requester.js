@@ -26,6 +26,16 @@ export default class Requester {
     }
   }
 
+  redirectToForm (link, action) {
+    if (link) {
+      this.store.commit('setEntityPath', link)
+      if (!(link instanceof Array)) {
+        link = this._makeParams(link)
+      }
+      this.router.push({ name: 'form', params: { path: link }, query: { action: action } })
+    }
+  }
+
   httpRequest (method, href, params) {
     var getParams = method.toLowerCase() === 'get' ? params : ''
     var header = {'Accept': 'application/json;application/vnd.siren+json;charset=UTF-8;'}
@@ -106,6 +116,9 @@ export default class Requester {
     }
     if (path.match(/page/g)) {
       path = path.replace('page', '')
+    }
+    if (path.match(/form/g)) {
+      path = path.replace('form', '')
     }
     var params = path.split('/')
     params = params.filter(function (x) {

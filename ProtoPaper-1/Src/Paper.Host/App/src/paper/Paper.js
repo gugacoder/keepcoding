@@ -48,6 +48,11 @@ const paper = {
         return isPaperPage
       },
 
+      isFormPage (path) {
+        var isFormPage = path.match(/\/form/g) || path.match(/form/g)
+        return isFormPage
+      },
+
       isDemoPage (path) {
         return demo.isDemoPage(path)
       },
@@ -56,12 +61,18 @@ const paper = {
         this.blueprint.load().then(() => {
           if (this.page.isRoot() || this.demo.isRoot()) {
             this.blueprint.goToIndexPage()
-          } else {
-            var validRoute = options.router.options.routes.find(route => route.name === route.name)
-            var isPaperPage = this.isPaperPage(route.name)
-            if (isPaperPage || !validRoute) {
-              this.requester.redirectToPage(route.path)
-            }
+            return
+          }
+          var validRoute = options.router.options.routes.find(route => route.name === route.name)
+          var isPaperPage = this.isPaperPage(route.name)
+          if (isPaperPage || !validRoute) {
+            this.requester.redirectToPage(route.path)
+            return
+          }
+          var isFormPage = this.isFormPage(route.name)
+          if (isFormPage) {
+            var action = route.query && route.query.action ? route.query.action : ''
+            this.requester.redirectToForm(route.path, action)
           }
         })
       },

@@ -75,13 +75,9 @@ export default class Blueprint {
   }
 
   showNavBox () {
-    // console.log('showNavBox 1', this.blueprint)
     if (this.blueprint && this.blueprint.hasProperty('hasNavBox')) {
-      // console.log('showNavBox', this.blueprint.properties.hasNavBox)
-      // console.log('showNavBox int', this.blueprint.properties.hasNavBox === 1)
       return this.blueprint.properties.hasNavBox === 1
     }
-    // console.log('return showNavBox')
     return true
   }
 
@@ -92,7 +88,7 @@ export default class Blueprint {
 
   goToIndexPage () {
     var indexPage = this.getIndexPage()
-    this.requester.redirectToPage(indexPage)
+    this.requester.httpRequest(indexPage)
   }
 
   load () {

@@ -4,8 +4,21 @@ export default class Actions {
     this.store = options.store
   }
 
+  get all () {
+    var actions = []
+    if (this.hasActions()) {
+      actions = this.store.getters.entity.actions
+    }
+    return actions
+  }
+
   getAction (name) {
-    return this.store.getters.entity.getActionByName(name)
+    var entity = this.store.getters.entity
+    if (entity && entity.actions) {
+      var action = entity.getActionByName(name)
+      return action
+    }
+    return ''
   }
 
   getActions (entities) {
@@ -54,10 +67,10 @@ export default class Actions {
   }
 
   getTitle (action) {
-    if (action && action.title !== null && action.title !== undefined && action.title.length > 0) {
+    if (action !== null && action.title !== undefined && action.title.length > 0) {
       return action.title
     }
-    if (action && action.name !== null && action.name !== undefined && action.name.length > 0) {
+    if (action !== null && action.name !== undefined && action.name.length > 0) {
       return action.name
     }
     return ''

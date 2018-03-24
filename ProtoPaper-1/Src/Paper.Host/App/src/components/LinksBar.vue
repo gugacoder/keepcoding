@@ -3,9 +3,9 @@
     fixed
     right
     clipped
-    v-model="$paper.navigation.openedRightMenu()"
-    app
+    v-model="$store.state.navigation.openedRightMenu"
     v-if="show"
+    app
   )
     v-list(
       subheader
@@ -39,9 +39,9 @@
       v-subheader
         | AÇÕES
       v-list-tile(
-        v-for="action in $paper.getEntity().actions" 
+        v-for="action in $paper.actions.all" 
         :key="action.name"
-        @click.stop="opneActionPage(action)"
+        @click.stop="openActionPage(action)"
       )
         v-list-tile-content
           v-list-tile-title(
@@ -77,16 +77,9 @@
     ],
 
     methods: {
-      opneActionPage (action) {
-        this.$router.push({
-          name: 'form',
-          params: {
-            path: this.$route.params.path
-          },
-          query: {
-            action: action.name
-          }
-        })
+      openActionPage (action) {
+        var params = this.$route.params.path
+        this.$paper.requester.redirectToForm(params, action.name)
       },
 
       openAboutPage () {
@@ -97,7 +90,7 @@
     computed: {
       show () {
         var show = !this.$paper.state.selection &&
-                   this.$paper.navigation.openedRightMenu() &&
+                   this.$store.state.navigation.openedRightMenu &&
                    this.$paper.navigation.showRightMenu()
         return show
       }
