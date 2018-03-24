@@ -43,6 +43,9 @@ export default class Actions {
   }
 
   getActionFields (entities, actionName) {
+    if (!entities || !this.hasActions()) {
+      return []
+    }
     var actions = entities.filter(entity => entity.actions.map(action => action.name === actionName)).map(entity => entity.actions)
     var commomFields = this._getDiffFields(entities, actionName)
     actions.forEach(action => {
