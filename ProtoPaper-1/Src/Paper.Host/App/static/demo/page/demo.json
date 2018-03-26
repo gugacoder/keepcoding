@@ -2,6 +2,60 @@
   "class":[
     "items", "list"
   ],
+  "properties": {
+      "fields": [
+         {
+            "name": "id",
+            "title": "Id",
+            "type": "int"
+         },
+         {
+            "name": "name",
+            "title": "Nome",
+            "type": "int"
+         },
+         {
+            "name": "calories",
+            "title": "Caloria",
+            "type": "string"
+         },
+         {
+            "name": "fat",
+            "title": "Gordura",
+            "type": "string"
+         },
+         {
+            "name": "carbs",
+            "title": "Carboidrato",
+            "type": "string"
+         },
+         {
+            "name": "protein",
+            "title": "Proteina",
+            "type": "long"
+         },
+         {
+            "name": "sodium",
+            "title": "Sódio",
+            "type": "long"
+         },
+         {
+            "name": "calcium",
+            "title": "Cálcio",
+            "type": "long"
+         },
+         {
+            "name": "iron",
+            "title": "Ferro",
+            "type": "long"
+         }
+      ],
+      "pagination": {
+         "count": 1,
+         "offset": 0,
+         "limit": 10
+      }
+   },
   "entities":[
    {
      "class": [ "order", "item" ],

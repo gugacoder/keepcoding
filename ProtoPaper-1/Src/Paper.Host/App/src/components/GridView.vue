@@ -79,17 +79,11 @@
     },
 
     data: () => ({
-      showLeftDrawer: '',
-      showLinks: false,
-      selected: [],
-      bottom: false
+      selected: []
     }),
 
     created () {
       Events.$on('selectState', this.selectedMode)
-      window.addEventListener('scroll', () => {
-        this.bottom = true
-      })
     },
 
     beforeRouteLeave (to, from, next) {
@@ -98,10 +92,6 @@
     },
 
     methods: {
-      show () {
-        this.showLinks = !this.showLinks
-      },
-
       selectedMode (selected) {
         if (!selected) {
           this.selected = []
@@ -133,40 +123,17 @@
 
     computed: {
       items () {
-        var items = []
-        if (this.$paper.grid.items) {
-          this.$paper.grid.items.forEach((item, index) => {
-            var itensWithIndex = Object.assign(
-              { _indexRowItemTable: index }, item.properties
-            )
-            items.push(itensWithIndex)
-          })
-        }
-        return items
+        return this.$paper.grid.items
       },
 
       headers () {
-        var headers = []
-        var item = this.items[0]
-        if (item) {
-          var keys = Object.keys(item)
-          keys.forEach((key) => {
-            if (!key.startsWith('_')) {
-              headers.push({
-                text: key,
-                align: 'left',
-                sortable: false
-              })
-            }
-          })
-        }
-        return headers
+        return this.$paper.grid.headers
       },
 
       selectedItems () {
         var selectedItems = []
         this.selected.forEach(item => {
-          var itemSelected = this.$paper.grid.items[item._indexRowItemTable]
+          var itemSelected = this.$paper.grid.validItems[item._indexRowItemTable]
           selectedItems.push(itemSelected)
         })
         return selectedItems
