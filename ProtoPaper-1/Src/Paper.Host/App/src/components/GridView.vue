@@ -38,6 +38,7 @@
             :key="item" 
             class="text-xs-left"
             nowrap
+            @click.stop="openItemView(items.index)"
           ) {{ item }}
 
           td(
@@ -48,7 +49,7 @@
               offset-x 
               left 
               bottom 
-              v-if="$paper.getEntity().entities[items.index].links"
+              v-if="hasItemLinks(items.index)"
             )
               v-btn(
                 icon
@@ -59,7 +60,7 @@
 
               v-list
                 v-list-tile(
-                  v-for="item in $paper.getEntity().entities[items.index].links" 
+                  v-for="item in itemLinks(items.index)" 
                   :key="item.href"
                 )
                   v-list-tile-content
@@ -110,6 +111,23 @@
       toggleAll () {
         if (this.selected.length) this.selected = []
         else this.selected = this.items.slice()
+      },
+
+      openItemView (index) {
+        var entity = this.$paper.getEntity().entities[index]
+        var link = entity.getLinkByRel('self')
+        this.$paper.requester.redirectToPage(link.href)
+      },
+
+      itemLinks (index) {
+        var entity = this.$paper.getEntity().entities[index]
+        var links = entity.links.filter((link) => !link.rel.includes('self'))
+        return links
+      },
+
+      hasItemLinks (index) {
+        var items = this.itemLinks(index)
+        return items && items.length > 0
       }
     },
 

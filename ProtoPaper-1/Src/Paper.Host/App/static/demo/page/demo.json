@@ -18,7 +18,9 @@
        "iron": "1%"
      },
       "links": [
-        { "rel": ["self"], "href": "/page/demo/1", "title": "Detalhes" }
+        { "rel": ["self"], "href": "/page/demo/1", "title": "Detalhes" },
+        { "rel": ["link1"], "href": "/page/demo/1", "title": "Link 1" },
+        { "rel": ["link2"], "href": "/page/demo/1", "title": "Link 2" }
       ],
      "actions": [
       {

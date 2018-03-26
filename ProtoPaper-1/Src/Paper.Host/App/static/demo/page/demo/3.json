@@ -3,6 +3,7 @@
      "rel": [ "http://x.io/rels/customer" ],
      "title": "Detalhes do Item 3",
      "properties": {
+       "_id": "3",
        "name": "Eclair",
        "calories": 262,
        "fat": 16.0,

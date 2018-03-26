@@ -3,6 +3,7 @@
   "rel": [ "http://x.io/rels/customer" ],
   "title": "Detalhes do Item 1",
   "properties": {
+    "_id": "1",
     "name": "Frozen",
     "calories": 159,
     "fat": 6.0,

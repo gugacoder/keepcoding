@@ -5,6 +5,7 @@ export default class Blueprint {
   constructor (options, page, demo, requester) {
     this.store = options.store
     this.page = page
+    this.router = options.router
     this.vue = options.vm
     this.requester = requester
     this.blueprintPage = '/Api/1/Blueprint'
@@ -88,7 +89,13 @@ export default class Blueprint {
 
   goToIndexPage () {
     var indexPage = this.getIndexPage()
-    this.requester.httpRequest(indexPage)
+    this.page.parse(indexPage).then((response) => {
+      if (response && response.ok) {
+        this.requester.redirectToPage(indexPage)
+      } else {
+        this.router.push('Home')
+      }
+    })
   }
 
   load () {

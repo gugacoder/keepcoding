@@ -3,6 +3,7 @@
      "rel": [ "http://x.io/rels/customer" ],
      "title": "Detalhes do Item 2",
      "properties": {
+       "_id": "2",
        "name": "Ice cream",
        "calories": 237,
        "fat": 9.0,

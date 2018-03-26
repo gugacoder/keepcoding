@@ -26,7 +26,6 @@ export default class Demo {
   }
 
   load (jsonFile) {
-    this.store.commit('setDemonstrationState', true)
     this.store.commit('setEntityPath', jsonFile)
     jsonFile = this._makeJsonFilePath(jsonFile)
     this._importDemoFile(jsonFile).then(json => {

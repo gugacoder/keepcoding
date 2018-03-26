@@ -85,7 +85,7 @@ export default class Requester {
     return '_self'
   }
 
-  goToSelf () {
+  goToRootPage () {
     var data = this.store.state.entity
     if (data && data.hasLinkByRel('self')) {
       var link = data.getLinkByRel('self')

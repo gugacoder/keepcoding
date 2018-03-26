@@ -50,11 +50,13 @@
         var items = []
         if (data && data.properties) {
           var keys = Object.keys(data.properties)
-          keys.forEach(function (key) {
-            items.push({
-              key: key,
-              value: data.properties[key]
-            })
+          keys.forEach((key) => {
+            if (!key.startsWith('_')) {
+              items.push({
+                key: key,
+                value: data.properties[key]
+              })
+            }
           })
         }
         return items
