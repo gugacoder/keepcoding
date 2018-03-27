@@ -7,11 +7,11 @@
     fixed
     :style="showClass"
   )
-    // v-btn(
-    //   icon
-    //   href="javascript:history.back()"
-    // )
-    //   v-icon arrow_back
+    v-btn(
+      icon
+      @click.stop="goBack()"
+    )
+      v-icon arrow_back
 
     v-toolbar-title(
       :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 50px' : 'min-width: 20px'" 
@@ -53,7 +53,12 @@
     }),
 
     beforeRouteUpdate (to, from, next) {
+      console.log('beforeRouteUpdate route', this.$router.history)
       next()
+    },
+
+    created () {
+      console.log('created route', this.$router.history)
     },
 
     computed: {
@@ -75,6 +80,14 @@
 
       clearSearch () {
         this.searchParams = ''
+      },
+
+      goBack () {
+        var back = -1
+        if (this.$route.name === 'notFound') {
+          back = -2
+        }
+        this.$router.go(back)
       }
     }
   }
