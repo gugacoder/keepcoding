@@ -23,6 +23,10 @@ const mutations = {
 
   error (state) {
     state.status = 'error'
+  },
+
+  removeToken (state) {
+    state.token = undefined
   }
 
 }
@@ -37,7 +41,7 @@ const actions = {
         var token = response.data.token
         localStorage.setItem('user-token', token)
         axios.defaults.headers.common['Authorization'] = token
-        commit('success', response)
+        commit('success', token)
         // dispatch(USER_REQUEST)
         resolve(response)
       }).catch(err => {
@@ -51,6 +55,7 @@ const actions = {
   logout ({commit, dispatch}) {
     return new Promise((resolve, reject) => {
       localStorage.removeItem('user-token')
+      commit('removeToken')
       delete axios.defaults.headers.common['Authorization']
       resolve()
     })

@@ -3,7 +3,7 @@
     "items", "list"
   ],
   "properties": {
-      "fields": [
+      "_fields": [
          {
             "name": "id",
             "title": "Id",

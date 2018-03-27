@@ -1,6 +1,6 @@
 <template lang="pug">
   v-app
-    links-bar
+    menu-links
     action-bar
     main-toolbar
     v-content
@@ -13,7 +13,7 @@
 
 <script>
   import ActionBar from './components/ActionBar.vue'
-  import LinksBar from './components/LinksBar.vue'
+  import MenuLinks from './components/MenuLinks.vue'
   import MainFooter from './components/MainFooter.vue'
   import MainToolbar from './components/MainToolbar.vue'
   export default {
@@ -21,7 +21,7 @@
       ActionBar,
       MainFooter,
       MainToolbar,
-      LinksBar
+      MenuLinks
     },
     beforeRouteUpdate (to, from, next) {
       next()

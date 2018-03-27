@@ -5,6 +5,10 @@ export default class Auth {
     this.router = options.router
   }
 
+  get isAuthenticated () {
+    return this.store.getters['auth/isAuthenticated']
+  }
+
   login (data) {
     this.store.dispatch('auth/request', data).then((response) => {
       this.router.push('/page/demo')

@@ -5,6 +5,7 @@ import navigation from './modules/navigation.js'
 import selection from './modules/selection.js'
 import blueprint from './modules/blueprint.js'
 import auth from './modules/auth.js'
+import user from './modules/user.js'
 
 Vue.use(Vuex)
 
@@ -42,6 +43,7 @@ export default new Vuex.Store({
     navigation,
     selection,
     blueprint,
-    auth
+    auth,
+    user
   }
 })

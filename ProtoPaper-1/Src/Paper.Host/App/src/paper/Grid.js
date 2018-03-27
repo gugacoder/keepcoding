@@ -58,10 +58,12 @@ export default class Grid {
 
   _getFieldProperties (fieldKey) {
     var entity = this.store.getters.entity
-    if (entity && entity.properties && entity.properties['fields']) {
-      var fields = entity.properties['fields']
-      var field = fields.find((field) => field.name === fieldKey)
-      return field
+    if (entity && entity.properties) {
+      var fields = entity.properties['_fields'] || entity.properties['fields']
+      if (fields) {
+        var field = fields.find((field) => field.name === fieldKey)
+        return field
+      }
     }
   }
 

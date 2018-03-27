@@ -39,6 +39,20 @@
 
     v-spacer
 
+    // v-menu(
+    //   offset-y
+    //   v-if="$paper.auth.isAuthenticated"
+    // )
+    //   v-btn(
+    //     icon
+    //     slot="activator"
+    //   )
+    //     v-icon person
+
+    //   v-list
+    //     v-list-tile(@click="$paper.auth.logout()")
+    //       v-list-tile-title Logout
+
     v-toolbar-side-icon(
       v-if="$paper.navigation.showRightMenu()"
       @click.stop="$paper.navigation.changeRightMenuState()"
@@ -79,6 +93,10 @@
 
       goBack () {
         this.$router.go(-1)
+      },
+
+      showUserMenu () {
+        this.$paper.user.changeMenuState()
       }
     }
   }
