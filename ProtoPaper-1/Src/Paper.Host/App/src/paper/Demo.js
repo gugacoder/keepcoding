@@ -34,7 +34,7 @@ export default class Demo {
     }).catch(() => {
       var message = 'Erro ao carregar a página de demonstração: ' + jsonFile
       this.vue.$notify({ message: message, type: 'danger' })
-      this.router.push({name: 'notFound', params: { routerName: jsonFile }})
+      this.router.replace({name: 'notFound', params: { routerName: jsonFile }})
     })
   }
 

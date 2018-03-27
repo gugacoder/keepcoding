@@ -36,9 +36,9 @@ export default class Page {
         }
       } else {
         if (response.data.status === 404) {
-          this.router.push({name: 'notFound', params: { routerName: pathEntity }})
+          this.router.replace({name: 'notFound', params: { routerName: pathEntity }})
         } else {
-          this.router.push({name: 'error', params: { error: response.data }})
+          this.router.replace({name: 'error', params: { error: response.data }})
         }
       }
     })

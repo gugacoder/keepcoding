@@ -53,12 +53,7 @@
     }),
 
     beforeRouteUpdate (to, from, next) {
-      console.log('beforeRouteUpdate route', this.$router.history)
       next()
-    },
-
-    created () {
-      console.log('created route', this.$router.history)
     },
 
     computed: {
@@ -83,11 +78,7 @@
       },
 
       goBack () {
-        var back = -1
-        if (this.$route.name === 'notFound') {
-          back = -2
-        }
-        this.$router.go(back)
+        this.$router.go(-1)
       }
     }
   }
