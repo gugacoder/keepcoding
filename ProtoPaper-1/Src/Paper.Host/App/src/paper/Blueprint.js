@@ -92,9 +92,10 @@ export default class Blueprint {
     this.page.parse(indexPage).then((response) => {
       if (response && response.ok) {
         this.requester.redirectToPage(indexPage)
-      } else {
-        this.router.push('Home')
       }
+      // else {
+      //   this.router.push('Home')
+      // }
     })
   }
 
