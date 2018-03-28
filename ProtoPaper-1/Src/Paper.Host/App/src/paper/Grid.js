@@ -34,8 +34,8 @@ export default class Grid {
       var keys = Object.keys(item)
       keys.forEach((key) => {
         if (!key.startsWith('_')) {
-          var field = this._getFieldProperties(key)
-          var title = field && field.title && field.title.length > 0 ? field.title : key
+          var header = this._getHeaderProperties(key)
+          var title = header && header.title && header.title.length > 0 ? header.title : key
           headers.push({
             text: title,
             align: 'left',
@@ -56,13 +56,13 @@ export default class Grid {
     this.store.commit('selection/setSelectedItems', items)
   }
 
-  _getFieldProperties (fieldKey) {
+  _getHeaderProperties (headerKey) {
     var entity = this.store.getters.entity
     if (entity && entity.properties) {
-      var fields = entity.properties['_fields'] || entity.properties['fields']
-      if (fields) {
-        var field = fields.find((field) => field.name === fieldKey)
-        return field
+      var headers = entity.properties['_headers'] || entity.properties['headers']
+      if (headers) {
+        var header = headers.find((header) => header.name === headerKey)
+        return header
       }
     }
   }
