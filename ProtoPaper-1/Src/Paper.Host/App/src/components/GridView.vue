@@ -34,7 +34,7 @@
           
           td(
             v-for="(header, index) in headers"
-            :key="header+index" 
+            :key="items.index.toString() + index.toString()"
             class="text-xs-left"
             nowrap
             @click.stop="openItemView(items.item)"
