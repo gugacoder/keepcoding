@@ -33,13 +33,12 @@
             )
           
           td(
-            v-for="(item, index) in items.item"
-            v-if="!index.startsWith('_')"
-            :key="item" 
+            v-for="(header, index) in headers"
+            :key="header+index" 
             class="text-xs-left"
             nowrap
-            @click.stop="openItemView(items.index)"
-          ) {{ item }}
+            @click.stop="openItemView(items.item)"
+          ) {{ items.item[header.value] }}
 
           td(
             class="text-xs-center" 
@@ -92,6 +91,10 @@
     },
 
     methods: {
+      columnKey (column, index, item) {
+        return column.value
+      },
+
       selectedMode (selected) {
         if (!selected) {
           this.selected = []
@@ -103,9 +106,9 @@
         else this.selected = this.items.slice()
       },
 
-      openItemView (index) {
-        var entity = this.$paper.getEntity().entities[index]
-        var link = entity.getLinkByRel('self')
+      openItemView (item) {
+        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+        var link = entireItem.getLinkByRel('self')
         this.$paper.requester.redirectToPage(link.href)
       },
 

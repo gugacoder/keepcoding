@@ -13,6 +13,13 @@
     )
       v-icon arrow_back
 
+    v-btn(
+      icon
+      v-if="$paper.filters.hasFilters()"
+      @click.stop="$paper.filters.changeMenuState()"
+    ) 
+      v-icon filter_list
+
     v-toolbar-title(
       :style="$vuetify.breakpoint.smAndUp ? 'width: 300px; min-width: 50px' : 'min-width: 20px'" 
       class="ml-0 pl-3 "

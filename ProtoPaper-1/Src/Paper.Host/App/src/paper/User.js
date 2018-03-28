@@ -1,4 +1,4 @@
-export default class State {
+export default class User {
 
   constructor (options) {
     this.store = options.store

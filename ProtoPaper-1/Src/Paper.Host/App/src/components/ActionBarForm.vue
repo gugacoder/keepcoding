@@ -1,74 +1,74 @@
 <template lang="pug">
-    v-dialog(
-      v-model="actionBarForm"
-      scrollable
-      max-width="1000"
-    )
-      v-card
-        v-card-title(primary-title)
-          h2 {{ $paper.actions.getTitle(action) }}
+  v-dialog(
+    v-model="actionBarForm"
+    scrollable
+    max-width="1000"
+  )
+    v-card
+      v-card-title(primary-title)
+        h2 {{ $paper.actions.getTitle(action) }}
 
-          v-spacer(v-if="$breakpoint.xs")
-          
-          v-menu(
-            bottom
-            left
-            v-if="$breakpoint.xs"
-          )
-            v-btn(
-              icon
-              slot="activator"
-            )
-              v-icon more_vert
-            
-            v-list
-              v-list-tile(
-                @click.stop="$_formsMixin_clear(action.name)"
-              ) Limpar
-
-              v-list-tile(
-                @click.stop="close"
-              ) Fechar
-            
-        v-card-text
-          v-form(
-            v-if="action"
-            :ref="formName"
-          )
-            v-layout(
-              row 
-              wrap 
-              v-for="field in fields" 
-              :key="field.name"
-            )
-              v-flex(xs12)
-                component(
-                  :is="$_formsMixin_dynamicComponent(field)"
-                  :field="field"
-                )
+        v-spacer(v-if="$breakpoint.xs")
         
-        v-divider
-
-        v-card-actions
+        v-menu(
+          bottom
+          left
+          v-if="$breakpoint.xs"
+        )
           v-btn(
-            color="primary"
-            flat
-            @click="submit()"
-          ) {{ $paper.actions.getTitle(action) }}
+            icon
+            slot="activator"
+          )
+            v-icon more_vert
+          
+          v-list
+            v-list-tile(
+              @click.stop="$_formsMixin_clear(action.name)"
+            ) Limpar
 
-          v-btn(
-            color="primary"
-            flat
-            v-if="!$breakpoint.xs"
-            @click="$_formsMixin_clear(action.name)"
-          ) Limpar
+            v-list-tile(
+              @click.stop="close"
+            ) Fechar
+          
+      v-card-text
+        v-form(
+          v-if="action"
+          :ref="formName"
+        )
+          v-layout(
+            row 
+            wrap 
+            v-for="field in fields" 
+            :key="field.name"
+          )
+            v-flex(xs12)
+              component(
+                :is="$_formsMixin_dynamicComponent(field)"
+                :field="field"
+              )
+      
+      v-divider
 
-          v-btn(
-            color="primary"
-            flat
-            v-if="!$breakpoint.xs"
-            @click.stop="close"
-          ) Fechar
+      v-card-actions
+        v-btn(
+          color="primary"
+          flat
+          @click="submit()"
+        ) {{ $paper.actions.getTitle(action) }}
+
+        v-btn(
+          color="primary"
+          flat
+          v-if="!$breakpoint.xs"
+          @click="$_formsMixin_clear(action.name)"
+        ) Limpar
+
+        v-btn(
+          color="primary"
+          flat
+          v-if="!$breakpoint.xs"
+          @click.stop="close"
+        ) Fechar
 </template>
 
 <script>

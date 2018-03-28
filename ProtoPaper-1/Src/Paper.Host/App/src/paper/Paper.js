@@ -11,6 +11,7 @@ import Grid from './Grid.js'
 import Auth from './Auth.js'
 import State from './State.js'
 import User from './User.js'
+import Filters from './Filters.js'
 
 const paper = {
   install (Vue, options) {
@@ -27,6 +28,7 @@ const paper = {
     var auth = new Auth(options)
     var state = new State(options)
     var user = new User(options)
+    var filters = new Filters(options, actions)
 
     var paper = {
       blueprint: blueprint,
@@ -41,6 +43,7 @@ const paper = {
       auth: auth,
       state: state,
       user: user,
+      filters: filters,
 
       getEntity () {
         return options.store.getters.entity

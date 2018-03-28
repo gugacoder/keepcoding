@@ -6,19 +6,20 @@ export default class Actions {
 
   get all () {
     var actions = []
-    if (this.hasActions()) {
-      actions = this.store.getters.entity.actions
+    var entity = this.store.getters.entity
+    if (entity && entity.actions) {
+      actions = entity.actions.filter(action => action.name !== 'filters')
     }
     return actions
   }
 
   getAction (name) {
     var entity = this.store.getters.entity
+    var action = ''
     if (entity && entity.actions) {
-      var action = entity.getActionByName(name)
-      return action
+      action = entity.getActionByName(name)
     }
-    return ''
+    return action
   }
 
   getActions (entities) {

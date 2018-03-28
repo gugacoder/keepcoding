@@ -29,9 +29,8 @@ export default class Grid {
 
   get headers () {
     var headers = []
-    var item = this.items[0]
-    if (item) {
-      var keys = Object.keys(item)
+    var keys = this._getDiffHeaders()
+    if (keys && keys.length > 0) {
       keys.forEach((key) => {
         if (!key.startsWith('_')) {
           var header = this._getHeaderProperties(key)
@@ -39,7 +38,8 @@ export default class Grid {
           headers.push({
             text: title,
             align: 'left',
-            sortable: false
+            sortable: false,
+            value: key
           })
         }
       })
@@ -65,6 +65,24 @@ export default class Grid {
         return header
       }
     }
+  }
+
+  _getDiffHeaders () {
+    var entity = this.store.getters.entity
+    var flags = []
+    if (entity && entity.entities && entity.entities.length > 0) {
+      entity.entities.forEach(entity => {
+        if (entity.properties) {
+          var keys = Object.keys(entity.properties)
+          keys.forEach(key => {
+            if (!flags.includes(key)) {
+              flags.push(key)
+            }
+          })
+        }
+      })
+    }
+    return flags
   }
 
 }
