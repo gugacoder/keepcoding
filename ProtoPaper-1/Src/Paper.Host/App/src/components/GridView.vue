@@ -25,7 +25,7 @@
         )
 
           tr(
-            :style="rowCursorStyle(items.item)"
+            :style="getRowCursorStyle(items.item)"
             @click.stop="openItemView(items.item)"
           )
 
@@ -40,12 +40,13 @@
             td(
               v-for="(header, index) in headers"
               :key="items.index.toString() + index.toString()"
+              :style="getColumnCursorStyle(items.item, header.value)"
               class="text-xs-left"
               nowrap
             ) 
               a(
-                v-if="hasColumnItemLink(items.item, index)"
-                @click.stop="openColumnItemView(items.item, index)"
+                v-if="hasColumnItemLink(items.item, header.value)"
+                @click.stop="openColumnItemView(items.item, header.value)"
               ) {{ items.item[header.value] }}
 
               div(v-else) {{ items.item[header.value] }}
@@ -101,9 +102,16 @@
     },
 
     methods: {
-      rowCursorStyle (item) {
-        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+      getRowCursorStyle (item) {
+        var entireItem = this.getRowIndex(item)
         var link = entireItem.getLinkByRel('self')
+        var exist = link && link.href && link.href.length > 0
+        return exist ? 'cursor: pointer' : 'cursor: default'
+      },
+
+      getColumnCursorStyle (item, column) {
+        var entireItem = this.getRowIndex(item)
+        var link = entireItem.getLinkByRel(column)
         var exist = link && link.href && link.href.length > 0
         return exist ? 'cursor: pointer' : 'cursor: default'
       },
@@ -124,13 +132,13 @@
       },
 
       hasColumnItemLink (item, column) {
-        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+        var entireItem = this.getRowIndex(item)
         var link = entireItem.getLinkByRel(column)
         return link && link.href && link.href.length > 0
       },
 
       openColumnItemView (item, column) {
-        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+        var entireItem = this.getRowIndex(item)
         var link = entireItem.getLinkByRel(column)
         if (link) {
           this.$paper.requester.redirectToPage(link.href)
@@ -138,7 +146,7 @@
       },
 
       openItemView (item) {
-        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+        var entireItem = this.getRowIndex(item)
         var link = entireItem.getLinkByRel('self')
         if (link) {
           this.$paper.requester.redirectToPage(link.href)
@@ -154,6 +162,10 @@
       hasItemLinks (index) {
         var items = this.itemLinks(index)
         return items && items.length > 0
+      },
+
+      getRowIndex (item) {
+        return this.$paper.grid.validItems[item._indexRowItemTable]
       }
     },
 
@@ -169,7 +181,7 @@
       selectedItems () {
         var selectedItems = []
         this.selected.forEach(item => {
-          var itemSelected = this.$paper.grid.validItems[item._indexRowItemTable]
+          var itemSelected = this.getRowIndex(item)
           selectedItems.push(itemSelected)
         })
         return selectedItems
