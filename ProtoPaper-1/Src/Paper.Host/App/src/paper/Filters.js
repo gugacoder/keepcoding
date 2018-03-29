@@ -6,10 +6,7 @@ export default class Filters {
   }
 
   get all () {
-    var filters = []
-    if (this.actions.hasActions()) {
-      filters = this.actions.getAction('filters')
-    }
+    var filters = this.actions.getAction('filters')
     return filters
   }
 

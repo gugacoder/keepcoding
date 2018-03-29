@@ -73,12 +73,12 @@
      },
       "links": [
         { "rel": ["self"], "href": "/page/demo/1", "title": "Detalhes" },
-        { "rel": ["link1"], "href": "/page/demo/1", "title": "Link 1" },
-        { "rel": ["link2"], "href": "/page/demo/1", "title": "Link 2" }
+        { "rel": ["link1", "fat"], "href": "/page/demo/2", "title": "Link 1" },
+        { "rel": ["link2", "protein"], "href": "/page/demo/3", "title": "Link 2" }
       ],
      "actions": [
       {
-        "name": "exportar",
+        "name": "filters",
         "href": "/demo/Exportar",
         "title": "Exportar",
         "method": "GET",

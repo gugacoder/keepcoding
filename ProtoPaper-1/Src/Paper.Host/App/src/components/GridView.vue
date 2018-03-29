@@ -24,48 +24,58 @@
           slot-scope="items"
         )
 
-          td(v-if="$paper.grid.hasActions()")
-            v-checkbox(
-              primary
-              hide-details
-              v-model="items.selected"
-              @click.stop="items.selected = !items.selected"
-            )
-          
-          td(
-            v-for="(header, index) in headers"
-            :key="items.index.toString() + index.toString()"
-            class="text-xs-left"
-            nowrap
+          tr(
+            :style="rowCursorStyle(items.item)"
             @click.stop="openItemView(items.item)"
-          ) {{ items.item[header.value] }}
-
-          td(
-            class="text-xs-center" 
-            @click.stop=""
           )
-            v-menu(
-              offset-x 
-              left 
-              bottom 
-              v-if="hasItemLinks(items.index)"
-            )
-              v-btn(
-                icon
-                slot="activator"
-              )
-                v-icon
-                  | more_vert
 
-              v-list
-                v-list-tile(
-                  v-for="item in itemLinks(items.index)" 
-                  :key="item.href"
+            td(v-if="$paper.grid.hasActions()")
+              v-checkbox(
+                primary
+                hide-details
+                v-model="items.selected"
+                @click.stop="items.selected = !items.selected"
+              )
+            
+            td(
+              v-for="(header, index) in headers"
+              :key="items.index.toString() + index.toString()"
+              class="text-xs-left"
+              nowrap
+            ) 
+              a(
+                v-if="hasColumnItemLink(items.item, index)"
+                @click.stop="openColumnItemView(items.item, index)"
+              ) {{ items.item[header.value] }}
+
+              div(v-else) {{ items.item[header.value] }}
+
+            td(
+              class="text-xs-center" 
+              @click.stop=""
+            )
+              v-menu(
+                offset-x 
+                left 
+                bottom 
+                v-if="hasItemLinks(items.index)"
+              )
+                v-btn(
+                  icon
+                  slot="activator"
                 )
-                  v-list-tile-content
-                    a(
-                      @click.stop="$paper.requester.redirectToPage(item.href)"
-                    ) {{ item.title ? item.title : item.rel[0] }}
+                  v-icon
+                    | more_vert
+
+                v-list
+                  v-list-tile(
+                    v-for="item in itemLinks(items.index)" 
+                    :key="item.href"
+                  )
+                    v-list-tile-content
+                      a(
+                        @click.stop="$paper.requester.redirectToPage(item.href)"
+                      ) {{ item.title ? item.title : item.rel[0] }}
 
 </template>
 
@@ -91,6 +101,13 @@
     },
 
     methods: {
+      rowCursorStyle (item) {
+        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+        var link = entireItem.getLinkByRel('self')
+        var exist = link && link.href && link.href.length > 0
+        return exist ? 'cursor: pointer' : 'cursor: default'
+      },
+
       columnKey (column, index, item) {
         return column.value
       },
@@ -106,10 +123,26 @@
         else this.selected = this.items.slice()
       },
 
+      hasColumnItemLink (item, column) {
+        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+        var link = entireItem.getLinkByRel(column)
+        return link && link.href && link.href.length > 0
+      },
+
+      openColumnItemView (item, column) {
+        var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
+        var link = entireItem.getLinkByRel(column)
+        if (link) {
+          this.$paper.requester.redirectToPage(link.href)
+        }
+      },
+
       openItemView (item) {
         var entireItem = this.$paper.grid.validItems[item._indexRowItemTable]
         var link = entireItem.getLinkByRel('self')
-        this.$paper.requester.redirectToPage(link.href)
+        if (link) {
+          this.$paper.requester.redirectToPage(link.href)
+        }
       },
 
       itemLinks (index) {
