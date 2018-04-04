@@ -13,6 +13,7 @@ export default class Blueprint {
     this.blueprint = this.store.getters['blueprint/blueprint']
     this.parser = new Parser(options)
     this.demo = demo
+    this.defaultTheme = 'indigo'
   }
 
   getPlannerPage () {
@@ -64,7 +65,7 @@ export default class Blueprint {
     }
   }
 
-  getTheme () {
+  getBlueprintTheme () {
     return this.blueprint.properties.theme
   }
 
@@ -80,7 +81,7 @@ export default class Blueprint {
     return this.blueprint && this.blueprint.hasLinkByRel('index')
   }
 
-  hasTheme () {
+  hasBlueprintTheme () {
     return this.blueprint && this.blueprint.hasProperty('theme')
   }
 
@@ -96,19 +97,31 @@ export default class Blueprint {
     this.blueprint = this.store.getters['blueprint/blueprint']
   }
 
-  setTheme () {
-    if (this.hasTheme()) {
-      var blueprintTheme = this.getTheme()
-      var theme = themes[blueprintTheme]
+  setPredefinedTheme (predefinedTheme) {
+    var theme = themes[predefinedTheme]
+    this.vue.$vuetify.theme.primary = theme.primary
+    this.vue.$vuetify.theme.secondary = theme.secondary
+    this.vue.$vuetify.theme.accent = theme.accent
+    this.vue.$vuetify.theme.error = theme.error
+    this.vue.$vuetify.theme.warning = theme.warning
+    this.vue.$vuetify.theme.info = theme.info
+    this.vue.$vuetify.theme.success = theme.success
+  }
 
-      this.vue.$vuetify.theme.primary = theme.primary
-      this.vue.$vuetify.theme.secondary = theme.secondary
-      this.vue.$vuetify.theme.accent = theme.accent
-      this.vue.$vuetify.theme.error = theme.error
-      this.vue.$vuetify.theme.warning = theme.warning
-      this.vue.$vuetify.theme.info = theme.info
-      this.vue.$vuetify.theme.success = theme.success
+  setTheme () {
+    var defaultTheme = themes[this.defaultTheme]
+    if (this.hasBlueprintTheme()) {
+      var blueprintThemeName = this.getBlueprintTheme()
+      var blueprintTheme = themes[blueprintThemeName]
     }
+    var theme = blueprintTheme || defaultTheme
+    this.vue.$vuetify.theme.primary = theme.primary
+    this.vue.$vuetify.theme.secondary = theme.secondary
+    this.vue.$vuetify.theme.accent = theme.accent
+    this.vue.$vuetify.theme.error = theme.error
+    this.vue.$vuetify.theme.warning = theme.warning
+    this.vue.$vuetify.theme.info = theme.info
+    this.vue.$vuetify.theme.success = theme.success
   }
 
   goToIndexPage () {

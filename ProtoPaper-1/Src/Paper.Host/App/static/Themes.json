@@ -2,7 +2,7 @@
   "red":  
     {
       "primary": "#D32F2F",
-      "secondary": "#D32F2F",
+      "secondary": "#607D8B",
       "accent": "#009688",
       "error": "#f44336",
       "warning": "#ffeb3b",
@@ -64,6 +64,46 @@
       "primary": "#757575",
       "secondary": "#00838F",
       "accent": "#757575",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "green":
+    {
+      "primary": "#4CAF50",
+      "secondary": "#FFC107",
+      "accent": "#FFC107",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "indigo":
+    {
+      "primary": "#3f51b5",
+      "secondary": "#546e7a",
+      "accent": "#546e7a",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "blue":
+    {
+      "primary": "#2196f3",
+      "secondary": "#FF4081",
+      "accent": "#546e7a",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "cyan":
+    {
+      "primary": "#00bcd4",
+      "secondary": "#FFa726",
+      "accent": "#00ACC1",
       "error": "#f44336",
       "warning": "#ffeb3b",
       "info": "#2196f3",
