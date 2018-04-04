@@ -12,6 +12,7 @@
 <script>
   export default {
     props: ['field'],
+
     data: () => ({
       model: null,
       items: [

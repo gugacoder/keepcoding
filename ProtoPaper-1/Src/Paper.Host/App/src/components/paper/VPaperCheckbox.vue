@@ -1,6 +1,6 @@
 <template lang="pug">
   v-checkbox(
-    color="green"
+    color="primary"
     :name="field.name"
     :value="field.value"
     v-model="field.value"

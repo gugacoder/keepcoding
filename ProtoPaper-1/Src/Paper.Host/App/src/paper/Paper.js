@@ -15,7 +15,7 @@ import Filters from './Filters.js'
 
 const paper = {
   install (Vue, options) {
-    var error = new Errors()
+    var errors = new Errors()
     var parser = new Parser(options)
     var demo = new Demo(options, parser)
     var requester = new Requester(options, demo)
@@ -34,7 +34,7 @@ const paper = {
       blueprint: blueprint,
       requester: requester,
       demo: demo,
-      error: error,
+      errors: errors,
       page: page,
       actions: actions,
       pagination: pagination,

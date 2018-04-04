@@ -1,11 +1,13 @@
 <template lang="pug">
     v-footer(
-      color="indigo"
+      color="primary"
     )
-      span(
-        class="white--text"
-      )
-        | KeepCoding &copy; 2017  v{{ version }}
+      v-flex(
+        xs12
+        py-3
+        white--text
+      ) 
+        | KeepCoding &copy; 2018  v{{ version }}
 </template>
 
 <script>

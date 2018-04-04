@@ -5,9 +5,8 @@
 
 <script>
   export default {
-    props: [
-      'field'
-    ],
+    props: ['field'],
+
     methods: {
       goToLink () {
         this.$paper.requester.redirectToPage(this.field.value)

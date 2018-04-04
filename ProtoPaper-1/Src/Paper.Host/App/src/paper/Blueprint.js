@@ -1,4 +1,5 @@
 import staticBlueprint from '../../static/Blueprint.json'
+import themes from '../../static/Themes.json'
 import Parser from './Parser.js'
 export default class Blueprint {
 
@@ -63,6 +64,10 @@ export default class Blueprint {
     }
   }
 
+  getTheme () {
+    return this.blueprint.properties.theme
+  }
+
   hasProjectInfo () {
     return this.blueprint && this.blueprint.hasProperty('info')
   }
@@ -75,6 +80,10 @@ export default class Blueprint {
     return this.blueprint && this.blueprint.hasLinkByRel('index')
   }
 
+  hasTheme () {
+    return this.blueprint && this.blueprint.hasProperty('theme')
+  }
+
   showNavBox () {
     if (this.blueprint && this.blueprint.hasProperty('hasNavBox')) {
       return this.blueprint.properties.hasNavBox === 1
@@ -85,6 +94,21 @@ export default class Blueprint {
   setBlueprint (blueprint) {
     this.store.commit('blueprint/setEntity', blueprint)
     this.blueprint = this.store.getters['blueprint/blueprint']
+  }
+
+  setTheme () {
+    if (this.hasTheme()) {
+      var blueprintTheme = this.getTheme()
+      var theme = themes[blueprintTheme]
+
+      this.vue.$vuetify.theme.primary = theme.primary
+      this.vue.$vuetify.theme.secondary = theme.secondary
+      this.vue.$vuetify.theme.accent = theme.accent
+      this.vue.$vuetify.theme.error = theme.error
+      this.vue.$vuetify.theme.warning = theme.warning
+      this.vue.$vuetify.theme.info = theme.info
+      this.vue.$vuetify.theme.success = theme.success
+    }
   }
 
   goToIndexPage () {
@@ -108,6 +132,7 @@ export default class Blueprint {
             var blueprint = this.parser.parse(staticBlueprint)
             this.setBlueprint(blueprint)
           }
+          this.setTheme()
           resolve()
         })
       } else {

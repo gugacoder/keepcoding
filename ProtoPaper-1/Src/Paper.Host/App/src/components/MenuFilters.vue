@@ -1,47 +1,41 @@
 <template lang="pug">
   v-navigation-drawer(
     fixed
-    right
-    clipped
+    left
     v-model="$store.state.filters.openedFiltersMenu"
-    v-if="show"
+    clipped
     app
+    v-if="show"
+    class="grey lighten-4"
+    style="max-height: calc(100% - 60px)"
   )
-    v-list(
-      subheader
-      v-if="$paper.filters.hasFilters()"
-    )
-      v-subheader
-        | FILTROS
+    v-subheader APLICAR FILTROS
 
-      v-list-tile(
-        v-for="filter in $paper.filters.all"
-        :key="filter.name"
-        :target="$paper.requester.target(link)"
-        @click.stop="$paper.requester.redirectToPage(link.href)"
+    v-container(
+      fluid
+      class="nobordertop"
+    )
+      v-layout(
+        flex
+        row
+        justify-space-between
       )
-        v-list-tile-content
-          v-list-tile-title(
-            v-if="link.title" 
-            v-html="link.title"
+        v-flex(xs12)
+          paper-form(
+            :action="$paper.filters.entity"
           )
-          v-list-tile-title(
-            v-else 
-            v-html="link.rel[0]"
-          )
-          
+
 </template>
 
 <script>
   import FormsMixin from '../mixins/FormsMixin.js'
-  import Breakpoint from '../mixins/Breakpoint.js'
+  import PaperForm from './paper/VPaperForm.vue'
   export default {
     beforeRouteUpdate (to, from, next) {
       next()
     },
 
     mixins: [
-      Breakpoint,
       FormsMixin
     ],
 
@@ -56,13 +50,25 @@
       }
     },
 
+    components: {
+      PaperForm
+    },
+
     computed: {
       show () {
         var show = !this.$paper.state.selection &&
-                   this.$store.state.navigation.openedRightMenu &&
-                   this.$paper.navigation.showRightMenu()
+                   this.$store.state.filters.openedFiltersMenu &&
+                   !this.$paper.isFormPage(this.$route.name)
         return show
       }
     }
   }
 </script>
+
+<style lang="sass">
+  .nobordertop
+    padding-top: 0px
+
+  .noborderbottom  
+    padding-bottom: 0px
+</style>

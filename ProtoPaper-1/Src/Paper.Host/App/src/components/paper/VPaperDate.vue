@@ -4,8 +4,8 @@
     wrap
   )
     v-flex(
-      xs11 
-      sm5
+      xs12
+      sm6
     )
       v-menu(
         lazy
@@ -15,8 +15,6 @@
         offset-y
         full-width
         :nudge-right="40"
-        max-width="290px"
-        min-width="290px"
       )
         v-text-field(
           :name="field.name"
@@ -25,7 +23,7 @@
           slot="activator"
           readonly
           v-model="dateFormatted"
-          prepend-icon="event"
+          append-icon="event"
         )
         v-date-picker(
           v-model="date" 
@@ -55,11 +53,13 @@
 <script>
   export default {
     props: ['field'],
+
     data: () => ({
       date: null,
       dateFormatted: null,
       menu: false
     }),
+
     methods: {
       formatDate (date) {
         if (!date) {
@@ -69,6 +69,7 @@
         const [year, month, day] = date.split('-')
         return `${day}/${month}/${year}`
       },
+
       parseDate (date) {
         if (!date) {
           return null

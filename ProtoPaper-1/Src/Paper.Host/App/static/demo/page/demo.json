@@ -78,7 +78,7 @@
       ],
      "actions": [
       {
-        "name": "filters",
+        "name": "exportar",
         "href": "/demo/Exportar",
         "title": "Exportar",
         "method": "GET",
@@ -418,7 +418,7 @@
           },
           {
              "name":"data",
-             "title":"Data de Hoje",
+             "title":"Data Inicial",
              "type":"date",
              "dataType":"date"
           },
@@ -430,7 +430,7 @@
          },
           {
              "name":"hora",
-             "title":"Hora de Hoje",
+             "title":"Hora Inicial",
              "type":"time",
              "dataType":"time"
           },
@@ -477,7 +477,65 @@
              "value": true
           }
        ]
-    }
+    },
+    {
+      "name":"filters",
+      "method":"GET",
+      "title":"Filtrar",
+      "href":"items",
+      "type":"application/x-www-form-urlencoded",
+      "fields":[
+         {
+            "name":"productCode",
+            "title":"Código do produto",
+            "type":"hidden",
+            "value":"valor",
+            "dataType":"string"
+         },
+         {
+            "name":"quantity",
+            "title":"Quantidade",
+            "type":"number",
+            "dataType":"int"
+         },
+         {
+            "name":"active",
+            "title":"Ativo",
+            "type":"number",
+            "dataType":"float"
+         },
+         {
+            "name":"data",
+            "title":"Data Inicial",
+            "type":"date",
+            "dataType":"date"
+         },
+         {
+           "name":"preco",
+           "title":"Preço",
+           "type":"number",
+           "dataType":"currency"
+        },
+         {
+            "name":"hora",
+            "title":"Hora Inicial",
+            "type":"time",
+            "dataType":"time"
+         },
+         {
+            "name":"select",
+            "title":"Selecione",
+            "type":"text",
+            "dataType":"multi"
+         },
+         {
+            "name":"ligado",
+            "title":"Ligado",
+            "type":"text",
+            "dataType":"bool"
+         }
+      ]
+   }
   ],
   "links":[
     {

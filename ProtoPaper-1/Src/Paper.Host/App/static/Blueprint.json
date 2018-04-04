@@ -2,6 +2,7 @@
   "class": ["blueprint"],
   "properties": {
     "hasNavBox": 1,
+    "theme": "grey",
     "info": {
       "id":"001",
       "name":"demoPage",

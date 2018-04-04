@@ -4,8 +4,8 @@
     wrap
   )
     v-flex(
-      xs11 
-      sm5
+      xs12
+      sm6
     )
       v-menu(
         lazy
@@ -15,8 +15,6 @@
         offset-y
         full-width
         :nudge-right="40"
-        max-width="290px"
-        min-width="290px"
       )
         v-text-field(
           :name="field.name"
@@ -24,7 +22,7 @@
           :value="field.value"
           slot="activator"
           v-model="time"
-          prepend-icon="access_time"
+          append-icon="access_time"
           readonly
         )
         v-time-picker(
@@ -50,6 +48,7 @@
 <script>
   export default {
     props: ['field'],
+
     data: () => ({
       time: null,
       menu: false,

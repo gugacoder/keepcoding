@@ -1,8 +1,9 @@
 <template lang="pug">
   v-toolbar(
-    color="indigo"
+    color="primary"
     dark
     app
+    clipped-left
     clipped-right
     fixed
     :style="showClass"
@@ -15,7 +16,7 @@
 
     v-btn(
       icon
-      v-if="$paper.filters.hasFilters()"
+      v-if="showFiltersMenu"
       @click.stop="$paper.filters.changeMenuState()"
     ) 
       v-icon filter_list
@@ -46,19 +47,19 @@
 
     v-spacer
 
-    // v-menu(
-    //   offset-y
-    //   v-if="$paper.auth.isAuthenticated"
-    // )
-    //   v-btn(
-    //     icon
-    //     slot="activator"
-    //   )
-    //     v-icon person
+    v-menu(
+      offset-y
+      v-if="$paper.auth.isAuthenticated"
+    )
+      v-btn(
+        icon
+        slot="activator"
+      )
+        v-icon person
 
-    //   v-list
-    //     v-list-tile(@click="$paper.auth.logout()")
-    //       v-list-tile-title Logout
+      v-list
+        v-list-tile(@click="$paper.auth.logout()")
+          v-list-tile-title Logout
 
     v-toolbar-side-icon(
       v-if="$paper.navigation.showRightMenu()"
@@ -86,6 +87,10 @@
 
       showTitle () {
         return this.$paper.blueprint.showNavBox() ? 'hidden-xs-only' : ''
+      },
+
+      showFiltersMenu () {
+        return this.$paper.filters.hasFilters() && !this.$paper.isFormPage(this.$route.name)
       }
     },
 

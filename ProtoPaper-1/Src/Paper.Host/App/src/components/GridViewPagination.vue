@@ -7,7 +7,7 @@
     v-btn(
       color="primary"
       flat
-      :icon="$breakpoint.xs"
+      :icon="$vuetify.breakpoint.xs"
       :disabled="!$paper.pagination.showFirst()"
       @click.stop="$paper.pagination.goToFirstPage()"
     )
@@ -17,7 +17,7 @@
     v-btn(
       color="primary"
       flat
-      :icon="$breakpoint.xs"
+      :icon="$vuetify.breakpoint.xs"
       :disabled="!$paper.pagination.showPrevious()"
       @click.stop="$paper.pagination.goToPreviousPage()"
     )
@@ -27,19 +27,10 @@
     v-btn(
       color="primary"
       flat
-      :icon="$breakpoint.xs"
+      :icon="$vuetify.breakpoint.xs"
       :disabled="!$paper.pagination.showNext()"
       @click.stop="$paper.pagination.goToNextPage()"
     )
       v-icon navigate_next
       span(class="hidden-xs-only") Próxima
 </template>
-
-<script>
-  import Breakpoint from '../mixins/Breakpoint.js'
-  export default {
-    mixins: [
-      Breakpoint
-    ]
-  }
-</script>

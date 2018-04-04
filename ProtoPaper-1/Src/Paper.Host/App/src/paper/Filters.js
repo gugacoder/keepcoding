@@ -5,13 +5,13 @@ export default class Filters {
     this.actions = actions
   }
 
-  get all () {
+  get entity () {
     var filters = this.actions.getAction('filters')
     return filters
   }
 
   hasFilters () {
-    return this.all && this.all.length > 0
+    return this.entity !== undefined && this.entity !== null
   }
 
   openMenu () {

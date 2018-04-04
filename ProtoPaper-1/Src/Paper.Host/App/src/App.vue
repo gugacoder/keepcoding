@@ -1,12 +1,11 @@
 <template lang="pug">
   v-app
     menu-links
+    menu-filters
     action-bar
     main-toolbar
     v-content
       router-view(:key="$route.fullPath")
-    // v-content(v-else)
-    //   | Loading ...
     main-footer
     notifications
 </template>
@@ -14,6 +13,7 @@
 <script>
   import ActionBar from './components/ActionBar.vue'
   import MenuLinks from './components/MenuLinks.vue'
+  import MenuFilters from './components/MenuFilters.vue'
   import MainFooter from './components/MainFooter.vue'
   import MainToolbar from './components/MainToolbar.vue'
   export default {
@@ -21,7 +21,8 @@
       ActionBar,
       MainFooter,
       MainToolbar,
-      MenuLinks
+      MenuLinks,
+      MenuFilters
     },
     beforeRouteUpdate (to, from, next) {
       next()
@@ -49,9 +50,9 @@
 </script>
 
 <style src="vue-notifyjs/themes/material.css"></style>
-<style>
-  .vue-notifyjs .alert {
-    z-index: 99999;
-  }
+
+<style lang="sass">
+  .vue-notifyjs .alert
+    z-index: 99999
 </style>
 

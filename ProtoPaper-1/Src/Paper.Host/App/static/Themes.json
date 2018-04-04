@@ -1,0 +1,73 @@
+{
+  "red":  
+    {
+      "primary": "#D32F2F",
+      "secondary": "#D32F2F",
+      "accent": "#009688",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "black":
+    {
+      "primary": "#000000",
+      "secondary": "#64DD17",
+      "accent": "#FFA000",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "purple":
+    {
+      "primary": "#6a1b9a",
+      "secondary": "#ff6d00",
+      "accent": "#9c27b0",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "pink":
+    {
+      "primary": "#E91E63",
+      "secondary": "#009688",
+      "accent": "#757575",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "deep-purple":
+    {
+      "primary": "#673AB7",
+      "secondary": "#00B8D4",
+      "accent": "#7CB342",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "orange":
+    {
+      "primary": "#FF9800",
+      "secondary": "#689F38",
+      "accent": "#7CB342",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    },
+  "grey":
+    {
+      "primary": "#757575",
+      "secondary": "#00838F",
+      "accent": "#757575",
+      "error": "#f44336",
+      "warning": "#ffeb3b",
+      "info": "#2196f3",
+      "success": "#4caf50"
+    }
+}
+ 

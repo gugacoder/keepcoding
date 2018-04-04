@@ -10,7 +10,7 @@
     )
       v-icon arrow_back
     
-    v-toolbar-title(v-if="!$breakpoint.xs")
+    v-toolbar-title(v-if="!$vuetify.breakpoint.xs")
       v-btn(
         flat
         @click="deselected"
@@ -22,7 +22,7 @@
     v-subheader
       | {{ selectedItemsLabel }}
 
-    div(v-if="!$breakpoint.xs")
+    div(v-if="!$vuetify.breakpoint.xs")
       v-btn(
         flat
         v-for="action in actions" 
@@ -30,7 +30,7 @@
         @click.stop="actionClick(action)"
       ) {{ $paper.actions.getTitle(action) }}
 
-    v-menu(v-if="$breakpoint.xs")
+    v-menu(v-if="$vuetify.breakpoint.xs")
       v-btn(
         icon
         slot="activator"
@@ -52,15 +52,10 @@
 <script>
   import { Events } from '../event-bus.js'
   import ActionBarForm from './ActionBarForm.vue'
-  import Breakpoint from '../mixins/Breakpoint.js'
   export default {
     components: {
       ActionBarForm
     },
-
-    mixins: [
-      Breakpoint
-    ],
 
     data: () => ({
       actionName: ''
