@@ -60,7 +60,7 @@
       v-list
         v-list-tile(
           v-for="(theme, index) in $paper.blueprint.themes"
-          @key="index"
+          :key="index"
           @click="changeTheme(index)"
         )
           v-list-tile-avatar

@@ -12,6 +12,7 @@
       deletable-chips
       autocomplete
       multiple
+      multi-line
       no-data-text="Opção não disponível"
     )
 

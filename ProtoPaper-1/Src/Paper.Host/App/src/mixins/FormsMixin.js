@@ -10,6 +10,7 @@ import VPaperSwitch from '../components/paper/VPaperSwitch.vue'
 import VPaperDatetime from '../components/paper/VPaperDatetime.vue'
 import VPaperCurrency from '../components/paper/VPaperCurrency.vue'
 import VPaperUrl from '../components/paper/VPaperUrl.vue'
+import VPaperLabel from '../components/paper/VPaperLabel.vue'
 import VPaperDateRange from '../components/paper/VPaperDateRange.vue'
 export default {
   data: () => ({
@@ -60,7 +61,8 @@ export default {
     VPaperDatetime,
     VPaperCurrency,
     VPaperUrl,
-    VPaperDateRange
+    VPaperDateRange,
+    VPaperLabel
   },
   methods: {
     $_formsMixin_dynamicComponent (field) {
@@ -121,6 +123,8 @@ export default {
           return 'VPaperNumber'
         case this.DataType.CURRENCY:
           return 'VPaperCurrency'
+        case this.DataType.STRING:
+          return 'VPaperLabel'
         default:
           return 'VPaperText'
       }

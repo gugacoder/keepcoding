@@ -445,7 +445,14 @@
              "title":"Ligado",
              "type":"text",
              "dataType":"bool"
-          }
+          },
+         {
+            "name":"message",
+            "title":"Confirmação",
+            "type":"text",
+            "dataType":"string",
+            "value":"Tem certeza que deseja exibir essa mensagem?"
+         }
        ]
     },
     {
@@ -577,6 +584,13 @@
             "title":"Ligado",
             "type":"text",
             "dataType":"bool"
+         },
+         {
+            "name":"message",
+            "title":"Mensagem",
+            "type":"text",
+            "dataType":"string",
+            "value":"Tem certeza que deseja exibir essa mensagem?"
          }
       ]
    }
