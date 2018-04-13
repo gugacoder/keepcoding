@@ -8,20 +8,21 @@
       sm6
     )
       v-menu(
+        ref="menuDate"
         lazy
         :close-on-content-click="false"
-        v-model="menu"
+        v-model="menuDate"
         transition="scale-transition"
         offset-y
         full-width
         :nudge-right="40"
+        :return-value.sync="date"
       )
         v-text-field(
           :name="field.name"
           :label="field.title"
-          :value="field.value"
+          :value="dateValue"
           slot="activator"
-          readonly
           v-model="dateFormatted"
           append-icon="event"
         )
@@ -29,25 +30,21 @@
           v-model="date" 
           :first-day-of-week="1"
           locale="pt-br"
-          @input="dateFormatted = formatDate($event)" 
           no-title 
-          scrollable 
-          actions
+          scrollable
         )
-          template(slot-scope="{ save, cancel }")
-            v-card-actions
-              v-spacer
-              v-btn(
-                flat 
-                color="primary" 
-                @click="cancel"
-              ) Cancelar
+          v-spacer
+          v-btn(
+            flat 
+            color="primary" 
+            @click="menuDate = false"
+          ) Cancelar
 
-              v-btn(
-                flat 
-                color="primary" 
-                @click="save"
-              ) OK
+          v-btn(
+            flat 
+            color="primary" 
+            @click="save(date)"
+          ) OK
 </template>
 
 <script>
@@ -56,8 +53,9 @@
 
     data: () => ({
       date: null,
+      dateValue: null,
       dateFormatted: null,
-      menu: false
+      menuDate: false
     }),
 
     methods: {
@@ -75,8 +73,14 @@
           return null
         }
 
-        const [month, day, year] = date.split('/')
+        const [year, month, day] = date.split('-')
         return `${day}-${month}-${year}`
+      },
+
+      save (date) {
+        this.dateFormatted = this.formatDate(date)
+        this.dateValue = this.parseDate(date)
+        this.menuDate = false
       }
     }
   }

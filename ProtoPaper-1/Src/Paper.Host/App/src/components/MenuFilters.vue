@@ -8,6 +8,7 @@
     v-if="show"
     class="grey lighten-4"
     style="max-height: calc(100% - 60px)"
+    :width="navigationSize"
   )
     v-subheader APLICAR FILTROS
 
@@ -18,7 +19,6 @@
       v-layout(
         flex
         row
-        justify-space-between
       )
         v-flex(xs12)
           paper-form(
@@ -56,10 +56,15 @@
 
     computed: {
       show () {
-        var show = !this.$paper.state.selection &&
+        var show = this.$paper.filters.hasFilters() &&
                    this.$store.state.filters.openedFiltersMenu &&
-                   !this.$paper.isFormPage(this.$route.name)
+                   !this.$paper.isFormPage(this.$route.name) &&
+                   !this.$paper.state.selection
         return show
+      },
+
+      navigationSize () {
+        return 300
       }
     }
   }
@@ -71,4 +76,12 @@
 
   .noborderbottom  
     padding-bottom: 0px
+
+  .headerDivider
+     border-left: 1px solid #38546d 
+     border-right: 1px solid #16222c
+     height: 80px
+     position: absolute
+     right: 249px
+     top: 10px
 </style>

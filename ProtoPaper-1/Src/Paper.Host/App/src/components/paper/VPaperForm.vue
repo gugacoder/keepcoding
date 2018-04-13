@@ -15,7 +15,6 @@
         v-flex(xs12)
           component(:is="$_formsMixin_dynamicComponent(field)" :field="field")
 
-
     v-btn(
       color="secondary"
       @click="submit()"
@@ -70,8 +69,3 @@
 
   }
 </script>
-
-<style lang="sass">
-  .input-group--text-field
-    height: 50px
-</style>

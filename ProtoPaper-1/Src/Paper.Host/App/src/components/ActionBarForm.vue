@@ -2,7 +2,6 @@
   v-dialog(
     v-model="actionBarForm"
     scrollable
-    max-width="1000"
   )
     v-card
       v-card-title(primary-title)
@@ -22,13 +21,11 @@
             v-icon more_vert
           
           v-list
-            v-list-tile(
-              @click.stop="$_formsMixin_clear(action.name)"
-            ) Limpar
+            v-list-tile(@click.stop="$_formsMixin_clear(action.name)") 
+              | Limpar
 
-            v-list-tile(
-              @click.stop="close"
-            ) Fechar
+            v-list-tile(@click.stop="close") 
+              | Fechar
           
       v-card-text
         v-form(
@@ -51,21 +48,18 @@
 
       v-card-actions
         v-btn(
-          color="primary"
-          flat
+          color="secondary"
           @click="submit()"
         ) {{ $paper.actions.getTitle(action) }}
 
         v-btn(
-          color="primary"
-          flat
+          color="white"
           v-if="!$vuetify.breakpoint.xs"
           @click="$_formsMixin_clear(action.name)"
         ) Limpar
 
         v-btn(
-          color="primary"
-          flat
+          color="white"
           v-if="!$vuetify.breakpoint.xs"
           @click.stop="close"
         ) Fechar

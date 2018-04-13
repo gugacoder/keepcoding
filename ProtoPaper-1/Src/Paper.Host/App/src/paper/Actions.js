@@ -15,7 +15,7 @@ export default class Actions {
 
   getAction (name) {
     var entity = this.store.getters.entity
-    var action = ''
+    var action = null
     if (entity && entity.actions) {
       action = entity.getActionByName(name)
     }

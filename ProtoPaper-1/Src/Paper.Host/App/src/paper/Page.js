@@ -65,6 +65,11 @@ export default class Page {
     })
   }
 
+  unload () {
+    this.store.commit('setEntity', null)
+    this.store.commit('setEntityPath', null)
+  }
+
   save (path, data) {
     this.requester.httpRequest('POST', path, data).then(response => {
       if (response.ok) {

@@ -5,7 +5,7 @@
     v-if="!$paper.state.selection"
   )
     v-btn(
-      color="primary"
+      color="secondary"
       flat
       :icon="$vuetify.breakpoint.xs"
       :disabled="!$paper.pagination.showFirst()"
@@ -15,7 +15,7 @@
       span(class="hidden-xs-only") Primeira Página
 
     v-btn(
-      color="primary"
+      color="secondary"
       flat
       :icon="$vuetify.breakpoint.xs"
       :disabled="!$paper.pagination.showPrevious()"
@@ -25,7 +25,7 @@
       span(class="hidden-xs-only") Anterior
       
     v-btn(
-      color="primary"
+      color="secondary"
       flat
       :icon="$vuetify.breakpoint.xs"
       :disabled="!$paper.pagination.showNext()"

@@ -19,7 +19,7 @@
         v-text-field(
           :name="field.name"
           :label="field.title"
-          :value="field.value"
+          :value="time"
           slot="activator"
           v-model="time"
           append-icon="access_time"

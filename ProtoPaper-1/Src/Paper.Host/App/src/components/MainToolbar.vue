@@ -42,14 +42,14 @@
       solo
       prepend-icon="search"
       placeholder="Buscar Rota"
-      style="max-width: 700px; min-width: 200px"
+      style="max-width: 700px; min-width: 170px"
     )
 
     v-spacer
 
     v-menu(
+      class="hidden-sm-and-down"
       offset-y
-      v-if="$paper.auth.isAuthenticated"
     )
       v-btn(
         icon
@@ -58,50 +58,14 @@
         v-icon format_color_fill
 
       v-list
-        v-list-tile(@click="changeTheme('red')")
+        v-list-tile(
+          v-for="(theme, index) in $paper.blueprint.themes"
+          @key="index"
+          @click="changeTheme(index)"
+        )
           v-list-tile-avatar
-            v-icon(color="red") lens
-          v-list-tile-title Vermelho
-        v-list-tile(@click="changeTheme('black')")
-          v-list-tile-avatar
-            v-icon(color="black") lens
-          v-list-tile-title Preto
-        v-list-tile(@click="changeTheme('purple')")
-          v-list-tile-avatar
-              v-icon(color="purple") lens
-          v-list-tile-title Roxo
-        v-list-tile(@click="changeTheme('pink')")
-          v-list-tile-avatar
-              v-icon(color="pink") lens
-          v-list-tile-title Rosa
-        v-list-tile(@click="changeTheme('deep-purple')")
-          v-list-tile-avatar
-              v-icon(color="deep-purple") lens
-          v-list-tile-title Lilás
-        v-list-tile(@click="changeTheme('orange')")
-          v-list-tile-avatar
-              v-icon(color="orange") lens
-          v-list-tile-title Laranja
-        v-list-tile(@click="changeTheme('grey')")
-          v-list-tile-avatar
-            v-icon(color="grey") lens
-          v-list-tile-title Cinza
-        v-list-tile(@click="changeTheme('green')")
-          v-list-tile-avatar
-            v-icon(color="green") lens
-          v-list-tile-title Verde
-        v-list-tile(@click="changeTheme('indigo')")
-          v-list-tile-avatar
-            v-icon(color="indigo") lens
-          v-list-tile-title Padrão
-        v-list-tile(@click="changeTheme('blue')")
-          v-list-tile-avatar
-            v-icon(color="blue") lens
-          v-list-tile-title Azul
-        v-list-tile(@click="changeTheme('cyan')")
-          v-list-tile-avatar
-            v-icon(color="cyan") lens
-          v-list-tile-title Ciano                      
+            v-icon(:color="index") lens
+          v-list-tile-title {{ theme.title }}                      
 
     v-menu(
       offset-y

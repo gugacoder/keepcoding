@@ -18,6 +18,10 @@
         | Cancelar
 
     v-spacer
+    
+    action-bar-form(
+      ref="actionBarForm"
+    )
 
     v-subheader
       | {{ selectedItemsLabel }}
@@ -45,8 +49,6 @@
         )
           v-list-tile-title 
             | {{ $paper.actions.getTitle(action) }}
-
-    action-bar-form(ref="actionBarForm")
 </template>
 
 <script>

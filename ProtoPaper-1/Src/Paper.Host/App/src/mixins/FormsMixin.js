@@ -77,6 +77,8 @@ export default {
           return this._getSubDataType(field.dataType)
         case this.Type.NUMBER:
           return this._getSubDataType(field.dataType)
+        case this.Type.CHECKBOX:
+          return 'VPaperSelect'
         default:
           return 'VPaperText'
       }
@@ -87,7 +89,8 @@ export default {
       var formName = 'form-' + actionName
       var form = this.$refs[formName]
       form.inputs.forEach((field) => {
-        if (field.$attrs.value !== null && field.$attrs.value !== undefined) {
+        var fieldValue = field.$attrs.value
+        if (fieldValue && fieldValue.length > 0) {
           var param = field.$attrs.name
           var value = field.$attrs.value
           params[param] = value

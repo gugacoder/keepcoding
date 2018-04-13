@@ -34,6 +34,10 @@
       this.$paper.navigation.setRightMenuVisible(true)
     },
 
+    destroyed () {
+      this.$paper.page.unload()
+    },
+
     computed: {
       dynamicComponent () {
         var data = this.$paper.getEntity()

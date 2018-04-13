@@ -1,11 +1,31 @@
 <template lang="pug">
-  v-flex(xs6)
+  v-flex(xs12)
+    v-select(
+      v-model="selected"
+      label="I use chips"
+      chips
+      :items="items"
+      :value="values"
+      :name="field.name"
+      item-text="title"
+      item-value="value"
+      deletable-chips
+      autocomplete
+      multiple
+      no-data-text="Opção não disponível"
+    )
+
     v-select(
       :label="field.title"
       :items="items"
       :name="field.name"
-      item-value="text"
-      v-model="field.value"
+      :value="values"
+      item-text="title"
+      item-value="value"
+      v-model="selected"
+      return-object
+      autocomplete
+      no-data-text="Opção não disponível"
     )
 </template>
 
@@ -14,16 +34,17 @@
     props: ['field'],
 
     data: () => ({
-      model: null,
-      items: [
-        { text: 'State 1' },
-        { text: 'State 2' },
-        { text: 'State 3' },
-        { text: 'State 4' },
-        { text: 'State 5' },
-        { text: 'State 6' },
-        { text: 'State 7' }
-      ]
-    })
+      selected: []
+    }),
+
+    computed: {
+      items () {
+        return this.field.value.items
+      },
+
+      values () {
+        return this.selected.toString()
+      }
+    }
   }
 </script>

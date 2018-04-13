@@ -16,6 +16,10 @@ export default class Blueprint {
     this.defaultTheme = 'indigo'
   }
 
+  get themes () {
+    return themes
+  }
+
   getPlannerPage () {
     if (this.blueprint && this.blueprint.hasLinkByRel('planner')) {
       return this.blueprint.getLinkByRel('planner').href

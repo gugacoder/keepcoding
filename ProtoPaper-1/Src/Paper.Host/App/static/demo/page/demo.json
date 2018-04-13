@@ -505,28 +505,72 @@
             "dataType":"float"
          },
          {
-            "name":"data",
+            "name":"datainicial",
             "title":"Data Inicial",
             "type":"date",
             "dataType":"date"
          },
          {
-           "name":"preco",
-           "title":"Preço",
-           "type":"number",
-           "dataType":"currency"
-        },
-         {
-            "name":"hora",
+            "name":"horainicial",
             "title":"Hora Inicial",
             "type":"time",
             "dataType":"time"
          },
          {
+            "name":"datafinal",
+            "title":"Data Final",
+            "type":"date",
+            "dataType":"date"
+         },
+         {
+            "name":"horafinal",
+            "title":"Hora Final",
+            "type":"time",
+            "dataType":"time"
+         },
+         {
+            "name":"preco",
+            "title":"Preço",
+            "type":"number",
+            "dataType":"currency"
+         },
+         {
             "name":"select",
             "title":"Selecione",
-            "type":"text",
-            "dataType":"multi"
+            "type":"checkbox",
+            "dataType":"multi",
+            "value": {
+              "items": [{
+                "title": "Item 1",
+                "value": "1",
+                "selected": true
+              },
+              {
+                "title": "Item 2",
+                "value": "2",
+                "selected": false
+              },
+              {
+                "title": "Item 3",
+                "value": "3",
+                "selected": false
+              },
+              {
+                "title": "Item 4",
+                "value": "4",
+                "selected": false
+              },
+              {
+                "title": "Item 5",
+                "value": "5",
+                "selected": false
+              },
+              {
+                "title": "Item 6",
+                "value": "6",
+                "selected": false
+              }]
+            }
          },
          {
             "name":"ligado",
