@@ -15,16 +15,26 @@
         v-flex(xs12)
           component(:is="$_formsMixin_dynamicComponent(field)" :field="field")
 
-    v-btn(
-      color="secondary"
-      @click="submit()"
-    ) {{ action.title }}
+    template
+      v-card-actions
+        v-btn(
+          color="secondary"
+          @click="submit()"
+        ) {{ action.title }}
 
-    v-btn(
-      color="white"
-      @click="$_formsMixin_clear(action.name)"
-    ) Limpar
+        v-btn(
+          v-if="showClearBtn"
+          color="white"
+          @click="$_formsMixin_clear(action.name)"
+        ) Limpar
 
+        v-spacer
+
+        v-btn(
+          color="white"
+          @click="goBack()"
+        ) Cancelar
+    
 </template>
 
 <script>
@@ -43,6 +53,11 @@
 
       formName () {
         return 'form-' + this.action.name
+      },
+
+      showClearBtn () {
+        var haveInputs = this.$_formsMixin_haveInputs(this.action)
+        return haveInputs
       }
     },
 
@@ -64,6 +79,10 @@
             this.$notify({ message: message, type: 'danger' })
           }
         })
+      },
+
+      goBack () {
+        this.$router.go(-1)
       }
     }
 

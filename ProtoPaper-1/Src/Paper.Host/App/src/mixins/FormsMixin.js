@@ -107,6 +107,13 @@ export default {
       form.reset()
     },
 
+    $_formsMixin_haveInputs (action) {
+      var input = action.fields.find(field =>
+        field.type !== this.Type.TEXT && field.dataType !== this.DataType.STRING
+      )
+      return input !== undefined
+    },
+
     _getSubDataType (dataType) {
       switch (dataType) {
         case this.DataType.BIT:

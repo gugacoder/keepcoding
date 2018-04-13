@@ -15,5 +15,21 @@
   },
   "links": [
     { "rel": ["self"], "href": "/demo/1" }
+  ],
+  "actions": [
+    {
+      "name":"remove-item",
+      "method":"GET",
+      "title":"Remover",
+      "href":"items",
+      "type":"application/x-www-form-urlencoded",
+      "fields":[{
+          "name":"message",
+          "title":"Confirmação",
+          "type":"text",
+          "dataType":"string",
+          "value":"Tem certeza que deseja remover esse item?"
+      }]
+    }
   ]
 }

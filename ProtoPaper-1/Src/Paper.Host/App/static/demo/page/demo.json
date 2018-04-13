@@ -394,7 +394,7 @@
        "name":"add-item",
        "method":"GET",
        "title":"Adicionar Item",
-       "href":"items",
+       "href":"http://localhost:8080/#/form/demo?action=confirm-add-item",
        "type":"application/x-www-form-urlencoded",
        "fields":[
           {
