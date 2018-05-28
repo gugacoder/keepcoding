@@ -607,7 +607,7 @@
     {
       "rel":["home"],
       "title":"Página Inicial",
-      "href":"/page/demo"
+      "href":"/page/demoIndex"
     },
     {
       "rel":["vue"],

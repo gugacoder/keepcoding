@@ -130,6 +130,12 @@ export default class Blueprint {
 
   goToIndexPage () {
     var indexPage = this.getIndexPage()
+
+    if (this.demo.isDemoPage(indexPage)) {
+      this.requester.redirectToPage(indexPage)
+      return
+    }
+
     this.page.parse(indexPage).then((response) => {
       if (response && response.ok) {
         this.requester.redirectToPage(indexPage)

@@ -102,7 +102,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     ]),
     // service worker caching
     new SWPrecacheWebpackPlugin({
-      cacheId: 'Sandbrowser',
+      cacheId: 'PaperBot',
       filename: 'service-worker.js',
       staticFileGlobs: ['dist/**/*.{js,html,css,json}'],
       minify: true,

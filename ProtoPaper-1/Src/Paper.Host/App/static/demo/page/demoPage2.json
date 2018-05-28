@@ -313,92 +313,214 @@
   ],
   "actions":[
     {
-        "name":"add-item",
-        "method":"GET",
-        "title":"Adicionar Item",
-        "href":"items",
-        "type":"application/x-www-form-urlencoded",
-        "fields":[
+       "name":"add-item",
+       "method":"GET",
+       "title":"Adicionar Item",
+       "href":"http://localhost:8080/#/form/demo?action=confirm-add-item",
+       "type":"application/x-www-form-urlencoded",
+       "fields":[
           {
-              "name":"productCode",
-              "title":"Código do produto",
-              "type":"hidden",
-              "value":"valor",
-              "dataType":"string"
+             "name":"productCode",
+             "title":"Código do produto",
+             "type":"hidden",
+             "value":"valor",
+             "dataType":"string"
           },
           {
-              "name":"quantity",
-              "title":"Quantidade",
-              "type":"number",
-              "dataType":"int"
+             "name":"quantity",
+             "title":"Quantidade",
+             "type":"number",
+             "dataType":"int"
           },
           {
-              "name":"active",
-              "title":"Ativo",
-              "type":"number",
-              "dataType":"int"
+             "name":"active",
+             "title":"Ativo",
+             "type":"number",
+             "dataType":"float"
           },
           {
-              "name":"data",
-              "title":"Data de Hoje",
-              "type":"date",
-              "dataType":"date"
+             "name":"data",
+             "title":"Data Inicial",
+             "type":"date",
+             "dataType":"date"
           },
           {
-              "name":"hora",
-              "title":"Hora de Hoje",
-              "type":"time",
-              "dataType":"time"
+            "name":"preco",
+            "title":"Preço",
+            "type":"number",
+            "dataType":"currency"
+         },
+          {
+             "name":"hora",
+             "title":"Hora Inicial",
+             "type":"time",
+             "dataType":"time"
           },
           {
-              "name":"select",
-              "title":"Selecione",
-              "type":"text",
-              "dataType":"multi"
+             "name":"select",
+             "title":"Selecione",
+             "type":"text",
+             "dataType":"multi"
           },
           {
-              "name":"ligado",
-              "title":"Ligado",
-              "type":"text",
-              "dataType":"bool"
-          }
-        ]
+             "name":"ligado",
+             "title":"Ligado",
+             "type":"text",
+             "dataType":"bool"
+          },
+         {
+            "name":"message",
+            "title":"Confirmação",
+            "type":"text",
+            "dataType":"string",
+            "value":"Tem certeza que deseja exibir essa mensagem?"
+         }
+       ]
     },
     {
-        "name":"config-item",
-        "title":"Configurar Item",
-        "href":"items",
-        "type":"application/x-www-form-urlencoded",
-        "fields":[
+       "name":"config-item",
+       "title":"Configurar Item",
+       "href":"items",
+       "type":"application/x-www-form-urlencoded",
+       "fields":[
           {
-              "name":"productCode",
-              "title":"Código do produto",
-              "type":"text"
+             "name":"productCode",
+             "title":"Código do produto",
+             "type":"text"
           },
           {
-              "name":"quantity",
-              "title":"Quantidade",
-              "type":"number"
+             "name":"quantity",
+             "title":"Quantidade",
+             "type":"number"
           },
           {
-              "name":"active",
-              "title":"Ativo",
-              "type":"checkbox",
-              "value": false
+             "name":"active",
+             "title":"Ativo",
+             "type":"checkbox",
+             "value": false
           },
           {
-              "name":"activia",
-              "title":"Ativio",
-              "type":"checkbox",
-              "value": true
+             "name":"activia",
+             "title":"Ativio",
+             "type":"checkbox",
+             "value": true
           }
-        ]
-    }
+       ]
+    },
+    {
+      "name":"filters",
+      "method":"GET",
+      "title":"Filtrar",
+      "href":"items",
+      "type":"application/x-www-form-urlencoded",
+      "fields":[
+         {
+            "name":"productCode",
+            "title":"Código do produto",
+            "type":"hidden",
+            "value":"valor",
+            "dataType":"string"
+         },
+         {
+            "name":"quantity",
+            "title":"Quantidade",
+            "type":"number",
+            "dataType":"int"
+         },
+         {
+            "name":"active",
+            "title":"Ativo",
+            "type":"number",
+            "dataType":"float"
+         },
+         {
+            "name":"datainicial",
+            "title":"Data Inicial",
+            "type":"date",
+            "dataType":"date"
+         },
+         {
+            "name":"horainicial",
+            "title":"Hora Inicial",
+            "type":"time",
+            "dataType":"time"
+         },
+         {
+            "name":"datafinal",
+            "title":"Data Final",
+            "type":"date",
+            "dataType":"date"
+         },
+         {
+            "name":"horafinal",
+            "title":"Hora Final",
+            "type":"time",
+            "dataType":"time"
+         },
+         {
+            "name":"preco",
+            "title":"Preço",
+            "type":"number",
+            "dataType":"currency"
+         },
+         {
+            "name":"select",
+            "title":"Selecione",
+            "type":"checkbox",
+            "dataType":"multi",
+            "value": {
+              "items": [{
+                "title": "Item 1",
+                "value": "1",
+                "selected": true
+              },
+              {
+                "title": "Item 2",
+                "value": "2",
+                "selected": false
+              },
+              {
+                "title": "Item 3",
+                "value": "3",
+                "selected": false
+              },
+              {
+                "title": "Item 4",
+                "value": "4",
+                "selected": false
+              },
+              {
+                "title": "Item 5",
+                "value": "5",
+                "selected": false
+              },
+              {
+                "title": "Item 6",
+                "value": "6",
+                "selected": false
+              }]
+            }
+         },
+         {
+            "name":"ligado",
+            "title":"Ligado",
+            "type":"text",
+            "dataType":"bool"
+         },
+         {
+            "name":"message",
+            "title":"Mensagem",
+            "type":"text",
+            "dataType":"string",
+            "value":"Tem certeza que deseja exibir essa mensagem?"
+         }
+      ]
+   }
   ],
   "links":[
     {
       "rel":["self"],
-      "href":"demoPage2"
+      "href":"demo"
     },
     {
       "rel":["first"],
@@ -413,21 +535,14 @@
       "href":"/demoPage3"
     },
     {
-      "rel":["orders"],
-      "title":"Orders",
-      "href":"http://api.x.io/orders/43"
+      "rel":["home"],
+      "title":"Página Inicial",
+      "href":"/page/demoIndex"
     },
     {
-      "rel":["book"],
-      "title":"A Semente de Mostarda",
-      "href":"https://goo.gl/8wgSF8",
-      "type":"pdf"
-    },
-    {
-      "rel":["siren"],
-      "title":"Siren",
-      "href":"http://api.x.io/orders/43",
-      "type":"application/vnd.siren+json; charset=UTF-8"
+      "rel":["vue"],
+      "title":"VueJS",
+      "href":"https://vuejs.org/"
     }
   ]
 }
