@@ -24,6 +24,9 @@ export default class Grid {
     if (entity && entity.hasSubEntityByClass('item')) {
       return entity.getSubEntitiesByClass('item')
     }
+    if (entity && entity.hasSubEntityByClass('row')) {
+      return entity.getSubEntitiesByClass('row')
+    }
     return []
   }
 
@@ -59,7 +62,7 @@ export default class Grid {
   _getHeaderProperties (headerKey) {
     var entity = this.store.getters.entity
     if (entity && entity.properties) {
-      var headers = entity.properties['_headers'] || entity.properties['headers']
+      var headers = entity.properties['_rowsHeaders'] || entity.properties['rowsHeaders']
       if (headers) {
         var header = headers.find((header) => header.name === headerKey)
         return header
