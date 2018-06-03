@@ -155,8 +155,11 @@
 
       itemLinks (index) {
         var entity = this.$paper.getEntity().entities[index]
-        var links = entity.links.filter((link) => !link.rel.includes('self'))
-        return links
+        if (entity.links) {
+          var links = entity.links.filter((link) => !link.rel.includes('self'))
+          return links
+        }
+        return []
       },
 
       hasItemLinks (index) {
