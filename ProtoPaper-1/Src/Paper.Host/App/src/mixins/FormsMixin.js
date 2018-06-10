@@ -131,7 +131,7 @@ export default {
         case this.DataType.CURRENCY:
           return 'VPaperCurrency'
         case this.DataType.STRING:
-          return 'VPaperLabel'
+          return 'VPaperText'
         default:
           return 'VPaperText'
       }
