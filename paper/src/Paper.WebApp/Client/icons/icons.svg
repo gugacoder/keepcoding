@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="safari-pinned-tab.svg">
+   sodipodi:docname="icons.svg">
   <defs
      id="defs4">
     <inkscape:perspective
@@ -116,5 +116,151 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
+    <g
+       transform="matrix(1.8749998,0,0,1.8749998,128,-920.81668)"
+       id="color-icon"
+       inkscape:label="#g4483">
+      <g
+         transform="translate(-120.54681,62.862926)"
+         id="g5156">
+        <path
+           inkscape:connector-curvature="0"
+           id="path5158"
+           d="m 129.12063,929.05676 c -0.42238,0.2948 -0.73173,0.7515 -0.82948,1.301 l -7.66537,43.09127 c -0.19552,1.0991 0.53185,2.1413 1.63094,2.3368 l 43.09127,7.6653 c 0.54955,0.098 1.08488,-0.035 1.50726,-0.3299 l -37.73462,-54.06447 z"
+           style="opacity:1;fill:#00b561;fill-opacity:1;stroke:#00b561;stroke-width:0.09453182;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5160"
+           d="m 129.12063,929.05676 37.73462,54.06447 c 0.42238,-0.2948 0.73188,-0.7516 0.82964,-1.3011 l 7.66536,-43.0913 c 0.19552,-1.0991 -0.53185,-2.1413 -1.63094,-2.3368 l -43.09127,-7.66527 c -0.54954,-0.098 -1.08503,0.035 -1.50741,0.33 z"
+           style="opacity:1;fill:#00ca61;fill-opacity:1;stroke:#00b561;stroke-width:0.09453182;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           style="opacity:1;fill:#f89e20;fill-opacity:1;stroke:#f89e20;stroke-width:0.09453182;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 140.20129,927.88326 c -0.46276,0.2263 -0.83875,0.6298 -1.02,1.1578 l -14.2118,41.39607 c -0.36249,1.0559 0.19566,2.1976 1.25152,2.5601 l 41.39613,14.2118 c 0.52793,0.1813 1.07734,0.1324 1.5401,-0.094 l -28.95595,-59.23197 z"
+           id="path5162"
+           inkscape:connector-curvature="0" />
+        <path
+           style="opacity:1;fill:#f8b520;fill-opacity:1;stroke:#f89e20;stroke-width:0.09453182;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 140.20129,927.88326 28.95595,59.23197 c 0.46275,-0.2262 0.83892,-0.6299 1.02016,-1.1578 l 14.21179,-41.3961 c 0.36249,-1.0559 -0.19566,-2.1976 -1.25151,-2.5601 l -41.39613,-14.21177 c -0.52793,-0.1813 -1.07751,-0.1324 -1.54026,0.094 z"
+           id="path5164"
+           inkscape:connector-curvature="0" />
+        <path
+           style="opacity:1;fill:#ce3ad9;fill-opacity:1;stroke:#b43ad9;stroke-width:0.09453182;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 131.99464,985.92893 c 0.41531,0.3047 0.94737,0.4502 1.49907,0.3654 l 43.26017,-6.6462 c 1.10341,-0.1695 1.85517,-1.1942 1.68565,-2.2976 l -6.64619,-43.26017 c -0.0848,-0.5517 -0.38325,-1.0155 -0.79856,-1.3202 l -39.00014,53.15877 z"
+           id="path5166"
+           inkscape:connector-curvature="0" />
+        <path
+           style="opacity:1;fill:#b43ad9;fill-opacity:1;stroke:#b43ad9;stroke-width:0.09453182;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 131.99464,985.92893 39.00014,-53.15877 c -0.4153,-0.3047 -0.94749,-0.4503 -1.49919,-0.3656 l -43.26018,6.64627 c -1.10341,0.1695 -1.85516,1.1942 -1.68564,2.2976 l 6.64619,43.2602 c 0.0848,0.5517 0.38338,1.0156 0.79868,1.3203 z"
+           id="path5168"
+           inkscape:connector-curvature="0" />
+      </g>
+      <rect
+         ry="0"
+         rx="0"
+         y="988.36218"
+         x="0"
+         height="64"
+         width="64"
+         id="rect5170"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.79688215px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.11992204"
+       x="0.5693031"
+       y="830.50049"
+       id="text323"><tspan
+         sodipodi:role="line"
+         id="tspan321"
+         x="0.5693031"
+         y="830.50049"
+         style="stroke-width:0.11992204">Norma:</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="836.49658"
+         id="tspan325"
+         style="stroke-width:0.11992204"> </tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="842.49268"
+         id="tspan327"
+         style="stroke-width:0.11992204">1. Desenhe uma versão da logo colorida e uma preto e branco.</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="848.48877"
+         id="tspan329"
+         style="stroke-width:0.11992204">2. A logo deve ter exatamente 120x120px.</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="854.48492"
+         id="tspan331"
+         style="stroke-width:0.11992204">    Acrescente uma quadrado transparente no fundo da logo com estas dimensões se necessário.</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="860.48102"
+         id="tspan333"
+         style="stroke-width:0.11992204">3. A logo preto e branco deve estar exatamente dentro dos limites da página, que</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="866.47711"
+         id="tspan335"
+         style="stroke-width:0.11992204">    também deve ter a dimensão de 120x120px.</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="872.47321"
+         id="tspan337"
+         style="stroke-width:0.11992204">4. A logo colorida pode estar em qualquer lugar.</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="878.4693"
+         id="tspan339"
+         style="stroke-width:0.11992204">5. Agrupe as partes da imagem para compor um único objeto.</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="884.46539"
+         id="tspan341"
+         style="stroke-width:0.11992204">6. Nomeie os objetos como:</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="890.46149"
+         id="tspan343"
+         style="stroke-width:0.11992204">    - &quot;color-icon&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="896.45764"
+         id="tspan345"
+         style="stroke-width:0.11992204">    - &quot;black-icon&quot;</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="902.45374"
+         id="tspan347"
+         style="stroke-width:0.11992204">    Para as versões colorida e preto e branco respectivamente.</tspan><tspan
+         sodipodi:role="line"
+         x="0.5693031"
+         y="908.44983"
+         style="stroke-width:0.11992204"
+         id="tspan4517">    Estes nomes são referenciados no script de exportação automática.</tspan></text>
+    <text
+       id="text4324"
+       y="926.48071"
+       x="0.24841791"
+       style="font-style:normal;font-weight:normal;font-size:4.79688215px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.11992204"
+       xml:space="preserve"><tspan
+         style="stroke-width:0.11992204"
+         id="tspan4322"
+         y="926.48071"
+         x="0.24841791"
+         sodipodi:role="line">Ícone preto e branco</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.79688215px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.11992204"
+       x="127.67911"
+       y="926.48071"
+       id="text4506"><tspan
+         sodipodi:role="line"
+         x="127.67911"
+         y="926.48071"
+         id="tspan4504"
+         style="stroke-width:0.11992204">Ícone colorido</tspan></text>
   </g>
 </svg>
