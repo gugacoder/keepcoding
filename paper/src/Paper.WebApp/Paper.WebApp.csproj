@@ -41,7 +41,7 @@
     </Content>
   </ItemGroup>
 
-  <Target Name="Debug_NpmRun" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\static') ">
+  <Target Name="Debug_NpmRun" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\index.html') ">
     
     <!-- Checa a existência do npm -->
     <Exec Command="npm --version" ContinueOnError="true">
