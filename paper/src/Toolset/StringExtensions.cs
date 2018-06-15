@@ -311,6 +311,22 @@ namespace Toolset
       return Regex.IsMatch(text, pattern);
     }
 
+    public static bool LikeIgnoreCase(this string text, string pattern)
+    {
+      pattern = $"^{Regex.Escape(pattern).Replace("%", ".*").Replace("_", ".")}$";
+      return Regex.IsMatch(text, pattern, RegexOptions.IgnoreCase);
+    }
+
+    public static bool EqualsAny(this string text, params string[] terms)
+    {
+      return terms.Contains(text);
+    }
+
+    public static bool EqualsAnyIgnoreCase(this string text, params string[] terms)
+    {
+      return terms.Any(x => x.EqualsIgnoreCase(text));
+    }
+
     public static bool EqualsIgnoreCase(this string text, string other)
     {
       if (text == null)

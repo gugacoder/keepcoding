@@ -46,6 +46,11 @@ namespace Toolset
       };
     }
 
+    public static implicit operator Ret(bool status)
+    {
+      return status ? Ret.Ok() : Ret.As(HttpStatusCode.BadRequest);
+    }
+
     #region Métodos Ok()
 
     public static RetStatus Ok()

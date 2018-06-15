@@ -96,10 +96,10 @@ namespace Paper.Media.Serialization
         return;
       }
 
-      if (value is string)
+      if (value is string || value is Uri)
       {
         writer.Write("\"");
-        writer.Write(Toolset.Json.Escape((string)value));
+        writer.Write(Toolset.Json.Escape(value.ToString()));
         writer.Write("\"");
         return;
       }

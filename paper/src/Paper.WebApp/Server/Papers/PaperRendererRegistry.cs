@@ -9,10 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Paper.Media.Design;
 using Paper.Media.Rendering;
+using Paper.WebApp.Server.Utilities;
 using Toolset;
 using Toolset.Collections;
 
-namespace Paper.WebApp.Server
+namespace Paper.WebApp.Server.Papers
 {
   public class PaperRendererRegistry : IPaperRendererRegistry
   {
@@ -127,7 +128,7 @@ namespace Paper.WebApp.Server
 
     public PaperRendererInfo FindPaperRenderer(string path)
     {
-      var key = pathIndex.Find(path);
+      var key = pathIndex.FindExact(path);
       var renderer = (key != null) ? pathTemplateIndex[key] : null;
       return renderer;
     }
@@ -135,44 +136,6 @@ namespace Paper.WebApp.Server
     public IEnumerable<PaperRendererInfo> FindPaperRenderers(Type paperType)
     {
       return paperTypeIndex[paperType] ?? Enumerable.Empty<PaperRendererInfo>();
-    }
-
-    class PathIndex
-    {
-      private readonly Node entries = new Node();
-
-      public void Add(string path)
-      {
-        Node index = entries;
-        foreach (var token in path.ToLower().Split('/').NonEmpty())
-        {
-          var key = token.Contains("{") ? "*" : token;
-          if (!index.ContainsKey(key))
-          {
-            index[key] = new Node();
-          }
-          index = index[key];
-        }
-        index.Value = path;
-      }
-
-      public string Find(string path)
-      {
-        Node index = entries;
-        foreach (var token in path.ToLower().Split('/').NonEmpty())
-        {
-          var key = index.ContainsKey(token) ? token : index.ContainsKey("*") ? "*" : null;
-          if (key == null)
-            return null;
-          index = index[key];
-        }
-        return index.Value;
-      }
-
-      class Node : Dictionary<string, Node>
-      {
-        public string Value { get; set; }
-      }
     }
   }
 }
