@@ -22,7 +22,7 @@ namespace Paper.WebApp.Server
 
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddPaperServices();
+      services.AddPaperWebAppServices();
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -33,7 +33,7 @@ namespace Paper.WebApp.Server
       app.UseDefaultFiles();
       app.UseStaticFiles();
       app.UseDirectoryBrowser();
-      app.UsePaperMiddlewares();
+      app.UsePaperWebAppMiddlewares();
     }
   }
 }

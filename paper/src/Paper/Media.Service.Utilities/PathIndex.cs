@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Toolset;
 
-namespace Paper.WebApp.Server.Utilities
+namespace Media.Service.Utilities
 {
-  class PathIndex : PathIndex<string>
+  public class PathIndex : PathIndex<string>
   {
     public void Add(string path)
     {

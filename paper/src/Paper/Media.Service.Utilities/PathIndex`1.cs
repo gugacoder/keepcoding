@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Toolset;
 using Toolset.Collections;
 
-namespace Paper.WebApp.Server.Utilities
+namespace Media.Service.Utilities
 {
-  internal class PathIndex<TValue>
+  public class PathIndex<TValue>
     where TValue : class
   {
     private readonly Node<TValue> entries = new Node<TValue>(null, null);

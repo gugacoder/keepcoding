@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Toolset;
 
-namespace Paper.WebApp.Server.Proxies
+namespace Media.Service.Proxies
 {
   public class Proxy
   {

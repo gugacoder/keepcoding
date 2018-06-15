@@ -17,7 +17,7 @@ namespace Paper.WebApp.Server
       try
       {
         WebHost.CreateDefaultBuilder(args)
-          .UsePaperHost()
+          .UsePaperWebAppHost()
           .UseStartup<Startup>()
           .Build()
           .Run();

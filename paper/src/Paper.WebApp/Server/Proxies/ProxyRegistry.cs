@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Media.Service.Proxies;
+using Media.Service.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Paper.WebApp.Server.Utilities;
 using Toolset;
 
 namespace Paper.WebApp.Server.Proxies
 {
-  public class ProxyRegistry : IProxyRegistry
+  class ProxyRegistry : IProxyRegistry
   {
     private readonly PathIndex<Proxy> index = new PathIndex<Proxy>();
 

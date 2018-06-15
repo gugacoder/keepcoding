@@ -8,9 +8,9 @@ using Microsoft.Net.Http.Headers;
 using Paper.Media;
 using Toolset;
 
-namespace Paper.WebApp.Server.Utilities
+namespace Media.Service.Utilities
 {
-  internal static class HttpNegotiation
+  public static class HttpNegotiation
   {
     public static string SelectContentType(HttpRequest req)
     {
