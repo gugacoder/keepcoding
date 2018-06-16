@@ -8,6 +8,8 @@ namespace Paper.WebApp.Server.Proxies
 {
   interface IProxyRegistry
   {
+    string[] Paths { get; }
+
     void Add(Proxy proxy);
 
     void Remove(string path);

@@ -9,6 +9,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using Toolset;
+using Microsoft.AspNetCore.Http;
 
 namespace Paper.Media.Serialization
 {
@@ -96,7 +97,7 @@ namespace Paper.Media.Serialization
         return;
       }
 
-      if (value is string || value is Uri)
+      if (SerializationUtilities.IsStringCompatible(value))
       {
         writer.Write("\"");
         writer.Write(Toolset.Json.Escape(value.ToString()));

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Paper.Media.Rendering;
+using Paper.Media.Service;
 using Paper.WebApp.Server.Proxies;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,8 @@ namespace Paper.WebApp.Server
   {
     #region IWebHostBuilder
 
-    public static IWebHostBuilder UsePaperWebAppHost(this IWebHostBuilder builder, params string[] args)
+    public static IWebHostBuilder UsePaperWebAppSettings(this IWebHostBuilder builder, params string[] args)
     {
-      var exePath = typeof(AspNetCoreExtensions).Assembly.Location;
-      var contentPath = Path.GetDirectoryName(exePath);
-      builder.UseContentRoot(contentPath);
       return builder;
     }
 
@@ -36,7 +34,6 @@ namespace Paper.WebApp.Server
 
     public static IServiceCollection AddPaperWebAppServices(this IServiceCollection services)
     {
-      services.AddSingleton<IPaperRendererRegistry, PaperRendererRegistry>();
       services.AddSingleton<IProxyRegistry, ProxyRegistry>();
       return services;
     }
@@ -47,14 +44,13 @@ namespace Paper.WebApp.Server
 
     public static IApplicationBuilder UsePaperWebAppMiddlewares(this IApplicationBuilder app)
     {
-      app.Map("/Api/1", PaperPipeline);
+      app.Map("/Api/1/Proxies", ProxyPipeline);
 
       return app;
     }
 
-    private static void PaperPipeline(IApplicationBuilder app)
+    private static void ProxyPipeline(IApplicationBuilder app)
     {
-      app.UseMiddleware<PaperMiddleware>();
       app.UseMiddleware<ProxyRegistryMiddleware>();
       app.UseMiddleware<ProxyMiddleware>();
     }

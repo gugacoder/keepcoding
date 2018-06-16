@@ -22,8 +22,6 @@ namespace Paper.WebApp.Server.Proxies
     private readonly RequestDelegate next;
     private readonly IProxyRegistry registry;
 
-    private readonly PathString addPath = new PathString("/Proxies");
-
     public ProxyRegistryMiddleware(RequestDelegate next, IProxyRegistry registry)
     {
       this.next = next;
@@ -32,12 +30,6 @@ namespace Paper.WebApp.Server.Proxies
 
     public async Task Invoke(HttpContext httpContext)
     {
-      if (!httpContext.Request.Path.StartsWithSegments(addPath))
-      {
-        await next(httpContext);
-        return;
-      }
-
       try
       {
         var req = httpContext.Request;
@@ -45,17 +37,6 @@ namespace Paper.WebApp.Server.Proxies
 
         var path = (string)query["path"];
         var reverseUri = (string)query["reverseUri"];
-
-        if (path == null)
-        {
-          var ret = HttpEntity.Create(
-            route: req.GetRequestUri(),
-            status: HttpStatusCode.BadRequest,
-            message: "Uso incorreto. Os parâmetros `path' deve ser indicado."
-          );
-          await SendStatusAsync(httpContext, ret);
-          return;
-        }
 
         var isShowInfoOnly = (req.Method == "GET" && reverseUri == null);
         if (isShowInfoOnly)
@@ -79,28 +60,68 @@ namespace Paper.WebApp.Server.Proxies
       var query = httpContext.Request.Query;
 
       var path = (string)query["path"];
-
-      Proxy proxy = registry.FindExact(path);
-      if (proxy != null)
+      if (path != null)
       {
-        var status = HttpEntity.Create(
-          route: req.GetRequestUri(),
-          status: HttpStatusCode.OK
-        );
+        Proxy proxy = registry.FindExact(path);
+        if (proxy == null)
+        {
+          var ret = HttpEntity.Create(
+            route: req.GetRequestUri(),
+            status: HttpStatusCode.NotFound,
+            message: $"Proxy não registrado: {path}"
+          );
+          await SendStatusAsync(httpContext, ret);
+        }
+        else
+        {
+          var href = req.GetRequestUri();
+          var allProxiesHref = new Route(href).UnsetArgs("path");
 
-        status.Data.Properties.Add("Path", proxy.Path.ToString());
-        status.Data.Properties.Add("ReverseUri", proxy.ReverseUri.ToString());
+          var entity = new Entity();
+          entity.Title = $"Configuração de proxy: {proxy.Path}";
+          entity.Class = KnownClasses.Single;
+          entity.Links = new LinkCollection();
+          entity.Links.AddSelf(href);
+          entity.Links.Add("link", "Todas as configurações de proxy", allProxiesHref);
+          entity.Properties = new PropertyCollection();
+          entity.Properties.AddFromGraph(proxy);
+          entity.Properties.AddDataHeadersFromGraph<Proxy>();
 
-        await SendStatusAsync(httpContext, status);
+          await SendStatusAsync(httpContext, Ret.Ok(entity));
+        }
       }
       else
       {
-        var status = HttpEntity.Create(
-          route: req.GetRequestUri(),
-          status: HttpStatusCode.NotFound,
-          message: $"Proxy não registrado: {path}"
-        );
-        await SendStatusAsync(httpContext, status);
+        var entity = new Entity();
+        entity.Class = KnownClasses.Rows;
+        entity.Title = "Todas as configurações de proxy";
+        entity.Links = new LinkCollection();
+        entity.Links.AddSelf(req.GetRequestUri());
+        entity.Entities = new EntityCollection();
+        entity.Properties = new PropertyCollection();
+        entity.Properties.AddRowsHeadersFromGraph<Proxy>();
+
+        foreach (var knownPath in registry.Paths)
+        {
+          var proxy = registry.FindExact(knownPath);
+          var href = 
+            new Route(req.GetRequestUri())
+              .SetArg("path", proxy.Path)
+              .ToString();
+          
+          var row = new Entity();
+          row.Title = $"Configuração de proxy: {proxy.Path}";
+          row.Class = KnownClasses.Row;
+          row.Rel = KnownRelations.Row;
+          row.Links = new LinkCollection();
+          row.Links.AddSelf(href);
+          row.Properties = new PropertyCollection();
+          row.Properties.AddFromGraph(proxy);
+
+          entity.Entities.Add(row);
+        }
+
+        await SendStatusAsync(httpContext, Ret.Ok(entity));
       }
     }
 
@@ -112,7 +133,7 @@ namespace Paper.WebApp.Server.Proxies
       var path = (string)query["path"];
       var reverseUri = (string)query["reverseUri"];
 
-      if (reverseUri == null)
+      if (path == null ||reverseUri == null)
       {
         var ret = HttpEntity.Create(
           route: req.GetRequestUri(),

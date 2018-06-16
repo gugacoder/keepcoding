@@ -38,24 +38,14 @@ namespace Paper.WebApp.Server.Proxies
       }
     }
 
-    public void Add(Proxy proxy)
-    {
-      index.Add(proxy.Path, proxy);
-    }
+    public string[] Paths => index.Paths;
 
-    public void Remove(string path)
-    {
-      index.Remove(path);
-    }
+    public void Add(Proxy proxy) => index.Add(proxy.Path, proxy);
 
-    public Proxy FindExact(string path)
-    {
-      return index.FindExact(path);
-    }
+    public void Remove(string path) => index.Remove(path);
 
-    public Proxy FindByPrefix(string path)
-    {
-      return index.FindByPrefix(path);
-    }
+    public Proxy FindExact(string path) => index.FindExact(path);
+
+    public Proxy FindByPrefix(string path) => index.FindByPrefix(path);
   }
 }

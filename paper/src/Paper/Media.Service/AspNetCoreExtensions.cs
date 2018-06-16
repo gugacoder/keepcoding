@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Paper.Media.Rendering;
+using Paper.Media.Service;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,12 +22,22 @@ namespace Media.Service
   {
     #region IWebHostBuilder
 
-    public static IWebHostBuilder UsePaperProxyServer(this IWebHostBuilder builder, params string[] args)
+    public static IWebHostBuilder UsePaperSettings(this IWebHostBuilder builder, params string[] args)
     {
+      var baseUri = builder.GetSetting(WebHostDefaults.ServerUrlsKey);
+      builder.ConfigureServices(services => RegisterServices(services, baseUri));
+
       var exePath = typeof(AspNetCoreExtensions).Assembly.Location;
       var contentPath = Path.GetDirectoryName(exePath);
       builder.UseContentRoot(contentPath);
+
       return builder;
+    }
+
+    private static void RegisterServices(IServiceCollection services, string baseUri)
+    {
+      var settings = new PaperSettings { BaseUri = new Uri(baseUri) };
+      services.AddSingleton<IPaperSettings>(settings);
     }
 
     #endregion

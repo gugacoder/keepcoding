@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -11,14 +12,19 @@ namespace Media.Service.Proxies
   {
     private static readonly TimeSpan MaxDelay = TimeSpan.FromMinutes(1);
 
+    [DisplayName("Caminho")]
     public PathString Path { get; set; }
 
+    [DisplayName("URI Reversa")]
     public Uri ReverseUri { get; set; }
 
+    [DisplayName("Visto Em")]
     public DateTime LastSeen { get; set; } = DateTime.Now;
 
+    [DisplayName("Habilitado")]
     public bool Enabled { get; set; } = true;
 
+    [DisplayName("Disponível")]
     public bool Available => Enabled && ((DateTime.Now - LastSeen) <= MaxDelay);
 
     public static Proxy Create(string path, string reverseUri)

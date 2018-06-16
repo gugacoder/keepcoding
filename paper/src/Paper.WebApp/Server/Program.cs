@@ -2,6 +2,7 @@
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using Media.Service;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,7 +18,8 @@ namespace Paper.WebApp.Server
       try
       {
         WebHost.CreateDefaultBuilder(args)
-          .UsePaperWebAppHost()
+          .UsePaperWebAppSettings()
+          .UsePaperSettings()
           .UseStartup<Startup>()
           .Build()
           .Run();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.Collections;
+using Paper.Media.Serialization;
 
 namespace Paper.Media
 {
@@ -64,14 +65,15 @@ namespace Paper.Media
       var type = value.GetType();
 
       if (type.IsPrimitive
-       || type.Namespace == "System"
-       || type.Namespace?.StartsWith("System.") == true
-       || value is IEnumerable
-       || value is CaseVariantString
-       || value is PropertyCollection
-       || value is HeaderCollection
-       || value is NameCollection
-       || value is Many)
+      || type.Namespace == "System"
+      || type.Namespace?.StartsWith("System.") == true
+      || SerializationUtilities.IsStringCompatible(value)
+      || value is IEnumerable
+      || value is CaseVariantString
+      || value is PropertyCollection
+      || value is HeaderCollection
+      || value is NameCollection
+      || value is Many)
         return value;
 
       var collection = new PropertyCollection();

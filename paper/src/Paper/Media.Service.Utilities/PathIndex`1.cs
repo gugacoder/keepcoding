@@ -12,6 +12,24 @@ namespace Media.Service.Utilities
   {
     private readonly Node<TValue> entries = new Node<TValue>(null, null);
 
+    public string[] Paths => EnumeratePaths().ToArray();
+
+    private IEnumerable<string> EnumeratePaths()
+    {
+      var stack = new Stack<Node<TValue>>();
+      stack.Push(entries);
+
+      while (stack.Count > 0)
+      {
+        var node = stack.Pop();
+
+        if (node.Path != null)
+          yield return node.Path;
+
+        node.Values.ForEach(n => stack.Push(n));
+      }
+    }
+
     public void Add(string path, TValue value)
     {
       Node<TValue> node = entries;
@@ -24,6 +42,7 @@ namespace Media.Service.Utilities
         }
         node = node[key];
       }
+      node.Path = path;
       node.Value = value;
     }
 
@@ -32,6 +51,7 @@ namespace Media.Service.Utilities
       var node = FindNodeExact(path);
       if (node != null)
       {
+        node.Path = null;
         node.Value = null;
       }
     }
@@ -95,6 +115,8 @@ namespace Media.Service.Utilities
       public string Key { get; }
 
       public bool IsRoot => (Parent == null);
+
+      public string Path { get; set; }
 
       public T Value { get; set; }
     }

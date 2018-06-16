@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Toolset.Collections;
 using Toolset;
+using System.ComponentModel;
 
 namespace Paper.Media
 {
@@ -14,19 +15,43 @@ namespace Paper.Media
 
     public static void AddFromGraph(this PropertyCollection properties, object graph)
     {
+      Property[] items;
+
       var type = graph.GetType();
-      var items = (
-        from prop in type.GetProperties()
-        from member in prop.GetCustomAttributes(true).OfType<DataMemberAttribute>()
-        orderby member.Order
-        let value = prop.GetValue(graph)
-        where member.EmitDefaultValue || (value != null)
-        select new Property
-        {
-          Name = member.Name ?? prop.Name,
-          Value = value
-        }
-      ).ToArray();
+      var isDataContract =
+        type
+          .GetCustomAttributes(true)
+          .OfType<DataContractAttribute>()
+          .Any();
+
+      if (isDataContract)
+      {
+        items = (
+          from prop in type.GetProperties()
+          from member in prop.GetCustomAttributes(true).OfType<DataMemberAttribute>()
+          orderby member.Order
+          let value = prop.GetValue(graph)
+          where member.EmitDefaultValue || (value != null)
+          select new Property
+          {
+            Name = member.Name ?? prop.Name,
+            Value = value
+          }
+        ).ToArray();
+      }
+      else
+      {
+        items = (
+          from prop in type.GetProperties()
+          let value = prop.GetValue(graph)
+          select new Property
+          {
+            Name = prop.Name,
+            Value = value
+          }
+        ).ToArray();
+      }
+
       properties.AddMany(items);
     }
 
@@ -69,17 +94,46 @@ namespace Paper.Media
 
     public static HeaderCollection AddDataHeadersFromGraph(this PropertyCollection properties, object graphOrType)
     {
+      Header[] headers;
+
       var type = (graphOrType is Type) ? (Type)graphOrType : graphOrType.GetType();
-      var headers = (
-        from prop in type.GetProperties()
-        from member in prop.GetCustomAttributes(true).OfType<DataMemberAttribute>()
-        orderby member.Order
-        select new Header
-        {
-          Name = member.Name ?? prop.Name,
-          Type = KnownFieldDataTypes.GetDataTypeName(prop.PropertyType)
-        }
-      ).ToArray();
+      var isDataContract =
+        type
+          .GetCustomAttributes(true)
+          .OfType<DataContractAttribute>()
+          .Any();
+
+      if (isDataContract)
+      {
+        headers = (
+          from prop in type.GetProperties()
+          from member in prop.GetCustomAttributes(true).OfType<DataMemberAttribute>()
+          orderby member.Order
+          select new Header
+          {
+            Name = member.Name ?? prop.Name,
+            Type = KnownFieldDataTypes.GetDataTypeName(prop.PropertyType),
+            Title = (member.Name ?? prop.Name).ChangeCase(TextCase.ProperCase),
+          }
+        ).ToArray();
+      }
+      else
+      {
+        headers = (
+          from prop in type.GetProperties()
+          let attribute =
+            prop.GetCustomAttributes(true)
+                .OfType<DisplayNameAttribute>()
+                .FirstOrDefault()
+          select new Header
+          {
+            Name = prop.Name,
+            Type = KnownFieldDataTypes.GetDataTypeName(prop.PropertyType),
+            Title = (attribute?.DisplayName ?? prop.Name).ChangeCase(TextCase.ProperCase),
+          }
+        ).ToArray();
+      }
+
       return AddDataHeaders(properties, headers);
     }
 
@@ -146,17 +200,46 @@ namespace Paper.Media
 
     public static HeaderCollection AddRowsHeadersFromGraph(this PropertyCollection properties, object graphOrType)
     {
+      Header[] headers;
+
       var type = (graphOrType is Type) ? (Type)graphOrType : graphOrType.GetType();
-      var headers = (
-        from prop in type.GetProperties()
-        from member in prop.GetCustomAttributes(true).OfType<DataMemberAttribute>()
-        orderby member.Order
-        select new Header
-        {
-          Name = member.Name ?? prop.Name,
-          Type = KnownFieldDataTypes.GetDataTypeName(prop.PropertyType)
-        }
-      ).ToArray();
+      var isDataContract =
+        type
+          .GetCustomAttributes(true)
+          .OfType<DataContractAttribute>()
+          .Any();
+
+      if (isDataContract)
+      {
+        headers = (
+          from prop in type.GetProperties()
+          from member in prop.GetCustomAttributes(true).OfType<DataMemberAttribute>()
+          orderby member.Order
+          select new Header
+          {
+            Name = member.Name ?? prop.Name,
+            Type = KnownFieldDataTypes.GetDataTypeName(prop.PropertyType),
+            Title = (member.Name ?? prop.Name).ChangeCase(TextCase.ProperCase),
+          }
+        ).ToArray();
+      }
+      else
+      {
+        headers = (
+          from prop in type.GetProperties()
+          let attribute =
+            prop.GetCustomAttributes(true)
+                .OfType<DisplayNameAttribute>()
+                .FirstOrDefault()
+          select new Header
+          {
+            Name = prop.Name,
+            Type = KnownFieldDataTypes.GetDataTypeName(prop.PropertyType),
+            Title = (attribute?.DisplayName ?? prop.Name).ChangeCase(TextCase.ProperCase),
+          }
+        ).ToArray();
+      }
+
       return AddRowsHeaders(properties, headers);
     }
 
