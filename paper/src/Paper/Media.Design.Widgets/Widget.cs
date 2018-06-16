@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Toolset;
+using Toolset.Collections;
 using Toolset.Reflection;
 
 namespace Paper.Media.Design.Widgets

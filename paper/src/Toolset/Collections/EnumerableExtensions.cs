@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Toolset
+namespace Toolset.Collections
 {
   /// <summary>
   /// Extensão de funcionalidades para IEnumerable.

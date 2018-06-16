@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Runtime.Loader;
 using System.Text;
 using System.Threading.Tasks;
-using Toolset.Application;
 
 namespace Toolset.Reflection
 {
@@ -68,9 +67,12 @@ namespace Toolset.Reflection
     {
       if (assemblies == null)
       {
+        var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+        var appPath = System.IO.Path.GetDirectoryName(assembly.Location);
+
         assemblies =
           Directory
-            .GetFiles(App.Path, "*.dll", SearchOption.TopDirectoryOnly)
+            .GetFiles(appPath, "*.dll", SearchOption.TopDirectoryOnly)
             .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
             .ToArray();
       }

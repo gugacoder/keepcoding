@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Toolset;
+using Toolset.Collections;
 
 namespace Paper.Media.Rendering
 {

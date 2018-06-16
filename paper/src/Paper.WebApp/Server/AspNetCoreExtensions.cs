@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using Toolset.Application;
 using static System.Environment;
 
 namespace Paper.WebApp.Server
@@ -45,7 +44,6 @@ namespace Paper.WebApp.Server
     public static IApplicationBuilder UsePaperWebAppMiddlewares(this IApplicationBuilder app)
     {
       app.Map("/Api/1/Proxies", ProxyPipeline);
-
       return app;
     }
 

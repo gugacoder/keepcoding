@@ -8,12 +8,13 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Paper.Media.Rendering;
 using Paper.Media.Service;
+using Paper.Media.Service.Proxies;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
-using Toolset.Application;
 using static System.Environment;
 
 namespace Media.Service
@@ -22,22 +23,31 @@ namespace Media.Service
   {
     #region IWebHostBuilder
 
-    public static IWebHostBuilder UsePaperSettings(this IWebHostBuilder builder, params string[] args)
+    public static IWebHostBuilder UsePaperSettings(this IWebHostBuilder builder)
     {
+      return UsePaperSettings(builder, opt => { });
+    }
+
+    public static IWebHostBuilder UsePaperSettings(this IWebHostBuilder builder, Action<PaperSettingsBuilder> action)
+    {
+      var settingsBuilder = new PaperSettingsBuilder();
+
+      action.Invoke(settingsBuilder);
+
+      var settings = (PaperSettings)settingsBuilder.Build();
+
       var baseUri = builder.GetSetting(WebHostDefaults.ServerUrlsKey);
-      builder.ConfigureServices(services => RegisterServices(services, baseUri));
+      settings.BaseUri = (baseUri != null) ? new Uri(baseUri) : null;
+
+      builder.ConfigureServices(services =>
+        services.AddSingleton<IPaperSettings>(settings)
+      );
 
       var exePath = typeof(AspNetCoreExtensions).Assembly.Location;
       var contentPath = Path.GetDirectoryName(exePath);
       builder.UseContentRoot(contentPath);
 
       return builder;
-    }
-
-    private static void RegisterServices(IServiceCollection services, string baseUri)
-    {
-      var settings = new PaperSettings { BaseUri = new Uri(baseUri) };
-      services.AddSingleton<IPaperSettings>(settings);
     }
 
     #endregion
@@ -47,6 +57,14 @@ namespace Media.Service
     public static IServiceCollection AddPaperServices(this IServiceCollection services)
     {
       services.AddSingleton<IPaperRendererRegistry, PaperRendererRegistry>();
+
+      var serviceProvider = services.BuildServiceProvider();
+      var settings = serviceProvider.GetService<IPaperSettings>();
+      if (settings.RemotePaperServerUris?.Any() == true)
+      {
+        services.AddHostedService<TimedProxyNotificationService>();
+      }
+
       return services;
     }
 
@@ -56,8 +74,13 @@ namespace Media.Service
 
     public static IApplicationBuilder UsePaperMiddlewares(this IApplicationBuilder app)
     {
+      var settings = app.ApplicationServices.GetService<IPaperSettings>();
+      var pathBase = settings?.PathBase;
+      if (pathBase != null)
+      {
+        app.UsePathBase(pathBase.ToString());
+      }
       app.Map("/Api/1", PaperPipeline);
-
       return app;
     }
 

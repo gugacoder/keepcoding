@@ -6,7 +6,6 @@ using System.Text;
 using System.Configuration;
 using System.Data.SqlClient;
 using Toolset.Data;
-using Toolset.Application;
 
 namespace Toolset.Sequel
 {
@@ -67,20 +66,22 @@ namespace Toolset.Sequel
       // Caso contrário vamos entender a configuração como sendo o nome de uma
       // seção <connectionString> no App.config.
       //
-      var connectionStringInfo = App.Connections[configuration];
-      if (connectionStringInfo == null)
-      {
-        var message = $"String de conexão não encontrada no arquivo de configuração: \"{configuration}\"";
-        var domain = App.User?.Domain;
-        if (domain != null)
-        {
-          message += $", para o domínio: \"{domain}\"";
-        }
-        throw new SequelException(message);
-      }
-
-      connectionString = connectionStringInfo.ToString();
-      connectionProvider = connectionStringInfo.Provider ?? SqlServerProvider;
+      // TODO: XXX: Implementar uma solução.
+      throw new NotImplementedException("Não é possível determinar a string de conexão.");
+      //var connectionStringInfo = App.Connections[configuration];
+      //if (connectionStringInfo == null)
+      //{
+      //  var message = $"String de conexão não encontrada no arquivo de configuração: \"{configuration}\"";
+      //  var domain = App.User?.Domain;
+      //  if (domain != null)
+      //  {
+      //    message += $", para o domínio: \"{domain}\"";
+      //  }
+      //  throw new SequelException(message);
+      //}
+      //
+      //connectionString = connectionStringInfo.ToString();
+      //connectionProvider = connectionStringInfo.Provider ?? SqlServerProvider;
     }
 
     private static void OptimizeConnectionString(DbProviderFactory factory, ref string connectionString)

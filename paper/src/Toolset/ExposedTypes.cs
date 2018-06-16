@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Text;
-using Toolset.Application;
 
 namespace Toolset
 {
@@ -24,9 +23,12 @@ namespace Toolset
       {
         if (_assemblies == null)
         {
+          var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+          var appPath = System.IO.Path.GetDirectoryName(assembly.Location);
+
           _assemblies =
             Directory
-              .GetFiles(App.Path, "*.dll", SearchOption.TopDirectoryOnly)
+              .GetFiles(appPath, "*.dll", SearchOption.TopDirectoryOnly)
               .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
               .ToArray();
         }
