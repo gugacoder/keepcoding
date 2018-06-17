@@ -10,6 +10,7 @@ using Paper.Media.Design.Widgets;
 using Paper.Media.Rendering;
 using Paper.Media.Rendering.Queries;
 using Toolset;
+using Toolset.Collections;
 using Toolset.Reflection;
 using Xunit;
 

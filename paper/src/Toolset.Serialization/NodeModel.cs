@@ -21,6 +21,31 @@ namespace Toolset.Serialization
 
     public abstract object SerializationValue { get; set; }
 
+    public bool IsObject { get { return this is ObjectModel; } }
+    public bool IsCollection { get { return this is CollectionModel; } }
+    public bool IsProperty { get { return this is PropertyModel; } }
+    public bool IsValue { get { return this is ValueModel; } }
+
+    public virtual PropertyModel this[string name]
+    {
+      get { return this.ChildProperties().FirstOrDefault(x => x.Name.EqualsIgnoreCase(name)); }
+    }
+
+    public virtual NodeModel this[int index]
+    {
+      get { return this.Children().ElementAtOrDefault(index); }
+    }
+
+    public int Count
+    {
+      get { return this.Children().Count(); }
+    }
+
+    public string[] PropertyNames
+    {
+      get { return this.ChildProperties().Select(x => x.Name).ToArray(); }
+    }
+
     #region Children...
 
     public abstract IEnumerable<NodeModel> Children();
