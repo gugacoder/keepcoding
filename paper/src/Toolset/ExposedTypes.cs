@@ -31,6 +31,11 @@ namespace Toolset
               .GetFiles(appPath, "*.dll", SearchOption.TopDirectoryOnly)
               .Select(AssemblyLoadContext.Default.LoadFromAssemblyPath)
               .ToArray();
+
+          Console.WriteLine("--assemblies--");
+          Console.WriteLine(string.Join(Environment.NewLine, _assemblies.Select(x => x.FullName)));
+          Console.WriteLine("----");
+
         }
         return _assemblies;
       }

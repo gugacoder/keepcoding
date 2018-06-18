@@ -83,7 +83,7 @@ namespace Paper.Media.Rendering.Queries
         href = new Route(href).UnsetArgs("limit", "offset");
 
         filterAction = new EntityAction();
-        filterAction.Name = "Filter";
+        filterAction.Name = "Filters";
         filterAction.Href = href;
         filterAction.Method = "GET";
         filterAction.Title = "Filtros";

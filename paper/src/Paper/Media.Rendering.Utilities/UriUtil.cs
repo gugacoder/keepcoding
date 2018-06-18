@@ -126,7 +126,7 @@ namespace Paper.Media.Rendering.Utilities
       {
         var key = $"{{{arg.Key}}}";
         var value = CreateText(arg.Value);
-        path = templatePath.Replace(key, value);
+        path = path.Replace(key, value);
       }
       return path;
     }

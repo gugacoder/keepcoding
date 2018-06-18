@@ -34,7 +34,11 @@ namespace Paper.Media.Rendering.Queries
             link.AddClass("entityLink");
             link.AddRel("link");
           }
-          ctx.Entity.Links.Add(link);
+
+          if (link.Href != null)
+          {
+            ctx.Entity.Links.Add(link);
+          }
         }
       }
       foreach (var item in links.OfType<QueryLink>())
@@ -48,7 +52,11 @@ namespace Paper.Media.Rendering.Queries
             link.AddClass("entityLink");
             link.AddRel("link");
           }
-          ctx.Entity.Links.Add(link);
+
+          if (link.Href != null)
+          {
+            ctx.Entity.Links.Add(link);
+          }
         }
       }
     }
@@ -78,7 +86,11 @@ namespace Paper.Media.Rendering.Queries
             link.AddClass("dataLink");
             link.AddRel("link");
           }
-          ctx.Entity.Links.Add(link);
+
+          if (link.Href != null)
+          {
+            ctx.Entity.Links.Add(link);
+          }
         }
       }
       foreach (var item in links.OfType<QueryLink>())
@@ -92,7 +104,11 @@ namespace Paper.Media.Rendering.Queries
             link.AddClass("dataLink");
             link.AddRel("link");
           }
-          ctx.Entity.Links.Add(link);
+
+          if (link.Href != null)
+          {
+            ctx.Entity.Links.Add(link);
+          }
         }
       }
     }
@@ -122,7 +138,11 @@ namespace Paper.Media.Rendering.Queries
             link.AddClass("rowLink");
             link.AddRel("link");
           }
-          rowEntity.Links.Add(link);
+
+          if (link.Href != null)
+          {
+            rowEntity.Links.Add(link);
+          }
         }
       }
 
@@ -137,7 +157,11 @@ namespace Paper.Media.Rendering.Queries
             link.AddClass("rowLink");
             link.AddRel("link");
           }
-          rowEntity.Links.Add(link);
+
+          if (link.Href != null)
+          {
+            rowEntity.Links.Add(link);
+          }
         }
       }
     }

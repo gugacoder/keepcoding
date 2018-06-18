@@ -11,10 +11,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Toolset.Reflection;
 
-namespace Paper.WebApp.Server.Demo
+namespace Paper.WebApp.Server.Demo.Consultas
 {
-  [ExposeQuery("/Menu")]
-  public class MenuQuery : IRowsQuery<object, object>, IHasQueryMetadata
+  [ExposeQuery("/Consulta/Rejeicoes")]
+  public class RejeicoesQuery : IRowsQuery<object, object>, IHasQueryMetadata
   {
     public object Filter => null;
 
@@ -28,7 +28,7 @@ namespace Paper.WebApp.Server.Demo
 
     public object GetProperties() => null;
 
-    public string GetTitle() => $"Menu";
+    public string GetTitle() => "Rejeições no Período";
 
     public Links GetLinks() => null;
       //=> new Links()
@@ -66,9 +66,9 @@ namespace Paper.WebApp.Server.Demo
       };
       yield return new
       {
-        Module = "Lacunas no Período",
+        Module = "Inutilizações no Período",
         Description = "Rastreio dos números de nota não utilzados no período.",
-        _Link = "{Api}/Consulta/Lacunas"
+        _Link = "{Api}/Consulta/Inutilizacao"
       };
     }
   }

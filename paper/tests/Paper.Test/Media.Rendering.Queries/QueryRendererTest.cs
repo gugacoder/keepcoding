@@ -590,6 +590,7 @@ namespace Paper.Test.Media.Rendering.Queries
     }
 
     [Theory]
+    [InlineData(typeof(RowsQuery))]
     [InlineData(typeof(DataAndRowsQuery))]
     public void RenderEntity_HasFilter(Type paperType)
     {

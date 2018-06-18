@@ -21,6 +21,7 @@ namespace Paper.Media
     /// Nome da ação.
     /// </summary>
     [DataMember(EmitDefaultValue = false, Order = 20)]
+    [CaseVariantString]
     public string Name { get; set; }
 
     /// <summary>
